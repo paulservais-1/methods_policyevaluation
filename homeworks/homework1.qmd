@@ -1,45 +1,126 @@
 
-Take for instance happiness as a variable to explain : as a social
-scientist, you would like to understand what causes people to be happy
-or not. Of course, you might have first struggles in defining
-happiness - an essentially subjective measure -, and you might as well
-have competing hypotheses about what causes happiness. In addition, you
-might have random errors perturbating your data collection process.
+## Exercice 1 - manual warm up 1
+* Imagine having 3 dices (one is blue, the other green and the last one is red) with 3 faces each, and values going from 1 to 3. Consider the sum of the three dices as random variable $X_{bgr}$:
+  - Compute the probability of obtaining 5, with the blue dice being 2, the red being 2, and the green being 1: $P(X_{bgr} = 5_{212})$
+  - What is the set of potential outcomes, $S_X$ of $X_{bgr}$ ?
+  - Now imagine that the dices can not be distinguished anymore, your random variable is $X$. What is your probability of obtaining 3, $P(X=3)$ ? 
+  - What is your probability of obtaining 5 ? 
+  - How much is the expectation ? 
+  - You know that one of your dices is worth 3. What is the probability of obtaining 5 in total? 
+  - Draw a bar plot, showing the potential outcomes in the x axis, and the probabilities in the y axis.
+  - What is the conditional expectation worth in the case where one of the three dices is worth 3 ? Is that equal to the non-conditional expectation of X ? 
+  - Verify all your results by simulating the throwing of these three dices, a 10000 times, in R. 
 
-## Download data
+## Exercice 2 - Playing with RStudio
+Open RStudio on your personal computer (or your personal coding environment).
+1. Create a new project named "Session 1 - Methods R&PE", in a new directory. What are the different files created ? Quit the session, go to your folder on your personal computer, and click on the '.Rproj' file created. What happens ?
+2. Write 1+1 in your main .R script and press "Run".
+3. Create a new folder in this project named 'data'.
+4. Install packages "tidyverse" and "rio" in the console.
+4. You're all set for importing data and start creating functions/the next exercices ! 
 
-Once you have a research question that you seek to analyse, you may want
-to download data relevant for your purposes. Imagine that I want to
-analyse the impact of religiosity on happiness. This would require me to
-find a data set that has both information on :
 
-1.  Individual people
+## Exercice 3 - playing with data
+The [European social survey](https://www.europeansocialsurvey.org/about-ess) "measures the attitudes, beliefs and behaviour patterns of diverse populations in more than thirty nations". Use the `rio` package to import data from <"https://jan-rovny.squarespace.com/s/ESS_FR.dta">. 
+1. Use `glimpse` function to have a look at all. Restrict your data set to `euftf` (views on European integration), `gndr` (gender), `happy`, `yrbrn`(birthyear) and `eduyrs` (years of education), using function `select()` from `tidyverse`.
+2. How many observations are there ? Are the variables categorical or continuous ?  
+3. Summarise your data set and comment on the findings, using `table()` and  `summary()`. Drop the NA values. 
+4. Create a new variable `age`, with the age of the respondents, using `mutate()`. Use 2026 as reference year.
+5. Plot the distribution of the variables `euftf` and `happy` using `barplot(table())`. What can you say about these distributions? What is the most common answer ? What is the percentage of respondents who have given this answer ?
+6. Plot a histogram of the age of the respondents, with 10 breaks. What is the decade with the most respondents ? 
+7. Plot the distribution of `happy` for `gndr == 1` and `gndr == 2`, using `ggplot2 : ggplot()` and ` geom_bar(position = "dodge")`
+8. Does being male/female influence your chances of self-reporting being happy ? Conduct a `t-test` to test the hypothesis that gender influences people's self assessed level of happiness. What are the 95% and 99% confidence intervals ?
 
-2.  Their level of religiosity - your independent variable (you seek to
-    analyse if religiosity impacts happiness)
 
-3.  Their level of happiness - your dependent variable (you seek to
-    explain happiness)
+```{r}
+#| echo: false
+#| eval: false
+ESS<-import("https://jan-rovny.squarespace.com/s/ESS_FR.dta")
+glimpse(ESS)
+ESS <- ESS %>% select(euftf, happy,yrbrn, eduyrs, gndr)
+length(ESS$euftf)
+summary(ESS)
+ESS <- ESS %>% mutate(age = 2026-yrbrn)
+barplot(table(ESS$euftf)/length(ESS$euftf))
+hist(ESS$age, breaks = 10)
+ggplot(ESS, aes(x = happy, fill = factor(gndr))) +
+    geom_bar(position = "dodge") + theme_minimal()
 
-4.  Ideally, other variables characterising the respondent's profile :
-    his/her gender, his/her age, his/her income, etc., which will help
-    isolate the specific effect of religiosity on happiness.
+t_test_result <- t.test(
+  ESS %>% filter(gndr == 1),
+  ESS %>% filter(gndr == 2),
+  alternative = "two.sided",
+  conf.level = 0.99,
+  var.equal = FALSE  # Use Welch's t-test for unequal variances
+)
+t_test_result
+```
+## Exercice 4 : the median income in French rural communes
+You want to analyse the electoral outcomes of the radical right in rural communes in France. For this, you have data on the 2024 European elections at <https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/demographics2024.xlsx>, and data on the French municipalities at <https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/demographics2024.xlsx>. 
+1. Use `rio` to import both data sets, stored in two different variables
+2. Use `glimpse` to . Look at the types of codedep and codecommune. Can you merge on `codedep` and `codecommune` in these conditions ? Use `as.numeric()` for both to prepare for the merge
+3. Use the `left_join()` function to merge both data set on codecommune and codedep.
+4. Restrict your data frame to rural communes, using `filter`.
+5. Replace NA values by the mean of the variable.
+6. What is the range of the far-right vote ? in absolute and relative terms ? 
+7. What is the average of the relative far-right vote in French rural communes ? The median ? The standard deviation ?
+8. Plot the distributions of far-right voting in the different kinds of French rural communes (present in `dens7`), using `ggplot()`.
+9. Is the expected far-right voting significantly different in those different rural typologies ? Compute different t-tests, and conclude.
 
-Finding the data set is not a trivial operation : it requires prior
-knowledge on data sets available out theser, remaining alert to new
-issues, and a lot of walking around on the internet to find data that
-could be relevant to your research problem. Discussions with peers are
-very useful for that. After discussion with friends or your research
-supervisor, you might for instance learn that such lab has issued such
-data set, this ministry provides such information, or this statistics
-institute provides these data. Your
 
-## Import the data in your local environment
 
-You may thus now have your data stored locally in your computer, in what
-case you should provide the path for your environment (RStudio or Stata)
-to access it. Otherwise, your computer will not know what you are
-talking about and probably return you a "No such file or directory" type
-of error. A good practice is therefore to store the data that your are
-using in a subfolder called "data", located in the same folder as where
-your piece of code or .RProject lies.
+```{r}
+#| echo: false
+#| eval: false
+
+library(rio)
+elec_eur <- import("https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/elections2024.csv")
+socio_dem <- import("https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/demographics2024.xlsx")
+
+glimpse(elec_eur)
+glimpse(socio_dem)
+
+socio_dem$codecommune<- as.numeric(socio_dem$codecommune)
+socio_dem$codedep <- as.numeric(socio_dem$codedep)
+
+elec_eur <- elec_eur %>% left_join(socio_dem)
+elec_eur <- elec_eur %>% filter(dens == "Rural")
+
+for(variable in colnames(elec_eur)){
+  if(is.numeric(elec_eur[[variable]])) {
+    elec_eur[[variable]] <- ifelse(is.na(elec_eur[[variable]]),
+                                   mean(elec_eur[[variable]], na.rm = TRUE),
+                                   elec_eur[[variable]])
+  }
+}
+
+summary(elec_eur)
+
+ggplot(data = elec_eur, aes(x = far_right_relvotes, color = dens7))+geom_density()
+
+# Example numeric variable (replace with your actual variable)
+numeric_var <- elec_eur$far_right_relvotes
+
+# Split the data by dens7 categories
+group1 <- numeric_var[elec_eur$dens7 == "Rural à habitat dispersé"]
+group2 <- numeric_var[elec_eur$dens7 == "Bourgs ruraux"]
+group3 <- numeric_var[elec_eur$dens7 == "Rural à habitat très dispersé"]
+
+# Perform pairwise t-tests
+t_test_1_2 <- t.test(group1, group2)
+t_test_1_3 <- t.test(group1, group3)
+t_test_2_3 <- t.test(group2, group3)
+
+# Print results
+print(t_test_1_2)
+print(t_test_1_3)
+print(t_test_2_3)
+
+
+```
+
+## Take-home assignement
+Find any data set online related to your research interests, or originating from the replication package of a paper that you would like to replicate. 
+- Select two variables and describe them using `summary`, and `` (or their Stata/Python equivalent)
+- Plot their distribution
+- Use a binary variable splitting your variable in two groups, and conduct a t-test to compare the means of those two groups. Comment on your findings.

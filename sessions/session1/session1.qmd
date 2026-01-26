@@ -27,7 +27,7 @@ interpretive dimensions, and quantitative methods. The latter methods
 allow to conduct large N comparisons, to replicate analyses, and have
 known very important recent developments related to technological
 improvements in the recent decades (e.g. Computational Social Science,
-LLMs). Similarly, these methods generally seek to find a. That is, a
+LLMs). Similarly, these methods generally seek to find a causation relationship between variables. That is, a
 given variable $Y$, is caused (and can eventually be predicted) by a
 series of other variables $X_1, X_2, X_3, X_4$, etc. Hence, in a very
 general form, considering that $Y$ can be explained by
@@ -38,8 +38,7 @@ $f : \mathbb{R}^4 \rightarrow \mathbb{R}$ that satisfies :
 Y = f(X_1,X_2, X_3, X_4)  + \epsilon 
 \end{equation}
 
-Hence, any research process typically involves the following stages :
-collection of data on variables $Y$, $X_1, X_2, X_3, X_4$, analysis of
+Hence, quantitative research is interested in finding out that function $f$, out of data collected on $Y$ and $X_1, ...$. Any research process typically involves the following stages : collection of data on variables $Y$, $X_1, X_2, X_3, X_4$, analysis of
 these data, and drawing interpretations and conclusions based on these
 data. The data are generally classified in two subgroups: categorical
 and continuous (or interval) variables. Categorical variables have a
@@ -48,7 +47,7 @@ limited amount of potential values, and for instance refer to
 with no logical ordering - e.g. the gender of an interviewee can be male
 = 1, female = 2, else = 3, etc. - or **ordinal** measures, with a
 logical ordering - e.g. a variable that qualifies the level of
-religiosity of someone on a 0 to 5 scale.
+religiosity of someone on a 0 to 5 scale. These ordinal and nominal variables generally describe something qualitatively. Quantitative variables can be continuous (infinite number of potential values : 0.1123, 1.24, 295) or discrete (e.g. 0, 1, 2, ...).
 
 As such, as being the first step, the **data collection phase is crucial
 in every empirical research project** - which is generally the case in
@@ -85,10 +84,13 @@ accurately measures the concept you seek to analyse). Before turning to real dat
 
 # Basics of probability theory
 
-## Probability, distribution functions
+## Random variable
+In probability and statistics, a variable that results from a random process is called a *random variable*. Random variables are any kind of variables that result from a random process. A typical case useful for us is for instance in Census data : to estimate voting among the French population, we can randomly draw individuals, and ask them questions about their voting behavior. This random process explains why our variable of interest, voting, will be considered a random variable.
+
+## Probability, distributions
 
 Imagine that you have two dices with six faces on each dice. Your random
-variable is the outcome of each throw of dices.
+variable is the outcome of each throw of dices. this result is the paradigmatic example of what a random variable is.
 
 You would like to assess your chances of obtaining each value contained
 in the set of potential outcomes $S = \{2,3,4,5,6,7,8,9,10,11,12\}$.
@@ -111,8 +113,8 @@ P(Y=3) = 1/6 \times 1/6 + 1/6 \times 1/6 = 2/36 = 1/18
 \end{equation}
 $$ You see that the probability is doubled, compared to P(Y=2).
 
-If you look at the joint probability, this corresponds to a diagonal :
-2. Hence, you see that obtaining 7 is the last diagonal and therefore $$
+If you look at the cases where $X_1+X_2 = \text{constant}$, they correspond to cases on the diagonal of the following table. The first diagonal is the case $X_1+X_2 = 2$, the second is $X_1+X_2 = 3$,  $X_1+X_2 = 4$, etc.  Hence, you see that obtaining 7 is the last diagonal and therefore
+$$
 \begin{equation}
 P(Y=7) = 6\times1/36 = 1/6
 \end{equation}
@@ -155,7 +157,6 @@ y = x1+x2 # total number obtained
 freq <- table(y)
 barplot(freq)
 ```
-
 and the function `table()` gives you the number of occurences for each
 value. The probability to obtain 7 from your sample is then simply the
 number of occurences that you have measured, divided by the total number
@@ -169,7 +170,36 @@ barplot(prob)
 
 These values are called the probability distribution of the variable Y.
 That is, for each outcome of Y, there is a probability to obtain it
-(here shown on the barplot). These probabilities follow the simple rule
+(here shown on the barplot). 
+
+## Law of large numbers 
+These probabilities are similar to those obtained by manual calculation at the beginning of this session. This is due to the very large number of observations. The law of large numbers states that the frequency of occurrence of a random variable converges towards its probability, for N ≥ 0. The graph below illustrates the evolution of the relative frequency of rolling a 7 with two dice as a function of the logarithm of the number of observations. The dice are rolled 1, 2, 3, 4… 100 times, then 200, 300, 400… 1,000,000 times. We observe that as the number of observations increases, the frequency converges towards the probability (0.16666667).
+
+```{r}
+library(tidyverse)
+Nn = c(1:100, seq(from = 100, to = 100000, by = 100))
+a = 0
+val = 0
+freqb <- data.frame(Nn = Nn, val = 0)
+
+freqb <- freqb %>%
+  rowwise() %>%
+  mutate(val = {
+      sums <- sample(1:6, Nn, replace = TRUE) + sample(1:6, Nn, replace = TRUE)
+      freq_table <- table(sums)
+      if ("7" %in% names(freq_table)) {
+        freq_table["7"] / Nn
+      } else {
+        0
+      }
+    }
+  ) %>%
+  ungroup()
+ggplot(data = freqb, aes(x = log(Nn), y = val))+geom_point()+geom_line()
+```
+
+
+Moreover, the probabilities of obtaining 2, 3, 4, ..., 12, follow the simple rule
 : $$
 \begin{equation}
 \sum_{i=1}^N P(Y = Y_i) = P(Y = Y_1)+P(Y= Y_2) +... P(Y = Y_n) = 1 
@@ -188,13 +218,13 @@ This value is called the expectation.
 ## Conditional probability, conditional expectation
 
 Imagine now that, due to the extreme fatigue provoked by the repetitive
-throwing of those dices, you throw those a bit too wildly and one falls
-under the table where you are. The other one is there and shows the
-value 3. You want to know the expected value of $y$, knowing that one
+rolling of those dices, you throw those a bit too wildly and one falls
+under the table where you sit. The other one is there and shows the
+value 3. You want to know the expected value of $Y$, knowing that one
 dice among the two is 3. This is called a conditional probability and
-noted $P(y|X_1)$, with $| X_1$ simply meaning that $X_1$ is considered
+noted $P(Y|X_1)$, with $| X_1$ simply meaning that $X_1$ is considered
 fixed (here worth 3). Since $X_1$ is fixed, the probability is
-$P(y|X_1) = 1/6$, and knowing this information is actually very precious
+$P(Y|X_1) = 1/6$ for all the potential values of $X_2$, and knowing this information is actually very precious
 on Y, because it considerably reduces the set of potential outcomes : $$
 Y \ge 4 \text{, } Y\le 9 \text{ and } S_Y = \{4, 5, 6, 7, 8, 9\} 
 $$ $$
@@ -204,7 +234,7 @@ $$ $$
 $$ and so we get : $$
 \begin{align}
   \mathbb{E}(Y|X_1 = 3) = 1/6 \times (4 + 5 + 6 + 7 + 8 + 9) = 6.5\\
-  \mathbb{E}(Y|X_1 = 4) = 1/6 \times (5 + 5 + 7 + 8 + 9 + 10) = 7.5
+  \mathbb{E}(Y|X_1 = 4) = 1/6 \times (5 + 6 + 7 + 8 + 9 + 10) = 7.5
 \end{align}
 $$ Notice that the expected value of y therefore changes, as a function
 of the explanatory variable, $X_1$.
@@ -213,8 +243,7 @@ of the explanatory variable, $X_1$.
 
 This conditional expectation is central in quantitative social science,
 as it is generally what the researcher seeks to evaluate, when
-confronted to social facts. Coming back to the example of the evaluation
-of happiness, imagine that you are similarly capable of measuring the
+confronted to social facts. Take the following example: you seek to understand what causes people to be happy. Imagine that you are similarly capable of measuring the
 level of happiness (self-reported on a 1 to 5 scale) of 10000
 individuals. If you are interested to know whether happiness is
 influenced by the degree of religiosity of an individual, you might want
@@ -248,7 +277,7 @@ effect of $X_2$, from the potential confounding variable $X_1$.
 ## Towards continuity
 
 Now simply imagine that you repeat that process with dices that have
-$n = 1000, 1400, 800$ faces, with each value ranging from $1/n$ to $ 1$.
+$n = 1000, 1400, 800$ faces, with each value ranging from $1/n$ to 1.
 And that you would like to know what are the final probabilities of
 having any decimal number between 0 and 3. Of course, the manual
 computation of this would be very cumbersome - which is why automatising
@@ -273,13 +302,13 @@ ggplot(dat, aes(x = y)) +
        y = "Density") +
   theme_minimal()
 ```
-Here, you clearly see that your variable is now almost continuous, and your probability to obtain one specific value becomes extremely small. We therefore generally focus on the probability of having $Y\le Y_0$, that is, the sum of probabilities of obtaining all the values below 4 (included). Coming back to our example of dices : for one dice, your probability of obtaining a result $\le 4$ is just the sum of the probabilities of getting all the values before 4 : 
+Here, you clearly see that your variable is now almost continuous, and your probability to obtain one specific value becomes extremely small. We therefore generally focus on the probability of having $Y\le Y_0$, that is, the sum of probabilities of obtaining all the values below $Y_0$ (included). Coming back to our example of dices : for one dice, your probability of obtaining a result $\le 4$ is just the sum of the probabilities of getting all the values before 4 : 
 \begin{equation}
 P(X_1 \le 4) = 1/6 + 1/6 + 1/6 + 1/6 = 4/6
 \end{equation}
-For a continuous variable, this sum is noted as an integral - yet it means the exact same thing  : 
+For a continuous variable, this sum is noted as a fancy integral - yet it means the exact same thing  : 
 \begin{equation}
-P(Y \le Y_0) = \int_\underline{R_Y}^Y_0 f_Y(y') \text{d}y'
+P(Y \le Y_0) = \int_{R_Y}^Y_0 f_Y (y') \text{d}y'
 \end{equation}
 
 # Real examples
@@ -289,7 +318,7 @@ Of course in practice dices are not extremely interesting... and you may want to
 
 
 ## Coding environment
-The R language is perhaps : R (CRAN). Its advantage over other softwares, like SPSS, is that it is entirely free and open-source, and that is maintained by a very large community of users. A very nice environment where to code on R is RStudio - which provides different panels where to organise your code, create new projects, etc. If you need help to download [R](https://cran.r-project.org/) and [RStudio](https://posit.co/downloads/), please check Malo Jan's webpage <https://malo-jn.quarto.pub/introduction-to-r/session1/0102_setup.html>, or other sources like <https://rstudio-education.github.io/hopr/starting.html>. In general, the R documentation, StackOverflow and AI are you friends in these cases is very useful !
+The advantage of R over other softwares, like Stata/SPSS, is that it is entirely free and open-source, and that is maintained by a very large community of users. A very nice environment where to code on R is RStudio - which provides different panels where to organise your code, create new projects, etc. If you need help to download [R](https://cran.r-project.org/) and [RStudio](https://posit.co/downloads/), please check Malo Jan's webpage <https://malo-jn.quarto.pub/introduction-to-r/session1/0102_setup.html>, or other sources like <https://rstudio-education.github.io/hopr/starting.html>. In general, the R documentation, StackOverflow and AI are you friends in these cases is very useful !
   
 ## Creating a project 
 The first step when you launch RStudio is to create a project in which you can work. The best way to do that is to go in `File > New Project > New directory > New Project > Create a new directory`. In the last step, you can choose the location of your directory. This will create a folder, in which your project will be contained. There, you will be able to create new scripts (".R" files), where you will be able to code. You can also code directly in the console. If you need reminders on the basic usage of R, please visit <https://malo-jn.quarto.pub/introduction-to-r/>.
@@ -405,6 +434,7 @@ is simply this way:
 ```{r}
 #| echo: true
 mean(comm_r$revmoyfoy)
+sd(comm_r$revmoyfoy)
 ```
 And the conditional expectations can also simply be computed by filtering out the values that are undesired.
 ```{r}
@@ -420,7 +450,7 @@ Where you clearly see that :
 
 Should we conclude that median income is significantly smaller in rural communes than in urban areas ? The density plot indeed shows that rural areas are more concentrated in the lower income regions, compared with urban areas, but the dispersion being quite large for urban areas... it is hard to know whether this difference is statistically significant or not ! The typical way to compare these two means is to use a t-test. 
 
-## Student's t-test
+## T-test
 Imagine that I would like to verify, lets say with a confidence margin of 99%, that 
 \begin{equation}
 \text{E}(\text{MI}| \text{dens} = \text{Rural}) \le \text{E}(\text{MI}| \text{dens} = \text{Urban}) 
@@ -431,7 +461,7 @@ t = \frac{\bar{X_1} - \bar{X_2}}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}
 \end{equation}
 Under the assumption that the two variables have normal distributions. If the two means are indeed statistically similar, that means that the t value should be non discernible from 0, with the 99% level of confidence decided. In the case where they are different, the t-value should be significantly different than 0. That means, the confidence interval defined at the 99% confidence level : 
 \begin{equation}
-(\bar{X_1} - \bar{X_2}) +- t_{.99} * \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}
+(\bar{X_1} - \bar{X_2}) \pm t_{.99} * \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}
 \end{equation}
 should not include 0. 
 In R, you can easily implement that using :

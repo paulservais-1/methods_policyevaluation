@@ -457,7 +457,7 @@ t = \frac{\bar{X_1} - \bar{X_2}}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}
 - Two means are indeed statistically similar, that means that the t value should be non discernible from 0, with the 99% level of confidence decided. 
 - If different, the t-value should be significantly different than 0. Confidence interval defined at the 99% confidence level should not include 0 : 
 \begin{equation}
-(\bar{X_1} - \bar{X_2}) \pm t_{99%} * \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}
+(\bar{X_1} - \bar{X_2}) +- \ t_{99%} * \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}
 \end{equation} 
 ```{r}
 #| echo: true
@@ -493,26 +493,7 @@ t_test_result
 ```
 
 ## Exercices 
-## Exercice 1 - manual warm up 1
-* Imagine having 3 dices (one is blue, the other green and the last one is red) with 3 faces each, and values going from 1 to 3. Consider the sum of the three dices as random variable $X_{bgr}$:
-  - Compute the probability of obtaining 5, with the blue dice being 2, the red being 2, and the green being 1: $P(X_{bgr} = 5_{212})$
-  - What is the set of potential outcomes, $S_X$ of $X_{bgr}$ ?
-  - Now imagine that the dices can not be distinguished anymore, your random variable is $X$. What is your probability of obtaining 3, $P(X=3)$ ? 
-  - What is your probability of obtaining 5 ? 
-  - How much is the expectation ? 
-  - You know that one of your dices is worth 3. What is the probability of obtaining 5 in total? 
-  - Draw a bar plot, showing the potential outcomes in the x axis, and the probabilities in the y axis.
-  - What is the conditional expectation worth in the case where one of the three dices is worth 3 ? Is that equal to the non-conditional expectation of X ? 
-  - Verify all your results by simulating the throwing of these three dices, a 10000 times, in R. 
 
-## Exercice 2 - 
-
-
-## Exercice 3 - 
-- Import data available at <> 
-- 
-
-## Exercice 4
 
 
 
