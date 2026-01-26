@@ -5,7 +5,8 @@ subtitle: "Session 1"
 footer : "Session 1 - Methods for Research and Policy Evaluation"
 author: "Paul Servais"
 format: 
-  revealjs
+  revealjs:
+    logo: images/scpo.png
 ---
 
 # Introduction
@@ -39,13 +40,13 @@ format:
 
 ## Course material 
 :::{.fragment}
-- Everything on <https://scpo-quantimethods.github.io/quantitative_methods_two/>
+- Everything on <https://paulservais-1.github.io/methods_policyevaluation/>
 - More structured than Moodle
 :::
 :::{.fragment}
 - Sessions, with clear codings outputs
 - Exercices
-![](images/image1.png){width=100%}
+![](images/website.png){width=100%}
 :::
 
 ## Course evaluation
@@ -56,6 +57,11 @@ format:
 - Abstract 
 - Intro - Theory - Methods - Results - Conclusion
 
+## Examples paper
+<div style="display: flex; justify-content: space-around;">
+  <img src="images/paper1.png" style="width: 40%;">
+  <img src="images/paper2.png" style="width: 40%;">
+</div>
 
 ## Sessions
 
@@ -136,6 +142,7 @@ head(x1,20) # head
 
 barplot(table(x1))
 ```
+
 ## Your experiment 
 - N = 100000
 ```{r}
@@ -187,11 +194,37 @@ mean(y)
 sd(y)
 summary(y)
 ```
-## Distribution
+
+## Law of large numbers
 ```{r}
 #| echo: true
 
 barplot(table(y))
+```
+```{r}
+#| echo: false
+#| eval: true
+
+library(tidyverse)
+Nn = c(1:100, seq(from = 100, to = 100000, by = 100))
+a = 0
+val = 0
+freqb <- data.frame(Nn = Nn, val = 0)
+
+freqb <- freqb %>%
+  rowwise() %>%
+  mutate(val = {
+      sums <- sample(1:6, Nn, replace = TRUE) + sample(1:6, Nn, replace = TRUE)
+      freq_table <- table(sums)
+      if ("7" %in% names(freq_table)) {
+        freq_table["7"] / Nn
+      } else {
+        0
+      }
+    }
+  ) %>%
+  ungroup()
+ggplot(data = freqb, aes(x = log(Nn), y = val))+geom_point()+geom_line()
 ```
 
 ## Expectation and variance 
@@ -319,8 +352,16 @@ ggplot(dat, aes(x = y)) +
   - R documentation
   
 ## Creating a project 
-- Create a project
-- Choose the location on your computer 
+- Create a project :
+
+![](images/create_proj.png){width=100%}
+
+## Creating a project
+- Project/folder creation 
+<div style="display: flex; justify-content: space-around;">
+  <img src="images/project.png" style="width: 45%;">
+  <img src="images/directory.png" style="width: 45%;">
+</div>
 
 ## Data and packages
 - R comes with basic language and functions : base R
@@ -370,6 +411,11 @@ comm_r <- communes %>% filter(codecommune %in% comms_rand)
 head(comm_r, 3)
 ```
 :::
+
+## Absolute path 
+
+![](images/absolute_path.png){width=50%}
+
 ## Categorical variable
 - Density typology
 ```{r}

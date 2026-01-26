@@ -95,7 +95,7 @@
     "href": "slides/session1/slides1.html#course-material",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Course material",
-    "text": "Course material\n\n\nEverything on https://scpo-quantimethods.github.io/quantitative_methods_two/\nMore structured than Moodle\n\n\n\n\nSessions, with clear codings outputs\nExercices"
+    "text": "Course material\n\n\nEverything on https://paulservais-1.github.io/methods_policyevaluation/\nMore structured than Moodle\n\n\n\n\nSessions, with clear codings outputs\nExercices"
   },
   {
     "objectID": "slides/session1/slides1.html#sessions",
@@ -186,7 +186,7 @@
     "href": "slides/session1/slides1.html#one-dice-example---distribution",
     "title": "Methods for Research and Policy Evaluation",
     "section": "One dice example - distribution",
-    "text": "One dice example - distribution\n\nYou throw it a 1000 times. I randomly generate that variable in R, using sample()\n\n\nlibrary(DT)\nN = 1000 #number of measurements\nx1 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)\nhead(x1,20) # head\n\n [1] 2 5 5 5 4 5 5 5 3 5 6 5 4 3 3 1 6 3 4 4"
+    "text": "One dice example - distribution\n\nYou throw it a 1000 times. I randomly generate that variable in R, using sample()\n\n\nlibrary(DT)\nN = 1000 #number of measurements\nx1 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)\nhead(x1,20) # head\n\n [1] 3 4 4 5 6 6 2 6 1 1 6 3 4 5 6 5 2 1 6 5"
   },
   {
     "objectID": "slides/session1/slides1.html#two-dices-example",
@@ -214,7 +214,7 @@
     "href": "slides/session1/slides1.html#distribution",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Distribution",
-    "text": "Distribution\n\nlibrary(DT)\nN = 10000 #number of measurements\nx1 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)\nx2 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)\ny = x1 + x2\nhead(y)\n\n[1]  6 10  4  5  8 10\n\nmean(y)\n\n[1] 6.9702\n\nsd(y)\n\n[1] 2.413772\n\nsummary(y)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   2.00    5.00    7.00    6.97    9.00   12.00"
+    "text": "Distribution\n\nlibrary(DT)\nN = 10000 #number of measurements\nx1 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)\nx2 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)\ny = x1 + x2\nhead(y)\n\n[1] 11  8  6  3 10 11\n\nmean(y)\n\n[1] 6.9859\n\nsd(y)\n\n[1] 2.427775\n\nsummary(y)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  2.000   5.000   7.000   6.986   9.000  12.000"
   },
   {
     "objectID": "slides/session1/slides1.html#expectation",
@@ -312,7 +312,7 @@
     "href": "slides/session1/slides1.html#conditional-distribution",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Conditional distribution",
-    "text": "Conditional distribution\n\nbarplot(table(4+x2)/N)"
+    "text": "Conditional distribution"
   },
   {
     "objectID": "slides/session1/slides1.html#density",
@@ -354,7 +354,7 @@
     "href": "slides/session1/slides1.html#importing-data",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Importing data",
-    "text": "Importing data\n\n\nlibrary(readxl) # needed to read excel without \"rio\"\ncommunes &lt;- read_excel(\"data/demographics2024.xlsx\") # relative path\ncommunes &lt;- read_excel(\"/Users/Desktop/Website/methods_policyevaluation/slides/session1/data/\") # absolute path\n#using the \"rio\" package\nlibrary(rio)\ncommunes &lt;- import(\"data/demographics2024.xlsx\")\n\n\n\nlibrary(readxl)\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.6\n✔ forcats   1.0.1     ✔ stringr   1.6.0\n✔ lubridate 1.9.4     ✔ tibble    3.3.0\n✔ purrr     1.2.0     ✔ tidyr     1.3.2\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\ncommunes &lt;- read_excel(\"data/demographics2024.xlsx\") # relative path\n\nlen_com &lt;- length(communes %&gt;% pull(codecommune))\nsample_com &lt;- sample(1:len_com, N, replace = FALSE)\ncomms_rand &lt;- NULL\na &lt;- 0\nfor(i in sample_com){\n  a =a+1\n  comms_rand[a] = (communes %&gt;% pull(codecommune))[i]}\ncomm_r &lt;- communes %&gt;% filter(codecommune %in% comms_rand) \n\n\n\nInspecting the data\n\n\nhead(comm_r, 3)\n\n# A tibble: 3 × 43\n  codecommune  Year codedep  agri  indp  cadr  pint  empl  ouvr  chom  pact\n  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 01007        2024 01         15    39   250   311   339   268    95  1222\n2 01008        2024 01          0    19    18    83    83   122     7   325\n3 01014        2024 01          0   119    19   173   199   392    22   902\n# ℹ 32 more variables: age &lt;dbl&gt;, popf &lt;dbl&gt;, francais &lt;dbl&gt;, etranger &lt;dbl&gt;,\n#   prixbien &lt;dbl&gt;, capitalratio &lt;dbl&gt;, npropri &lt;dbl&gt;, nlogement &lt;dbl&gt;,\n#   pop &lt;dbl&gt;, revmoyfoy &lt;dbl&gt;, revtot &lt;dbl&gt;, recetteimpotslocaux &lt;dbl&gt;,\n#   recette &lt;dbl&gt;, baseimpotslocaux &lt;dbl&gt;, nodip &lt;dbl&gt;, sup &lt;dbl&gt;,\n#   Libellé &lt;chr&gt;, Exploitations &lt;dbl&gt;, Personnes &lt;dbl&gt;, UTA &lt;dbl&gt;, SAU &lt;dbl&gt;,\n#   PBS &lt;lgl&gt;, dens &lt;chr&gt;, densaav &lt;chr&gt;, dens7 &lt;chr&gt;, ntot &lt;dbl&gt;, pagri &lt;dbl&gt;,\n#   pindp &lt;dbl&gt;, pcadr &lt;dbl&gt;, ppint &lt;dbl&gt;, pempl &lt;dbl&gt;, pouvr &lt;dbl&gt;"
+    "text": "Importing data\n\n\nlibrary(readxl) # needed to read excel without \"rio\"\ncommunes &lt;- read_excel(\"data/demographics2024.xlsx\") # relative path\ncommunes &lt;- read_excel(\"/Users/Desktop/Website/methods_policyevaluation/slides/session1/data/\") # absolute path\n#using the \"rio\" package\nlibrary(rio)\ncommunes &lt;- import(\"data/demographics2024.xlsx\")\n\n\n\n\nInspecting the data\n\n\nhead(comm_r, 3)\n\n# A tibble: 3 × 43\n  codecommune  Year codedep  agri  indp  cadr  pint  empl  ouvr  chom  pact\n  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 01001        2024 01          0    39    33    14    86   147    26   319\n2 01007        2024 01         15    39   250   311   339   268    95  1222\n3 01013        2024 01          2     0    18    13    11    42     0    86\n# ℹ 32 more variables: age &lt;dbl&gt;, popf &lt;dbl&gt;, francais &lt;dbl&gt;, etranger &lt;dbl&gt;,\n#   prixbien &lt;dbl&gt;, capitalratio &lt;dbl&gt;, npropri &lt;dbl&gt;, nlogement &lt;dbl&gt;,\n#   pop &lt;dbl&gt;, revmoyfoy &lt;dbl&gt;, revtot &lt;dbl&gt;, recetteimpotslocaux &lt;dbl&gt;,\n#   recette &lt;dbl&gt;, baseimpotslocaux &lt;dbl&gt;, nodip &lt;dbl&gt;, sup &lt;dbl&gt;,\n#   Libellé &lt;chr&gt;, Exploitations &lt;dbl&gt;, Personnes &lt;dbl&gt;, UTA &lt;dbl&gt;, SAU &lt;dbl&gt;,\n#   PBS &lt;lgl&gt;, dens &lt;chr&gt;, densaav &lt;chr&gt;, dens7 &lt;chr&gt;, ntot &lt;dbl&gt;, pagri &lt;dbl&gt;,\n#   pindp &lt;dbl&gt;, pcadr &lt;dbl&gt;, ppint &lt;dbl&gt;, pempl &lt;dbl&gt;, pouvr &lt;dbl&gt;"
   },
   {
     "objectID": "slides/session1/slides1.html#your-experiment",
@@ -403,28 +403,28 @@
     "href": "slides/session1/slides1.html#visualising-the-variance",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Visualising the variance",
-    "text": "Visualising the variance\n\ndevs = (y - mean(y))^2\nhead(y)\n\n[1]  6 10  4  5  8 10\n\nunique(devs)\n\n [1]  0.94128804  9.17968804  8.82208804  3.88168804  1.06048804 15.76248804\n [7]  4.12008804 16.23928804  0.00088804 25.29888804 24.70288804\n\nmean(devs)\n\n[1] 5.825712\n\nbarplot(table(devs))"
+    "text": "Visualising the variance\n\ndevs = (y - mean(y))^2\nhead(y)\n\n[1] 11  8  6  3 10 11\n\nunique(devs)\n\n [1] 16.11299881  1.02839881  0.97199881 15.88739881  9.08479881  0.00019881\n [7]  8.91559881  4.05659881  3.94379881 25.14119881 24.85919881\n\nmean(devs)\n\n[1] 5.893501\n\nbarplot(table(devs))"
   },
   {
     "objectID": "slides/session1/slides1.html#creating-a-project",
     "href": "slides/session1/slides1.html#creating-a-project",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Creating a project",
-    "text": "Creating a project\n\nCreate a project\nChoose the location on your computer"
+    "text": "Creating a project\n\nCreate a project :"
   },
   {
     "objectID": "slides/session1/slides1.html#categorical-variable",
     "href": "slides/session1/slides1.html#categorical-variable",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Categorical variable",
-    "text": "Categorical variable\n\nDensity typology\n\n\n# Nominal : the density typology of communes \nunique(comm_r$dens)\n\n[1] \"Rural\"                \"Urbain intermédiaire\" \"Urbain dense\"        \n\ntable(comm_r$dens)\n\n\n               Rural         Urbain dense Urbain intermédiaire \n                8765                  199                 1036 \n\nsummary(comm_r$dens)\n\n   Length     Class      Mode \n    10000 character character \n\n\n\nNominal or ordinal ?"
+    "text": "Categorical variable\n\nDensity typology\n\n\n# Nominal : the density typology of communes \nunique(comm_r$dens)\n\n[1] \"Rural\"                \"Urbain intermédiaire\" \"Urbain dense\"        \n\ntable(comm_r$dens)\n\n\n               Rural         Urbain dense Urbain intermédiaire \n                8759                  205                 1036 \n\nsummary(comm_r$dens)\n\n   Length     Class      Mode \n    10000 character character \n\n\n\nNominal or ordinal ?"
   },
   {
     "objectID": "slides/session1/slides1.html#expectations",
     "href": "slides/session1/slides1.html#expectations",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Expectations",
-    "text": "Expectations\n\nYou can compute the expectation: \\[\\begin{equation}\n\\text{E}(\\text{MI}) = \\frac{1}{10000}\\sum_{i=1}^{10000} \\text{MI}_i\n\\end{equation}\\]\n\n\nmean(comm_r$revmoyfoy)\n\n[1] 31203.45\n\n\n\nAnd the conditional expectations\n\n\nmean((comm_r %&gt;% filter(dens == \"Rural\"))$revmoyfoy)\n\n[1] 30483.03\n\nmean((comm_r %&gt;% filter(dens == \"Urbain dense\"|dens == \"Urbain intermédiaire\"))$revmoyfoy)\n\n[1] 36316.4"
+    "text": "Expectations\n\nYou can compute the expectation: \\[\\begin{equation}\n\\text{E}(\\text{MI}) = \\frac{1}{10000}\\sum_{i=1}^{10000} \\text{MI}_i\n\\end{equation}\\]\n\n\nmean(comm_r$revmoyfoy)\n\n[1] 31116.43\n\n\n\nAnd the conditional expectations\n\n\nmean((comm_r %&gt;% filter(dens == \"Rural\"))$revmoyfoy)\n\n[1] 30400.02\n\nmean((comm_r %&gt;% filter(dens == \"Urbain dense\"|dens == \"Urbain intermédiaire\"))$revmoyfoy)\n\n[1] 36172.89"
   },
   {
     "objectID": "slides/session1/slides1.html#statistical-inference",
@@ -438,7 +438,7 @@
     "href": "slides/session1/slides1.html#interval-variable",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Interval variable",
-    "text": "Interval variable\n\nMedian income in communes\n\n\n# Continuous : the median income in those communes\nsummary(comm_r$revmoyfoy)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n  10610   25849   29712   31203   34608  118232       8 \n\nrange(comm_r$revmoyfoy, na.rm = TRUE)\n\n[1]  10610.21 118232.08\n\nsummary((comm_r %&gt;% drop_na(revmoyfoy))$revmoyfoy) #dropping NA's\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  10610   25849   29712   31203   34608  118232 \n\n#replacing the NA's\ncomm_r &lt;- comm_r %&gt;% mutate(revmoyfoy = ifelse(is.na(revmoyfoy), mean(revmoyfoy, na.rm =TRUE), revmoyfoy))\nsummary(comm_r$revmoyfoy)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  10610   25854   29720   31203   34603  118232"
+    "text": "Interval variable\n\nMedian income in communes\n\n\n# Continuous : the median income in those communes\nsummary(comm_r$revmoyfoy)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n   8151   25864   29629   31116   34555  132947       7 \n\nrange(comm_r$revmoyfoy, na.rm = TRUE)\n\n[1]   8151.157 132946.950\n\nsummary((comm_r %&gt;% drop_na(revmoyfoy))$revmoyfoy) #dropping NA's\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   8151   25864   29629   31116   34555  132947 \n\n#replacing the NA's\ncomm_r &lt;- comm_r %&gt;% mutate(revmoyfoy = ifelse(is.na(revmoyfoy), mean(revmoyfoy, na.rm =TRUE), revmoyfoy))\nsummary(comm_r$revmoyfoy)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   8151   25865   29634   31116   34549  132947"
   },
   {
     "objectID": "slides/session1/slides1.html#statistical-inference-1",
@@ -515,21 +515,21 @@
     "href": "slides/session1/slides1.html#your-experiment-3",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Your experiment",
-    "text": "Your experiment\n\nN = 10000 #number of measurements\nx = sample(1:1000,100, replace=T) # your hundred dices\nhead(x)\n\n[1] 865 581 482 664 729 742\n\ny =0\nfor(i in x){y = y+sample(1:i, N, replace = T)/i}\nhead(y)\n\n[1] 48.63609 48.01225 49.74673 53.61307 54.30241 50.59588\n\n\n\nYou now get closer to a continuous random variable…\nYour probability to obtain one specific value (eg. X = 43.503) becomes extremely small.\nYou generally rather assess the probability that the value you pick is bigger or smaller than a certain value"
+    "text": "Your experiment\n\nN = 10000 #number of measurements\nx = sample(1:1000,100, replace=T) # your hundred dices\nhead(x)\n\n[1] 615 473 977 659 933 619\n\ny =0\nfor(i in x){y = y+sample(1:i, N, replace = T)/i}\nhead(y)\n\n[1] 49.12824 52.19408 57.23269 52.01299 53.50483 48.09993\n\n\n\nYou now get closer to a continuous random variable…\nYour probability to obtain one specific value (eg. X = 43.503) becomes extremely small.\nYou generally rather assess the probability that the value you pick is bigger or smaller than a certain value"
   },
   {
     "objectID": "slides/session1/slides1.html#students-t-test",
     "href": "slides/session1/slides1.html#students-t-test",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Student’s t-test",
-    "text": "Student’s t-test\n\nTwo means are indeed statistically similar, that means that the t value should be non discernible from 0, with the 99% level of confidence decided.\nIf different, the t-value should be significantly different than 0. Confidence interval defined at the 99% confidence level should not include 0 : \\[\\begin{equation}\n(\\bar{X_1} - \\bar{X_2}) \\pm t_{99%} * \\sqrt{\\frac{s_1^2}{n_1}+\\frac{s_2^2}{n_2}}\n\\end{equation}\\]\n\n\nt_test_result &lt;- t.test(\n  rural_income,\n  urban_income,\n  alternative = \"two.sided\",\n  conf.level = 0.99,\n  var.equal = FALSE  # Use Welch's t-test for unequal variances\n)"
+    "text": "Student’s t-test\n\nTwo means are indeed statistically similar, that means that the t value should be non discernible from 0, with the 99% level of confidence decided.\nIf different, the t-value should be significantly different than 0. Confidence interval defined at the 99% confidence level should not include 0 : \\[\\begin{equation}\n(\\bar{X_1} - \\bar{X_2}) +- \\ t_{99%} * \\sqrt{\\frac{s_1^2}{n_1}+\\frac{s_2^2}{n_2}}\n\\end{equation}\\]\n\n\nt_test_result &lt;- t.test(\n  rural_income,\n  urban_income,\n  alternative = \"two.sided\",\n  conf.level = 0.99,\n  var.equal = FALSE  # Use Welch's t-test for unequal variances\n)"
   },
   {
     "objectID": "slides/session1/slides1.html#students-t-test-1",
     "href": "slides/session1/slides1.html#students-t-test-1",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Student’s t-test",
-    "text": "Student’s t-test\n\nt_test_result\n\n\n    Welch Two Sample t-test\n\ndata:  rural_income and urban_income\nt = -17.398, df = 1391.2, p-value &lt; 2.2e-16\nalternative hypothesis: true difference in means is not equal to 0\n99 percent confidence interval:\n -6698.204 -4968.538\nsample estimates:\nmean of x mean of y \n 30483.03  36316.40"
+    "text": "Student’s t-test\n\n\n\n    Welch Two Sample t-test\n\ndata:  rural_income and urban_income\nt = -17.394, df = 1397.3, p-value &lt; 2.2e-16\nalternative hypothesis: true difference in means is not equal to 0\n99 percent confidence interval:\n -6628.915 -4916.821\nsample estimates:\nmean of x mean of y \n 30400.02  36172.89"
   },
   {
     "objectID": "slides/session1/slides1.html#exercice-3--",
@@ -705,5 +705,19 @@
     "title": "Session 1 — Descriptive statistics",
     "section": "T-test",
     "text": "T-test\nImagine that I would like to verify, lets say with a confidence margin of 99%, that \\[\\begin{equation}\n\\text{E}(\\text{MI}| \\text{dens} = \\text{Rural}) \\le \\text{E}(\\text{MI}| \\text{dens} = \\text{Urban})\n\\end{equation}\\] The t-test consists in computing a t-statistic comparing the means of the two independent samples : \\[\\begin{equation}\nt = \\frac{\\bar{X_1} - \\bar{X_2}}{\\sqrt{\\frac{s_1^2}{n_1}+\\frac{s_2^2}{n_2}}}\n\\end{equation}\\] Under the assumption that the two variables have normal distributions. If the two means are indeed statistically similar, that means that the t value should be non discernible from 0, with the 99% level of confidence decided. In the case where they are different, the t-value should be significantly different than 0. That means, the confidence interval defined at the 99% confidence level : \\[\\begin{equation}\n(\\bar{X_1} - \\bar{X_2}) \\pm t_{.99} * \\sqrt{\\frac{s_1^2}{n_1}+\\frac{s_2^2}{n_2}}\n\\end{equation}\\] should not include 0. In R, you can easily implement that using :\n\nrural_income &lt;- comm_r %&gt;% filter(dens == \"Rural\") %&gt;% pull(revmoyfoy)\nurban_income &lt;- comm_r %&gt;% filter(dens == \"Urbain dense\" | dens == \"Urbain intermédiaire\") %&gt;% pull(revmoyfoy)\n\nt_test_result &lt;- t.test(\n  rural_income,\n  urban_income,\n  alternative = \"two.sided\",\n  conf.level = 0.99,\n  var.equal = FALSE  # Use Welch's t-test for unequal variances\n)\n\nWhere you test the NULL hypothesis, which is that the means are similar - hence that the difference is not statistically different than 0. If your p-value is below 0.01, you conclude that your hypothesis is rejected. The result of the t-test ran above indeed shows you that your 99% confidence interval [-7135.543; -5418.664] excludes 0, which means that the test is indeed significant, and you can clearly reject the NULL hypothesis with 99% confidence (even much more) : the means are different, and the average difference is 6277, 11 euros (36 640,58 - 30363,47)."
+  },
+  {
+    "objectID": "slides/session1/slides1.html#absolute-path",
+    "href": "slides/session1/slides1.html#absolute-path",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Absolute path",
+    "text": "Absolute path"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#creating-a-project-1",
+    "href": "slides/session1/slides1.html#creating-a-project-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Creating a project",
+    "text": "Creating a project\n\nLocation"
   }
 ]
