@@ -22,7 +22,7 @@ website:
           - text: "Session 6: Instrumental Variables (IV), Two-Stage Least Squares (2SLS) and Two-Stage Residual Inclusion (2SRI)"
             href: sessions/session6.qmd
        
-      - text: Homeworks
+      - text: Exercices
       - menu:
           - text: "Session 1: Dataset Building and Descriptive Statistics"
             href: homeworks/homework1.qmd
@@ -36,6 +36,10 @@ website:
             href: homeworks/homework5.qmd
           - text: "Session 6: Instrumental Variables (IV), Two-Stage Least Squares (2SLS) and Two-Stage Residual Inclusion (2SRI)"
             href: homeworks/homework6.qmd
+      - text: Slides
+      - menu:
+          - text: "Session 1: Dataset Building and Descriptive Statistics"
+            href: slides/slides1.qmd
       - href: about.qmd
         text: About
 

@@ -39,6 +39,482 @@
     "href": "sessions/session1.html",
     "title": "Session 1 — Descriptive statistics",
     "section": "",
-    "text": "Introduction\n\n\nTheoretical background\n\n\nExercices\n\n1 + 1\n\n[1] 2\n\n\n\\[\n\\begin{equation}\n\\hat{\\beta} = (X'X)^{-1}X'y\n\\end{equation}\n\\]\nSecond example:\n\nRStataPython\n\n\n\n1 + 2\n\n[1] 3\n\n\n\n\n1 + 2\n\n\n1 + 2"
+    "text": "The core of any research in social science is to discover and describe relationships between variables. Whether you describe a research puzzle as a “why X despite Y?” type of question, or. The social facts Y that the researchers seek to explain are generally called the dependent variable, the explanandum, while the variables supposed to explain it are called the independent variables or the explanans.\nHence, any research process typically involves the following stages : collection of data, analysis of these data, and drawing interpretations and conclusions based on these data. As such, the data collection phase is crucial in every empirical research project - which is generally the case in political science or sociology.\nOf course, many methods exist in practice to make such claims about connection between variables. These methods are generally divided in two large sub-groups : qualitative methods, which are generally based on small-N comparisons and can for instance allow to better access interpretive dimensions, and quantitative methods. The latter methods allow to conduct large N comparisons, to replicate analyses, and have known very important recent developments related to technological improvements in the recent decades (e.g. Computational Social Science, LLMs). Similarly, these methods generally seek to find a. That is, a given variable \\(Y\\), is caused (and can therefore be predicted) by a series of other variables \\(X_1, X_2, X_3, X_4\\). Hence, in a very general form, considering that \\(Y\\) can be explained by \\(X_1, X_2, X_3, X_4\\) means that we assume that there exists a function \\(f : \\mathbb{R}^4 \\rightarrow \\mathbb{R}\\) that satisfies : \\[\n\\begin{equation}\nY = f(X_1,X_2, X_3, X_4)  + \\epsilon\n\\end{equation}\n\\]\nTake for instance happiness as a variable to explain : as a social scientist, you would like to understand what causes people to be happy or not. Of course, you might have first struggles in defining happiness - an essentially subjective measure -, and you might as well have competing hypotheses about what causes happiness."
+  },
+  {
+    "objectID": "sessions/session1.html#probability-distribution-functions",
+    "href": "sessions/session1.html#probability-distribution-functions",
+    "title": "Session 1 — Descriptive statistics",
+    "section": "Probability, distribution functions",
+    "text": "Probability, distribution functions\nImagine that you have two dices with six faces on each dice. Your random variable is the outcome of each dice that you throw.\nYou want to assess your chances of obtaining each value contained in the set of potential outcomes \\(S = \\{2,3,4,5,6,7,8,9,10,11,12\\}\\). Intuitively, you might want to start by looking at the 2 value : 2 is only obtained in the case where you obtain one for the two dices. That is, for dice 1, you have \\(1/6\\) of obtaining the value, and then again \\(1/6\\) of obtaining 1 for the second dice. Overall, the probability of obtaining \\(2\\), \\(P(y=2)\\) is therefore : \\[\n\\begin{equation}\nP_2 = 1/6 \\times 1/6 = 1/36\n\\end{equation}\n\\] Of course, if you now want to look at the probability of obtaining \\(3\\) as outcome, \\(P(y = 3)\\) your probability will be the union of two probabilities : the chance of obtaining 1 with dice 1 and 2 with dice 2, or the one of obtaining 2 with dice 1 and 1 with dice 2. Mathematically, this writes : \\[\n\\begin{equation}\nP(Y=3) = 1/6 \\times 1/6 + 1/6 \\times 1/6 = 2/36 = 1/18\n\\end{equation}\n\\] You see that the probability is doubled, compared to 2.\nIf you look at the joint probability, this corresponds to a diagonal : 2. Hence, you see that obtaining 7 is the last diagonal and therefore \\[\n\\begin{equation}\nP(Y=7) = 6\\times1/36 = 1/6\n\\end{equation}\n\\]\n\\[\\begin{array}{c|cccccc}\n& 1 & 2 & 3 & 4 & 5 & 6 \\\\\n\\hline\n1 & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} \\\\\n2 & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} \\\\\n3 & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} \\\\\n4 & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} \\\\\n5 & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} \\\\\n6 & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36}\n\\end{array}\\]\nImagine now that you are skeptical of these theoretical findings, and you decide to carry a small experiment in order to test this. Let’s imagine that you are feeling very bored for an entire year and that you decide to launch these two dices a hundred thousand times, and report results in two tables \\(X_1, X_2\\) with the result for each dice. Your results might look like :\n\nlibrary(DT)\nN = 100000 #number of measurements\nx1 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)\nx2 = sample(1:6,N, replace=T) # second dice (values are from 1 to 6)\nhead(x1)\n\n[1] 6 6 1 1 5 3\n\n\nIn fact your final result - the sum of the two dices -, is the union of two independent events \\(X_1, X_2\\) being respectively the outcome of dice \\(1\\) and \\(2\\), provided that they are indeed independent. Your final result \\(Y\\) is therefore simply the sum of these two random variables. You can then sum :\n\ny = x1+x2 # total number obtained\nfreq &lt;- table(y)\nbarplot(freq)\n\n\n\n\n\n\n\n\nand the function table() gives you the number of occurences for each value. The probability to obtain 7 from your sample is then simply the number of occurences that you have measured, divided by the total number of attempts that you have done, in this case 10000. Hence :\n\nprob &lt;- freq/N\nprob\n\ny\n      2       3       4       5       6       7       8       9      10      11 \n0.02687 0.05655 0.08459 0.11087 0.13589 0.16597 0.14046 0.11278 0.08265 0.05542 \n     12 \n0.02795 \n\nbarplot(prob)\n\n\n\n\n\n\n\n\nThese values are called the probability distribution of the variable Y. That is, for each outcome of Y, there is a probability (here shown on the barplot). These probabilities follow the simple rule : \\[\\begin{equation}\n\\sum_{i=1}^N P(y_i) = P(y_1)+P(y_2) +... P(y_n) = 1\n\\end{equation}\\]\nThat is, the sum of all probabilities over the set of potential outcomes \\(\\{y_1,y_2,y_3,..., y_n\\}\\) is equal to 1. The \\(\\Sigma\\) symbol simply stands for sum. Now imagine that you want to know the average value\n\\[\\begin{equation}\n\n\\mathbb{E}(y) = \\sum_{i=1}^N y_i P(y_i) = \\bar{y}\n\\end{equation}\\]\nThis value is called the expectation. In the case"
+  },
+  {
+    "objectID": "sessions/session1.html#conditional-probability",
+    "href": "sessions/session1.html#conditional-probability",
+    "title": "Session 1 — Descriptive statistics",
+    "section": "Conditional probability",
+    "text": "Conditional probability\nImagine now that, due to the extreme fatigue provoked by the repetitive throwing of those dices, you throw those a bit too wildly and one falls under the table where you are. The other one is there and shows the value 3. You want to know the expected value of \\(y\\), knowing that one dice among the two is 3. This is called a conditional probability and noted \\(P(y|X_1)\\), with \\(| X_1\\) simply meaning that \\(X_1\\) is considered fixed (here worth 3). Since \\(X_1\\) is fixed, the probability is \\(P(y|X_1) = 1/6\\), and knowing this information is actually very precious on Y, because it considerably reduces the set of potential outcomes : \\[\nY \\ge 4 \\text{, } Y\\le 9 \\text{ and } S = \\{4, 5, 6, 7, 8, 9\\}\n\\] \\[\n\\begin{equation}\n\\mathbb{E}(y|X_1 = 3) = \\sum_{i=1}^N y_i P(y_i|X_1 = 3)\n\\end{equation}\n\\] and so we get : \\[\n\\begin{align}\n  \\mathbb{E}(y|X_1 = 3) = 1/6 \\times (4 + 5 + 6 + 7 + 8 + 9) = 6.5\\\\\n  \\mathbb{E}(y|X_1 = 4) = 1/6 \\times (5 + 5 + 7 + 8 + 9 + 10) = 7.5\n\\end{align}\n\\] Notice that the expected value of y therefore changes, as a function of the explanatory variable, \\(X_1\\)."
+  },
+  {
+    "objectID": "sessions/session1.html#towards-continuity",
+    "href": "sessions/session1.html#towards-continuity",
+    "title": "Session 1 — Descriptive statistics",
+    "section": "Towards continuity",
+    "text": "Towards continuity\nNow simply imagine that you repeat that process with dices that have \\(n = 1000, 1400, 800\\) faces, with each value ranging from \\(1/n to 1\\). And that you would like to know what are the final probabilities of having any decimal number between 0 and 3. Of course, the manual computation of this would be very cumbersome - which is why automising the process with R can prove very useful. Reusing the same code would give :\n\nlibrary(ggplot2)\nlibrary(dplyr)\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\nN = 100000 #number of measurements\nx1 = sample(1:1000,N, replace=T)/1000 # first dice (values are from 1 to 6)\nx2 = sample(1:1400,N, replace = T)/1400\nx3 = sample(1:800,N,replace = T)/800\ny = x1+x2+x3\ndat &lt;- data.frame(y)\nggplot(dat, aes(x = y)) +\n  geom_histogram(aes(y = after_stat(density))) +\n  geom_density(color = \"red\", linewidth = 1) +\n  labs(title = \"Distribution of y = x1 + x2 + x3\",\n       x = \"y\",\n       y = \"Density\") +\n  theme_minimal()\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`."
+  },
+  {
+    "objectID": "slides/session1/slides1.html#your-instructor",
+    "href": "slides/session1/slides1.html#your-instructor",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Your instructor",
+    "text": "Your instructor\n\nPaul Servais, paul.servais@sciencespo.fr.\nTrained as physical engineer (Ecole Polytechnique de Bruxelles), then came to SciencesPo (Urban School), graduated last year\nNow working on climate politics, comparative politics\nI’ve been working on the electoral impacts of wind turbines on the vote for the RN"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#course-objectives",
+    "href": "slides/session1/slides1.html#course-objectives",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Course objectives",
+    "text": "Course objectives\n\nProvide you with skills useful for:\n\nPolicy Evaluation\nQuantitative research\nWith mathematical formalisation\nBased on coding in R (on RStudio), with some Stata examples\n\nCorrelation is not causation !"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#course-organisation",
+    "href": "slides/session1/slides1.html#course-organisation",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Course organisation",
+    "text": "Course organisation\n\n10’ introduction\n30’ mathematical formalisation and coding examples\n1h maths and coding exercices on R"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#and-you-objectives-for-the-class",
+    "href": "slides/session1/slides1.html#and-you-objectives-for-the-class",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "And you ? Objectives for the class ?",
+    "text": "And you ? Objectives for the class ?"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#course-material",
+    "href": "slides/session1/slides1.html#course-material",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Course material",
+    "text": "Course material\n\n\nEverything on https://scpo-quantimethods.github.io/quantitative_methods_two/\nMore structured than Moodle\n\n\n\n\nSessions, with clear codings outputs\nExercices"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#sessions",
+    "href": "slides/session1/slides1.html#sessions",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Sessions",
+    "text": "Sessions\n\n\nCoding basics, and descriptive statistics\n\n\nLinear regressions\n\n\nNon-linear regressions\n\n\nRegression Discontinuity Design (RDD)\n\n\n\nDifference-in-differences (DiD) and panel data\n\n\nInstrumental Variables (IV)"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#course-examination",
+    "href": "slides/session1/slides1.html#course-examination",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Course examination",
+    "text": "Course examination"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#and-you",
+    "href": "slides/session1/slides1.html#and-you",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "And you ?",
+    "text": "And you ?\n\nBackground ?\nObjectives for the class ?"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#course-evaluation",
+    "href": "slides/session1/slides1.html#course-evaluation",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Course evaluation",
+    "text": "Course evaluation\n\nSimple pass/fail\nGoal is to replicate or find a research question, by groups of two, and write a 5-pages document summarising the findings\nThe objective is clearly not to overload anybody with work, but to give useful tips and skills for the future !\nAbstract\nIntro - Theory - Methods - Results - Conclusion"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#other-excellent-sources",
+    "href": "slides/session1/slides1.html#other-excellent-sources",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Other excellent sources",
+    "text": "Other excellent sources\n\nWork by colleagues of my center (CEE) :\n\nhttps://luissattelmayer.github.io/quant-2025/ ;\nhttps://malo-jn.quarto.pub/introduction-to-r/ ;\nhttps://www.rovny.org/methods-2-ed\n\nWork by other economists :\n\nCunningham, Scott. Causal Inference: The Mixtape. (2021). Available at: https://mixtape.scunning.com/.\n\nHuntington-Klein. The Effect: An Introduction to Research Design and Causality. (2021). https://theeffectbook.net/"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#questions",
+    "href": "slides/session1/slides1.html#questions",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Questions ?",
+    "text": "Questions ?"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#motivation",
+    "href": "slides/session1/slides1.html#motivation",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Motivation",
+    "text": "Motivation\n\nOur world is increasingly measured and monitored systematically\nThis creates loads of data about almost everything\nThe objectives of statistics is to find meaningful information in those data\nYet most of the time the data is imperfect or limited, in terms of reach, validity, and in terms of reliability\nNeed to idenfity margins of validity !"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#research-problem-and-empirical-evidence",
+    "href": "slides/session1/slides1.html#research-problem-and-empirical-evidence",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Research problem and empirical evidence",
+    "text": "Research problem and empirical evidence\n\nA research puzzle generally comes with identifying a puzzling relationship between two variables\nWhy Y despite X ? Because Z\nA more empirical question would also be: does Z affect X ?\nQuantitative methods, and causal inference, are a way to assess the size of the effect of Z on Y and to measure its significance."
+  },
+  {
+    "objectID": "slides/session1/slides1.html#terminology-random-and-non-random-variables",
+    "href": "slides/session1/slides1.html#terminology-random-and-non-random-variables",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Terminology : random and non-random variables",
+    "text": "Terminology : random and non-random variables\n\nA ‘puzzling’ variable, with random outcomes, is called a random variable. Take any census : it is generally built on a sample of individuals, randomly drawn from an overall population\nCategorical\n\nNominal : finite amount of values/categories, non-ordered eg. gender, the department where you live\nOrdinal : ranking of preferences eg. ranking your preferences from 1 to 5\n\nContinuous/interval variables : infinite number of potential outcomes (in a given range)"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#descriptive-statistics",
+    "href": "slides/session1/slides1.html#descriptive-statistics",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Descriptive statistics",
+    "text": "Descriptive statistics\n\nThe first step is to describe the variables we seek to"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#categorical-and-continuous-variables",
+    "href": "slides/session1/slides1.html#categorical-and-continuous-variables",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Categorical and continuous variables",
+    "text": "Categorical and continuous variables\n\nCategorical\n\nNominal : finite amount of values/categories, non-ordered eg. gender, the department where you live\nOrdinal : ranking of preferences eg. ranking your preferences from 1 to 5\n\nContinuous/interval variables : infinite number of potential outcomes (in a given range)"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#one-dice-example",
+    "href": "slides/session1/slides1.html#one-dice-example",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "One dice example",
+    "text": "One dice example\n\nA typical example is the result of a six-faces dice, that you throw.\n\\(X\\), the result of your dice, is a random variable\n\\(S_X = \\{1,2,3,4,5,6\\}\\) is its set of potential outcomes\nIf your dice is not broken, \\(P(X =1,2,3,4,5,6) = 1/6 \\approx 0.1666667\\).\nThe probability set is \\(P_X = \\{1/6, 1/6, 1/6, 1/6, 1/6, 1/6\\}\\). Each outcome comes with a probability."
+  },
+  {
+    "objectID": "slides/session1/slides1.html#one-dice-example---distribution",
+    "href": "slides/session1/slides1.html#one-dice-example---distribution",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "One dice example - distribution",
+    "text": "One dice example - distribution\n\nYou throw it a 1000 times. I randomly generate that variable in R, using sample()\n\n\nlibrary(DT)\nN = 1000 #number of measurements\nx1 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)\nhead(x1,20) # head\n\n [1] 2 6 6 4 2 1 4 5 5 3 1 4 5 2 6 5 1 3 5 1"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#two-dices-example",
+    "href": "slides/session1/slides1.html#two-dices-example",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Two dices example",
+    "text": "Two dices example\n\nNow imagine that you have two dices\n\\(X_1\\) is the result of dice 1, \\(X_2\\) is the result of dice 2\n\\(Y = X_1 + X_2\\) is also a random variable;\nIf \\(X_1\\) and \\(X_2\\) are independent and can be distinguished (e.g. different colors) \\[\\begin{equation}\nP(Y_{ij}) = P(X_1 = i)\\times P(X_2 = j)\n\\end{equation}\\]\n\\(S = \\{2,3,4,5,6,7,8,9,10,11,12\\}\\)\nYet here \\(X_1\\) and \\(X_2\\) are interchangeable… Probabilities = ?"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#you-can-simul",
+    "href": "slides/session1/slides1.html#you-can-simul",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "You can simul",
+    "text": "You can simul"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#two-dices-example-1",
+    "href": "slides/session1/slides1.html#two-dices-example-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Two dices example",
+    "text": "Two dices example\n\\[\\begin{array}{c|cccccc}\n& 1 & 2 & 3 & 4 & 5 & 6 \\\\\n\\hline\n1 & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} \\\\\n2 & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} \\\\\n3 & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} \\\\\n4 & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} \\\\\n5 & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} \\\\\n6 & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36} & \\frac{1}{36}\n\\end{array}\\]"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#distribution",
+    "href": "slides/session1/slides1.html#distribution",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Distribution",
+    "text": "Distribution\n\nlibrary(DT)\nN = 10000 #number of measurements\nx1 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)\nx2 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)\ny = x1 + x2\nhead(y)\n\n[1]  7  6  4 10  4  9\n\nmean(y)\n\n[1] 6.9913\n\nsd(y)\n\n[1] 2.416321\n\nsummary(y)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  2.000   5.000   7.000   6.991   9.000  12.000"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#expectation",
+    "href": "slides/session1/slides1.html#expectation",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Expectation",
+    "text": "Expectation\n\nWhat is the expected value ? \\[\\begin{equation}\n\\mathbb{E}(Y) = \\sum_{i=1}^N Y_i * P(Y = Y_i) = \\bar{Y}\n\\end{equation}\\]\nAnd the variance of a sample is : \\[\\begin{equation}\n\\mathbb{V}\\text{ar}(Y) = \\mathbb{E}((Y-\\bar{Y})^2) =  \\frac{1}{N} \\sum_{i=1}^N (Y_i -\\bar{Y})^2 = \\sigma_Y^2\n\\end{equation}\\]"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#towards-continuity",
+    "href": "slides/session1/slides1.html#towards-continuity",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Towards continuity",
+    "text": "Towards continuity\n\nYou have 1000 dices, with \\(i = 1,2,3,..., 1000\\) faces.\nValues are all divided by \\(i\\).\nYou randomly pick 100 of these,\nYou throw each of them 10000 times\nYou report the sum as random variable Y"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#expectation-and-variance",
+    "href": "slides/session1/slides1.html#expectation-and-variance",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Expectation and variance",
+    "text": "Expectation and variance\n\nThe expectation is the average value that will come out of your dice: \\[\\begin{equation}\n\\text{E}(Y) = \\sum_{i=1}^N Y_i * P(Y_i) = \\bar{Y}\n\\end{equation}\\]\nAnd you want to measure the average dispersion around the mean called the variance : \\[\\begin{equation}\n\\text{E}((Y_i-\\bar{Y})^2) = \\frac{1}{N} \\sum_{i=1}^N (Y_i - \\bar{Y})^2\n\\end{equation}\\]"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#probability-density-for-a-continuous-variable",
+    "href": "slides/session1/slides1.html#probability-density-for-a-continuous-variable",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Probability density for a continuous variable",
+    "text": "Probability density for a continuous variable\n\nlibrary(ggplot2)\ndat = data.frame(y)\nggplot(dat, aes(x = y)) +\n  geom_histogram(aes(y = after_stat(density)), bins = 100) +\n  geom_density(color = \"red\", linewidth = 1) +\n  labs(title = \"Distribution of Y\",\n       x = \"Y\",\n       y = \"Density\") +\n  theme_minimal()"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#random-variables",
+    "href": "slides/session1/slides1.html#random-variables",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Random variables",
+    "text": "Random variables\n\nA variable with random outcomes, is called a random variable : eg. a census is generally built on a sample of individuals, randomly drawn from an overall population.\nCategorical : finite amount of values/categories\n\nNominal : non-ordered eg. gender, the department where you live\nOrdinal : ranking of preferences eg. ranking your preferences from 1 to 5\n\nContinuous/interval variables : infinite number of potential outcomes (in a given range)"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#conditional-probability",
+    "href": "slides/session1/slides1.html#conditional-probability",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Conditional probability",
+    "text": "Conditional probability\n\nNow imagine that you know the value of one dice, but not the other.\nImagine \\(X_1 =4\\).\n\\(S_Y = \\{5,6,7,8,9, 10\\}\\)\nWhat are the probabilities ? \\[\\begin{equation}\nP(Y|X_1 = 4) = \\frac{1}{6}\n\\end{equation}\\]\nHence, knowing \\(X_1\\) considerably influences the probabilities on Y!"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#real-life-examples",
+    "href": "slides/session1/slides1.html#real-life-examples",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Real-life examples",
+    "text": "Real-life examples\n\n\nOf course in practice dices are not extremely interesting…\nBut the same logic applies to real data !\nImagine working on the French communes\nYou seek to describe the median income in those communes\nYou only have access to a random sample of 10.000\nYou will need a coding environment : RStudio (open source, free, huge community)\nand data… : your task is to find it online"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#median-income-in-those-communes",
+    "href": "slides/session1/slides1.html#median-income-in-those-communes",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Median income in those communes",
+    "text": "Median income in those communes\n\nInterval variable\n\n\n# Continuous : the median income in those communes\nsummary(comm_r$revmoyfoy)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n   8151   25808   29477   31049   34404  125092       9 \n\nrange(comm_r$revmoyfoy, na.rm = TRUE)\n\n[1]   8151.157 125092.100\n\nsummary((comm_r %&gt;% drop_na(revmoyfoy))$revmoyfoy) #dropping NA's\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   8151   25808   29477   31049   34404  125092 \n\n#replacing the NA's\ncomm_r &lt;- comm_r %&gt;% mutate(revmoyfoy = ifelse(is.na(revmoyfoy), mean(revmoyfoy, na.rm =TRUE), revmoyfoy))\nsummary(comm_r$revmoyfoy)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   8151   25812   29482   31049   34400  125092"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#s",
+    "href": "slides/session1/slides1.html#s",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "S",
+    "text": "S"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#descriptive-statistics-1",
+    "href": "slides/session1/slides1.html#descriptive-statistics-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Descriptive statistics",
+    "text": "Descriptive statistics\n\nThe first step in every statistical analysis\nDescribe the variables we work with\n\nremove outliers, deal with missing values\nverify the quality of the data\n\nrange\nmean\nmedian\nstandard deviation"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#conditional-expectation",
+    "href": "slides/session1/slides1.html#conditional-expectation",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Conditional expectation",
+    "text": "Conditional expectation\n\n\nKnowing \\(X_1 = 4\\) therefore also changes the expectation : \\[\\begin{equation}\n\\text{E}(Y|X_1 = 4) = \\frac{1}{6}(5+6+7+8+9+10) = 7.5\n\\end{equation}\\]\n\n\n\n\nN = 10000 #number of measurements\nx1 = 4 # first dice (values are from 1 to 6)\nx2 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)\ny = x1 + x2"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#distribution-1",
+    "href": "slides/session1/slides1.html#distribution-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Distribution",
+    "text": "Distribution\n\nbarplot(table(y))"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#distribution-2",
+    "href": "slides/session1/slides1.html#distribution-2",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Distribution",
+    "text": "Distribution\n\nbarplot(table(y))"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#conditional-distribution",
+    "href": "slides/session1/slides1.html#conditional-distribution",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Conditional distribution",
+    "text": "Conditional distribution"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#density",
+    "href": "slides/session1/slides1.html#density",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Density",
+    "text": "Density\n\nmu &lt;- comm_r %&gt;% select() %&gt;% group_by()\nggplot(comm_r, aes(x= revmoyfoy, color = dens)) + geom_density()"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#skewness",
+    "href": "slides/session1/slides1.html#skewness",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Skewness",
+    "text": "Skewness\n\n\\(\\text{Ages} =\\{13,15,15,16,16,17,13,15,17, 18, 55\\}\\)\n\\(\\text{Med}_{\\text{Age}} = 16\\) and \\(\\bar{\\text{Age}} = 19.09\\)\nThe mean is very sensitive to extreme values !\nMedian \\(&lt;\\) Mean : positively skewed (the mean is pushed upwards by high values)\nMedian \\(&gt;\\) Mean : negatively skewed (the mean is pushed downwards by low values)\nMean = Median : symmetrical distribution"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#probability-density-function",
+    "href": "slides/session1/slides1.html#probability-density-function",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Probability density function",
+    "text": "Probability density function"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#probability-density-function-1",
+    "href": "slides/session1/slides1.html#probability-density-function-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Probability density function",
+    "text": "Probability density function"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#coding-environment",
+    "href": "slides/session1/slides1.html#coding-environment",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Coding environment",
+    "text": "Coding environment\n\nLanguage : R (CRAN)\nEnvironment : RStudio\nSee documentation on:\n\nMalo Jan’s webpage https://malo-jn.quarto.pub/introduction-to-r/\nR documentation"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#importing-data",
+    "href": "slides/session1/slides1.html#importing-data",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Importing data",
+    "text": "Importing data\n\n\nlibrary(readxl) # needed to read excel without \"rio\"\ncommunes &lt;- read_excel(\"data/demographics2024.xlsx\") # relative path\ncommunes &lt;- read_excel(\"/Users/Desktop/Website/methods_policyevaluation/slides/session1/data/\") # absolute path\n#using the \"rio\" package\nlibrary(rio)\ncommunes &lt;- import(\"data/demographics2024.xlsx\")\n\n\n\n\nInspecting the data\n\n\nhead(comm_r, 3)\n\n# A tibble: 3 × 43\n  codecommune  Year codedep  agri  indp  cadr  pint  empl  ouvr  chom  pact\n  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 01001        2024 01          0    39    33    14    86   147    26   319\n2 01004        2024 01          4   142   678  1647  1211  1235   427  4917\n3 01008        2024 01          0    19    18    83    83   122     7   325\n# ℹ 32 more variables: age &lt;dbl&gt;, popf &lt;dbl&gt;, francais &lt;dbl&gt;, etranger &lt;dbl&gt;,\n#   prixbien &lt;dbl&gt;, capitalratio &lt;dbl&gt;, npropri &lt;dbl&gt;, nlogement &lt;dbl&gt;,\n#   pop &lt;dbl&gt;, revmoyfoy &lt;dbl&gt;, revtot &lt;dbl&gt;, recetteimpotslocaux &lt;dbl&gt;,\n#   recette &lt;dbl&gt;, baseimpotslocaux &lt;dbl&gt;, nodip &lt;dbl&gt;, sup &lt;dbl&gt;,\n#   Libellé &lt;chr&gt;, Exploitations &lt;dbl&gt;, Personnes &lt;dbl&gt;, UTA &lt;dbl&gt;, SAU &lt;dbl&gt;,\n#   PBS &lt;lgl&gt;, dens &lt;chr&gt;, densaav &lt;chr&gt;, dens7 &lt;chr&gt;, ntot &lt;dbl&gt;, pagri &lt;dbl&gt;,\n#   pindp &lt;dbl&gt;, pcadr &lt;dbl&gt;, ppint &lt;dbl&gt;, pempl &lt;dbl&gt;, pouvr &lt;dbl&gt;"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#your-experiment",
+    "href": "slides/session1/slides1.html#your-experiment",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Your experiment",
+    "text": "Your experiment\n\nbarplot(table(x1))"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#your-experiment-normalised---distribution",
+    "href": "slides/session1/slides1.html#your-experiment-normalised---distribution",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Your experiment normalised - distribution",
+    "text": "Your experiment normalised - distribution\n\nbarplot(table(x1)/N)"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#your-experiment-1",
+    "href": "slides/session1/slides1.html#your-experiment-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Your experiment",
+    "text": "Your experiment\n\nN = 100000\n\n\nbarplot(table(x1 = sample(1:6,100000, replace=T)))"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#data-and-packages",
+    "href": "slides/session1/slides1.html#data-and-packages",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Data and packages",
+    "text": "Data and packages\n\nR comes with basic language and functions : base R\n\nyou can add, multiply, conduct basic operations in your files\n\nI strongly recommend the use of packages and libraries\n\ntidyverse is extremely useful\n\nYou can load and install such packages in this way :\n\n\ninstall.packages(\"tidyverse\")\nlibrary(tidyverse)"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#exercices",
+    "href": "slides/session1/slides1.html#exercices",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Exercices",
+    "text": "Exercices"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#your-experiment-normalised",
+    "href": "slides/session1/slides1.html#your-experiment-normalised",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Your experiment normalised",
+    "text": "Your experiment normalised\n\nDistribution\n\n\nbarplot(table(x1)/N)"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#visualising-the-variance",
+    "href": "slides/session1/slides1.html#visualising-the-variance",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Visualising the variance",
+    "text": "Visualising the variance\n\ndevs = (y - mean(y))^2\nhead(y)\n\n[1]  7  6  4 10  4  9\n\nunique(devs)\n\n [1]  0.00007569  0.98267569  8.94787569  9.05227569  4.03487569  3.96527569\n [7] 15.93047569 16.06967569 24.91307569  1.01747569 25.08707569\n\nsummary(devs)\n\n     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. \n7.570e-05 9.827e-01 3.965e+00 5.838e+00 8.948e+00 2.509e+01 \n\nbarplot(table(devs))"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#creating-a-project",
+    "href": "slides/session1/slides1.html#creating-a-project",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Creating a project",
+    "text": "Creating a project\n\nCreate a project\nChoose the location on your computer"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#categorical-variable",
+    "href": "slides/session1/slides1.html#categorical-variable",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Categorical variable",
+    "text": "Categorical variable\n\nDensity typology\n\n\n# Nominal : the density typology of communes \nunique(comm_r$dens)\n\n[1] \"Rural\"                \"Urbain intermédiaire\" \"Urbain dense\"        \n\ntable(comm_r$dens)\n\n\n               Rural         Urbain dense Urbain intermédiaire \n                8742                  201                 1057 \n\nsummary(comm_r$dens)\n\n   Length     Class      Mode \n    10000 character character \n\n\n\nNominal or ordinal ?"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#expectations",
+    "href": "slides/session1/slides1.html#expectations",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Expectations",
+    "text": "Expectations\n\nYou can compute the expectation: \\[\\begin{equation}\n\\text{E}(\\text{MI}) = \\frac{1}{10000}\\sum_{i=1}^{10000} \\text{MI}_i\n\\end{equation}\\]\n\n\nmean(comm_r$revmoyfoy)\n\n[1] 31010.81\n\n\n\nAnd the conditional expectations\n\n\nmean((comm_r %&gt;% filter(dens == \"Rural\"))$revmoyfoy)\n\n[1] 30269.31\n\nmean((comm_r %&gt;% filter(dens == \"Urbain dense\"|dens == \"Urbain intermédiaire\"))$revmoyfoy)\n\n[1] 36163.55"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#statistical-inference",
+    "href": "slides/session1/slides1.html#statistical-inference",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Statistical inference",
+    "text": "Statistical inference\n\nYou see :\n\n\\[\\begin{equation}\n\\text{E}(\\text{MI}| \\text{dens} = \\text{Rural}) \\le \\text{E}(\\text{MI})\n\\end{equation}\\]\n\nShould we conclude that median income is significantly smaller in rural communes than in urban areas ?\nThe density plot indeed shows that rural areas are more concentrated in the lower income regions, compared with urban areas…\nYet dispersion quite large for urban areas…"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#interval-variable",
+    "href": "slides/session1/slides1.html#interval-variable",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Interval variable",
+    "text": "Interval variable\n\nMedian income in communes\n\n\n# Continuous : the median income in those communes\nsummary(comm_r$revmoyfoy)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n   9693   25750   29514   31011   34423  120724       5 \n\nrange(comm_r$revmoyfoy, na.rm = TRUE)\n\n[1]   9693.044 120723.690\n\nsummary((comm_r %&gt;% drop_na(revmoyfoy))$revmoyfoy) #dropping NA's\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   9693   25750   29514   31011   34423  120724 \n\n#replacing the NA's\ncomm_r &lt;- comm_r %&gt;% mutate(revmoyfoy = ifelse(is.na(revmoyfoy), mean(revmoyfoy, na.rm =TRUE), revmoyfoy))\nsummary(comm_r$revmoyfoy)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   9693   25750   29516   31011   34420  120724"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#statistical-inference-1",
+    "href": "slides/session1/slides1.html#statistical-inference-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Statistical inference",
+    "text": "Statistical inference\n\nI would like to be 95% sure that \\[\\begin{equation}\n\\text{E}(\\text{MI}| \\text{dens} = \\text{Rural}) \\le \\text{E}(\\text{MI}| \\text{dens} = \\text{Urban})\n\\end{equation}\\]"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#exercice-1",
+    "href": "slides/session1/slides1.html#exercice-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Exercice 1",
+    "text": "Exercice 1"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#exercice-2",
+    "href": "slides/session1/slides1.html#exercice-2",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Exercice 2",
+    "text": "Exercice 2"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#exercice-3",
+    "href": "slides/session1/slides1.html#exercice-3",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Exercice 3",
+    "text": "Exercice 3\n\nImport data available at &lt;&gt;"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#exercice-4",
+    "href": "slides/session1/slides1.html#exercice-4",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Exercice 4",
+    "text": "Exercice 4"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#skewness-1",
+    "href": "slides/session1/slides1.html#skewness-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Skewness",
+    "text": "Skewness\n\nLogging a positively skewed variable can make it more symmetrical\n\n\nggplot(comm_r, aes(x= log(revmoyfoy), color = dens)) + geom_density()"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#exercice-1---manual-warm-up-1",
+    "href": "slides/session1/slides1.html#exercice-1---manual-warm-up-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Exercice 1 - manual warm up 1",
+    "text": "Exercice 1 - manual warm up 1\n\nImagine having 3 dices (one is blue, the other green and the last one is red) with 3 faces each, and values going from 1 to 3. Consider the sum of the three dices as random variable \\(X_{bgr}\\):\n\nCompute the probability of obtaining 5, with the blue dice being 2, the red being 2, and the green being 1: \\(P(X_{bgr} = 5_{212})\\)\nWhat is the set of potential outcomes, \\(S_X\\) of \\(X_{bgr}\\) ?\nNow imagine that the dices can not be distinguished anymore, your random variable is \\(X\\). What is your probability of obtaining 3, \\(P(X=3)\\) ?\nWhat is your probability of obtaining 5 ?\nHow much is the expectation ?\nYou know that one of your dices is worth 3. What is the probability of obtaining 5 in total?\nDraw a bar plot, showing the potential outcomes in the x axis, and the probabilities in the y axis.\nWhat is the conditional expectation worth in the case where one of the three dices is worth 3 ? Is that equal to the non-conditional expectation of X ?\nVerify all your results by simulating the throwing of these three dices, a 10000 times, in R."
+  },
+  {
+    "objectID": "slides/session1/slides1.html#exercice-2--",
+    "href": "slides/session1/slides1.html#exercice-2--",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Exercice 2 -",
+    "text": "Exercice 2 -"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#your-experiment-with-n-100000",
+    "href": "slides/session1/slides1.html#your-experiment-with-n-100000",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Your experiment with N = 100000",
+    "text": "Your experiment with N = 100000\n\nDistribution\n\n\nbarplot(table(x1 = sample(1:6,100000, replace=T)))"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#your-experiment-2",
+    "href": "slides/session1/slides1.html#your-experiment-2",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Your experiment",
+    "text": "Your experiment\n\nNormalised\n\n\nbarplot(table(x1 = sample(1:6,100000, replace=T))/100000)"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#your-experiment-3",
+    "href": "slides/session1/slides1.html#your-experiment-3",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Your experiment",
+    "text": "Your experiment\n\nN = 10000 #number of measurements\nx = sample(1:1000,100, replace=T) # your hundred dices\nhead(x)\n\n[1] 192 794 314 956 166 612\n\ny =0\nfor(i in x){y = y+sample(1:i, N, replace = T)/i}\nhead(y)\n\n[1] 49.00893 48.51893 51.99274 53.98543 51.12595 51.86300\n\n\n\nYou now get closer to a continuous random variable…\nYour probability to obtain one specific value (eg. X = 43.503) becomes extremely small.\nYou generally rather assess the probability that the value you pick is bigger or smaller than a certain value"
   }
 ]
