@@ -395,7 +395,7 @@ Paul Servais
 <span id="cb1-3"><a></a>x1 <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,N, <span class="at">replace=</span>T) <span class="co"># first dice (values are from 1 to 6)</span></span>
 <span id="cb1-4"><a></a><span class="fu">head</span>(x1,<span class="dv">20</span>) <span class="co"># head</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 4 3 5 5 2 5 4 1 5 5 2 1 4 5 3 1 6 3 6 2</code></pre>
+<pre><code> [1] 5 5 2 5 4 5 3 1 6 3 3 6 1 2 1 2 6 6 5 5</code></pre>
 </div>
 </div>
 </section>
@@ -462,20 +462,20 @@ P(Y_{ij}) = P(X_1 = i)\times P(X_2 = j)
 <span id="cb6-5"><a></a>y <span class="ot">=</span> x1 <span class="sc">+</span> x2</span>
 <span id="cb6-6"><a></a><span class="fu">head</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  5 10 11  2  9  8</code></pre>
+<pre><code>[1] 6 6 7 6 4 2</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">mean</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 7.0033</code></pre>
+<pre><code>[1] 7.0255</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">sd</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.414099</code></pre>
+<pre><code>[1] 2.410069</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">summary</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  2.000   5.000   7.000   7.003   9.000  12.000 </code></pre>
+  2.000   5.000   7.000   7.026   9.000  12.000 </code></pre>
 </div>
 </div>
 </section>
@@ -503,16 +503,16 @@ P(Y_{ij}) = P(X_1 = i)\times P(X_2 = j)
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>devs <span class="ot">=</span> (y <span class="sc">-</span> <span class="fu">mean</span>(y))<span class="sc">^</span><span class="dv">2</span></span>
 <span id="cb15-2"><a></a><span class="fu">head</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  5 10 11  2  9  8</code></pre>
+<pre><code>[1] 6 6 7 6 4 2</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">unique</span>(devs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]  4.01321089  8.98021089 15.97361089 25.03301089  3.98681089  0.99341089
- [7]  1.00661089  0.00001089  9.01981089 16.02641089 24.96701089</code></pre>
+<pre><code> [1]  1.05165025  0.00065025  9.15365025 25.25565025 15.79665025 16.20465025
+ [7]  4.10265025  3.89865025  0.94965025  8.84765025 24.74565025</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">mean</span>(devs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5.827289</code></pre>
+<pre><code>[1] 5.80785</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">barplot</span>(<span class="fu">table</span>(devs))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
@@ -569,13 +569,13 @@ P(Y|X_1 = 4) = \frac{1}{6}
 <span id="cb23-2"><a></a>x <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>,<span class="dv">100</span>, <span class="at">replace=</span>T) <span class="co"># your hundred dices</span></span>
 <span id="cb23-3"><a></a><span class="fu">head</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 802 931 306 368 738  15</code></pre>
+<pre><code>[1] 865 308 349 191  48 858</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>y <span class="ot">=</span><span class="dv">0</span></span>
 <span id="cb25-2"><a></a><span class="cf">for</span>(i <span class="cf">in</span> x){y <span class="ot">=</span> y<span class="sc">+</span><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>i, N, <span class="at">replace =</span> T)<span class="sc">/</span>i}</span>
 <span id="cb25-3"><a></a><span class="fu">head</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 48.08149 49.26106 50.65681 47.74369 48.85585 45.21077</code></pre>
+<pre><code>[1] 49.05865 46.11632 48.74863 52.49252 51.75632 52.07382</code></pre>
 </div>
 </div>
 <ul>
@@ -666,9 +666,9 @@ P(Y|X_1 = 4) = \frac{1}{6}
 <pre><code># A tibble: 3 × 43
   codecommune  Year codedep  agri  indp  cadr  pint  empl  ouvr  chom  pact
   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 01005        2024 01         11    37    56   192   185   177    18   658
-2 01007        2024 01         15    39   250   311   339   268    95  1222
-3 01008        2024 01          0    19    18    83    83   122     7   325
+1 01002        2024 01          0    39     9     0    66     0     9   114
+2 01006        2024 01          0     0     0    34    23    23     0    80
+3 01011        2024 01         11     0     2    78    17     3     9   111
 # ℹ 32 more variables: age &lt;dbl&gt;, popf &lt;dbl&gt;, francais &lt;dbl&gt;, etranger &lt;dbl&gt;,
 #   prixbien &lt;dbl&gt;, capitalratio &lt;dbl&gt;, npropri &lt;dbl&gt;, nlogement &lt;dbl&gt;,
 #   pop &lt;dbl&gt;, revmoyfoy &lt;dbl&gt;, revtot &lt;dbl&gt;, recetteimpotslocaux &lt;dbl&gt;,
@@ -695,7 +695,7 @@ P(Y|X_1 = 4) = \frac{1}{6}
 <div class="cell-output cell-output-stdout">
 <pre><code>
                Rural         Urbain dense Urbain intermédiaire 
-                8714                  223                 1063 </code></pre>
+                8761                  205                 1034 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="fu">summary</span>(comm_r<span class="sc">$</span>dens)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -717,23 +717,23 @@ P(Y|X_1 = 4) = \frac{1}{6}
 <span id="cb37-2"><a></a><span class="fu">summary</span>(comm_r<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-   8729   25817   29630   31199   34643  128858      10 </code></pre>
+  10931   25803   29622   31165   34542  133022       7 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="fu">range</span>(comm_r<span class="sc">$</span>revmoyfoy, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]   8729.167 128858.060</code></pre>
+<pre><code>[1]  10930.87 133021.66</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="fu">summary</span>((comm_r <span class="sc">%&gt;%</span> <span class="fu">drop_na</span>(revmoyfoy))<span class="sc">$</span>revmoyfoy) <span class="co">#dropping NA's</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   8729   25817   29630   31199   34643  128858 </code></pre>
+  10931   25803   29622   31165   34542  133022 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a><span class="co">#replacing the NA's</span></span>
 <span id="cb43-2"><a></a>comm_r <span class="ot">&lt;-</span> comm_r <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">revmoyfoy =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(revmoyfoy), <span class="fu">mean</span>(revmoyfoy, <span class="at">na.rm =</span><span class="cn">TRUE</span>), revmoyfoy))</span>
 <span id="cb43-3"><a></a><span class="fu">summary</span>(comm_r<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   8729   25819   29644   31199   34636  128858 </code></pre>
+  10931   25809   29627   31165   34539  133022 </code></pre>
 </div>
 </div>
 </section>
@@ -776,7 +776,7 @@ P(Y|X_1 = 4) = \frac{1}{6}
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a><span class="fu">mean</span>(comm_r<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 31198.85</code></pre>
+<pre><code>[1] 31165.31</code></pre>
 </div>
 </div>
 <ul>
@@ -785,11 +785,11 @@ P(Y|X_1 = 4) = \frac{1}{6}
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a><span class="fu">mean</span>((comm_r <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dens <span class="sc">==</span> <span class="st">"Rural"</span>))<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 30423.52</code></pre>
+<pre><code>[1] 30452.12</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a><span class="fu">mean</span>((comm_r <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dens <span class="sc">==</span> <span class="st">"Urbain dense"</span><span class="sc">|</span>dens <span class="sc">==</span> <span class="st">"Urbain intermédiaire"</span>))<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 36452.55</code></pre>
+<pre><code>[1] 36208.28</code></pre>
 </div>
 </div>
 </section>
@@ -823,7 +823,7 @@ t = \frac{\bar{X_1} - \bar{X_2}}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}
 <ul>
 <li>Two means are indeed statistically similar, that means that the t value should be non discernible from 0, with the 99% level of confidence decided.</li>
 <li>If different, the t-value should be significantly different than 0. Confidence interval defined at the 99% confidence level should not include 0 : <span class="math display">\[\begin{equation}
-(\bar{X_1} - \bar{X_2}) \pm t_{99%} * \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}
+(\bar{X_1} - \bar{X_2}) +- \ t_{99%} * \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}
 \end{equation}\]</span></li>
 </ul>
 <div class="cell">
@@ -844,48 +844,18 @@ t = \frac{\bar{X_1} - \bar{X_2}}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}
     Welch Two Sample t-test
 
 data:  rural_income and urban_income
-t = -18.101, df = 1452.7, p-value &lt; 2.2e-16
+t = -16.681, df = 1389.1, p-value &lt; 2.2e-16
 alternative hypothesis: true difference in means is not equal to 0
 99 percent confidence interval:
- -6888.125 -5169.952
+ -6646.236 -4866.088
 sample estimates:
 mean of x mean of y 
- 30423.52  36452.55 </code></pre>
+ 30452.12  36208.28 </code></pre>
 </div>
 </div>
 </section>
 <section id="exercices" class="slide level2">
 <h2>Exercices</h2>
-</section>
-<section id="exercice-1---manual-warm-up-1" class="slide level2">
-<h2>Exercice 1 - manual warm up 1</h2>
-<ul>
-<li>Imagine having 3 dices (one is blue, the other green and the last one is red) with 3 faces each, and values going from 1 to 3. Consider the sum of the three dices as random variable <span class="math inline">\(X_{bgr}\)</span>:
-<ul>
-<li>Compute the probability of obtaining 5, with the blue dice being 2, the red being 2, and the green being 1: <span class="math inline">\(P(X_{bgr} = 5_{212})\)</span></li>
-<li>What is the set of potential outcomes, <span class="math inline">\(S_X\)</span> of <span class="math inline">\(X_{bgr}\)</span> ?</li>
-<li>Now imagine that the dices can not be distinguished anymore, your random variable is <span class="math inline">\(X\)</span>. What is your probability of obtaining 3, <span class="math inline">\(P(X=3)\)</span> ?</li>
-<li>What is your probability of obtaining 5 ?</li>
-<li>How much is the expectation ?</li>
-<li>You know that one of your dices is worth 3. What is the probability of obtaining 5 in total?</li>
-<li>Draw a bar plot, showing the potential outcomes in the x axis, and the probabilities in the y axis.</li>
-<li>What is the conditional expectation worth in the case where one of the three dices is worth 3 ? Is that equal to the non-conditional expectation of X ?</li>
-<li>Verify all your results by simulating the throwing of these three dices, a 10000 times, in R.</li>
-</ul></li>
-</ul>
-</section>
-<section id="exercice-2--" class="slide level2">
-<h2>Exercice 2 -</h2>
-</section>
-<section id="exercice-3--" class="slide level2">
-<h2>Exercice 3 -</h2>
-<ul>
-<li>Import data available at &lt;&gt;</li>
-<li></li>
-</ul>
-</section>
-<section id="exercice-4" class="slide level2">
-<h2>Exercice 4</h2>
 
 
 </section></section>

@@ -270,7 +270,9 @@ window.Quarto = {
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#basics-of-probability-theory" id="toc-basics-of-probability-theory" class="nav-link" data-scroll-target="#basics-of-probability-theory">Basics of probability theory</a>
   <ul class="collapse">
-  <li><a href="#probability-distribution-functions" id="toc-probability-distribution-functions" class="nav-link" data-scroll-target="#probability-distribution-functions">Probability, distribution functions</a></li>
+  <li><a href="#random-variable" id="toc-random-variable" class="nav-link" data-scroll-target="#random-variable">Random variable</a></li>
+  <li><a href="#probability-distributions" id="toc-probability-distributions" class="nav-link" data-scroll-target="#probability-distributions">Probability, distributions</a></li>
+  <li><a href="#law-of-large-numbers" id="toc-law-of-large-numbers" class="nav-link" data-scroll-target="#law-of-large-numbers">Law of large numbers</a></li>
   <li><a href="#conditional-probability-conditional-expectation" id="toc-conditional-probability-conditional-expectation" class="nav-link" data-scroll-target="#conditional-probability-conditional-expectation">Conditional probability, conditional expectation</a></li>
   <li><a href="#ceteris-paribus-hypothesis-and-bias" id="toc-ceteris-paribus-hypothesis-and-bias" class="nav-link" data-scroll-target="#ceteris-paribus-hypothesis-and-bias">Ceteris paribus hypothesis and bias</a></li>
   <li><a href="#towards-continuity" id="toc-towards-continuity" class="nav-link" data-scroll-target="#towards-continuity">Towards continuity</a></li>
@@ -287,7 +289,7 @@ window.Quarto = {
   <li><a href="#density" id="toc-density" class="nav-link" data-scroll-target="#density">Density</a></li>
   <li><a href="#skewness" id="toc-skewness" class="nav-link" data-scroll-target="#skewness">Skewness</a></li>
   <li><a href="#expectations" id="toc-expectations" class="nav-link" data-scroll-target="#expectations">Expectations</a></li>
-  <li><a href="#students-t-test" id="toc-students-t-test" class="nav-link" data-scroll-target="#students-t-test">Student’s t-test</a></li>
+  <li><a href="#t-test" id="toc-t-test" class="nav-link" data-scroll-target="#t-test">T-test</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -317,11 +319,11 @@ window.Quarto = {
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
 <p>The core of any research in social science is to discover and describe relationships between variables. Whether you describe a research puzzle as a “why X despite Y?” type of question, or as finding the relationships between independent and dependent variables, it generally involves unveiling causation relationships previously hidden, unknown or ignored by analysts. The social facts Y that the researchers seek to explain are generally called the <em>dependent variable</em>, the <em>explanandum</em>, while the variables supposed to explain it are called the <em>independent variables</em> or the <em>explanans</em>.</p>
-<p>Of course, many methods exist in practice to make such claims about connection between variables. These methods are generally divided in two large sub-groups : qualitative methods, which are generally based on small-N comparisons and can for instance allow to better access interpretive dimensions, and quantitative methods. The latter methods allow to conduct large N comparisons, to replicate analyses, and have known very important recent developments related to technological improvements in the recent decades (e.g.&nbsp;Computational Social Science, LLMs). Similarly, these methods generally seek to find a. That is, a given variable <span class="math inline">\(Y\)</span>, is caused (and can eventually be predicted) by a series of other variables <span class="math inline">\(X_1, X_2, X_3, X_4\)</span>, etc. Hence, in a very general form, considering that <span class="math inline">\(Y\)</span> can be explained by <span class="math inline">\(X_1, X_2, X_3, X_4\)</span> means that we assume that there exists a function <span class="math inline">\(f : \mathbb{R}^4 \rightarrow \mathbb{R}\)</span> that satisfies :</p>
+<p>Of course, many methods exist in practice to make such claims about connection between variables. These methods are generally divided in two large sub-groups : qualitative methods, which are generally based on small-N comparisons and can for instance allow to better access interpretive dimensions, and quantitative methods. The latter methods allow to conduct large N comparisons, to replicate analyses, and have known very important recent developments related to technological improvements in the recent decades (e.g.&nbsp;Computational Social Science, LLMs). Similarly, these methods generally seek to find a causation relationship between variables. That is, a given variable <span class="math inline">\(Y\)</span>, is caused (and can eventually be predicted) by a series of other variables <span class="math inline">\(X_1, X_2, X_3, X_4\)</span>, etc. Hence, in a very general form, considering that <span class="math inline">\(Y\)</span> can be explained by <span class="math inline">\(X_1, X_2, X_3, X_4\)</span> means that we assume that there exists a function <span class="math inline">\(f : \mathbb{R}^4 \rightarrow \mathbb{R}\)</span> that satisfies :</p>
 <p><span class="math display">\[\begin{equation}
 Y = f(X_1,X_2, X_3, X_4)  + \epsilon
 \end{equation}\]</span></p>
-<p>Hence, any research process typically involves the following stages : collection of data on variables <span class="math inline">\(Y\)</span>, <span class="math inline">\(X_1, X_2, X_3, X_4\)</span>, analysis of these data, and drawing interpretations and conclusions based on these data. The data are generally classified in two subgroups: categorical and continuous (or interval) variables. Categorical variables have a limited amount of potential values, and for instance refer to <strong>nominal</strong> measures which help qualitatively describe the observations, with no logical ordering - e.g.&nbsp;the gender of an interviewee can be male = 1, female = 2, else = 3, etc. - or <strong>ordinal</strong> measures, with a logical ordering - e.g.&nbsp;a variable that qualifies the level of religiosity of someone on a 0 to 5 scale.</p>
+<p>Hence, quantitative research is interested in finding out that function <span class="math inline">\(f\)</span>, out of data collected on <span class="math inline">\(Y\)</span> and <span class="math inline">\(X_1, ...\)</span>. Any research process typically involves the following stages : collection of data on variables <span class="math inline">\(Y\)</span>, <span class="math inline">\(X_1, X_2, X_3, X_4\)</span>, analysis of these data, and drawing interpretations and conclusions based on these data. The data are generally classified in two subgroups: categorical and continuous (or interval) variables. Categorical variables have a limited amount of potential values, and for instance refer to <strong>nominal</strong> measures which help qualitatively describe the observations, with no logical ordering - e.g.&nbsp;the gender of an interviewee can be male = 1, female = 2, else = 3, etc. - or <strong>ordinal</strong> measures, with a logical ordering - e.g.&nbsp;a variable that qualifies the level of religiosity of someone on a 0 to 5 scale. These ordinal and nominal variables generally describe something qualitatively. Quantitative variables can be continuous (infinite number of potential values : 0.1123, 1.24, 295) or discrete (e.g.&nbsp;0, 1, 2, …).</p>
 <p>As such, as being the first step, the <strong>data collection phase is crucial in every empirical research project</strong> - which is generally the case in political science or sociology. This data collection phase typically follows the following steps :</p>
 <ul>
 <li><strong>Download the data</strong>, typically from online sources : national institutes of statistics (e.g.&nbsp;INSEE in France, in the UK, in the USA) , official ministries - -, or collection - eg. through survey experiments, web scraping, or any other method -). This step also comes with selecting the desired format of the data (typically .csv, .xslx, .dat, .spss, .stata, .Rdata, or parquet), as well as reading the meta data, which allow to understand where the data is from, when it was done, for what purpose, etc.</li>
@@ -334,9 +336,13 @@ Y = f(X_1,X_2, X_3, X_4)  + \epsilon
 </section>
 <section id="basics-of-probability-theory" class="level1">
 <h1>Basics of probability theory</h1>
-<section id="probability-distribution-functions" class="level2">
-<h2 class="anchored" data-anchor-id="probability-distribution-functions">Probability, distribution functions</h2>
-<p>Imagine that you have two dices with six faces on each dice. Your random variable is the outcome of each throw of dices.</p>
+<section id="random-variable" class="level2">
+<h2 class="anchored" data-anchor-id="random-variable">Random variable</h2>
+<p>In probability and statistics, a variable that results from a random process is called a <em>random variable</em>. Random variables are any kind of variables that result from a random process. A typical case useful for us is for instance in Census data : to estimate voting among the French population, we can randomly draw individuals, and ask them questions about their voting behavior. This random process explains why our variable of interest, voting, will be considered a random variable.</p>
+</section>
+<section id="probability-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="probability-distributions">Probability, distributions</h2>
+<p>Imagine that you have two dices with six faces on each dice. Your random variable is the outcome of each throw of dices. this result is the paradigmatic example of what a random variable is.</p>
 <p>You would like to assess your chances of obtaining each value contained in the set of potential outcomes <span class="math inline">\(S = \{2,3,4,5,6,7,8,9,10,11,12\}\)</span>. Intuitively, you might want to start by looking at the 2 value : 2 is only obtained in the case where you obtain one for the two dices. That is, for dice 1, you have <span class="math inline">\(1/6\)</span> of obtaining the value, and then again <span class="math inline">\(1/6\)</span> of obtaining 1 for the second dice. Overall, the probability of obtaining <span class="math inline">\(2\)</span>, <span class="math inline">\(P(Y=2)\)</span> is therefore : <span class="math display">\[
 \begin{equation}
 P_2 = 1/6 \times 1/6 = 1/36
@@ -346,7 +352,7 @@ P_2 = 1/6 \times 1/6 = 1/36
 P(Y=3) = 1/6 \times 1/6 + 1/6 \times 1/6 = 2/36 = 1/18
 \end{equation}
 \]</span> You see that the probability is doubled, compared to P(Y=2).</p>
-<p>If you look at the joint probability, this corresponds to a diagonal : 2. Hence, you see that obtaining 7 is the last diagonal and therefore <span class="math display">\[
+<p>If you look at the cases where <span class="math inline">\(X_1+X_2 = \text{constant}\)</span>, they correspond to cases on the diagonal of the following table. The first diagonal is the case <span class="math inline">\(X_1+X_2 = 2\)</span>, the second is <span class="math inline">\(X_1+X_2 = 3\)</span>, <span class="math inline">\(X_1+X_2 = 4\)</span>, etc. Hence, you see that obtaining 7 is the last diagonal and therefore <span class="math display">\[
 \begin{equation}
 P(Y=7) = 6\times1/36 = 1/6
 \end{equation}
@@ -369,7 +375,7 @@ P(Y=7) = 6\times1/36 = 1/6
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,N, <span class="at">replace=</span>T) <span class="co"># second dice (values are from 1 to 6)</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(x1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2 1 3 6 5 2</code></pre>
+<pre><code>[1] 2 1 4 5 5 2</code></pre>
 </div>
 </div>
 <p>In fact your final result - the sum of the two dices -, is the union of two independent events <span class="math inline">\(X_1, X_2\)</span> being respectively the outcome of dice <span class="math inline">\(1\)</span> and <span class="math inline">\(2\)</span>, provided that they are indeed independent. Your final result <span class="math inline">\(Y\)</span> is therefore simply the sum of these two random variables. You can then sum :</p>
@@ -392,9 +398,9 @@ P(Y=7) = 6\times1/36 = 1/6
 <div class="cell-output cell-output-stdout">
 <pre><code>y
       2       3       4       5       6       7       8       9      10      11 
-0.02878 0.05604 0.08377 0.10997 0.13747 0.16592 0.13947 0.11099 0.08284 0.05660 
+0.02830 0.05608 0.08263 0.11148 0.13819 0.16411 0.13968 0.11282 0.08368 0.05507 
      12 
-0.02815 </code></pre>
+0.02796 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(prob)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -405,7 +411,56 @@ P(Y=7) = 6\times1/36 = 1/6
 </div>
 </div>
 </div>
-<p>These values are called the probability distribution of the variable Y. That is, for each outcome of Y, there is a probability to obtain it (here shown on the barplot). These probabilities follow the simple rule : <span class="math display">\[
+<p>These values are called the probability distribution of the variable Y. That is, for each outcome of Y, there is a probability to obtain it (here shown on the barplot).</p>
+</section>
+<section id="law-of-large-numbers" class="level2">
+<h2 class="anchored" data-anchor-id="law-of-large-numbers">Law of large numbers</h2>
+<p>These probabilities are similar to those obtained by manual calculation at the beginning of this session. This is due to the very large number of observations. The law of large numbers states that the frequency of occurrence of a random variable converges towards its probability, for N ≥ 0. The graph below illustrates the evolution of the relative frequency of rolling a 7 with two dice as a function of the logarithm of the number of observations. The dice are rolled 1, 2, 3, 4… 100 times, then 200, 300, 400… 1,000,000 times. We observe that as the number of observations increases, the frequency converges towards the probability (0.16666667).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.6
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.1     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.2
+✔ purrr     1.2.0     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Nn <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">100</span>, <span class="at">to =</span> <span class="dv">100000</span>, <span class="at">by =</span> <span class="dv">100</span>))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>val <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>freqb <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Nn =</span> Nn, <span class="at">val =</span> <span class="dv">0</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>freqb <span class="ot">&lt;-</span> freqb <span class="sc">%&gt;%</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">val =</span> {</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>      sums <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, Nn, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, Nn, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>      freq_table <span class="ot">&lt;-</span> <span class="fu">table</span>(sums)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (<span class="st">"7"</span> <span class="sc">%in%</span> <span class="fu">names</span>(freq_table)) {</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        freq_table[<span class="st">"7"</span>] <span class="sc">/</span> Nn</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span> {</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>        <span class="dv">0</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> freqb, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(Nn), <span class="at">y =</span> val))<span class="sc">+</span><span class="fu">geom_point</span>()<span class="sc">+</span><span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session1_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<dl>
+<dt>Moreover, the probabilities of obtaining 2, 3, 4, …, 12, follow the simple rule</dt>
+<dd>
+<span class="math display">\[
 \begin{equation}
 \sum_{i=1}^N P(Y = Y_i) = P(Y = Y_1)+P(Y= Y_2) +... P(Y = Y_n) = 1
 \end{equation}
@@ -413,12 +468,14 @@ P(Y=7) = 6\times1/36 = 1/6
 \begin{equation}
 \mathbb{E}(Y) = \sum_{i=1}^N Y_i \ * P(Y_i) = \bar{Y}
 \end{equation}
-\]</span></p>
+\]</span>
+</dd>
+</dl>
 <p>This value is called the expectation.</p>
 </section>
 <section id="conditional-probability-conditional-expectation" class="level2">
 <h2 class="anchored" data-anchor-id="conditional-probability-conditional-expectation">Conditional probability, conditional expectation</h2>
-<p>Imagine now that, due to the extreme fatigue provoked by the repetitive throwing of those dices, you throw those a bit too wildly and one falls under the table where you are. The other one is there and shows the value 3. You want to know the expected value of <span class="math inline">\(y\)</span>, knowing that one dice among the two is 3. This is called a conditional probability and noted <span class="math inline">\(P(y|X_1)\)</span>, with <span class="math inline">\(| X_1\)</span> simply meaning that <span class="math inline">\(X_1\)</span> is considered fixed (here worth 3). Since <span class="math inline">\(X_1\)</span> is fixed, the probability is <span class="math inline">\(P(y|X_1) = 1/6\)</span>, and knowing this information is actually very precious on Y, because it considerably reduces the set of potential outcomes : <span class="math display">\[
+<p>Imagine now that, due to the extreme fatigue provoked by the repetitive rolling of those dices, you throw those a bit too wildly and one falls under the table where you sit. The other one is there and shows the value 3. You want to know the expected value of <span class="math inline">\(Y\)</span>, knowing that one dice among the two is 3. This is called a conditional probability and noted <span class="math inline">\(P(Y|X_1)\)</span>, with <span class="math inline">\(| X_1\)</span> simply meaning that <span class="math inline">\(X_1\)</span> is considered fixed (here worth 3). Since <span class="math inline">\(X_1\)</span> is fixed, the probability is <span class="math inline">\(P(Y|X_1) = 1/6\)</span> for all the potential values of <span class="math inline">\(X_2\)</span>, and knowing this information is actually very precious on Y, because it considerably reduces the set of potential outcomes : <span class="math display">\[
 Y \ge 4 \text{, } Y\le 9 \text{ and } S_Y = \{4, 5, 6, 7, 8, 9\}
 \]</span> <span class="math display">\[
 \begin{equation}
@@ -427,13 +484,13 @@ Y \ge 4 \text{, } Y\le 9 \text{ and } S_Y = \{4, 5, 6, 7, 8, 9\}
 \]</span> and so we get : <span class="math display">\[
 \begin{align}
   \mathbb{E}(Y|X_1 = 3) = 1/6 \times (4 + 5 + 6 + 7 + 8 + 9) = 6.5\\
-  \mathbb{E}(Y|X_1 = 4) = 1/6 \times (5 + 5 + 7 + 8 + 9 + 10) = 7.5
+  \mathbb{E}(Y|X_1 = 4) = 1/6 \times (5 + 6 + 7 + 8 + 9 + 10) = 7.5
 \end{align}
 \]</span> Notice that the expected value of y therefore changes, as a function of the explanatory variable, <span class="math inline">\(X_1\)</span>.</p>
 </section>
 <section id="ceteris-paribus-hypothesis-and-bias" class="level2">
 <h2 class="anchored" data-anchor-id="ceteris-paribus-hypothesis-and-bias">Ceteris paribus hypothesis and bias</h2>
-<p>This conditional expectation is central in quantitative social science, as it is generally what the researcher seeks to evaluate, when confronted to social facts. Coming back to the example of the evaluation of happiness, imagine that you are similarly capable of measuring the level of happiness (self-reported on a 1 to 5 scale) of 10000 individuals. If you are interested to know whether happiness is influenced by the degree of religiosity of an individual, you might want to ask them questions about their practicing of religion <span class="math inline">\(X\)</span>, and then to know how <span class="math inline">\(Y\)</span> evolves with <span class="math inline">\(X\)</span>, on average. This would lead you to be interested in the expectation :<br>
+<p>This conditional expectation is central in quantitative social science, as it is generally what the researcher seeks to evaluate, when confronted to social facts. Take the following example: you seek to understand what causes people to be happy. Imagine that you are similarly capable of measuring the level of happiness (self-reported on a 1 to 5 scale) of 10000 individuals. If you are interested to know whether happiness is influenced by the degree of religiosity of an individual, you might want to ask them questions about their practicing of religion <span class="math inline">\(X\)</span>, and then to know how <span class="math inline">\(Y\)</span> evolves with <span class="math inline">\(X\)</span>, on average. This would lead you to be interested in the expectation :<br>
 <span class="math display">\[
 \begin{equation}
 \mathbb{E}(Y) = f(X)
@@ -446,66 +503,52 @@ Y \ge 4 \text{, } Y\le 9 \text{ and } S_Y = \{4, 5, 6, 7, 8, 9\}
 </section>
 <section id="towards-continuity" class="level2">
 <h2 class="anchored" data-anchor-id="towards-continuity">Towards continuity</h2>
-<p>Now simply imagine that you repeat that process with dices that have <span class="math inline">\(n = 1000, 1400, 800\)</span> faces, with each value ranging from <span class="math inline">\(1/n\)</span> to $ 1$. And that you would like to know what are the final probabilities of having any decimal number between 0 and 3. Of course, the manual computation of this would be very cumbersome - which is why automatising the process with R can prove very useful. Reusing the same code would give :</p>
+<p>Now simply imagine that you repeat that process with dices that have <span class="math inline">\(n = 1000, 1400, 800\)</span> faces, with each value ranging from <span class="math inline">\(1/n\)</span> to 1. And that you would like to know what are the final probabilities of having any decimal number between 0 and 3. Of course, the manual computation of this would be very cumbersome - which is why automatising the process with R can prove very useful. Reusing the same code would give :</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'dplyr'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:stats':
-
-    filter, lag</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:base':
-
-    intersect, setdiff, setequal, union</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">100000</span> <span class="co">#number of measurements</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>,N, <span class="at">replace=</span>T)<span class="sc">/</span><span class="dv">1000</span> <span class="co"># first dice (values are from 1 to 6)</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1400</span>,N, <span class="at">replace =</span> T)<span class="sc">/</span><span class="dv">1400</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">800</span>,N,<span class="at">replace =</span> T)<span class="sc">/</span><span class="dv">800</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> x1<span class="sc">+</span>x2<span class="sc">+</span>x3</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat, <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">100000</span> <span class="co">#number of measurements</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>,N, <span class="at">replace=</span>T)<span class="sc">/</span><span class="dv">1000</span> <span class="co"># first dice (values are from 1 to 6)</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1400</span>,N, <span class="at">replace =</span> T)<span class="sc">/</span><span class="dv">1400</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">800</span>,N,<span class="at">replace =</span> T)<span class="sc">/</span><span class="dv">800</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> x1<span class="sc">+</span>x2<span class="sc">+</span>x3</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat, <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           y
-1  0.9910714
-2  1.5491786
-3  2.1514286
-4  0.9027857
-5  0.9638571
-6  2.1781786
-7  0.6161429
-8  1.6309286
-9  1.9220357
-10 1.7453214</code></pre>
+1  1.7287500
+2  1.6783571
+3  0.7270000
+4  0.6637500
+5  2.0806071
+6  0.9384286
+7  1.1744286
+8  2.2131071
+9  1.3277857
+10 1.9465714</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="at">x =</span> y)) <span class="sc">+</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density))) <span class="sc">+</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of y = x1 + x2 + x3"</span>,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"y"</span>,</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Density"</span>) <span class="sc">+</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="at">x =</span> y)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density))) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of y = x1 + x2 + x3"</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"y"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Density"</span>) <span class="sc">+</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="session1_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="session1_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Here, you clearly see that your variable is now almost continuous, and your probability to obtain one specific value becomes extremely small. We therefore generally focus on the probability of having <span class="math inline">\(Y\le Y_0\)</span>, that is, the sum of probabilities of obtaining all the values below 4 (included). Coming back to our example of dices : for one dice, your probability of obtaining a result <span class="math inline">\(\le 4\)</span> is just the sum of the probabilities of getting all the values before 4 : <span class="math display">\[\begin{equation}
+<p>Here, you clearly see that your variable is now almost continuous, and your probability to obtain one specific value becomes extremely small. We therefore generally focus on the probability of having <span class="math inline">\(Y\le Y_0\)</span>, that is, the sum of probabilities of obtaining all the values below <span class="math inline">\(Y_0\)</span> (included). Coming back to our example of dices : for one dice, your probability of obtaining a result <span class="math inline">\(\le 4\)</span> is just the sum of the probabilities of getting all the values before 4 : <span class="math display">\[\begin{equation}
 P(X_1 \le 4) = 1/6 + 1/6 + 1/6 + 1/6 = 4/6
-\end{equation}\]</span> For a continuous variable, this sum is noted as an integral - yet it means the exact same thing : <span class="math display">\[\begin{equation}
-P(Y \le Y_0) = \int_\underline{R_Y}^Y_0 f_Y(y') \text{d}y'
+\end{equation}\]</span> For a continuous variable, this sum is noted as a fancy integral - yet it means the exact same thing : <span class="math display">\[\begin{equation}
+P(Y \le Y_0) = \int_{R_Y}^Y_0 f_Y (y') \text{d}y'
 \end{equation}\]</span></p>
 </section>
 </section>
@@ -517,7 +560,7 @@ P(Y \le Y_0) = \int_\underline{R_Y}^Y_0 f_Y(y') \text{d}y'
 </section>
 <section id="coding-environment" class="level2">
 <h2 class="anchored" data-anchor-id="coding-environment">Coding environment</h2>
-<p>The R language is perhaps : R (CRAN). Its advantage over other softwares, like SPSS, is that it is entirely free and open-source, and that is maintained by a very large community of users. A very nice environment where to code on R is RStudio - which provides different panels where to organise your code, create new projects, etc. If you need help to download <a href="https://cran.r-project.org/">R</a> and <a href="https://posit.co/downloads/">RStudio</a>, please check Malo Jan’s webpage <a href="https://malo-jn.quarto.pub/introduction-to-r/session1/0102_setup.html" class="uri">https://malo-jn.quarto.pub/introduction-to-r/session1/0102_setup.html</a>, or other sources like <a href="https://rstudio-education.github.io/hopr/starting.html" class="uri">https://rstudio-education.github.io/hopr/starting.html</a>. In general, the R documentation, StackOverflow and AI are you friends in these cases is very useful !</p>
+<p>The advantage of R over other softwares, like Stata/SPSS, is that it is entirely free and open-source, and that is maintained by a very large community of users. A very nice environment where to code on R is RStudio - which provides different panels where to organise your code, create new projects, etc. If you need help to download <a href="https://cran.r-project.org/">R</a> and <a href="https://posit.co/downloads/">RStudio</a>, please check Malo Jan’s webpage <a href="https://malo-jn.quarto.pub/introduction-to-r/session1/0102_setup.html" class="uri">https://malo-jn.quarto.pub/introduction-to-r/session1/0102_setup.html</a>, or other sources like <a href="https://rstudio-education.github.io/hopr/starting.html" class="uri">https://rstudio-education.github.io/hopr/starting.html</a>. In general, the R documentation, StackOverflow and AI are you friends in these cases is very useful !</p>
 </section>
 <section id="creating-a-project" class="level2">
 <h2 class="anchored" data-anchor-id="creating-a-project">Creating a project</h2>
@@ -527,44 +570,31 @@ P(Y \le Y_0) = \int_\underline{R_Y}^Y_0 f_Y(y') \text{d}y'
 <h2 class="anchored" data-anchor-id="data-and-packages">Data and packages</h2>
 <p>R comes with basic language and functions : base R. This basic infrastructure for instance allows you to add, multiply, conduct basic operations in your files. In general, you want to perform many more operations, which is why I strongly recommend the use of packages and libraries. These packages are already coded functions and tools that allow you to be much more efficient in your code. Among all those libraries, <code>tidyverse</code> is <strong>extremely</strong> useful. You can load and install such packages in this way :</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="importing-data" class="level2">
 <h2 class="anchored" data-anchor-id="importing-data">Importing data</h2>
 <p>Other useful packages are those that allow to download and import data. Imagine that you have data retrieved from the internet : here a file containing information on the french communes - demographics2024.xlsx. This file is an “excel” file, hence it should be read by a program capable to read excel formats: this requires the readxl package. Another more general function is <code>import()</code>, which comes with the package <code>rio</code>. This allows you to disregard the format of your file (it is coded to support various formats). You can also export() data using rio.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl) <span class="co"># needed to read excel without "rio"</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>communes <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/demographics2024.xlsx"</span>) <span class="co"># relative path</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>communes <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"/Users/Desktop/Website/methods_policyevaluation/slides/session1/data/"</span>) <span class="co"># absolute path</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#using the "rio" package</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>communes <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/demographics2024.xlsx"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ forcats   1.0.1     ✔ stringr   1.6.0
-✔ lubridate 1.9.4     ✔ tibble    3.3.0
-✔ purrr     1.2.0     ✔ tidyr     1.3.2
-✔ readr     2.1.6     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl) <span class="co"># needed to read excel without "rio"</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>communes <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/demographics2024.xlsx"</span>) <span class="co"># relative path</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>communes <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"/Users/Desktop/Website/methods_policyevaluation/slides/session1/data/"</span>) <span class="co"># absolute path</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#using the "rio" package</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>communes <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/demographics2024.xlsx"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Once you have data imported, you can rapidly inspect it, by using the function <code>head()</code> and <code>tail()</code>, which allow you to get the first and last rows of a data set, see the different variables it contains and their type.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(comm_r, <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(comm_r, <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 43
   codecommune  Year codedep  agri  indp  cadr  pint  empl  ouvr  chom  pact
   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 01001        2024 01          0    39    33    14    86   147    26   319
-2 01004        2024 01          4   142   678  1647  1211  1235   427  4917
-3 01009        2024 01          0    41     0    95    21     4     2   161
+1 01013        2024 01          2     0    18    13    11    42     0    86
+2 01017        2024 01         11     0     0     0    41    28    19    80
+3 01021        2024 01         11    38   180   105    50    67     0   451
 # ℹ 32 more variables: age &lt;dbl&gt;, popf &lt;dbl&gt;, francais &lt;dbl&gt;, etranger &lt;dbl&gt;,
 #   prixbien &lt;dbl&gt;, capitalratio &lt;dbl&gt;, npropri &lt;dbl&gt;, nlogement &lt;dbl&gt;,
 #   pop &lt;dbl&gt;, revmoyfoy &lt;dbl&gt;, revtot &lt;dbl&gt;, recetteimpotslocaux &lt;dbl&gt;,
@@ -573,14 +603,14 @@ P(Y \le Y_0) = \int_\underline{R_Y}^Y_0 f_Y(y') \text{d}y'
 #   PBS &lt;lgl&gt;, dens &lt;chr&gt;, densaav &lt;chr&gt;, dens7 &lt;chr&gt;, ntot &lt;dbl&gt;, pagri &lt;dbl&gt;,
 #   pindp &lt;dbl&gt;, pcadr &lt;dbl&gt;, ppint &lt;dbl&gt;, pempl &lt;dbl&gt;, pouvr &lt;dbl&gt;</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(comm_r, <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(comm_r, <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 43
   codecommune  Year codedep  agri  indp  cadr  pint  empl  ouvr  chom  pact
   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 95652        2024 95          6   218   439   489   579   186   101  1917
+1 95633        2024 95          0    10     0    14    19     0     0    43
 2 95656        2024 95          0     2    69    94     0     0    15   165
-3 95690        2024 95          0    22    29    85     0     8     5   144
+3 95682        2024 95          0    11    29    74     0     3     5   117
 # ℹ 32 more variables: age &lt;dbl&gt;, popf &lt;dbl&gt;, francais &lt;dbl&gt;, etranger &lt;dbl&gt;,
 #   prixbien &lt;dbl&gt;, capitalratio &lt;dbl&gt;, npropri &lt;dbl&gt;, nlogement &lt;dbl&gt;,
 #   pop &lt;dbl&gt;, revmoyfoy &lt;dbl&gt;, revtot &lt;dbl&gt;, recetteimpotslocaux &lt;dbl&gt;,
@@ -589,7 +619,7 @@ P(Y \le Y_0) = \int_\underline{R_Y}^Y_0 f_Y(y') \text{d}y'
 #   PBS &lt;lgl&gt;, dens &lt;chr&gt;, densaav &lt;chr&gt;, dens7 &lt;chr&gt;, ntot &lt;dbl&gt;, pagri &lt;dbl&gt;,
 #   pindp &lt;dbl&gt;, pcadr &lt;dbl&gt;, ppint &lt;dbl&gt;, pempl &lt;dbl&gt;, pouvr &lt;dbl&gt;</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(comm_r<span class="sc">$</span>codecommune)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(comm_r<span class="sc">$</span>codecommune)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10000</code></pre>
 </div>
@@ -600,18 +630,18 @@ P(Y \le Y_0) = \int_\underline{R_Y}^Y_0 f_Y(y') \text{d}y'
 <h2 class="anchored" data-anchor-id="categorical-variable">Categorical variable</h2>
 <p>For categorical variables, you can check their different values in the following way:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Nominal : the density typology of communes </span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(comm_r<span class="sc">$</span>dens)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Nominal : the density typology of communes </span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(comm_r<span class="sc">$</span>dens)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Rural"                "Urbain intermédiaire" "Urbain dense"        </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(comm_r<span class="sc">$</span>dens)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(comm_r<span class="sc">$</span>dens)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
                Rural         Urbain dense Urbain intermédiaire 
-                8786                  190                 1024 </code></pre>
+                8787                  177                 1036 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(comm_r<span class="sc">$</span>dens)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(comm_r<span class="sc">$</span>dens)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Length     Class      Mode 
     10000 character character </code></pre>
@@ -623,27 +653,27 @@ P(Y \le Y_0) = \int_\underline{R_Y}^Y_0 f_Y(y') \text{d}y'
 <h2 class="anchored" data-anchor-id="interval-variable">Interval variable</h2>
 <p>If you look at a continuous variable - e.g.&nbsp;the median income in communes -, you can use the function <code>summary()</code> to obtain essential informations on the variable : its mean, median, its quartiles, and the number of NA’s. NA’s are gaps in your variable, missing information - that are therefore coded as Not Assessed. You may either remove these, by using <code>drop_na()</code>, or fill these, by adding zeros instead or the mean of the variable. This can be done in this way :</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Continuous : the median income in those communes</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(comm_r<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Continuous : the median income in those communes</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(comm_r<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-   9693   25825   29665   31268   34607  167966      11 </code></pre>
+  11047   25808   29663   31141   34596  133022      10 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(comm_r<span class="sc">$</span>revmoyfoy, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(comm_r<span class="sc">$</span>revmoyfoy, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]   9693.044 167966.330</code></pre>
+<pre><code>[1]  11047.14 133021.66</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>((comm_r <span class="sc">%&gt;%</span> <span class="fu">drop_na</span>(revmoyfoy))<span class="sc">$</span>revmoyfoy) <span class="co">#dropping NA's</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   9693   25825   29665   31268   34607  167966 </code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#replacing the NA's</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>comm_r <span class="ot">&lt;-</span> comm_r <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">revmoyfoy =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(revmoyfoy), <span class="fu">mean</span>(revmoyfoy, <span class="at">na.rm =</span><span class="cn">TRUE</span>), revmoyfoy))</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(comm_r<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>((comm_r <span class="sc">%&gt;%</span> <span class="fu">drop_na</span>(revmoyfoy))<span class="sc">$</span>revmoyfoy) <span class="co">#dropping NA's</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   9693   25826   29671   31268   34604  167966 </code></pre>
+  11047   25808   29663   31141   34596  133022 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#replacing the NA's</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>comm_r <span class="ot">&lt;-</span> comm_r <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">revmoyfoy =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(revmoyfoy), <span class="fu">mean</span>(revmoyfoy, <span class="at">na.rm =</span><span class="cn">TRUE</span>), revmoyfoy))</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(comm_r<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  11047   25811   29671   31141   34589  133022 </code></pre>
 </div>
 </div>
 <p>Notice that your last summary no longer contains NA values, and has an unchanged mean value - which is the objective of filling with mean values instead of the NA’s.</p>
@@ -652,11 +682,11 @@ P(Y \le Y_0) = \int_\underline{R_Y}^Y_0 f_Y(y') \text{d}y'
 <h2 class="anchored" data-anchor-id="density">Density</h2>
 <p>You can also easily have a look at the density, by using <code>ggplot2</code> package, that is extremely useful for plots and graphs in R. <code>ggplot</code> works this way: you just have to specify your data (here <code>comm_r</code>), your variables (typically x, y and color) in Aesthetic Mapping (aes) <code>aes(x =, y =, color = )</code> and then add different shapes to your graph : here <code>geom_density()</code>. You can also try plotting a histogram with <code>geom_histogram()</code> !</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(comm_r, <span class="fu">aes</span>(<span class="at">x=</span> revmoyfoy, <span class="at">color =</span> dens)) <span class="sc">+</span> <span class="fu">geom_density</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(comm_r, <span class="fu">aes</span>(<span class="at">x=</span> revmoyfoy, <span class="at">color =</span> dens)) <span class="sc">+</span> <span class="fu">geom_density</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="session1_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="session1_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -671,11 +701,11 @@ P(Y \le Y_0) = \int_\underline{R_Y}^Y_0 f_Y(y') \text{d}y'
 <p>Where most ages correspond to pupils, and the last one is the bus driver. If you compute the median, it is worth 16 (the value that splits your distribution in two chunks with equal sizes), while if you compute the mean, <span class="math inline">\(\bar{\text{Age}} = 19.09\)</span>. Hence, your mean is very sensitive to extreme values ! That is why your distribution can be ‘skewed’, and non-symmetrical, if your median is different than your mean. You typically find the three cases : - Median <span class="math inline">\(&lt;\)</span> Mean : positively skewed (the mean is pushed upwards by high values) - Median <span class="math inline">\(&gt;\)</span> Mean : negatively skewed (the mean is pushed downwards by low values) - Mean = Median : symmetrical distribution</p>
 <p>In the previous case, for instance, the distributions are positively skewed : you see in the distribution that some very high values are pushing the mean upwards, compared with the median. In order to bring down these extreme values, you can use transformations, like logarithms, to make a positively skewed variable look more symmetrical:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(comm_r, <span class="fu">aes</span>(<span class="at">x=</span> <span class="fu">log</span>(revmoyfoy), <span class="at">color =</span> dens)) <span class="sc">+</span> <span class="fu">geom_density</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(comm_r, <span class="fu">aes</span>(<span class="at">x=</span> <span class="fu">log</span>(revmoyfoy), <span class="at">color =</span> dens)) <span class="sc">+</span> <span class="fu">geom_density</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="session1_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="session1_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -687,20 +717,24 @@ P(Y \le Y_0) = \int_\underline{R_Y}^Y_0 f_Y(y') \text{d}y'
 \text{E}(\text{MI}) = \frac{1}{10000}\sum_{i=1}^{10000} \text{MI}_i,
 \end{equation}\]</span> is simply this way:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(comm_r<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(comm_r<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 31268.12</code></pre>
+<pre><code>[1] 31140.55</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(comm_r<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8393.226</code></pre>
 </div>
 </div>
 <p>And the conditional expectations can also simply be computed by filtering out the values that are undesired.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((comm_r <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dens <span class="sc">==</span> <span class="st">"Rural"</span>))<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 30515.88</code></pre>
+<pre><code>[1] 30416.54</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((comm_r <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dens <span class="sc">==</span> <span class="st">"Urbain dense"</span><span class="sc">|</span>dens <span class="sc">==</span> <span class="st">"Urbain intermédiaire"</span>))<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 36712.25</code></pre>
+<pre><code>[1] 36385.35</code></pre>
 </div>
 </div>
 <p>Where you clearly see that :</p>
@@ -709,14 +743,14 @@ P(Y \le Y_0) = \int_\underline{R_Y}^Y_0 f_Y(y') \text{d}y'
 \end{equation}\]</span></p>
 <p>Should we conclude that median income is significantly smaller in rural communes than in urban areas ? The density plot indeed shows that rural areas are more concentrated in the lower income regions, compared with urban areas, but the dispersion being quite large for urban areas… it is hard to know whether this difference is statistically significant or not ! The typical way to compare these two means is to use a t-test.</p>
 </section>
-<section id="students-t-test" class="level2">
-<h2 class="anchored" data-anchor-id="students-t-test">Student’s t-test</h2>
+<section id="t-test" class="level2">
+<h2 class="anchored" data-anchor-id="t-test">T-test</h2>
 <p>Imagine that I would like to verify, lets say with a confidence margin of 99%, that <span class="math display">\[\begin{equation}
 \text{E}(\text{MI}| \text{dens} = \text{Rural}) \le \text{E}(\text{MI}| \text{dens} = \text{Urban})
 \end{equation}\]</span> The t-test consists in computing a t-statistic comparing the means of the two independent samples : <span class="math display">\[\begin{equation}
 t = \frac{\bar{X_1} - \bar{X_2}}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}
 \end{equation}\]</span> Under the assumption that the two variables have normal distributions. If the two means are indeed statistically similar, that means that the t value should be non discernible from 0, with the 99% level of confidence decided. In the case where they are different, the t-value should be significantly different than 0. That means, the confidence interval defined at the 99% confidence level : <span class="math display">\[\begin{equation}
-(\bar{X_1} - \bar{X_2}) +- t_{.99} * \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}
+(\bar{X_1} - \bar{X_2}) \pm t_{.99} * \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}
 \end{equation}\]</span> should not include 0. In R, you can easily implement that using :</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>rural_income <span class="ot">&lt;-</span> comm_r <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dens <span class="sc">==</span> <span class="st">"Rural"</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(revmoyfoy)</span>

@@ -70,6 +70,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -203,8 +232,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#download-data" id="toc-download-data" class="nav-link active" data-scroll-target="#download-data">Download data</a></li>
-  <li><a href="#import-the-data-in-your-local-environment" id="toc-import-the-data-in-your-local-environment" class="nav-link" data-scroll-target="#import-the-data-in-your-local-environment">Import the data in your local environment</a></li>
+  <li><a href="#exercice-1---manual-warm-up-1" id="toc-exercice-1---manual-warm-up-1" class="nav-link active" data-scroll-target="#exercice-1---manual-warm-up-1">Exercice 1 - manual warm up 1</a></li>
+  <li><a href="#exercice-2---playing-with-rstudio" id="toc-exercice-2---playing-with-rstudio" class="nav-link" data-scroll-target="#exercice-2---playing-with-rstudio">Exercice 2 - Playing with RStudio</a></li>
+  <li><a href="#exercice-3---playing-with-data" id="toc-exercice-3---playing-with-data" class="nav-link" data-scroll-target="#exercice-3---playing-with-data">Exercice 3 - playing with data</a></li>
+  <li><a href="#exercice-4-the-median-income-in-french-rural-communes" id="toc-exercice-4-the-median-income-in-french-rural-communes" class="nav-link" data-scroll-target="#exercice-4-the-median-income-in-french-rural-communes">Exercice 4 : the median income in French rural communes</a></li>
+  <li><a href="#take-home-assignement" id="toc-take-home-assignement" class="nav-link" data-scroll-target="#take-home-assignement">Take-home assignement</a></li>
   </ul>
 </nav>
     </div>
@@ -214,21 +246,39 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>Take for instance happiness as a variable to explain : as a social scientist, you would like to understand what causes people to be happy or not. Of course, you might have first struggles in defining happiness - an essentially subjective measure -, and you might as well have competing hypotheses about what causes happiness. In addition, you might have random errors perturbating your data collection process.</p>
-<section id="download-data" class="level2">
-<h2 class="anchored" data-anchor-id="download-data">Download data</h2>
-<p>Once you have a research question that you seek to analyse, you may want to download data relevant for your purposes. Imagine that I want to analyse the impact of religiosity on happiness. This would require me to find a data set that has both information on :</p>
-<ol type="1">
-<li><p>Individual people</p></li>
-<li><p>Their level of religiosity - your independent variable (you seek to analyse if religiosity impacts happiness)</p></li>
-<li><p>Their level of happiness - your dependent variable (you seek to explain happiness)</p></li>
-<li><p>Ideally, other variables characterising the respondent’s profile : his/her gender, his/her age, his/her income, etc., which will help isolate the specific effect of religiosity on happiness.</p></li>
-</ol>
-<p>Finding the data set is not a trivial operation : it requires prior knowledge on data sets available out theser, remaining alert to new issues, and a lot of walking around on the internet to find data that could be relevant to your research problem. Discussions with peers are very useful for that. After discussion with friends or your research supervisor, you might for instance learn that such lab has issued such data set, this ministry provides such information, or this statistics institute provides these data. Your</p>
+<section id="exercice-1---manual-warm-up-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercice-1---manual-warm-up-1">Exercice 1 - manual warm up 1</h2>
+<ul>
+<li>Imagine having 3 dices (one is blue, the other green and the last one is red) with 3 faces each, and values going from 1 to 3. Consider the sum of the three dices as random variable <span class="math inline">\(X_{bgr}\)</span>:
+<ul>
+<li>Compute the probability of obtaining 5, with the blue dice being 2, the red being 2, and the green being 1: <span class="math inline">\(P(X_{bgr} = 5_{212})\)</span></li>
+<li>What is the set of potential outcomes, <span class="math inline">\(S_X\)</span> of <span class="math inline">\(X_{bgr}\)</span> ?</li>
+<li>Now imagine that the dices can not be distinguished anymore, your random variable is <span class="math inline">\(X\)</span>. What is your probability of obtaining 3, <span class="math inline">\(P(X=3)\)</span> ?</li>
+<li>What is your probability of obtaining 5 ?</li>
+<li>How much is the expectation ?</li>
+<li>You know that one of your dices is worth 3. What is the probability of obtaining 5 in total?</li>
+<li>Draw a bar plot, showing the potential outcomes in the x axis, and the probabilities in the y axis.</li>
+<li>What is the conditional expectation worth in the case where one of the three dices is worth 3 ? Is that equal to the non-conditional expectation of X ?</li>
+<li>Verify all your results by simulating the throwing of these three dices, a 10000 times, in R.</li>
+</ul></li>
+</ul>
 </section>
-<section id="import-the-data-in-your-local-environment" class="level2">
-<h2 class="anchored" data-anchor-id="import-the-data-in-your-local-environment">Import the data in your local environment</h2>
-<p>You may thus now have your data stored locally in your computer, in what case you should provide the path for your environment (RStudio or Stata) to access it. Otherwise, your computer will not know what you are talking about and probably return you a “No such file or directory” type of error. A good practice is therefore to store the data that your are using in a subfolder called “data”, located in the same folder as where your piece of code or .RProject lies.</p>
+<section id="exercice-2---playing-with-rstudio" class="level2">
+<h2 class="anchored" data-anchor-id="exercice-2---playing-with-rstudio">Exercice 2 - Playing with RStudio</h2>
+<p>Open RStudio on your personal computer (or your personal coding environment). 1. Create a new project named “Session 1 - Methods R&amp;PE”, in a new directory. What are the different files created ? Quit the session, go to your folder on your personal computer, and click on the ‘.Rproj’ file created. What happens ? 2. Write 1+1 in your main .R script and press “Run”. 3. Create a new folder in this project named ‘data’. 4. Install packages “tidyverse” and “rio” in the console. 4. You’re all set for importing data and start creating functions/the next exercices !</p>
+</section>
+<section id="exercice-3---playing-with-data" class="level2">
+<h2 class="anchored" data-anchor-id="exercice-3---playing-with-data">Exercice 3 - playing with data</h2>
+<p>The <a href="https://www.europeansocialsurvey.org/about-ess">European social survey</a> “measures the attitudes, beliefs and behaviour patterns of diverse populations in more than thirty nations”. Use the <code>rio</code> package to import data from &lt;“https://jan-rovny.squarespace.com/s/ESS_FR.dta”&gt;. 1. Use <code>glimpse</code> function to have a look at all. Restrict your data set to <code>euftf</code> (views on European integration), <code>gndr</code> (gender), <code>happy</code>, <code>yrbrn</code>(birthyear) and <code>eduyrs</code> (years of education), using function <code>select()</code> from <code>tidyverse</code>. 2. How many observations are there ? Are the variables categorical or continuous ?<br>
+3. Summarise your data set and comment on the findings, using <code>table()</code> and <code>summary()</code>. Drop the NA values. 4. Create a new variable <code>age</code>, with the age of the respondents, using <code>mutate()</code>. Use 2026 as reference year. 5. Plot the distribution of the variables <code>euftf</code> and <code>happy</code> using <code>barplot(table())</code>. What can you say about these distributions? What is the most common answer ? What is the percentage of respondents who have given this answer ? 6. Plot a histogram of the age of the respondents, with 10 breaks. What is the decade with the most respondents ? 7. Plot the distribution of <code>happy</code> for <code>gndr == 1</code> and <code>gndr == 2</code>, using <code>ggplot2 : ggplot()</code> and <code>geom_bar(position = "dodge")</code> 8. Does being male/female influence your chances of self-reporting being happy ? Conduct a <code>t-test</code> to test the hypothesis that gender influences people’s self assessed level of happiness. What are the 95% and 99% confidence intervals ?</p>
+</section>
+<section id="exercice-4-the-median-income-in-french-rural-communes" class="level2">
+<h2 class="anchored" data-anchor-id="exercice-4-the-median-income-in-french-rural-communes">Exercice 4 : the median income in French rural communes</h2>
+<p>You want to analyse the electoral outcomes of the radical right in rural communes in France. For this, you have data on the 2024 European elections at <a href="https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/demographics2024.xlsx" class="uri">https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/demographics2024.xlsx</a>, and data on the French municipalities at <a href="https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/demographics2024.xlsx" class="uri">https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/demographics2024.xlsx</a>. 1. Use <code>rio</code> to import both data sets, stored in two different variables 2. Use <code>glimpse</code> to . Look at the types of codedep and codecommune. Can you merge on <code>codedep</code> and <code>codecommune</code> in these conditions ? Use <code>as.numeric()</code> for both to prepare for the merge 3. Use the <code>left_join()</code> function to merge both data set on codecommune and codedep. 4. Restrict your data frame to rural communes, using <code>filter</code>. 5. Replace NA values by the mean of the variable. 6. What is the range of the far-right vote ? in absolute and relative terms ? 7. What is the average of the relative far-right vote in French rural communes ? The median ? The standard deviation ? 8. Plot the distributions of far-right voting in the different kinds of French rural communes (present in <code>dens7</code>), using <code>ggplot()</code>. 9. Is the expected far-right voting significantly different in those different rural typologies ? Compute different t-tests, and conclude.</p>
+</section>
+<section id="take-home-assignement" class="level2">
+<h2 class="anchored" data-anchor-id="take-home-assignement">Take-home assignement</h2>
+<p>Find any data set online related to your research interests, or originating from the replication package of a paper that you would like to replicate. - Select two variables and describe them using <code>summary</code>, and `` (or their Stata/Python equivalent) - Plot their distribution - Use a binary variable splitting your variable in two groups, and conduct a t-test to compare the means of those two groups. Comment on your findings.</p>
 
 
 </section>
