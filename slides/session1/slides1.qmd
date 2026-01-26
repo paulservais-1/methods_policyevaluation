@@ -488,6 +488,9 @@ t_test_result <- t.test(
   var.equal = FALSE  # Use Welch's t-test for unequal variances
 )
 ```
+```{r}
+t_test_result
+```
 
 ## Exercices 
 ## Exercice 1 - manual warm up 1

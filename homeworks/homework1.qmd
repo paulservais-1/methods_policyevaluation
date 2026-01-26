@@ -1,0 +1,45 @@
+
+Take for instance happiness as a variable to explain : as a social
+scientist, you would like to understand what causes people to be happy
+or not. Of course, you might have first struggles in defining
+happiness - an essentially subjective measure -, and you might as well
+have competing hypotheses about what causes happiness. In addition, you
+might have random errors perturbating your data collection process.
+
+## Download data
+
+Once you have a research question that you seek to analyse, you may want
+to download data relevant for your purposes. Imagine that I want to
+analyse the impact of religiosity on happiness. This would require me to
+find a data set that has both information on :
+
+1.  Individual people
+
+2.  Their level of religiosity - your independent variable (you seek to
+    analyse if religiosity impacts happiness)
+
+3.  Their level of happiness - your dependent variable (you seek to
+    explain happiness)
+
+4.  Ideally, other variables characterising the respondent's profile :
+    his/her gender, his/her age, his/her income, etc., which will help
+    isolate the specific effect of religiosity on happiness.
+
+Finding the data set is not a trivial operation : it requires prior
+knowledge on data sets available out theser, remaining alert to new
+issues, and a lot of walking around on the internet to find data that
+could be relevant to your research problem. Discussions with peers are
+very useful for that. After discussion with friends or your research
+supervisor, you might for instance learn that such lab has issued such
+data set, this ministry provides such information, or this statistics
+institute provides these data. Your
+
+## Import the data in your local environment
+
+You may thus now have your data stored locally in your computer, in what
+case you should provide the path for your environment (RStudio or Stata)
+to access it. Otherwise, your computer will not know what you are
+talking about and probably return you a "No such file or directory" type
+of error. A good practice is therefore to store the data that your are
+using in a subfolder called "data", located in the same folder as where
+your piece of code or .RProject lies.

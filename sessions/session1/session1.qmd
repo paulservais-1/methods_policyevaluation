@@ -32,11 +32,11 @@ given variable $Y$, is caused (and can eventually be predicted) by a
 series of other variables $X_1, X_2, X_3, X_4$, etc. Hence, in a very
 general form, considering that $Y$ can be explained by
 $X_1, X_2, X_3, X_4$ means that we assume that there exists a function
-$f : \mathbb{R}^4 \rightarrow \mathbb{R}$ that satisfies : $$
+$f : \mathbb{R}^4 \rightarrow \mathbb{R}$ that satisfies : 
+
 \begin{equation}
 Y = f(X_1,X_2, X_3, X_4)  + \epsilon 
 \end{equation}
-$$
 
 Hence, any research process typically involves the following stages :
 collection of data on variables $Y$, $X_1, X_2, X_3, X_4$, analysis of
@@ -81,104 +81,7 @@ follows the following steps :
 Ideally, the data collected should be both reliable and valid : that
 means, it should have a small random error (the errors affecting the
 measurements themselves), and limited systematic error (your measure
-accurately measures the concept you seek to analyse).
-
-Take for instance happiness as a variable to explain : as a social
-scientist, you would like to understand what causes people to be happy
-or not. Of course, you might have first struggles in defining
-happiness - an essentially subjective measure -, and you might as well
-have competing hypotheses about what causes happiness. In addition, you
-might have random errors perturbating your data collection process.
-
-## Download data
-
-Once you have a research question that you seek to analyse, you may want
-to download data relevant for your purposes. Imagine that I want to
-analyse the impact of religiosity on happiness. This would require me to
-find a data set that has both information on :
-
-1.  Individual people
-
-2.  Their level of religiosity - your independent variable (you seek to
-    analyse if religiosity impacts happiness)
-
-3.  Their level of happiness - your dependent variable (you seek to
-    explain happiness)
-
-4.  Ideally, other variables characterising the respondent's profile :
-    his/her gender, his/her age, his/her income, etc., which will help
-    isolate the specific effect of religiosity on happiness.
-
-Finding the data set is not a trivial operation : it requires prior
-knowledge on data sets available out theser, remaining alert to new
-issues, and a lot of walking around on the internet to find data that
-could be relevant to your research problem. Discussions with peers are
-very useful for that. After discussion with friends or your research
-supervisor, you might for instance learn that such lab has issued such
-data set, this ministry provides such information, or this statistics
-institute provides these data. Your
-
-## Import the data in your local environment
-
-You may thus now have your data stored locally in your computer, in what
-case you should provide the path for your environment (RStudio or Stata)
-to access it. Otherwise, your computer will not know what you are
-talking about and probably return you a "No such file or directory" type
-of error. A good practice is therefore to store the data that your are
-using in a subfolder called "data", located in the same folder as where
-your piece of code or .RProject lies.
-
-```{r}
-library(tidyverse)
-# Importing data using the absolute path : gives the actual location of the data on your computer
-
-
-# Importing data using the relative path : gives the location of the data on your computer, relative to your code script
-
-# Importing data from the internet 
-
-```
-
-Of course, the function used to read your data will depend on the format
-of your data itself. Here are a couple other examples for other formats
-than .csv.
-
-```{r}
-# .xslx (Excel)
-
-
-# .dat
-
-# .stata
-
-```
-
-## Inspect the data
-
-Once your data is opened in your local environment, you can start
-inspecting it. A good start is to inspect the first and last rows :
-
-```{r}
-head_data <- head(data_ess, 15) #refer the data set, refer the number of rows to keep
-tail_data <- tail(data_ess, 15) #refers the last rows
-head_data
-tail_data
-
-```
-
-This shows that the data is structured in columns and rows : each row
-corresponds to one observation/measurement, and each column corresponds
-to a variable.
-
-You may want to know the names of the variables and have a specific look
-at some of the interesting variables for your purposes
-
-```{r}
-colnames(data_ess)
-head(data_ess %>% select(), 15)
-unique(data_ess %>% select()) # shows the different values contained in your column
-table(data_ess %>% select())  # shows the different values and their count
-```
+accurately measures the concept you seek to analyse). Before turning to real data sets and data manipulation, the next sections remind basics of probability theory, that will be useful for the rest of the class.
 
 # Basics of probability theory
 
@@ -422,7 +325,7 @@ communes <- import("data/demographics2024.xlsx")
 library(readxl)
 library(tidyverse)
 communes <- read_excel("data/demographics2024.xlsx") # relative path
-
+N = 10000
 len_com <- length(communes %>% pull(codecommune))
 sample_com <- sample(1:len_com, N, replace = FALSE)
 comms_rand <- NULL
@@ -528,7 +431,7 @@ t = \frac{\bar{X_1} - \bar{X_2}}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}
 \end{equation}
 Under the assumption that the two variables have normal distributions. If the two means are indeed statistically similar, that means that the t value should be non discernible from 0, with the 99% level of confidence decided. In the case where they are different, the t-value should be significantly different than 0. That means, the confidence interval defined at the 99% confidence level : 
 \begin{equation}
-(\bar{X_1} - \bar{X_2}) \pm t_{99%} * \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}
+(\bar{X_1} - \bar{X_2}) +- t_{.99} * \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}
 \end{equation}
 should not include 0. 
 In R, you can easily implement that using :
