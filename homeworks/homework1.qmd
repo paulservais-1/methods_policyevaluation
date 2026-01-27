@@ -1,23 +1,23 @@
 
 ## Exercice 1 - manual warm up 1
-* Imagine having 3 dices (one is blue, the other green and the last one is red) with 3 faces each, and values going from 1 to 3. Consider the sum of the three dices as random variable $X_{bgr}$:
-  - Compute the probability of obtaining 5, with the blue dice being 2, the red being 2, and the green being 1: $P(X_{bgr} = 5_{212})$
-  - What is the set of potential outcomes, $S_X$ of $X_{bgr}$ ?
-  - Now imagine that the dices can not be distinguished anymore, your random variable is $X$. What is your probability of obtaining 3, $P(X=3)$ ? 
-  - What is your probability of obtaining 5 ? 
-  - How much is the expectation ? 
-  - You know that one of your dices is worth 3. What is the probability of obtaining 5 in total? 
-  - Draw a bar plot, showing the potential outcomes in the x axis, and the probabilities in the y axis.
-  - What is the conditional expectation worth in the case where one of the three dices is worth 3 ? Is that equal to the non-conditional expectation of X ? 
-  - Verify all your results by simulating the throwing of these three dices, a 10000 times, in R. 
+  Imagine having 3 dices (one is blue, the other green and the last one is red) with 3 faces each, and values going from 1 to 3. Consider the sum of the three dices as random variable $X_{bgr}$:
+1. Compute the probability of obtaining 5, with the blue dice being 2, the red being 2, and the green being 1: $P(X_{bgr} = 5_{212})$
+2. What is the set of potential outcomes, $S_X$ of $X_{bgr}$ ?
+3. Now imagine that the dices can not be distinguished anymore, your random variable is $X$. What is your probability of obtaining 3, $P(X=3)$ ? 
+4. What is your probability of obtaining 5 ? 
+5. How much is the expectation ? 
+6. You know that one of your dices is worth 3. What is the probability of obtaining 5 in total? 
+7. Draw a bar plot, showing the potential outcomes in the x axis, and the probabilities in the y axis.
+8. What is the conditional expectation worth in the case where one of the three dices is worth 3 ? Is that equal to the non-conditional expectation of X ? 
+9. Verify all your results by simulating the throwing of these three dices, a 10000 times, in R. 
 
 ## Exercice 2 - Playing with RStudio
-Open RStudio on your personal computer (or your personal coding environment).
+  Open RStudio on your personal computer (or your personal coding environment).
 1. Create a new project named "Session 1 - Methods R&PE", in a new directory. What are the different files created ? Quit the session, go to your folder on your personal computer, and click on the '.Rproj' file created. What happens ?
 2. Write 1+1 in your main .R script and press "Run".
 3. Create a new folder in this project named 'data'.
 4. Install packages "tidyverse" and "rio" in the console.
-4. You're all set for importing data and start creating functions/the next exercices ! 
+5. You're all set for importing data and start creating functions/the next exercices ! 
 
 
 ## Exercice 3 - playing with data
@@ -120,7 +120,7 @@ print(t_test_2_3)
 ```
 
 ## Take-home assignement
-Find any data set online related to your research interests, or originating from the replication package of a paper that you would like to replicate. 
-- Select two variables and describe them using `summary`, and `` (or their Stata/Python equivalent)
-- Plot their distribution
-- Use a binary variable splitting your variable in two groups, and conduct a t-test to compare the means of those two groups. Comment on your findings.
+  Find any data set online related to your research interests, or originating from the replication package of a paper that you would like to replicate. 
+1. Select two variables and describe them using `summary`, and `` (or their Stata/Python equivalent)
+2. Plot their distribution
+3. Use a binary variable splitting your variable in two groups, and conduct a t-test to compare the means of those two groups. Comment on your findings.
