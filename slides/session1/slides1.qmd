@@ -49,6 +49,10 @@ format:
 ![](images/website.png){width=100%}
 :::
 
+## AI 
+
+## R and RStudio
+ 
 ## Course evaluation
 
 - Simple pass/fail 
@@ -97,7 +101,7 @@ format:
 ## Research problem and empirical evidence 
 - A research puzzle generally comes with identifying a puzzling relationship between two variables
 - Why Y despite X ? Because Z
-- A more empirical question would also be: does Z affect X ?
+- A more empirical question would also be: does Z affect Y ?
 - Quantitative methods, and causal inference, are a way to assess the size of the effect of Z on Y and to measure its significance.
 
 
@@ -120,11 +124,12 @@ format:
 - Continuous/interval variables : infinite number of potential outcomes (in a given range)
 
 ## One dice example
-- A typical example is the result of a six-faces dice, that you throw.
+- A typical example is the result of a six-faces dice, that you roll.
 - $X$, the result of your dice, is a random variable
 - $S_X = \{1,2,3,4,5,6\}$ is its set of potential outcomes
 - If your dice is not broken, $P(X =1,2,3,4,5,6) = 1/6 \approx 0.1666667$. 
 - The probability set is $P_X = \{1/6, 1/6, 1/6, 1/6, 1/6, 1/6\}$. Each outcome comes with a probability.
+- How could we test that ?
 
 ## One dice example - distribution
 - You throw it a 1000 times. I randomly generate that variable in R, using `sample()`
@@ -157,6 +162,7 @@ barplot(table(x1 = sample(1:6,100000, replace=T)))
 
 barplot(table(x1 = sample(1:6,100000, replace=T))/100000)
 ```
+
 ## Two dices example 
 - Now imagine that you have two dices
 - $X_1$ is the result of dice 1, $X_2$ is the result of dice 2
@@ -201,6 +207,8 @@ summary(y)
 
 barplot(table(y))
 ```
+## Law of large numbers
+
 ```{r}
 #| echo: false
 #| eval: true
