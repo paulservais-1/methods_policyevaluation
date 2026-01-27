@@ -66,22 +66,22 @@
     "objectID": "slides/session1/slides1.html#your-instructor",
     "href": "slides/session1/slides1.html#your-instructor",
     "title": "Methods for Research and Policy Evaluation",
-    "section": "Your instructor",
-    "text": "Your instructor\n\nPaul Servais, paul.servais@sciencespo.fr.\nTrained as physical engineer (Ecole Polytechnique de Bruxelles), then came to SciencesPo (Urban School), graduated last year\nNow working on climate politics, comparative politics\nI’ve been working on the electoral impacts of wind turbines on the vote for the RN"
+    "section": "",
+    "text": "Paul Servais, paul.servais@sciencespo.fr.\nTrained as physical engineer (Ecole Polytechnique de Bruxelles), then came to SciencesPo (Urban School), graduated last year\nNow working on climate politics, comparative politics\nI’ve been working on the electoral impacts of wind turbines on the vote for the RN"
   },
   {
     "objectID": "slides/session1/slides1.html#course-objectives",
     "href": "slides/session1/slides1.html#course-objectives",
     "title": "Methods for Research and Policy Evaluation",
-    "section": "Course objectives",
-    "text": "Course objectives\n\nProvide you with skills useful for:\n\nPolicy Evaluation\nQuantitative research\nWith mathematical formalisation\nBased on coding in R (on RStudio), with some Stata examples\n\nCorrelation is not causation !"
+    "section": "",
+    "text": "Provide you with skills useful for:\n\nPolicy Evaluation\nQuantitative research\nWith mathematical formalisation\nBased on coding in R (on RStudio), with some Stata examples\n\nCorrelation is not causation !"
   },
   {
     "objectID": "slides/session1/slides1.html#course-organisation",
     "href": "slides/session1/slides1.html#course-organisation",
     "title": "Methods for Research and Policy Evaluation",
-    "section": "Course organisation",
-    "text": "Course organisation\n\n10’ introduction\n30’ mathematical formalisation and coding examples\n1h maths and coding exercices on R"
+    "section": "",
+    "text": "10’ introduction\n30’ mathematical formalisation and coding examples\n1h maths and coding exercices on R"
   },
   {
     "objectID": "slides/session1/slides1.html#and-you-objectives-for-the-class",
@@ -94,15 +94,15 @@
     "objectID": "slides/session1/slides1.html#course-material",
     "href": "slides/session1/slides1.html#course-material",
     "title": "Methods for Research and Policy Evaluation",
-    "section": "Course material",
-    "text": "Course material\n\n\nEverything on https://paulservais-1.github.io/methods_policyevaluation/\nMore structured than Moodle\n\n\n\n\nSessions, with clear codings outputs\nExercices"
+    "section": "",
+    "text": "Everything on https://paulservais-1.github.io/methods_policyevaluation/\nMore structured than Moodle\n\n\n\n\nSessions, with clear codings outputs\nExercices"
   },
   {
     "objectID": "slides/session1/slides1.html#sessions",
     "href": "slides/session1/slides1.html#sessions",
     "title": "Methods for Research and Policy Evaluation",
-    "section": "Sessions",
-    "text": "Sessions\n\n\nCoding basics, and descriptive statistics\n\n\nLinear regressions\n\n\nNon-linear regressions\n\n\nRegression Discontinuity Design (RDD)\n\n\n\nDifference-in-differences (DiD) and panel data\n\n\nInstrumental Variables (IV)"
+    "section": "",
+    "text": "Coding basics, and descriptive statistics\n\n\nLinear regressions\n\n\nNon-linear regressions\n\n\nRegression Discontinuity Design (RDD)\n\n\n\nDifference-in-differences (DiD) and panel data\n\n\nInstrumental Variables (IV)"
   },
   {
     "objectID": "slides/session1/slides1.html#course-examination",
@@ -115,22 +115,22 @@
     "objectID": "slides/session1/slides1.html#and-you",
     "href": "slides/session1/slides1.html#and-you",
     "title": "Methods for Research and Policy Evaluation",
-    "section": "And you ?",
-    "text": "And you ?\n\nBackground ?\nObjectives for the class ?"
+    "section": "",
+    "text": "Background ?\nObjectives for the class ?"
   },
   {
     "objectID": "slides/session1/slides1.html#course-evaluation",
     "href": "slides/session1/slides1.html#course-evaluation",
     "title": "Methods for Research and Policy Evaluation",
-    "section": "Course evaluation",
-    "text": "Course evaluation\n\nSimple pass/fail\nGoal is to replicate or find a research question, by groups of two, and write a 5-pages document summarising the findings\nThe objective is clearly not to overload anybody with work, but to give useful tips and skills for the future !\nAbstract\nIntro - Theory - Methods - Results - Conclusion"
+    "section": "",
+    "text": "Simple pass/fail\nGoal is to replicate or find a research question, by groups of two, and write a 5-pages document summarising the findings\nThe objective is clearly not to overload anybody with work, but to give useful tips and skills for the future !\nAbstract\nIntro - Theory - Methods - Results - Conclusion"
   },
   {
     "objectID": "slides/session1/slides1.html#other-excellent-sources",
     "href": "slides/session1/slides1.html#other-excellent-sources",
     "title": "Methods for Research and Policy Evaluation",
-    "section": "Other excellent sources",
-    "text": "Other excellent sources\n\nWork by colleagues of my center (CEE) :\n\nhttps://luissattelmayer.github.io/quant-2025/ ;\nhttps://malo-jn.quarto.pub/introduction-to-r/ ;\nhttps://www.rovny.org/methods-2-ed\n\nWork by other economists :\n\nCunningham, Scott. Causal Inference: The Mixtape. (2021). Available at: https://mixtape.scunning.com/.\n\nHuntington-Klein. The Effect: An Introduction to Research Design and Causality. (2021). https://theeffectbook.net/"
+    "section": "",
+    "text": "Work by colleagues of my center (CEE) :\n\nhttps://luissattelmayer.github.io/quant-2025/ ;\nhttps://malo-jn.quarto.pub/introduction-to-r/ ;\nhttps://www.rovny.org/methods-2-ed\n\nWork by other economists :\n\nCunningham, Scott. Causal Inference: The Mixtape. (2021). Available at: https://mixtape.scunning.com/.\n\nHuntington-Klein. The Effect: An Introduction to Research Design and Causality. (2021). https://theeffectbook.net/"
   },
   {
     "objectID": "slides/session1/slides1.html#questions",
@@ -151,7 +151,7 @@
     "href": "slides/session1/slides1.html#research-problem-and-empirical-evidence",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Research problem and empirical evidence",
-    "text": "Research problem and empirical evidence\n\nA research puzzle generally comes with identifying a puzzling relationship between two variables\nWhy Y despite X ? Because Z\nA more empirical question would also be: does Z affect X ?\nQuantitative methods, and causal inference, are a way to assess the size of the effect of Z on Y and to measure its significance."
+    "text": "Research problem and empirical evidence\n\nA research puzzle generally comes with identifying a puzzling relationship between two variables\nWhy Y despite X ? Because Z\nA more empirical question would also be: does Z affect Y ?\nQuantitative methods, and causal inference, are a way to assess the size of the effect of Z on Y and to measure its significance."
   },
   {
     "objectID": "slides/session1/slides1.html#terminology-random-and-non-random-variables",
@@ -179,14 +179,14 @@
     "href": "slides/session1/slides1.html#one-dice-example",
     "title": "Methods for Research and Policy Evaluation",
     "section": "One dice example",
-    "text": "One dice example\n\nA typical example is the result of a six-faces dice, that you throw.\n\\(X\\), the result of your dice, is a random variable\n\\(S_X = \\{1,2,3,4,5,6\\}\\) is its set of potential outcomes\nIf your dice is not broken, \\(P(X =1,2,3,4,5,6) = 1/6 \\approx 0.1666667\\).\nThe probability set is \\(P_X = \\{1/6, 1/6, 1/6, 1/6, 1/6, 1/6\\}\\). Each outcome comes with a probability."
+    "text": "One dice example\n\nA typical example is the result of a six-faces dice, that you roll.\n\\(X\\), the result of your dice, is a random variable\n\\(S_X = \\{1,2,3,4,5,6\\}\\) is its set of potential outcomes\nIf your dice is not broken, \\(P(X =1,2,3,4,5,6) = 1/6 \\approx 0.1666667\\).\nThe probability set is \\(P_X = \\{1/6, 1/6, 1/6, 1/6, 1/6, 1/6\\}\\). Each outcome comes with a probability.\nHow could we test that ?"
   },
   {
     "objectID": "slides/session1/slides1.html#one-dice-example---distribution",
     "href": "slides/session1/slides1.html#one-dice-example---distribution",
     "title": "Methods for Research and Policy Evaluation",
     "section": "One dice example - distribution",
-    "text": "One dice example - distribution\n\nYou throw it a 1000 times. I randomly generate that variable in R, using sample()\n\n\nlibrary(DT)\nN = 1000 #number of measurements\nx1 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)\nhead(x1,20) # head\n\n [1] 3 4 4 5 6 6 2 6 1 1 6 3 4 5 6 5 2 1 6 5"
+    "text": "One dice example - distribution\n\nYou throw it a 1000 times. I randomly generate that variable in R, using sample()\n\n\nlibrary(DT)\nN = 1000 #number of measurements\nx1 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)\nhead(x1,20) # head\n\n [1] 1 3 5 2 6 2 1 2 5 1 4 4 2 6 5 6 6 3 1 6"
   },
   {
     "objectID": "slides/session1/slides1.html#two-dices-example",
@@ -214,7 +214,7 @@
     "href": "slides/session1/slides1.html#distribution",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Distribution",
-    "text": "Distribution\n\nlibrary(DT)\nN = 10000 #number of measurements\nx1 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)\nx2 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)\ny = x1 + x2\nhead(y)\n\n[1] 11  8  6  3 10 11\n\nmean(y)\n\n[1] 6.9859\n\nsd(y)\n\n[1] 2.427775\n\nsummary(y)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  2.000   5.000   7.000   6.986   9.000  12.000"
+    "text": "Distribution\n\nlibrary(DT)\nN = 10000 #number of measurements\nx1 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)\nx2 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)\ny = x1 + x2\nhead(y)\n\n[1] 7 7 3 2 6 8\n\nmean(y)\n\n[1] 6.9989\n\nsd(y)\n\n[1] 2.426497\n\nsummary(y)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  2.000   5.000   7.000   6.999   9.000  12.000"
   },
   {
     "objectID": "slides/session1/slides1.html#expectation",
@@ -312,7 +312,7 @@
     "href": "slides/session1/slides1.html#conditional-distribution",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Conditional distribution",
-    "text": "Conditional distribution"
+    "text": "Conditional distribution\n\nbarplot(table(4+x2)/N)"
   },
   {
     "objectID": "slides/session1/slides1.html#density",
@@ -354,7 +354,7 @@
     "href": "slides/session1/slides1.html#importing-data",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Importing data",
-    "text": "Importing data\n\n\nlibrary(readxl) # needed to read excel without \"rio\"\ncommunes &lt;- read_excel(\"data/demographics2024.xlsx\") # relative path\ncommunes &lt;- read_excel(\"/Users/Desktop/Website/methods_policyevaluation/slides/session1/data/\") # absolute path\n#using the \"rio\" package\nlibrary(rio)\ncommunes &lt;- import(\"data/demographics2024.xlsx\")\n\n\n\n\nInspecting the data\n\n\nhead(comm_r, 3)\n\n# A tibble: 3 × 43\n  codecommune  Year codedep  agri  indp  cadr  pint  empl  ouvr  chom  pact\n  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 01001        2024 01          0    39    33    14    86   147    26   319\n2 01007        2024 01         15    39   250   311   339   268    95  1222\n3 01013        2024 01          2     0    18    13    11    42     0    86\n# ℹ 32 more variables: age &lt;dbl&gt;, popf &lt;dbl&gt;, francais &lt;dbl&gt;, etranger &lt;dbl&gt;,\n#   prixbien &lt;dbl&gt;, capitalratio &lt;dbl&gt;, npropri &lt;dbl&gt;, nlogement &lt;dbl&gt;,\n#   pop &lt;dbl&gt;, revmoyfoy &lt;dbl&gt;, revtot &lt;dbl&gt;, recetteimpotslocaux &lt;dbl&gt;,\n#   recette &lt;dbl&gt;, baseimpotslocaux &lt;dbl&gt;, nodip &lt;dbl&gt;, sup &lt;dbl&gt;,\n#   Libellé &lt;chr&gt;, Exploitations &lt;dbl&gt;, Personnes &lt;dbl&gt;, UTA &lt;dbl&gt;, SAU &lt;dbl&gt;,\n#   PBS &lt;lgl&gt;, dens &lt;chr&gt;, densaav &lt;chr&gt;, dens7 &lt;chr&gt;, ntot &lt;dbl&gt;, pagri &lt;dbl&gt;,\n#   pindp &lt;dbl&gt;, pcadr &lt;dbl&gt;, ppint &lt;dbl&gt;, pempl &lt;dbl&gt;, pouvr &lt;dbl&gt;"
+    "text": "Importing data\n\n\nlibrary(readxl) # needed to read excel without \"rio\"\ncommunes &lt;- read_excel(\"data/demographics2024.xlsx\") # relative path\ncommunes &lt;- read_excel(\"/Users/Desktop/Website/methods_policyevaluation/slides/session1/data/\") # absolute path\n#using the \"rio\" package\nlibrary(rio)\ncommunes &lt;- import(\"data/demographics2024.xlsx\")\n\n\n\nlibrary(readxl)\nlibrary(tidyverse)\ncommunes &lt;- read_excel(\"data/demographics2024.xlsx\") # relative path\n\nlen_com &lt;- length(communes %&gt;% pull(codecommune))\nsample_com &lt;- sample(1:len_com, N, replace = FALSE)\ncomms_rand &lt;- NULL\na &lt;- 0\nfor(i in sample_com){\n  a =a+1\n  comms_rand[a] = (communes %&gt;% pull(codecommune))[i]}\ncomm_r &lt;- communes %&gt;% filter(codecommune %in% comms_rand) \n\n\n\nInspecting the data\n\n\nhead(comm_r, 3)\n\n# A tibble: 3 × 43\n  codecommune  Year codedep  agri  indp  cadr  pint  empl  ouvr  chom  pact\n  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 01001        2024 01          0    39    33    14    86   147    26   319\n2 01005        2024 01         11    37    56   192   185   177    18   658\n3 01006        2024 01          0     0     0    34    23    23     0    80\n# ℹ 32 more variables: age &lt;dbl&gt;, popf &lt;dbl&gt;, francais &lt;dbl&gt;, etranger &lt;dbl&gt;,\n#   prixbien &lt;dbl&gt;, capitalratio &lt;dbl&gt;, npropri &lt;dbl&gt;, nlogement &lt;dbl&gt;,\n#   pop &lt;dbl&gt;, revmoyfoy &lt;dbl&gt;, revtot &lt;dbl&gt;, recetteimpotslocaux &lt;dbl&gt;,\n#   recette &lt;dbl&gt;, baseimpotslocaux &lt;dbl&gt;, nodip &lt;dbl&gt;, sup &lt;dbl&gt;,\n#   Libellé &lt;chr&gt;, Exploitations &lt;dbl&gt;, Personnes &lt;dbl&gt;, UTA &lt;dbl&gt;, SAU &lt;dbl&gt;,\n#   PBS &lt;lgl&gt;, dens &lt;chr&gt;, densaav &lt;chr&gt;, dens7 &lt;chr&gt;, ntot &lt;dbl&gt;, pagri &lt;dbl&gt;,\n#   pindp &lt;dbl&gt;, pcadr &lt;dbl&gt;, ppint &lt;dbl&gt;, pempl &lt;dbl&gt;, pouvr &lt;dbl&gt;"
   },
   {
     "objectID": "slides/session1/slides1.html#your-experiment",
@@ -403,7 +403,7 @@
     "href": "slides/session1/slides1.html#visualising-the-variance",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Visualising the variance",
-    "text": "Visualising the variance\n\ndevs = (y - mean(y))^2\nhead(y)\n\n[1] 11  8  6  3 10 11\n\nunique(devs)\n\n [1] 16.11299881  1.02839881  0.97199881 15.88739881  9.08479881  0.00019881\n [7]  8.91559881  4.05659881  3.94379881 25.14119881 24.85919881\n\nmean(devs)\n\n[1] 5.893501\n\nbarplot(table(devs))"
+    "text": "Visualising the variance\n\ndevs = (y - mean(y))^2\nhead(y)\n\n[1] 7 7 3 2 6 8\n\nunique(devs)\n\n [1]  0.00000121 15.99120121 24.98900121  0.99780121  1.00220121  4.00440121\n [7] 16.00880121  9.00660121 25.01100121  3.99560121  8.99340121\n\nmean(devs)\n\n[1] 5.887299\n\nbarplot(table(devs))"
   },
   {
     "objectID": "slides/session1/slides1.html#creating-a-project",
@@ -417,14 +417,14 @@
     "href": "slides/session1/slides1.html#categorical-variable",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Categorical variable",
-    "text": "Categorical variable\n\nDensity typology\n\n\n# Nominal : the density typology of communes \nunique(comm_r$dens)\n\n[1] \"Rural\"                \"Urbain intermédiaire\" \"Urbain dense\"        \n\ntable(comm_r$dens)\n\n\n               Rural         Urbain dense Urbain intermédiaire \n                8759                  205                 1036 \n\nsummary(comm_r$dens)\n\n   Length     Class      Mode \n    10000 character character \n\n\n\nNominal or ordinal ?"
+    "text": "Categorical variable\n\nDensity typology\n\n\n# Nominal : the density typology of communes \nunique(comm_r$dens)\n\n[1] \"Rural\"                \"Urbain intermédiaire\" \"Urbain dense\"        \n\ntable(comm_r$dens)\n\n\n               Rural         Urbain dense Urbain intermédiaire \n                8733                  225                 1042 \n\nsummary(comm_r$dens)\n\n   Length     Class      Mode \n    10000 character character \n\n\n\nNominal or ordinal ?"
   },
   {
     "objectID": "slides/session1/slides1.html#expectations",
     "href": "slides/session1/slides1.html#expectations",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Expectations",
-    "text": "Expectations\n\nYou can compute the expectation: \\[\\begin{equation}\n\\text{E}(\\text{MI}) = \\frac{1}{10000}\\sum_{i=1}^{10000} \\text{MI}_i\n\\end{equation}\\]\n\n\nmean(comm_r$revmoyfoy)\n\n[1] 31116.43\n\n\n\nAnd the conditional expectations\n\n\nmean((comm_r %&gt;% filter(dens == \"Rural\"))$revmoyfoy)\n\n[1] 30400.02\n\nmean((comm_r %&gt;% filter(dens == \"Urbain dense\"|dens == \"Urbain intermédiaire\"))$revmoyfoy)\n\n[1] 36172.89"
+    "text": "Expectations\n\nYou can compute the expectation: \\[\\begin{equation}\n\\text{E}(\\text{MI}) = \\frac{1}{10000}\\sum_{i=1}^{10000} \\text{MI}_i\n\\end{equation}\\]\n\n\nmean(comm_r$revmoyfoy)\n\n[1] 31192.55\n\n\n\nAnd the conditional expectations\n\n\nmean((comm_r %&gt;% filter(dens == \"Rural\"))$revmoyfoy)\n\n[1] 30464.99\n\nmean((comm_r %&gt;% filter(dens == \"Urbain dense\"|dens == \"Urbain intermédiaire\"))$revmoyfoy)\n\n[1] 36207.41"
   },
   {
     "objectID": "slides/session1/slides1.html#statistical-inference",
@@ -438,7 +438,7 @@
     "href": "slides/session1/slides1.html#interval-variable",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Interval variable",
-    "text": "Interval variable\n\nMedian income in communes\n\n\n# Continuous : the median income in those communes\nsummary(comm_r$revmoyfoy)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n   8151   25864   29629   31116   34555  132947       7 \n\nrange(comm_r$revmoyfoy, na.rm = TRUE)\n\n[1]   8151.157 132946.950\n\nsummary((comm_r %&gt;% drop_na(revmoyfoy))$revmoyfoy) #dropping NA's\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   8151   25864   29629   31116   34555  132947 \n\n#replacing the NA's\ncomm_r &lt;- comm_r %&gt;% mutate(revmoyfoy = ifelse(is.na(revmoyfoy), mean(revmoyfoy, na.rm =TRUE), revmoyfoy))\nsummary(comm_r$revmoyfoy)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   8151   25865   29634   31116   34549  132947"
+    "text": "Interval variable\n\nMedian income in communes\n\n\n# Continuous : the median income in those communes\nsummary(comm_r$revmoyfoy)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n  11047   25795   29586   31193   34577  167966       7 \n\nrange(comm_r$revmoyfoy, na.rm = TRUE)\n\n[1]  11047.14 167966.33\n\nsummary((comm_r %&gt;% drop_na(revmoyfoy))$revmoyfoy) #dropping NA's\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  11047   25795   29586   31193   34577  167966 \n\n#replacing the NA's\ncomm_r &lt;- comm_r %&gt;% mutate(revmoyfoy = ifelse(is.na(revmoyfoy), mean(revmoyfoy, na.rm =TRUE), revmoyfoy))\nsummary(comm_r$revmoyfoy)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  11047   25797   29592   31193   34573  167966"
   },
   {
     "objectID": "slides/session1/slides1.html#statistical-inference-1",
@@ -515,21 +515,21 @@
     "href": "slides/session1/slides1.html#your-experiment-3",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Your experiment",
-    "text": "Your experiment\n\nN = 10000 #number of measurements\nx = sample(1:1000,100, replace=T) # your hundred dices\nhead(x)\n\n[1] 615 473 977 659 933 619\n\ny =0\nfor(i in x){y = y+sample(1:i, N, replace = T)/i}\nhead(y)\n\n[1] 49.12824 52.19408 57.23269 52.01299 53.50483 48.09993\n\n\n\nYou now get closer to a continuous random variable…\nYour probability to obtain one specific value (eg. X = 43.503) becomes extremely small.\nYou generally rather assess the probability that the value you pick is bigger or smaller than a certain value"
+    "text": "Your experiment\n\nN = 10000 #number of measurements\nx = sample(1:1000,100, replace=T) # your hundred dices\nhead(x)\n\n[1] 992 994  78 860 897 900\n\ny =0\nfor(i in x){y = y+sample(1:i, N, replace = T)/i}\nhead(y)\n\n[1] 44.80009 48.46255 50.94224 46.47149 46.07926 47.52640\n\n\n\nYou now get closer to a continuous random variable…\nYour probability to obtain one specific value (eg. X = 43.503) becomes extremely small.\nYou generally rather assess the probability that the value you pick is bigger or smaller than a certain value"
   },
   {
     "objectID": "slides/session1/slides1.html#students-t-test",
     "href": "slides/session1/slides1.html#students-t-test",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Student’s t-test",
-    "text": "Student’s t-test\n\nTwo means are indeed statistically similar, that means that the t value should be non discernible from 0, with the 99% level of confidence decided.\nIf different, the t-value should be significantly different than 0. Confidence interval defined at the 99% confidence level should not include 0 : \\[\\begin{equation}\n(\\bar{X_1} - \\bar{X_2}) +- \\ t_{99%} * \\sqrt{\\frac{s_1^2}{n_1}+\\frac{s_2^2}{n_2}}\n\\end{equation}\\]\n\n\nt_test_result &lt;- t.test(\n  rural_income,\n  urban_income,\n  alternative = \"two.sided\",\n  conf.level = 0.99,\n  var.equal = FALSE  # Use Welch's t-test for unequal variances\n)"
+    "text": "Student’s t-test\n\nTwo means are indeed statistically similar, that means that the t value should be non discernible from 0, with the 99% level of confidence decided.\nIf different, the t-value should be significantly different than 0. Confidence interval defined at the 99% confidence level should not include 0 : \\[\\begin{equation}\n(\\bar{X_1} - \\bar{X_2}) \\pm t_{.99} * \\sqrt{\\frac{s_1^2}{n_1}+\\frac{s_2^2}{n_2}}\n\\end{equation}\\]\n\n\nt_test_result &lt;- t.test(\n  rural_income,\n  urban_income,\n  alternative = \"two.sided\",\n  conf.level = 0.99,\n  var.equal = FALSE  # Use Welch's t-test for unequal variances\n)"
   },
   {
     "objectID": "slides/session1/slides1.html#students-t-test-1",
     "href": "slides/session1/slides1.html#students-t-test-1",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Student’s t-test",
-    "text": "Student’s t-test\n\n\n\n    Welch Two Sample t-test\n\ndata:  rural_income and urban_income\nt = -17.394, df = 1397.3, p-value &lt; 2.2e-16\nalternative hypothesis: true difference in means is not equal to 0\n99 percent confidence interval:\n -6628.915 -4916.821\nsample estimates:\nmean of x mean of y \n 30400.02  36172.89"
+    "text": "Student’s t-test\n\nt_test_result\n\n\n    Welch Two Sample t-test\n\ndata:  rural_income and urban_income\nt = -16.716, df = 1426.8, p-value &lt; 2.2e-16\nalternative hypothesis: true difference in means is not equal to 0\n99 percent confidence interval:\n -6628.485 -4856.351\nsample estimates:\nmean of x mean of y \n 30464.99  36207.41"
   },
   {
     "objectID": "slides/session1/slides1.html#exercice-3--",
@@ -655,7 +655,7 @@
     "href": "homeworks/homework1.html",
     "title": "Methods for Research and Policy Evaluation",
     "section": "",
-    "text": "Take for instance happiness as a variable to explain : as a social scientist, you would like to understand what causes people to be happy or not. Of course, you might have first struggles in defining happiness - an essentially subjective measure -, and you might as well have competing hypotheses about what causes happiness. In addition, you might have random errors perturbating your data collection process."
+    "text": "Imagine having 3 dices (one is blue, the other green and the last one is red) with 3 faces each, and values going from 1 to 3. Consider the sum of the three dices as random variable \\(X_{bgr}\\):\n\nCompute the probability of obtaining 5, with the blue dice being 2, the red being 2, and the green being 1: \\(P(X_{bgr} = 5_{212})\\)\nWhat is the set of potential outcomes, \\(S_X\\) of \\(X_{bgr}\\) ?\nNow imagine that the dices can not be distinguished anymore, your random variable is \\(X\\). What is your probability of obtaining 3, \\(P(X=3)\\) ?\nWhat is the probability of obtaining 5 ?\nHow much is the expectation ?\nYou know that one of your dices is worth 3. What is the probability of obtaining 5 in total?\nDraw a bar plot, showing the potential outcomes in the x axis, and the probabilities in the y axis.\nWhat is the conditional expectation worth in the case where one of the three dices is worth 3 ? Is that equal to the non-conditional expectation of X ?\nVerify all your results by simulating the rolling of these three dices, 10000 times, in R."
   },
   {
     "objectID": "homeworks/homework1.html#download-data",
@@ -676,7 +676,7 @@
     "href": "slides/session1/slides1.html",
     "title": "Methods for Research and Policy Evaluation",
     "section": "",
-    "text": "Paul Servais, paul.servais@sciencespo.fr.\nTrained as physical engineer (Ecole Polytechnique de Bruxelles), then came to SciencesPo (Urban School), graduated last year\nNow working on climate politics, comparative politics\nI’ve been working on the electoral impacts of wind turbines on the vote for the RN\n\n\n\n\n\n\nProvide you with skills useful for:\n\nPolicy Evaluation\nQuantitative research\nWith mathematical formalisation\nBased on coding in R (on RStudio), with some Stata examples\n\nCorrelation is not causation !\n\n\n\n\n\n\n10’ introduction\n30’ mathematical formalisation and coding examples\n1h maths and coding exercices on R\n\n\n\n\n\nBackground ?\nObjectives for the class ?\n\n\n\n\n\n\nEverything on https://scpo-quantimethods.github.io/quantitative_methods_two/\nMore structured than Moodle\n\n\n\n\nSessions, with clear codings outputs\nExercices \n\n\n\n\n\n\nSimple pass/fail\nGoal is to replicate or find a research question, by groups of two, and write a 5-pages document summarising the findings\nThe objective is clearly not to overload anybody with work, but to give useful tips and skills for the future !\nAbstract\nIntro - Theory - Methods - Results - Conclusion\n\n\n\n\n\n\nCoding basics, and descriptive statistics\n\n\nLinear regressions\n\n\nNon-linear regressions\n\n\nRegression Discontinuity Design (RDD)\n\n\n\nDifference-in-differences (DiD) and panel data\n\n\nInstrumental Variables (IV)\n\n\n\n\n\n\nWork by colleagues of my center (CEE) :\n\nhttps://luissattelmayer.github.io/quant-2025/ ;\nhttps://malo-jn.quarto.pub/introduction-to-r/ ;\nhttps://www.rovny.org/methods-2-ed\n\nWork by other economists :\n\nCunningham, Scott. Causal Inference: The Mixtape. (2021). Available at: https://mixtape.scunning.com/.\n\nHuntington-Klein. The Effect: An Introduction to Research Design and Causality. (2021). https://theeffectbook.net/"
+    "text": "Paul Servais, paul.servais@sciencespo.fr.\nTrained as physical engineer (Ecole Polytechnique de Bruxelles), then came to SciencesPo (Urban School), graduated last year\nNow working on climate politics, comparative politics\nI’ve been working on the electoral impacts of wind turbines on the vote for the RN\n\n\n\n\n\n\nProvide you with skills useful for:\n\nPolicy Evaluation\nQuantitative research\nWith mathematical formalisation\nBased on coding in R (on RStudio), with some Stata examples\n\nCorrelation is not causation !\n\n\n\n\n\n\n10’ introduction\n30’ mathematical formalisation and coding examples\n1h maths and coding exercices on R\n\n\n\n\n\nBackground ?\nObjectives for the class ?\n\n\n\n\n\n\nEverything on https://paulservais-1.github.io/methods_policyevaluation/\nMore structured than Moodle\n\n\n\n\nSessions, with clear codings outputs\nExercices \n\n\n\n\n\n\n\n\n\n\n\n\nSimple pass/fail\nGoal is to replicate or find a research question, by groups of two, and write a 5-pages document summarising the findings\nThe objective is clearly not to overload anybody with work, but to give useful tips and skills for the future !\nAbstract\nIntro - Theory - Methods - Results - Conclusion\n\n\n\n\n\n \n\n\n\n\n\n\nCoding basics, and descriptive statistics\n\n\nLinear regressions\n\n\nNon-linear regressions\n\n\nRegression Discontinuity Design (RDD)\n\n\n\nDifference-in-differences (DiD) and panel data\n\n\nInstrumental Variables (IV)\n\n\n\n\n\n\nWork by colleagues of my center (CEE) :\n\nhttps://luissattelmayer.github.io/quant-2025/ ;\nhttps://malo-jn.quarto.pub/introduction-to-r/ ;\nhttps://www.rovny.org/methods-2-ed\n\nWork by other economists :\n\nCunningham, Scott. Causal Inference: The Mixtape. (2021). Available at: https://mixtape.scunning.com/.\n\nHuntington-Klein. The Effect: An Introduction to Research Design and Causality. (2021). https://theeffectbook.net/"
   },
   {
     "objectID": "sessions/session1/session1.html#random-variable",
@@ -718,6 +718,55 @@
     "href": "slides/session1/slides1.html#creating-a-project-1",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Creating a project",
-    "text": "Creating a project\n\nLocation"
+    "text": "Creating a project\n\nProject/folder creation"
+  },
+  {
+    "objectID": "homeworks/homework1.html#exercice-1---manual-warm-up-1",
+    "href": "homeworks/homework1.html#exercice-1---manual-warm-up-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "",
+    "text": "Imagine having 3 dices (one is blue, the other green and the last one is red) with 3 faces each, and values going from 1 to 3. Consider the sum of the three dices as random variable \\(X_{bgr}\\):\n\nCompute the probability of obtaining 5, with the blue dice being 2, the red being 2, and the green being 1: \\(P(X_{bgr} = 5_{212})\\)\nWhat is the set of potential outcomes, \\(S_X\\) of \\(X_{bgr}\\) ?\nNow imagine that the dices can not be distinguished anymore, your random variable is \\(X\\). What is your probability of obtaining 3, \\(P(X=3)\\) ?\nWhat is the probability of obtaining 5 ?\nHow much is the expectation ?\nYou know that one of your dices is worth 3. What is the probability of obtaining 5 in total?\nDraw a bar plot, showing the potential outcomes in the x axis, and the probabilities in the y axis.\nWhat is the conditional expectation worth in the case where one of the three dices is worth 3 ? Is that equal to the non-conditional expectation of X ?\nVerify all your results by simulating the rolling of these three dices, 10000 times, in R."
+  },
+  {
+    "objectID": "homeworks/homework1.html#exercice-2---playing-with-rstudio",
+    "href": "homeworks/homework1.html#exercice-2---playing-with-rstudio",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Exercice 2 - Playing with RStudio",
+    "text": "Exercice 2 - Playing with RStudio\nOpen RStudio on your personal computer (or your personal coding environment).\n\nCreate a new project named “Session 1 - Methods R&PE”, in a new directory. What are the different files created ? Quit the session, go to your folder on your personal computer, and click on the ‘.Rproj’ file created. What happens ?\nWrite 1+1 in your main .R script and press “Run”.\nCreate a new folder in this project named ‘data’.\nInstall packages “tidyverse” and “rio” in the console.\nYou’re all set for importing data and start creating functions/the next exercices !"
+  },
+  {
+    "objectID": "homeworks/homework1.html#exercice-3---playing-with-data",
+    "href": "homeworks/homework1.html#exercice-3---playing-with-data",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Exercice 3 - playing with data",
+    "text": "Exercice 3 - playing with data\nThe European social survey “measures the attitudes, beliefs and behaviour patterns of diverse populations in more than thirty nations”. Use the rio package to import data from &lt;“https://jan-rovny.squarespace.com/s/ESS_FR.dta”&gt;.\n\nUse glimpse function to have a look at all. Restrict your data set to euftf (views on European integration), gndr (gender), happy, yrbrn(birthyear) and eduyrs (years of education), using function select() from tidyverse.\nHow many observations are there ? Are the variables categorical or continuous ?\n\nSummarise your data set and comment on the findings, using table() and summary(). Drop the NA values.\nCreate a new variable age, with the age of the respondents, using mutate(). Use 2026 as reference year.\nPlot the distribution of the variables euftf and happy using barplot(table()). What can you say about these distributions? What is the most common answer ? What is the percentage of respondents who have given this answer ?\nPlot a histogram of the age of the respondents, with 10 breaks. What is the decade with the most respondents ?\nPlot the distribution of happy for gndr == 1 and gndr == 2, using ggplot2 : ggplot() and geom_bar(position = \"dodge\")\nDoes being male/female influence your chances of self-reporting being happy ? Conduct a t-test to test the hypothesis that gender influences people’s self assessed level of happiness. What are the 95% and 99% confidence intervals ?"
+  },
+  {
+    "objectID": "homeworks/homework1.html#exercice-4-the-median-income-in-french-rural-communes",
+    "href": "homeworks/homework1.html#exercice-4-the-median-income-in-french-rural-communes",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Exercice 4 : the median income in French rural communes",
+    "text": "Exercice 4 : the median income in French rural communes\nYou want to analyse the electoral outcomes of the radical right in rural communes in France. For this, you have data on the 2024 European elections at https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/demographics2024.xlsx, and data on the French municipalities at https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/demographics2024.xlsx.\n\nUse rio to import both data sets, stored in two different variables\nUse glimpse to . Look at the types of codedep and codecommune. Can you merge on codedep and codecommune in these conditions ? Use as.numeric() for both to prepare for the merge\nUse the left_join() function to merge both data set on codecommune and codedep.\nRestrict your data frame to rural communes, using filter.\nReplace NA values by the mean of the variable.\nWhat is the range of the far-right vote ? in absolute and relative terms ?\nWhat is the average of the relative far-right vote in French rural communes ? The median ? The standard deviation ?\nPlot the distributions of far-right voting in the different kinds of French rural communes (present in dens7), using ggplot().\nIs the expected far-right voting significantly different in those different rural typologies ? Compute different t-tests, and conclude."
+  },
+  {
+    "objectID": "homeworks/homework1.html#take-home-assignement",
+    "href": "homeworks/homework1.html#take-home-assignement",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Take-home assignement",
+    "text": "Take-home assignement\nFind any data set online related to your research interests, or originating from the replication package of a paper that you would like to replicate. 1. Select two variables and describe them using summary, and `` (or their Stata/Python equivalent) 2. Plot their distribution 3. Use a binary variable splitting your variable in two groups, and conduct a t-test to compare the means of those two groups. Comment on your findings."
+  },
+  {
+    "objectID": "slides/session1/slides1.html#law-of-large-numbers",
+    "href": "slides/session1/slides1.html#law-of-large-numbers",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Law of large numbers",
+    "text": "Law of large numbers\n\nbarplot(table(y))"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#law-of-large-numbers-1",
+    "href": "slides/session1/slides1.html#law-of-large-numbers-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Law of large numbers",
+    "text": "Law of large numbers\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.6\n✔ forcats   1.0.1     ✔ stringr   1.6.0\n✔ ggplot2   4.0.1     ✔ tibble    3.3.0\n✔ lubridate 1.9.4     ✔ tidyr     1.3.2\n✔ purrr     1.2.0     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors"
   }
 ]
