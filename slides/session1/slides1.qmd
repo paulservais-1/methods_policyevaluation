@@ -88,7 +88,6 @@ format:
   - <https://luissattelmayer.github.io/quant-2025/> ; 
   - <https://malo-jn.quarto.pub/introduction-to-r/> ; 
   - <https://www.rovny.org/methods-2-ed>
-  - 
 - Work by other economists :
   - Cunningham, Scott. Causal Inference: The Mixtape. (2021). Available at: <https://mixtape.scunning.com/>.  
   - Huntington-Klein. The Effect: An Introduction to Research Design and Causality. (2021). <https://theeffectbook.net/>
@@ -216,6 +215,8 @@ ggplot(data = freqb, aes(x = log(Nn), y = val))+geom_point()+geom_line()
 P(X=1) + P(X=2) + P(X=3) + P(X=4) = 4/6
 \end{equation}
 - It is written as a sum
+
+
 ## Two dices example 
 - Now imagine that you have two dices
 - $X_1$ is the result of dice 1, $X_2$ is the result of dice 2
@@ -444,7 +445,15 @@ ggplot(dat, aes(x = y)) +
   ) +
   theme_minimal()
 ``` 
-
+## Probability density function (pdf)
+```{r}
+#| echo: true
+boxplot(y)
+``` 
+```{r}
+#| echo: true
+quantile(y)
+``` 
 ## Many pdfs... depends on your data !
 <div style="display: flex; justify-content: space-around;">
   <img src="images/pdfs.png" style="width: 65%;">
