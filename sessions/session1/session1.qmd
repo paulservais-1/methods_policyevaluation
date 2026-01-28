@@ -307,9 +307,12 @@ Here, you clearly see that your variable is now almost continuous, and your prob
 P(X_1 \le 4) = 1/6 + 1/6 + 1/6 + 1/6 = 4/6
 \end{equation}
 For a continuous variable, this sum is noted as a fancy integral - yet it means the exact same thing  : 
+
 \begin{equation}
-P(Y \le Y_0) = \int_{R_Y}^Y_0 f_Y (y') \text{d}y'
+P(Y \le Y_0) = \int_{R_{min}}^{Y_0} f_Y(y')\text{d}y' 
 \end{equation}
+
+This simply means that we are summing the probabilities of having $P(X=y')$ over all the values $y'$ from the first value in your range, the minimum of the range, - $R_{min}$ -, to value $Y_0$. If you come back to our intuitive example, of $P(X\le 4)$ with a dice with six faces, the logic is the same - yet we are here using a continuous variable instead of a variable with discrete outcomes (1,2,3,4,5,6).
 
 # Real examples
 ## Real-life examples
@@ -318,7 +321,7 @@ Of course in practice dices are not extremely interesting... and you may want to
 
 
 ## Coding environment
-The advantage of R over other softwares, like Stata/SPSS, is that it is entirely free and open-source, and that is maintained by a very large community of users. A very nice environment where to code on R is RStudio - which provides different panels where to organise your code, create new projects, etc. If you need help to download [R](https://cran.r-project.org/) and [RStudio](https://posit.co/downloads/), please check Malo Jan's webpage <https://malo-jn.quarto.pub/introduction-to-r/session1/0102_setup.html>, or other sources like <https://rstudio-education.github.io/hopr/starting.html>. In general, the R documentation, StackOverflow and AI are you friends in these cases is very useful !
+The advantage of R over other softwares, like Stata/SPSS, is that it is entirely free and open-source, and that is maintained by a very large community of users. A very nice environment where to code on R is RStudio - which provides different panels/tabs where to organise your code, create new projects, etc. If you need help to download [R](https://cran.r-project.org/) and [RStudio](https://posit.co/downloads/), please check Malo Jan's webpage <https://malo-jn.quarto.pub/introduction-to-r/session1/0102_setup.html>, or other sources like <https://rstudio-education.github.io/hopr/starting.html>. In general, the R documentation, StackOverflow and AI are you friends in these cases is very useful !
   
 ## Creating a project 
 The first step when you launch RStudio is to create a project in which you can work. The best way to do that is to go in `File > New Project > New directory > New Project > Create a new directory`. In the last step, you can choose the location of your directory. This will create a folder, in which your project will be contained. There, you will be able to create new scripts (".R" files), where you will be able to code. You can also code directly in the console. If you need reminders on the basic usage of R, please visit <https://malo-jn.quarto.pub/introduction-to-r/>.
@@ -334,13 +337,18 @@ library(tidyverse)
 
 ## Importing data
 
-Other useful packages are those that allow to download and import data. Imagine that you have data retrieved from the internet : here a file containing information on the french communes - demographics2024.xlsx. This file is an "excel" file, hence it should be read by a program capable to read excel formats: this requires the readxl package. Another more general function is `import()`, which comes with the package `rio`. This allows you to disregard the format of your file (it is coded to support various formats). You can also export() data using rio.
+Other useful packages are those that allow to download and import data. Imagine that you have data retrieved from the internet : here a file containing information on the french communes - demographics2024.xlsx. This file is an "excel" file, hence it should be read by a program capable to read excel formats: this requires the readxl package. Another more general function is `import()`, which comes with the package `rio`. This allows you to disregard the format of your file (it is coded to support various formats). You can also export() data using rio. 
+
+An important aspect when importing data is to know where the file is located on your computer. To know that, you can either right-click on the file and copy paste the location of your file (e.g. "Where" in MacOS) in RStudio (absolute path of your data set), or put the data in the same folder/location than the script that you are mainly using, and only provide the name of the data set ("demographics.xlsx"). If you provide this name but the data is stored in your "Downloads/", while your script is located in "Desktop/Session1MPER/exercices/" for instance, your computer will not know where to search for ! 
+
 ```{r}
 #| echo: true
 #| eval: false
 library(readxl) # needed to read excel without "rio"
-communes <- read_excel("data/demographics2024.xlsx") # relative path
-communes <- read_excel("/Users/Desktop/Website/methods_policyevaluation/slides/session1/data/") # absolute path
+# Relative path : I give the location compared with my current script (here demographics is stored in folder data, itself stored in the same folder as my script)
+communes <- read_excel("data/demographics2024.xlsx") 
+# ABSOLUTE PATH : the exact location on my computer
+communes <- read_excel("/Users/Desktop/Website/methods_policyevaluation/slides/session1/data/demographics2024.xlsx") # absolute path
 #using the "rio" package
 library(rio)
 communes <- import("data/demographics2024.xlsx")
