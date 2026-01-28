@@ -568,6 +568,22 @@ comm_r <- comm_r %>% mutate(revmoyfoy = ifelse(is.na(revmoyfoy), mean(revmoyfoy,
 summary(comm_r$revmoyfoy)
 ```
 
+## Interval variable
+- Quantiles and Interval
+```{r}
+#| echo: true
+# Continuous : the median income in those communes
+IQR(comm_r$revmoyfoy)
+quantile(comm_r$revmoyfoy)
+```
+
+## Interval variable
+- Boxplot
+```{r}
+#| echo: true
+boxplot(comm_r$revmoyfoy)
+```
+
 ## Density
 ```{r}
 #| echo: true

@@ -186,7 +186,7 @@
     "href": "slides/session1/slides1.html#one-dice-example---distribution",
     "title": "Methods for Research and Policy Evaluation",
     "section": "One dice example - distribution",
-    "text": "One dice example - distribution\n\nYou throw it a 1000 times. I randomly generate that variable in R, using sample()\n\n\nN = 1000 #number of measurements\nx1 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)\nhead(x1,20) # head\n\n [1] 1 6 4 2 3 2 2 2 5 4 1 5 5 3 4 6 3 2 2 5"
+    "text": "One dice example - distribution\n\nYou throw it a 1000 times. I randomly generate that variable in R, using sample()\n\n\nN = 1000 #number of measurements\nx1 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)\nhead(x1,20) # head\n\n [1] 4 4 5 5 6 5 3 4 1 3 2 6 1 5 5 3 5 1 5 4"
   },
   {
     "objectID": "slides/session1/slides1.html#two-dices-example",
@@ -214,7 +214,7 @@
     "href": "slides/session1/slides1.html#distribution",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Distribution",
-    "text": "Distribution\n\nN = 10000 #number of measurements\nx1 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)\nx2 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)\ny = x1 + x2\nhead(y)\n\n[1] 11 11  5 11  9  6\n\nmean(y)\n\n[1] 6.9757\n\nsd(y)\n\n[1] 2.426623\n\nsummary(y)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  2.000   5.000   7.000   6.976   9.000  12.000"
+    "text": "Distribution\n\nN = 10000 #number of measurements\nx1 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)\nx2 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)\ny = x1 + x2\nhead(y)\n\n[1] 10  9  9 12  5  7\n\nmean(y)\n\n[1] 6.9548\n\nsd(y)\n\n[1] 2.422136\n\nsummary(y)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  2.000   5.000   7.000   6.955   9.000  12.000"
   },
   {
     "objectID": "slides/session1/slides1.html#expectation",
@@ -235,7 +235,7 @@
     "href": "slides/session1/slides1.html#expectation-and-variance",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Expectation and variance",
-    "text": "Expectation and variance\n\nThe expectation is the average value that will come out of your dice: \\[\\begin{equation}\n\\text{E}(Y) = \\sum_{i=1}^N Y_i * P(Y_i) = \\bar{Y}\n\\end{equation}\\]\n\n\nmean(y)\n\n[1] 6.9757"
+    "text": "Expectation and variance\n\nThe expectation is the average value that will come out of your dice: \\[\\begin{equation}\n\\text{E}(Y) = \\sum_{i=1}^N Y_i * P(Y_i) = \\bar{Y}\n\\end{equation}\\]\n\n\nmean(y)\n\n[1] 6.9548"
   },
   {
     "objectID": "slides/session1/slides1.html#probability-density-for-a-continuous-variable",
@@ -354,7 +354,7 @@
     "href": "slides/session1/slides1.html#importing-data",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Importing data",
-    "text": "Importing data\n\n\nlibrary(readxl) # needed to read excel without \"rio\"\ncommunes &lt;- read_excel(\"data/demographics2024.xlsx\") # relative path\ncommunes &lt;- read_excel(\"/Users/Desktop/Website/methods_policyevaluation/slides/session1/data/\") # absolute path\n#using the \"rio\" package\nlibrary(rio)\ncommunes &lt;- import(\"data/demographics2024.xlsx\")\n\n\n\n\nInspecting the data\n\n\nhead(comm_r, 3)\n\n# A tibble: 3 × 43\n  codecommune  Year codedep  agri  indp  cadr  pint  empl  ouvr  chom  pact\n  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 01004        2024 01          4   142   678  1647  1211  1235   427  4917\n2 01008        2024 01          0    19    18    83    83   122     7   325\n3 01011        2024 01         11     0     2    78    17     3     9   111\n# ℹ 32 more variables: age &lt;dbl&gt;, popf &lt;dbl&gt;, francais &lt;dbl&gt;, etranger &lt;dbl&gt;,\n#   prixbien &lt;dbl&gt;, capitalratio &lt;dbl&gt;, npropri &lt;dbl&gt;, nlogement &lt;dbl&gt;,\n#   pop &lt;dbl&gt;, revmoyfoy &lt;dbl&gt;, revtot &lt;dbl&gt;, recetteimpotslocaux &lt;dbl&gt;,\n#   recette &lt;dbl&gt;, baseimpotslocaux &lt;dbl&gt;, nodip &lt;dbl&gt;, sup &lt;dbl&gt;,\n#   Libellé &lt;chr&gt;, Exploitations &lt;dbl&gt;, Personnes &lt;dbl&gt;, UTA &lt;dbl&gt;, SAU &lt;dbl&gt;,\n#   PBS &lt;lgl&gt;, dens &lt;chr&gt;, densaav &lt;chr&gt;, dens7 &lt;chr&gt;, ntot &lt;dbl&gt;, pagri &lt;dbl&gt;,\n#   pindp &lt;dbl&gt;, pcadr &lt;dbl&gt;, ppint &lt;dbl&gt;, pempl &lt;dbl&gt;, pouvr &lt;dbl&gt;"
+    "text": "Importing data\n\n\nlibrary(readxl) # needed to read excel without \"rio\"\ncommunes &lt;- read_excel(\"data/demographics2024.xlsx\") # relative path\ncommunes &lt;- read_excel(\"/Users/Desktop/Website/methods_policyevaluation/slides/session1/data/\") # absolute path\n#using the \"rio\" package\nlibrary(rio)\ncommunes &lt;- import(\"data/demographics2024.xlsx\")\n\n\n\n\nInspecting the data\n\n\nhead(comm_r, 3)\n\n# A tibble: 3 × 43\n  codecommune  Year codedep  agri  indp  cadr  pint  empl  ouvr  chom  pact\n  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 01009        2024 01          0    41     0    95    21     4     2   161\n2 01010        2024 01         29    36    58    98   197   154    47   572\n3 01011        2024 01         11     0     2    78    17     3     9   111\n# ℹ 32 more variables: age &lt;dbl&gt;, popf &lt;dbl&gt;, francais &lt;dbl&gt;, etranger &lt;dbl&gt;,\n#   prixbien &lt;dbl&gt;, capitalratio &lt;dbl&gt;, npropri &lt;dbl&gt;, nlogement &lt;dbl&gt;,\n#   pop &lt;dbl&gt;, revmoyfoy &lt;dbl&gt;, revtot &lt;dbl&gt;, recetteimpotslocaux &lt;dbl&gt;,\n#   recette &lt;dbl&gt;, baseimpotslocaux &lt;dbl&gt;, nodip &lt;dbl&gt;, sup &lt;dbl&gt;,\n#   Libellé &lt;chr&gt;, Exploitations &lt;dbl&gt;, Personnes &lt;dbl&gt;, UTA &lt;dbl&gt;, SAU &lt;dbl&gt;,\n#   PBS &lt;lgl&gt;, dens &lt;chr&gt;, densaav &lt;chr&gt;, dens7 &lt;chr&gt;, ntot &lt;dbl&gt;, pagri &lt;dbl&gt;,\n#   pindp &lt;dbl&gt;, pcadr &lt;dbl&gt;, ppint &lt;dbl&gt;, pempl &lt;dbl&gt;, pouvr &lt;dbl&gt;"
   },
   {
     "objectID": "slides/session1/slides1.html#your-experiment",
@@ -417,14 +417,14 @@
     "href": "slides/session1/slides1.html#categorical-variable",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Categorical variable",
-    "text": "Categorical variable\n\nDensity typology\n\n\n# Nominal : the density typology of communes \nunique(comm_r$dens)\n\n[1] \"Urbain intermédiaire\" \"Rural\"                \"Urbain dense\"        \n\ntable(comm_r$dens)\n\n\n               Rural         Urbain dense Urbain intermédiaire \n                8801                  209                  990 \n\nsummary(comm_r$dens)\n\n   Length     Class      Mode \n    10000 character character \n\n\n\nNominal or ordinal ?"
+    "text": "Categorical variable\n\nDensity typology\n\n\n# Nominal : the density typology of communes \nunique(comm_r$dens)\n\n[1] \"Rural\"                \"Urbain intermédiaire\" \"Urbain dense\"        \n\ntable(comm_r$dens)\n\n\n               Rural         Urbain dense Urbain intermédiaire \n                8750                  211                 1039 \n\nsummary(comm_r$dens)\n\n   Length     Class      Mode \n    10000 character character \n\n\n\nNominal or ordinal ?"
   },
   {
     "objectID": "slides/session1/slides1.html#expectations",
     "href": "slides/session1/slides1.html#expectations",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Expectations",
-    "text": "Expectations\n\nYou can compute the expectation: \\[\\begin{equation}\n\\text{E}(\\text{MI}) = \\frac{1}{10000}\\sum_{i=1}^{10000} \\text{MI}_i\n\\end{equation}\\]\n\n\nmean(comm_r$revmoyfoy)\n\n[1] 31028.2\n\n\n\nAnd the conditional expectations\n\n\nmean((comm_r %&gt;% filter(dens == \"Rural\"))$revmoyfoy)\n\n[1] 30332.78\n\nmean((comm_r %&gt;% filter(dens == \"Urbain dense\"|dens == \"Urbain intermédiaire\"))$revmoyfoy)\n\n[1] 36132.79"
+    "text": "Expectations\n\nYou can compute the expectation: \\[\\begin{equation}\n\\text{E}(\\text{MI}) = \\frac{1}{10000}\\sum_{i=1}^{10000} \\text{MI}_i\n\\end{equation}\\]\n\n\nmean(comm_r$revmoyfoy)\n\n[1] 31157.54\n\n\n\nAnd the conditional expectations\n\n\nmean((comm_r %&gt;% filter(dens == \"Rural\"))$revmoyfoy)\n\n[1] 30442.89\n\nmean((comm_r %&gt;% filter(dens == \"Urbain dense\"|dens == \"Urbain intermédiaire\"))$revmoyfoy)\n\n[1] 36160.11"
   },
   {
     "objectID": "slides/session1/slides1.html#statistical-inference",
@@ -438,7 +438,7 @@
     "href": "slides/session1/slides1.html#interval-variable",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Interval variable",
-    "text": "Interval variable\n\nMedian income in communes\n\n\n# Continuous : the median income in those communes\nsummary(comm_r$revmoyfoy)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n   8729   25783   29480   31028   34419  167966       6 \n\nrange(comm_r$revmoyfoy, na.rm = TRUE)\n\n[1]   8729.167 167966.330\n\nsummary((comm_r %&gt;% drop_na(revmoyfoy))$revmoyfoy) #dropping NA's\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   8729   25783   29480   31028   34419  167966 \n\n#replacing the NA's\ncomm_r &lt;- comm_r %&gt;% mutate(revmoyfoy = ifelse(is.na(revmoyfoy), mean(revmoyfoy, na.rm =TRUE), revmoyfoy))\nsummary(comm_r$revmoyfoy)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   8729   25785   29482   31028   34414  167966"
+    "text": "Interval variable\n\nMedian income in communes\n\n\n# Continuous : the median income in those communes\nsummary(comm_r$revmoyfoy)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n   8151   25833   29640   31158   34678  124355       6 \n\nrange(comm_r$revmoyfoy, na.rm = TRUE)\n\n[1]   8151.157 124355.220\n\nsummary((comm_r %&gt;% drop_na(revmoyfoy))$revmoyfoy) #dropping NA's\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   8151   25833   29640   31158   34678  124355 \n\n#replacing the NA's\ncomm_r &lt;- comm_r %&gt;% mutate(revmoyfoy = ifelse(is.na(revmoyfoy), mean(revmoyfoy, na.rm =TRUE), revmoyfoy))\nsummary(comm_r$revmoyfoy)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   8151   25838   29642   31158   34675  124355"
   },
   {
     "objectID": "slides/session1/slides1.html#statistical-inference-1",
@@ -515,7 +515,7 @@
     "href": "slides/session1/slides1.html#your-experiment-3",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Your experiment",
-    "text": "Your experiment\n\nN = 10000 #number of measurements\nx = sample(1:1000,100, replace=T) # your hundred dices\nhead(x)\n\n[1] 529 611 951 200 978 881\n\ny =0\nfor(i in x){y = y+sample(1:i, N, replace = T)/i}\nhead(y)\n\n[1] 52.04341 47.46120 42.62648 48.62225 46.35461 54.23466"
+    "text": "Your experiment\n\nN = 10000 #number of measurements\nx = sample(1:1000,100, replace=T) # your hundred dices\nhead(x)\n\n[1] 236 808 154 104  99  32\n\ny =0\nfor(i in x){y = y+sample(1:i, N, replace = T)/i}\nhead(y)\n\n[1] 51.60100 53.34894 49.38180 51.12909 53.65841 54.26067"
   },
   {
     "objectID": "slides/session1/slides1.html#students-t-test",
@@ -809,7 +809,7 @@
     "href": "slides/session1/slides1.html#expectation-and-variance-1",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Expectation and variance",
-    "text": "Expectation and variance\n\nAnd you want to measure the average dispersion around the mean called the variance : \\[\\begin{equation}\n\\text{E}((Y_i-\\bar{Y})^2) = \\frac{1}{N} \\sum_{i=1}^N (Y_i - \\bar{Y})^2 = \\sigma^2\n\\end{equation}\\]\nThis is a measure of “dispersion” (around the mean)\n\n\nvar(y)\n\n[1] 5.888498"
+    "text": "Expectation and variance\n\nAnd you want to measure the average dispersion around the mean called the variance : \\[\\begin{equation}\n\\text{E}((Y_i-\\bar{Y})^2) = \\frac{1}{N} \\sum_{i=1}^N (Y_i - \\bar{Y})^2 = \\sigma^2\n\\end{equation}\\]\nThis is a measure of “dispersion” (around the mean)\n\n\nvar(y)\n\n[1] 5.866744"
   },
   {
     "objectID": "slides/session1/slides1.html#probability-density-function-pdf",
@@ -844,6 +844,20 @@
     "href": "slides/session1/slides1.html#probability-density-function-pdf-3",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Probability density function (pdf)",
-    "text": "Probability density function (pdf)\n\nboxplot(y)\n\n\n\nquantile(y)\n\n      0%      25%      50%      75%     100% \n36.80743 48.28609 50.27091 52.21138 63.35887"
+    "text": "Probability density function (pdf)\n\nboxplot(y)\n\n\n\nquantile(y)\n\n      0%      25%      50%      75%     100% \n40.41608 49.11844 51.04767 53.01683 61.33723"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#interval-variable-1",
+    "href": "slides/session1/slides1.html#interval-variable-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Interval variable",
+    "text": "Interval variable\n\nQuantiles and Interval\n\n\n# Continuous : the median income in those communes\nIQR(comm_r$revmoyfoy)\n\n[1] 8836.75\n\nquantile(comm_r$revmoyfoy)\n\n        0%        25%        50%        75%       100% \n  8151.157  25838.301  29641.599  34675.051 124355.220"
+  },
+  {
+    "objectID": "slides/session1/slides1.html#interval-variable-2",
+    "href": "slides/session1/slides1.html#interval-variable-2",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Interval variable",
+    "text": "Interval variable\n\nBoxplot\n\n\nboxplot(comm_r$revmoyfoy)"
   }
 ]
