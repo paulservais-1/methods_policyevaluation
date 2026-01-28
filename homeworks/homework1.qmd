@@ -60,7 +60,7 @@ t_test_result <- t.test(
 t_test_result
 ```
 ## Exercice 4 : the median income in French rural communes
-You want to analyse the electoral outcomes of the radical right in rural communes in France. For this, you have data on the 2024 European elections at <https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/demographics2024.xlsx>, and data on the French municipalities at <https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/demographics2024.xlsx>. 
+You want to analyse the electoral outcomes of the radical right in rural communes in France. For this, you have data on the 2024 European elections at <https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/elections2024.csv>, and data on the French municipalities at <https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/demographics2024.xlsx>. 
 
   1. Use `rio` to import both data sets, stored in two different variables
   2. Use `glimpse` to . Look at the types of codedep and codecommune. Can you merge on `codedep` and `codecommune` in these conditions ? Use `as.numeric()` for both to prepare for the merge
@@ -126,6 +126,9 @@ print(t_test_2_3)
 
 ## Take-home assignement
   Find any data set online related to your research interests, or originating from the replication package of a paper that you would like to replicate. 
+  
   1. Select two variables and describe them using `summary`, and `` (or their Stata/Python equivalent)
+  
   2. Plot their distribution
+  
   3. Use a binary variable splitting your variable in two groups, and conduct a t-test to compare the means of those two groups. Comment on your findings.
