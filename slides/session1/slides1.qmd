@@ -34,8 +34,10 @@ format:
 - 1h maths and coding exercices on R
 
 ## And you ? 
-- Background ?
+- Background ?  
+  - math, statistics, coding 
 - Objectives for the class ?
+
 
 
 ## Course material 
@@ -52,14 +54,19 @@ format:
 ## AI 
 
 ## R and RStudio
+- Did you manage to install it ?
+  - open-source
+  - wide community
+  - free
  
 ## Course evaluation
 
 - Simple pass/fail 
-- Goal is to replicate or find a research question, by groups of two, and write a 5-pages document summarising the findings
-- The objective is clearly not to overload anybody with work, but to give useful tips and skills for the future ! 
+- Replicate or find a research question, by groups of two, and write a 5-pages document summarising the findings
 - Abstract 
 - Intro - Theory - Methods - Results - Conclusion
+- The objective is clearly not to overload anybody with work, but to give useful tips and skills for the future ! 
+
 
 ## Examples paper
 <div style="display: flex; justify-content: space-around;">
@@ -81,9 +88,11 @@ format:
   - <https://luissattelmayer.github.io/quant-2025/> ; 
   - <https://malo-jn.quarto.pub/introduction-to-r/> ; 
   - <https://www.rovny.org/methods-2-ed>
+  - 
 - Work by other economists :
   - Cunningham, Scott. Causal Inference: The Mixtape. (2021). Available at: <https://mixtape.scunning.com/>.  
   - Huntington-Klein. The Effect: An Introduction to Research Design and Causality. (2021). <https://theeffectbook.net/>
+  - <https://scpoecon.github.io/ScPoEconometrics/R-intro.html>
  
 ## Questions ? 
 
@@ -95,7 +104,7 @@ format:
 - This creates loads of data about almost everything
 - The objectives of statistics is to find meaningful information in those data 
 - Yet most of the time the data is imperfect or limited, in terms of reach, validity, and in terms of reliability
-- Need to idenfity margins of validity !
+- Need to idenfity **margins of validity** !
 
 
 ## Research problem and empirical evidence 
@@ -106,6 +115,7 @@ format:
 
 
 # Descriptive statistics
+
 ## Descriptive statistics
 - The first step in every statistical analysis
 - Describe the variables we work with
@@ -115,6 +125,14 @@ format:
     - mean
     - median
     - standard deviation
+    - density
+
+## Structure
+
+1. Intuitive examples
+  - Examples with dices
+  - Definitions : mean, variance, median, deciles
+2. Real-life application 
 
 ## Random variables
 - A variable with random outcomes, is called a random variable : eg. a census is generally built on a sample of individuals, randomly drawn from an overall population.
@@ -128,7 +146,7 @@ format:
 - $X$, the result of your dice, is a random variable
 - $S_X = \{1,2,3,4,5,6\}$ is its set of potential outcomes
 - If your dice is not broken, $P(X =1,2,3,4,5,6) = 1/6 \approx 0.1666667$. 
-- The probability set is $P_X = \{1/6, 1/6, 1/6, 1/6, 1/6, 1/6\}$. Each outcome comes with a probability.
+- The probability set is $P_X = \{1/6, 1/6, 1/6, 1/6, 1/6, 1/6\}$ (number of favorable cases/total number of cases). Each outcome comes with a probability.
 - How could we test that ?
 
 ## One dice example - distribution
@@ -136,11 +154,11 @@ format:
 ```{r}
 #| echo: true
 
-library(DT)
 N = 1000 #number of measurements
 x1 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)
 head(x1,20) # head
 ```
+
 ## Your experiment
 ```{r}
 #| echo: true
@@ -155,6 +173,7 @@ barplot(table(x1))
 
 barplot(table(x1 = sample(1:6,100000, replace=T)))
 ```
+
 ## Your experiment 
 - Normalised
 ```{r}
@@ -163,6 +182,40 @@ barplot(table(x1 = sample(1:6,100000, replace=T)))
 barplot(table(x1 = sample(1:6,100000, replace=T))/100000)
 ```
 
+
+## Law of large numbers
+- When N gets very big, the frequency converges to the probability
+```{r}
+#| echo: false
+#| eval: true
+
+library(tidyverse)
+Nn = c(1:100, seq(from = 100, to = 100000, by = 100))
+a = 0
+val = 0
+freqb <- data.frame(Nn = Nn, val = 0)
+
+freqb <- freqb %>%
+  rowwise() %>%
+  mutate(val = {
+      sums <- sample(1:6, Nn, replace = TRUE)
+      freq_table <- table(sums)
+      if ("3" %in% names(freq_table)) {
+        freq_table["3"] / Nn
+      } else {
+        0
+      }
+    }
+  ) %>%
+  ungroup()
+ggplot(data = freqb, aes(x = log(Nn), y = val))+geom_point()+geom_line()
+```
+## Summing probabilities
+- The probability of obtaining a value $\le$ 4 is the union of all the probabilities :
+\begin{equation}
+P(X=1) + P(X=2) + P(X=3) + P(X=4) = 4/6
+\end{equation}
+- It is written as a sum
 ## Two dices example 
 - Now imagine that you have two dices
 - $X_1$ is the result of dice 1, $X_2$ is the result of dice 2
@@ -190,7 +243,6 @@ P(Y_{ij}) = P(X_1 = i)\times P(X_2 = j)
 ```{r}
 #| echo: true
 
-library(DT)
 N = 10000 #number of measurements
 x1 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)
 x2 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)
@@ -201,60 +253,51 @@ sd(y)
 summary(y)
 ```
 
-## Law of large numbers
-```{r}
-#| echo: true
-
-barplot(table(y))
-```
-## Law of large numbers
-
-```{r}
-#| echo: false
-#| eval: true
-
-library(tidyverse)
-Nn = c(1:100, seq(from = 100, to = 100000, by = 100))
-a = 0
-val = 0
-freqb <- data.frame(Nn = Nn, val = 0)
-
-freqb <- freqb %>%
-  rowwise() %>%
-  mutate(val = {
-      sums <- sample(1:6, Nn, replace = TRUE) + sample(1:6, Nn, replace = TRUE)
-      freq_table <- table(sums)
-      if ("7" %in% names(freq_table)) {
-        freq_table["7"] / Nn
-      } else {
-        0
-      }
-    }
-  ) %>%
-  ungroup()
-ggplot(data = freqb, aes(x = log(Nn), y = val))+geom_point()+geom_line()
-```
 
 ## Expectation and variance 
 - The expectation is the average value that will come out of your dice: 
 \begin{equation}
 \text{E}(Y) = \sum_{i=1}^N Y_i * P(Y_i) = \bar{Y}
 \end{equation}
-- And you want to measure the average dispersion around the mean called the variance :
-\begin{equation}
-\text{E}((Y_i-\bar{Y})^2) = \frac{1}{N} \sum_{i=1}^N (Y_i - \bar{Y})^2
-\end{equation}
 
-## Visualising the variance
 ```{r}
 #| echo: true
-
-devs = (y - mean(y))^2
-head(y)
-unique(devs)
-mean(devs)
-barplot(table(devs))
+mean(y)
 ```
+
+## Expectation and variance
+- And you want to measure the average dispersion around the mean called the variance :
+\begin{equation}
+\text{E}((Y_i-\bar{Y})^2) = \frac{1}{N} \sum_{i=1}^N (Y_i - \bar{Y})^2 = \sigma^2
+\end{equation}
+- This is a measure of "dispersion" (around the mean)
+```{r}
+#| echo: true
+var(y)
+```
+
+## Visualising the variance
+- For N = 100
+```{r}
+#| echo: false
+#| eval: true
+N = 100 #number of measurements
+x1 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)
+x2 = sample(1:6,N, replace=T) # first dice (values are from 1 to 6)
+y = x1 + x2
+rand <- data.frame(y)
+rand$devs <- (rand$y - mean(y))^2
+rand$num <- as.numeric(rownames(rand))
+
+ggplot(rand, aes(x=num, y = y)) +geom_point()+ geom_hline(yintercept = mean(y), linetype = "dashed", color = "red") +scale_x_continuous(breaks = seq(1, max(rand$num), by = 20)) + 
+  scale_y_continuous(breaks = 2:12) +  
+  geom_segment(
+    aes(x = num, xend = num, y = y, yend = mean(y)),
+    color = "blue", alpha = 0.3
+  ) + theme_minimal()
+
+```
+
 ## Conditional probability 
 - Now imagine that you know the value of one dice, but not the other.
 - Imagine $X_1 =4$. 
@@ -306,11 +349,8 @@ y =0
 for(i in x){y = y+sample(1:i, N, replace = T)/i}
 head(y)
 ```
-- You now get closer to a continuous random variable...
-- Your probability to obtain one specific value (eg. X = 43.503) becomes extremely small. 
-- You generally rather assess the probability that the value you pick is bigger or smaller than a certain value
 
-## Probability density function
+## Probability density function (pdf)
 ```{r}
 #| echo: false
 #| eval: false
@@ -331,14 +371,85 @@ ggplot(dat, aes(x = y)) +
 #| eval: true
 library(ggplot2)
 dat = data.frame(y)
+library(ggplot2)
+
+# Calculer la moyenne et l'écart-type
+mu <- mean(dat$y, na.rm = TRUE)
+sigma <- sd(dat$y, na.rm = TRUE)
+
+# Calculer la densité pour obtenir les valeurs de densité à mu - sigma et mu + sigma
+d <- density(dat$y)
+dens_at_mu_minus_sigma <- approx(d$x, d$y, xout = mu - sigma)$y
+dens_at_mu_plus_sigma <- approx(d$x, d$y, xout = mu + sigma)$y
+
+# Créer le graphique
 ggplot(dat, aes(x = y)) +
-  geom_histogram(aes(y = after_stat(density)), bins = 100) +
+  geom_histogram(aes(y = after_stat(density)), bins = 100, fill = "lightblue", alpha = 0.5) +
   geom_density(color = "red", linewidth = 1) +
-  labs(title = "Distribution of Y",
-       x = "Y",
-       y = "Density") +
+  # Ajouter un segment horizontal entre mu - sigma et mu + sigma, à la hauteur de la densité
+  geom_segment(
+    aes(x = mu - sigma, xend = mu + sigma, y = dens_at_mu_minus_sigma, yend = dens_at_mu_minus_sigma),
+    color = "darkgreen", linewidth = 1.5
+  ) +
+  # Ajouter des lignes verticales pour marquer mu, mu - sigma et mu + sigma
+  geom_vline(xintercept = mu, color = "darkgreen", linetype = "dashed", linewidth = 0.8) +
+  geom_vline(xintercept = mu - sigma, color = "orange", linetype = "dotted", linewidth = 0.8) +
+  geom_vline(xintercept = mu + sigma, color = "orange", linetype = "dotted", linewidth = 0.8) +
+  # Ajouter des annotations pour clarifier
+  annotate("text", x = mu, y = max(d$y) * 1.05, label = paste0("μ = ", round(mu, 2)), color = "darkgreen") +
+  annotate("text", x = mu - sigma, y = max(d$y) * 1.05, label = paste0("μ - σ = ", round(mu - sigma, 2)), color = "orange") +
+  annotate("text", x = mu + sigma, y = max(d$y) * 1.05, label = paste0("μ + σ = ", round(mu + sigma, 2)), color = "orange") +
+  labs(
+    title = "Distribution of Y (μ ± σ intervals)",
+    x = "Y",
+    y = "Densité"
+  ) +
   theme_minimal()
+
 ```
+
+## Probability density function (pdf)
+
+- You now get closer to a continuous random variable...
+- Your probability to obtain one specific value (eg. X = 52.503) becomes extremely small.
+- Your density is a probability density function, $f$
+- You generally rather assess the probability that the value you pick is bigger or smaller than a certain value
+
+## Probability density function (pdf)
+- $P(X \le 52.503) = \int_{\text{min(R)}}^{52.503} f_X(x') \text{d}x'$
+```{r}
+
+# Calculer la densité une seule fois
+d <- density(dat$y)
+dens_df <- data.frame(x = d$x, y = d$y)
+
+# Trouver l'indice où x ≈ 43.503
+cutoff <- 52.503
+dens_df$color <- ifelse(dens_df$x <= cutoff, "red", "gray")
+
+# Créer le graphique
+ggplot(dat, aes(x = y)) +
+  geom_histogram(aes(y = after_stat(density)), bins = 100, fill = "lightblue", alpha = 0.5) +
+  geom_density(color = "black", linewidth = 0.5) +  # Courbe noire pour la référence
+  geom_ribbon(
+    data = dens_df,
+    aes(ymin = 0, ymax = y, x = x, fill = color),
+    alpha = 0.5, show.legend = FALSE
+  ) +
+  scale_fill_identity() +
+  labs(
+    title = "Distribution of Y",
+    x = "Y",
+    y = "Densité"
+  ) +
+  theme_minimal()
+``` 
+
+## Many pdfs... depends on your data !
+<div style="display: flex; justify-content: space-around;">
+  <img src="images/pdfs.png" style="width: 65%;">
+  <img src="images/pdfs_mean.png" style="width: 30%;">
+</div>
 # Coding reminder and real examples
 
 ## Real-life examples
@@ -495,8 +606,9 @@ mean((comm_r %>% filter(dens == "Urbain dense"|dens == "Urbain intermédiaire"))
 
 - Should we conclude that median income is significantly smaller in rural communes than in urban areas ? 
 - The density plot indeed shows that rural areas are more concentrated in the lower income regions, compared with urban areas...
-- Yet dispersion quite large for urban areas... 
+- Yet dispersion quite large for urban areas... see notes
 
+<!--
 ## Statistical inference
 - I would like to be 95% sure that 
 \begin{equation}
@@ -545,10 +657,15 @@ t_test_result <- t.test(
 ```{r}
 t_test_result
 ```
+"""
+-->
 
 ## Exercices 
 
-
+1. Manual warm-up
+2. Playing with R Studio
+3. Playing with ESS data
+4. Playing with socio-demographic and electoral data in France
 
 
 
