@@ -138,7 +138,7 @@ window.Quarto = {
  <span class="dropdown-text">Session 1: Dataset Building and Descriptive Statistics</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../sessions/session2.html">
+    <a class="dropdown-item" href="../sessions/session2.qmd">
  <span class="dropdown-text">Session 2: OLS: Simple and Multiple Linear Regressions and Analysis</span></a>
   </li>  
         <li>
@@ -288,7 +288,7 @@ window.Quarto = {
 </section>
 <section id="exercice-4-the-median-income-in-french-rural-communes" class="level2">
 <h2 class="anchored" data-anchor-id="exercice-4-the-median-income-in-french-rural-communes">Exercice 4 : the median income in French rural communes</h2>
-<p>You want to analyse the electoral outcomes of the radical right in rural communes in France. For this, you have data on the 2024 European elections at <a href="https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/demographics2024.xlsx" class="uri">https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/demographics2024.xlsx</a>, and data on the French municipalities at <a href="https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/demographics2024.xlsx" class="uri">https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/demographics2024.xlsx</a>.</p>
+<p>You want to analyse the electoral outcomes of the radical right in rural communes in France. For this, you have data on the 2024 European elections at <a href="https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/elections2024.csv" class="uri">https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/elections2024.csv</a>, and data on the French municipalities at <a href="https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/demographics2024.xlsx" class="uri">https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/demographics2024.xlsx</a>.</p>
 <ol type="1">
 <li>Use <code>rio</code> to import both data sets, stored in two different variables</li>
 <li>Use <code>glimpse</code> to . Look at the types of codedep and codecommune. Can you merge on <code>codedep</code> and <code>codecommune</code> in these conditions ? Use <code>as.numeric()</code> for both to prepare for the merge</li>
@@ -303,7 +303,12 @@ window.Quarto = {
 </section>
 <section id="take-home-assignement" class="level2">
 <h2 class="anchored" data-anchor-id="take-home-assignement">Take-home assignement</h2>
-<p>Find any data set online related to your research interests, or originating from the replication package of a paper that you would like to replicate. 1. Select two variables and describe them using <code>summary</code>, and `` (or their Stata/Python equivalent) 2. Plot their distribution 3. Use a binary variable splitting your variable in two groups, and conduct a t-test to compare the means of those two groups. Comment on your findings.</p>
+<p>Find any data set online related to your research interests, or originating from the replication package of a paper that you would like to replicate.</p>
+<ol type="1">
+<li><p>Select two variables and describe them using <code>summary</code>, and `` (or their Stata/Python equivalent)</p></li>
+<li><p>Plot their distribution</p></li>
+<li><p>Use a binary variable splitting your variable in two groups, and conduct a t-test to compare the means of those two groups. Comment on your findings.</p></li>
+</ol>
 
 
 </section>

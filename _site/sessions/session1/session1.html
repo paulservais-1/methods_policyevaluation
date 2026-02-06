@@ -173,7 +173,7 @@ window.Quarto = {
  <span class="dropdown-text">Session 1: Dataset Building and Descriptive Statistics</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../sessions/session2.html">
+    <a class="dropdown-item" href="../../sessions/session2.qmd">
  <span class="dropdown-text">Session 2: OLS: Simple and Multiple Linear Regressions and Analysis</span></a>
   </li>  
         <li>
@@ -374,7 +374,7 @@ P(Y=7) = 6\times1/36 = 1/6
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,N, <span class="at">replace=</span>T) <span class="co"># second dice (values are from 1 to 6)</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(x1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3 1 3 6 6 4</code></pre>
+<pre><code>[1] 5 3 2 4 1 5</code></pre>
 </div>
 </div>
 <p>In fact your final result - the sum of the two dices -, is the union of two independent events <span class="math inline">\(X_1, X_2\)</span> being respectively the outcome of dice <span class="math inline">\(1\)</span> and <span class="math inline">\(2\)</span>, provided that they are indeed independent. Your final result <span class="math inline">\(Y\)</span> is therefore simply the sum of these two random variables. You can then sum :</p>
@@ -397,7 +397,7 @@ P(Y=7) = 6\times1/36 = 1/6
 <div class="cell-output cell-output-stdout">
 <pre><code>y
       2       3       4       5       6       7       8       9      10      11 
-0.02818 0.05599 0.08297 0.10988 0.14107 0.16517 0.14013 0.10939 0.08354 0.05516 
+0.02679 0.05563 0.08426 0.11152 0.13742 0.16673 0.13944 0.11127 0.08221 0.05621 
      12 
 0.02852 </code></pre>
 </div>
@@ -515,16 +515,16 @@ Y \ge 4 \text{, } Y\le 9 \text{ and } S_Y = \{4, 5, 6, 7, 8, 9\}
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           y
-1  1.6741071
-2  1.8533214
-3  1.8754286
-4  1.2020357
-5  1.1473571
-6  0.8312143
-7  1.7554643
-8  1.5938929
-9  1.0263571
-10 1.5923929</code></pre>
+1  1.6555000
+2  1.4491429
+3  2.0727857
+4  1.7874286
+5  1.7348571
+6  1.3641786
+7  2.1402857
+8  0.3108929
+9  1.1082500
+10 2.1335714</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="at">x =</span> y)) <span class="sc">+</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density))) <span class="sc">+</span></span>
@@ -546,9 +546,11 @@ Y \ge 4 \text{, } Y\le 9 \text{ and } S_Y = \{4, 5, 6, 7, 8, 9\}
 </div>
 <p>Here, you clearly see that your variable is now almost continuous, and your probability to obtain one specific value becomes extremely small. We therefore generally focus on the probability of having <span class="math inline">\(Y\le Y_0\)</span>, that is, the sum of probabilities of obtaining all the values below <span class="math inline">\(Y_0\)</span> (included). Coming back to our example of dices : for one dice, your probability of obtaining a result <span class="math inline">\(\le 4\)</span> is just the sum of the probabilities of getting all the values before 4 : <span class="math display">\[\begin{equation}
 P(X_1 \le 4) = 1/6 + 1/6 + 1/6 + 1/6 = 4/6
-\end{equation}\]</span> For a continuous variable, this sum is noted as a fancy integral - yet it means the exact same thing : <span class="math display">\[\begin{equation}
-P(Y \le Y_0) = \int_{R_Y}^Y_0 f_Y (y') \text{d}y'
+\end{equation}\]</span> For a continuous variable, this sum is noted as a fancy integral - yet it means the exact same thing :</p>
+<p><span class="math display">\[\begin{equation}
+P(Y \le Y_0) = \int_{R_{min}}^{Y_0} f_Y(y')\text{d}y'
 \end{equation}\]</span></p>
+<p>This simply means that we are summing the probabilities of having <span class="math inline">\(P(X=y')\)</span> over all the values <span class="math inline">\(y'\)</span> from the first value in your range, the minimum of the range, - <span class="math inline">\(R_{min}\)</span> -, to value <span class="math inline">\(Y_0\)</span>. If you come back to our intuitive example, of <span class="math inline">\(P(X\le 4)\)</span> with a dice with six faces, the logic is the same - yet we are here using a continuous variable instead of a variable with discrete outcomes (1,2,3,4,5,6).</p>
 </section>
 </section>
 <section id="real-examples" class="level1">
@@ -559,7 +561,7 @@ P(Y \le Y_0) = \int_{R_Y}^Y_0 f_Y (y') \text{d}y'
 </section>
 <section id="coding-environment" class="level2">
 <h2 class="anchored" data-anchor-id="coding-environment">Coding environment</h2>
-<p>The advantage of R over other softwares, like Stata/SPSS, is that it is entirely free and open-source, and that is maintained by a very large community of users. A very nice environment where to code on R is RStudio - which provides different panels where to organise your code, create new projects, etc. If you need help to download <a href="https://cran.r-project.org/">R</a> and <a href="https://posit.co/downloads/">RStudio</a>, please check Malo Jan’s webpage <a href="https://malo-jn.quarto.pub/introduction-to-r/session1/0102_setup.html" class="uri">https://malo-jn.quarto.pub/introduction-to-r/session1/0102_setup.html</a>, or other sources like <a href="https://rstudio-education.github.io/hopr/starting.html" class="uri">https://rstudio-education.github.io/hopr/starting.html</a>. In general, the R documentation, StackOverflow and AI are you friends in these cases is very useful !</p>
+<p>The advantage of R over other softwares, like Stata/SPSS, is that it is entirely free and open-source, and that is maintained by a very large community of users. A very nice environment where to code on R is RStudio - which provides different panels/tabs where to organise your code, create new projects, etc. If you need help to download <a href="https://cran.r-project.org/">R</a> and <a href="https://posit.co/downloads/">RStudio</a>, please check Malo Jan’s webpage <a href="https://malo-jn.quarto.pub/introduction-to-r/session1/0102_setup.html" class="uri">https://malo-jn.quarto.pub/introduction-to-r/session1/0102_setup.html</a>, or other sources like <a href="https://rstudio-education.github.io/hopr/starting.html" class="uri">https://rstudio-education.github.io/hopr/starting.html</a>. In general, the R documentation, StackOverflow and AI are you friends in these cases is very useful !</p>
 </section>
 <section id="creating-a-project" class="level2">
 <h2 class="anchored" data-anchor-id="creating-a-project">Creating a project</h2>
@@ -576,13 +578,16 @@ P(Y \le Y_0) = \int_{R_Y}^Y_0 f_Y (y') \text{d}y'
 <section id="importing-data" class="level2">
 <h2 class="anchored" data-anchor-id="importing-data">Importing data</h2>
 <p>Other useful packages are those that allow to download and import data. Imagine that you have data retrieved from the internet : here a file containing information on the french communes - demographics2024.xlsx. This file is an “excel” file, hence it should be read by a program capable to read excel formats: this requires the readxl package. Another more general function is <code>import()</code>, which comes with the package <code>rio</code>. This allows you to disregard the format of your file (it is coded to support various formats). You can also export() data using rio.</p>
+<p>An important aspect when importing data is to know where the file is located on your computer. To know that, you can either right-click on the file and copy paste the location of your file (e.g.&nbsp;“Where” in MacOS) in RStudio (absolute path of your data set), or put the data in the same folder/location than the script that you are mainly using, and only provide the name of the data set (“demographics.xlsx”). If you provide this name but the data is stored in your “Downloads/”, while your script is located in “Desktop/Session1MPER/exercices/” for instance, your computer will not know where to search for !</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl) <span class="co"># needed to read excel without "rio"</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>communes <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/demographics2024.xlsx"</span>) <span class="co"># relative path</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>communes <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"/Users/Desktop/Website/methods_policyevaluation/slides/session1/data/"</span>) <span class="co"># absolute path</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#using the "rio" package</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>communes <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/demographics2024.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Relative path : I give the location compared with my current script (here demographics is stored in folder data, itself stored in the same folder as my script)</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>communes <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/demographics2024.xlsx"</span>) </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ABSOLUTE PATH : the exact location on my computer</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>communes <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"/Users/Desktop/Website/methods_policyevaluation/slides/session1/data/demographics2024.xlsx"</span>) <span class="co"># absolute path</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#using the "rio" package</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>communes <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/demographics2024.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Once you have data imported, you can rapidly inspect it, by using the function <code>head()</code> and <code>tail()</code>, which allow you to get the first and last rows of a data set, see the different variables it contains and their type.</p>
 <div class="cell">
@@ -591,9 +596,9 @@ P(Y \le Y_0) = \int_{R_Y}^Y_0 f_Y (y') \text{d}y'
 <pre><code># A tibble: 3 × 43
   codecommune  Year codedep  agri  indp  cadr  pint  empl  ouvr  chom  pact
   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 01006        2024 01          0     0     0    34    23    23     0    80
-2 01009        2024 01          0    41     0    95    21     4     2   161
-3 01012        2024 01         11     0     0     0    53    68     9   132
+1 01001        2024 01          0    39    33    14    86   147    26   319
+2 01005        2024 01         11    37    56   192   185   177    18   658
+3 01007        2024 01         15    39   250   311   339   268    95  1222
 # ℹ 32 more variables: age &lt;dbl&gt;, popf &lt;dbl&gt;, francais &lt;dbl&gt;, etranger &lt;dbl&gt;,
 #   prixbien &lt;dbl&gt;, capitalratio &lt;dbl&gt;, npropri &lt;dbl&gt;, nlogement &lt;dbl&gt;,
 #   pop &lt;dbl&gt;, revmoyfoy &lt;dbl&gt;, revtot &lt;dbl&gt;, recetteimpotslocaux &lt;dbl&gt;,
@@ -607,8 +612,8 @@ P(Y \le Y_0) = \int_{R_Y}^Y_0 f_Y (y') \text{d}y'
 <pre><code># A tibble: 3 × 43
   codecommune  Year codedep  agri  indp  cadr  pint  empl  ouvr  chom  pact
   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 95678        2024 95          0    31   197   112    55    40    23   435
-2 95682        2024 95          0    11    29    74     0     3     5   117
+1 95656        2024 95          0     2    69    94     0     0    15   165
+2 95660        2024 95          0     0    55    69   162    25    41   311
 3 95690        2024 95          0    22    29    85     0     8     5   144
 # ℹ 32 more variables: age &lt;dbl&gt;, popf &lt;dbl&gt;, francais &lt;dbl&gt;, etranger &lt;dbl&gt;,
 #   prixbien &lt;dbl&gt;, capitalratio &lt;dbl&gt;, npropri &lt;dbl&gt;, nlogement &lt;dbl&gt;,
@@ -638,7 +643,7 @@ P(Y \le Y_0) = \int_{R_Y}^Y_0 f_Y (y') \text{d}y'
 <div class="cell-output cell-output-stdout">
 <pre><code>
                Rural         Urbain dense Urbain intermédiaire 
-                8816                  189                  995 </code></pre>
+                8765                  229                 1006 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(comm_r<span class="sc">$</span>dens)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -656,23 +661,23 @@ P(Y \le Y_0) = \int_{R_Y}^Y_0 f_Y (y') \text{d}y'
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(comm_r<span class="sc">$</span>revmoyfoy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-   8151   25797   29624   31138   34586  167966       5 </code></pre>
+  11264   25863   29662   31174   34607  133022       6 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(comm_r<span class="sc">$</span>revmoyfoy, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]   8151.157 167966.330</code></pre>
+<pre><code>[1]  11264.42 133021.66</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>((comm_r <span class="sc">%&gt;%</span> <span class="fu">drop_na</span>(revmoyfoy))<span class="sc">$</span>revmoyfoy) <span class="co">#dropping NA's</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   8151   25797   29624   31138   34586  167966 </code></pre>
+  11264   25863   29662   31174   34607  133022 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#replacing the NA's</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>comm_r <span class="ot">&lt;-</span> comm_r <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">revmoyfoy =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(revmoyfoy), <span class="fu">mean</span>(revmoyfoy, <span class="at">na.rm =</span><span class="cn">TRUE</span>), revmoyfoy))</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(comm_r<span class="sc">$</span>revmoyfoy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   8151   25798   29627   31138   34583  167966 </code></pre>
+  11264   25864   29668   31174   34607  133022 </code></pre>
 </div>
 </div>
 <p>Notice that your last summary no longer contains NA values, and has an unchanged mean value - which is the objective of filling with mean values instead of the NA’s.</p>
@@ -718,22 +723,22 @@ P(Y \le Y_0) = \int_{R_Y}^Y_0 f_Y (y') \text{d}y'
 <div class="cell">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(comm_r<span class="sc">$</span>revmoyfoy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 31137.84</code></pre>
+<pre><code>[1] 31173.89</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(comm_r<span class="sc">$</span>revmoyfoy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 8428.651</code></pre>
+<pre><code>[1] 8326.113</code></pre>
 </div>
 </div>
 <p>And the conditional expectations can also simply be computed by filtering out the values that are undesired.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((comm_r <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dens <span class="sc">==</span> <span class="st">"Rural"</span>))<span class="sc">$</span>revmoyfoy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 30471.68</code></pre>
+<pre><code>[1] 30454.42</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((comm_r <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dens <span class="sc">==</span> <span class="st">"Urbain dense"</span><span class="sc">|</span>dens <span class="sc">==</span> <span class="st">"Urbain intermédiaire"</span>))<span class="sc">$</span>revmoyfoy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 36098.04</code></pre>
+<pre><code>[1] 36280.12</code></pre>
 </div>
 </div>
 <p>Where you clearly see that :</p>
