@@ -12,7 +12,7 @@ website:
           - text: "Session 1: Dataset Building and Descriptive Statistics"
             href: sessions/session1/session1.qmd
           - text: "Session 2: OLS: Simple and Multiple Linear Regressions and Analysis"
-            href: sessions/session2.qmd
+            href: sessions/session2/session2.qmd
           - text: "Session 3: Non-Linear Regressions and Analysis"
             href: sessions/session3.qmd
           - text: "Session 4: Difference-in-Differences (DiD)"
