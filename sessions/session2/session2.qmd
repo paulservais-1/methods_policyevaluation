@@ -869,7 +869,7 @@ Let us again consider the example of median incomes in French municipalities.
 
 ```{r}
 library(readxl)
-data_dem <- read_excel("/Users/paulservais/Downloads/demographics2024.xlsx")
+data_dem <- read_excel("data/demographics2024.xlsx")
 plot(density((data_dem %>% drop_na(revmoyfoy))$revmoyfoy))
 log_median_inc <- log(data_dem$revmoyfoy)
 mean(log_median_inc, na.rm = TRUE)
