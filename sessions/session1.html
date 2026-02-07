@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Session 1 — Descriptive statistics – Methods for Research and Policy Evaluation</title>
+<title>session1 – Methods for Research and Policy Evaluation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,41 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -67,15 +32,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -104,35 +70,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -169,11 +106,11 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
         <li>
-    <a class="dropdown-item" href="../sessions/session1.html">
+    <a class="dropdown-item" href="../sessions/session1/session1.html">
  <span class="dropdown-text">Session 1: Dataset Building and Descriptive Statistics</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../sessions/session2.html">
+    <a class="dropdown-item" href="../sessions/session2/session2.html">
  <span class="dropdown-text">Session 2: OLS: Simple and Multiple Linear Regressions and Analysis</span></a>
   </li>  
         <li>
@@ -196,7 +133,7 @@ window.Quarto = {
   </li>
   <li class="nav-item">
     <span class="nav-link">
-<span class="menu-text">Homeworks</span>
+<span class="menu-text">Exercices</span>
     </span>
   </li>  
   <li class="nav-item dropdown ">
@@ -231,6 +168,22 @@ window.Quarto = {
     </ul>
   </li>
   <li class="nav-item">
+    <span class="nav-link">
+<span class="menu-text">Slides</span>
+    </span>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu--2" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text"></span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu--2">    
+        <li>
+    <a class="dropdown-item" href="../slides/session1/slides1.html">
+ <span class="dropdown-text">Session 1: Dataset Building and Descriptive Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
     <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
@@ -245,235 +198,17 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#basics-of-probability-theory" id="toc-basics-of-probability-theory" class="nav-link" data-scroll-target="#basics-of-probability-theory">Basics of probability theory</a>
-  <ul class="collapse">
-  <li><a href="#probability-distribution-functions" id="toc-probability-distribution-functions" class="nav-link" data-scroll-target="#probability-distribution-functions">Probability, distribution functions</a></li>
-  <li><a href="#conditional-probability" id="toc-conditional-probability" class="nav-link" data-scroll-target="#conditional-probability">Conditional probability</a></li>
-  <li><a href="#towards-continuity" id="toc-towards-continuity" class="nav-link" data-scroll-target="#towards-continuity">Towards continuity</a></li>
-  </ul></li>
-  <li><a href="#exercices" id="toc-exercices" class="nav-link" data-scroll-target="#exercices">Exercices</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Session 1 — Descriptive statistics</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
 
 
-</header>
 
-
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<p>The core of any research in social science is to discover and describe relationships between variables. Whether you describe a research puzzle as a “why X despite Y?” type of question, or. The social facts Y that the researchers seek to explain are generally called the <em>dependent variable</em>, the <em>explanandum</em>, while the variables supposed to explain it are called the <em>independent variables</em> or the <em>explanans</em>.</p>
-<p>Hence, any research process typically involves the following stages : collection of data, analysis of these data, and drawing interpretations and conclusions based on these data. As such, the <strong>data collection phase is crucial in every empirical research project</strong> - which is generally the case in political science or sociology.</p>
-<p>Of course, many methods exist in practice to make such claims about connection between variables. These methods are generally divided in two large sub-groups : qualitative methods, which are generally based on small-N comparisons and can for instance allow to better access interpretive dimensions, and quantitative methods. The latter methods allow to conduct large N comparisons, to replicate analyses, and have known very important recent developments related to technological improvements in the recent decades (e.g.&nbsp;Computational Social Science, LLMs). Similarly, these methods generally seek to find a. That is, a given variable <span class="math inline">\(Y\)</span>, is caused (and can therefore be predicted) by a series of other variables <span class="math inline">\(X_1, X_2, X_3, X_4\)</span>. Hence, in a very general form, considering that <span class="math inline">\(Y\)</span> can be explained by <span class="math inline">\(X_1, X_2, X_3, X_4\)</span> means that we assume that there exists a function <span class="math inline">\(f : \mathbb{R}^4 \rightarrow \mathbb{R}\)</span> that satisfies : <span class="math display">\[
-\begin{equation}
-Y = f(X_1,X_2, X_3, X_4)  + \epsilon
-\end{equation}
-\]</span></p>
-<p>Take for instance happiness as a variable to explain : as a social scientist, you would like to understand what causes people to be happy or not. Of course, you might have first struggles in defining happiness - an essentially subjective measure -, and you might as well have competing hypotheses about what causes happiness.</p>
-</section>
-<section id="basics-of-probability-theory" class="level1">
-<h1>Basics of probability theory</h1>
-<section id="probability-distribution-functions" class="level2">
-<h2 class="anchored" data-anchor-id="probability-distribution-functions">Probability, distribution functions</h2>
-<p>Imagine that you have two dices with six faces on each dice. Your random variable is the outcome of each dice that you throw.</p>
-<p>You want to assess your chances of obtaining each value contained in the set of potential outcomes <span class="math inline">\(S = \{2,3,4,5,6,7,8,9,10,11,12\}\)</span>. Intuitively, you might want to start by looking at the 2 value : 2 is only obtained in the case where you obtain one for the two dices. That is, for dice 1, you have <span class="math inline">\(1/6\)</span> of obtaining the value, and then again <span class="math inline">\(1/6\)</span> of obtaining 1 for the second dice. Overall, the probability of obtaining <span class="math inline">\(2\)</span>, <span class="math inline">\(P(y=2)\)</span> is therefore : <span class="math display">\[
-\begin{equation}
-P_2 = 1/6 \times 1/6 = 1/36
-\end{equation}
-\]</span> Of course, if you now want to look at the probability of obtaining <span class="math inline">\(3\)</span> as outcome, <span class="math inline">\(P(y = 3)\)</span> your probability will be the union of two probabilities : the chance of obtaining 1 with dice 1 and 2 with dice 2, or the one of obtaining 2 with dice 1 and 1 with dice 2. Mathematically, this writes : <span class="math display">\[
-\begin{equation}
-P(Y=3) = 1/6 \times 1/6 + 1/6 \times 1/6 = 2/36 = 1/18
-\end{equation}
-\]</span> You see that the probability is doubled, compared to 2.</p>
-<p>If you look at the joint probability, this corresponds to a diagonal : 2. Hence, you see that obtaining 7 is the last diagonal and therefore <span class="math display">\[
-\begin{equation}
-P(Y=7) = 6\times1/36 = 1/6
-\end{equation}
-\]</span></p>
-<span class="math display">\[\begin{array}{c|cccccc}
-&amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 \\
-\hline
-1 &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36} \\
-2 &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36} \\
-3 &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36} \\
-4 &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36} \\
-5 &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36} \\
-6 &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36} &amp; \frac{1}{36}
-\end{array}\]</span>
-<p>Imagine now that you are skeptical of these theoretical findings, and you decide to carry a small experiment in order to test this. Let’s imagine that you are feeling very bored for an entire year and that you decide to launch these two dices a hundred thousand times, and report results in two tables <span class="math inline">\(X_1, X_2\)</span> with the result for each dice. Your results might look like :</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">100000</span> <span class="co">#number of measurements</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,N, <span class="at">replace=</span>T) <span class="co"># first dice (values are from 1 to 6)</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,N, <span class="at">replace=</span>T) <span class="co"># second dice (values are from 1 to 6)</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(x1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 6 6 1 1 5 3</code></pre>
-</div>
-</div>
-<p>In fact your final result - the sum of the two dices -, is the union of two independent events <span class="math inline">\(X_1, X_2\)</span> being respectively the outcome of dice <span class="math inline">\(1\)</span> and <span class="math inline">\(2\)</span>, provided that they are indeed independent. Your final result <span class="math inline">\(Y\)</span> is therefore simply the sum of these two random variables. You can then sum :</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> x1<span class="sc">+</span>x2 <span class="co"># total number obtained</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>freq <span class="ot">&lt;-</span> <span class="fu">table</span>(y)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(freq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="session1_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>and the function <code>table()</code> gives you the number of occurences for each value. The probability to obtain 7 from your sample is then simply the number of occurences that you have measured, divided by the total number of attempts that you have done, in this case 10000. Hence :</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> freq<span class="sc">/</span>N</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>prob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>y
-      2       3       4       5       6       7       8       9      10      11 
-0.02687 0.05655 0.08459 0.11087 0.13589 0.16597 0.14046 0.11278 0.08265 0.05542 
-     12 
-0.02795 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(prob)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="session1_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>These values are called the probability distribution of the variable Y. That is, for each outcome of Y, there is a probability (here shown on the barplot). These probabilities follow the simple rule : <span class="math display">\[\begin{equation}
-\sum_{i=1}^N P(y_i) = P(y_1)+P(y_2) +... P(y_n) = 1
-\end{equation}\]</span></p>
-<p>That is, the sum of all probabilities over the set of potential outcomes <span class="math inline">\(\{y_1,y_2,y_3,..., y_n\}\)</span> is equal to 1. The <span class="math inline">\(\Sigma\)</span> symbol simply stands for sum. Now imagine that you want to know the average value</p>
-<p><span class="math display">\[\begin{equation}
-
-\mathbb{E}(y) = \sum_{i=1}^N y_i P(y_i) = \bar{y}
-\end{equation}\]</span></p>
-<p>This value is called the expectation. In the case</p>
-</section>
-<section id="conditional-probability" class="level2">
-<h2 class="anchored" data-anchor-id="conditional-probability">Conditional probability</h2>
-<p>Imagine now that, due to the extreme fatigue provoked by the repetitive throwing of those dices, you throw those a bit too wildly and one falls under the table where you are. The other one is there and shows the value 3. You want to know the expected value of <span class="math inline">\(y\)</span>, knowing that one dice among the two is 3. This is called a conditional probability and noted <span class="math inline">\(P(y|X_1)\)</span>, with <span class="math inline">\(| X_1\)</span> simply meaning that <span class="math inline">\(X_1\)</span> is considered fixed (here worth 3). Since <span class="math inline">\(X_1\)</span> is fixed, the probability is <span class="math inline">\(P(y|X_1) = 1/6\)</span>, and knowing this information is actually very precious on Y, because it considerably reduces the set of potential outcomes : <span class="math display">\[
-Y \ge 4 \text{, } Y\le 9 \text{ and } S = \{4, 5, 6, 7, 8, 9\}
-\]</span> <span class="math display">\[
-\begin{equation}
-\mathbb{E}(y|X_1 = 3) = \sum_{i=1}^N y_i P(y_i|X_1 = 3)
-\end{equation}
-\]</span> and so we get : <span class="math display">\[
-\begin{align}
-  \mathbb{E}(y|X_1 = 3) = 1/6 \times (4 + 5 + 6 + 7 + 8 + 9) = 6.5\\
-  \mathbb{E}(y|X_1 = 4) = 1/6 \times (5 + 5 + 7 + 8 + 9 + 10) = 7.5
-\end{align}
-\]</span> Notice that the expected value of y therefore changes, as a function of the explanatory variable, <span class="math inline">\(X_1\)</span>.</p>
-</section>
-<section id="towards-continuity" class="level2">
-<h2 class="anchored" data-anchor-id="towards-continuity">Towards continuity</h2>
-<p>Now simply imagine that you repeat that process with dices that have <span class="math inline">\(n = 1000, 1400, 800\)</span> faces, with each value ranging from <span class="math inline">\(1/n to 1\)</span>. And that you would like to know what are the final probabilities of having any decimal number between 0 and 3. Of course, the manual computation of this would be very cumbersome - which is why automising the process with R can prove very useful. Reusing the same code would give :</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'dplyr'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:stats':
-
-    filter, lag</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:base':
-
-    intersect, setdiff, setequal, union</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">100000</span> <span class="co">#number of measurements</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>,N, <span class="at">replace=</span>T)<span class="sc">/</span><span class="dv">1000</span> <span class="co"># first dice (values are from 1 to 6)</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1400</span>,N, <span class="at">replace =</span> T)<span class="sc">/</span><span class="dv">1400</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">800</span>,N,<span class="at">replace =</span> T)<span class="sc">/</span><span class="dv">800</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> x1<span class="sc">+</span>x2<span class="sc">+</span>x3</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="at">x =</span> y)) <span class="sc">+</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density))) <span class="sc">+</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of y = x1 + x2 + x3"</span>,</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"y"</span>,</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Density"</span>) <span class="sc">+</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="session1_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="exercices" class="level1">
-<h1>Exercices</h1>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-</div>
-<p><span class="math display">\[
-\begin{equation}
-\hat{\beta} = (X'X)^{-1}X'y
-\end{equation}
-\]</span></p>
-<p>Second example:</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Python</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3</code></pre>
-</div>
-</div>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="sourceCode" id="cb17"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>1 + 2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="op">+</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-
-
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -531,13 +266,14 @@ Attaching package: 'dplyr'</code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -552,7 +288,7 @@ Attaching package: 'dplyr'</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/paulservais-1\.github\.io\/methods_policyevaluation\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
