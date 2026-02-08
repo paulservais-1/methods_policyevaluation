@@ -358,6 +358,12 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
 <p>In our previous session, we focused on describing individual variables. We explored measures of central tendency—such as the mean, median, and mode—as well as measures of dispersion, which show how values are spread around these central points. We also examined graphical methods like histograms and density plots, which help visualize the distribution of a variable. Histograms display the frequency of values within intervals, while density plots represent the distribution as a continuous curve. These tools led us to the concept of the probability density function, a continuous function that best represents the distribution of a variable.</p>
 <p>While describing a single variable is informative and foundational, most research aims to go further by examining relationships <strong>between</strong> variables. The goal is often to determine whether one variable (X) influences another (Y), or vice versa. This was briefly introduced at the end of Session 1, where we considered whether density could be reliably linked to a significant effect on the median income of municipalities. This question was complex because the subgroups not only had different means but also different dispersions—higher deviations around those means. To address this, we introduced the t-test, a method for comparing the means of two groups.</p>
+<p>In this session, we will :</p>
+<ol type="1">
+<li>Remind you important notions of statistical inference, which we will be using for the rest of the class;</li>
+<li>Introduce you to t-tests;</li>
+<li>Introduce you to linear regression models;</li>
+</ol>
 </section>
 <section id="types-of-relationships" class="level2">
 <h2 class="anchored" data-anchor-id="types-of-relationships">Types of relationships</h2>
@@ -428,16 +434,16 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat, <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           y
-1  1.4015714
-2  0.8408929
-3  0.7155714
-4  1.7185714
-5  0.9760357
-6  1.8557500
-7  1.1892857
-8  1.7740357
-9  0.9705357
-10 1.6938929</code></pre>
+1  0.8106071
+2  0.9235357
+3  1.9427500
+4  0.7755714
+5  1.3245714
+6  2.0100000
+7  2.0841071
+8  0.9418214
+9  1.6495714
+10 1.7528571</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="at">x =</span> y)) <span class="sc">+</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density)), <span class="at">bins =</span> <span class="dv">100</span>)<span class="sc">+</span></span>
@@ -460,7 +466,7 @@ Attaching package: 'dplyr'</code></pre>
 [1] 1.291
 
 $y
-[1] 0.7048476</code></pre>
+[1] 0.7100835</code></pre>
 </div>
 </div>
 <p>You might ask yourself : what is the probability of obtaining 1.291 ? Of course, this probability would be extremely low : <span class="math inline">\(P_X(x) \rightarrow 0\)</span>. Instead, you would rather consider the probability of having a value falling in a given interval <span class="math inline">\([a,b]\)</span>, for instance <span class="math inline">\([1, 1.5]\)</span>. This probability would be given by: <span class="math display">\[\begin{equation}
@@ -540,11 +546,11 @@ f_N(x) = \mathcal{N}(x; \mu, \sigma) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.498696</code></pre>
+<pre><code>[1] 1.500474</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4988821</code></pre>
+<pre><code>[1] 0.5006002</code></pre>
 </div>
 </div>
 <p>which means that the normal distribution is centered in 1.5, and its standard deviation is 0.5 : 68% of the data is located within the interval between 1 and 2.</p>
@@ -1449,7 +1455,7 @@ Z \leq  \frac{2-\mu_Y}{\sigma} = 0.997941
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(int) <span class="co"># </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9762985</code></pre>
+<pre><code>[1] 0.975707</code></pre>
 </div>
 </div>
 <p>This gives about 0.97, which is very close to what you had computed from the tables. Note how I am computing this integral : I am just summing over all the values <span class="math inline">\(x \leq 2.5\)</span>, with the very small steps <span class="math inline">\(\delta x = 0.0000001\)</span> and therefore $ x = 0.000005$ , <span class="math inline">\(x = 0.000015\)</span>,<span class="math inline">\(x = 0.000025\)</span>, <span class="math inline">\(x = 0.000035\)</span>,…, <span class="math inline">\(x = 2.500000\)</span> and adding the very small quantities:</p>
@@ -1459,7 +1465,7 @@ Z \leq  \frac{2-\mu_Y}{\sigma} = 0.997941
 <p>As already said, an integral is just a fancy way of writing a sum for continuous variables ! Hence, numerically, a way of computing that integral is just to take a very small step, and simulate the sum ! If you repeat the exact same process for 2 instead of 2.5, you get :</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8411853</code></pre>
+<pre><code>[1] 0.8394636</code></pre>
 </div>
 </div>
 <p>which is also very close to what we had found from the tables.</p>
