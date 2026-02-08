@@ -32,6 +32,12 @@ had different means but also different dispersions—higher deviations
 around those means. To address this, we introduced the t-test, a method
 for comparing the means of two groups.
 
+In this session, we will :
+
+1. Remind you important notions of statistical inference, which we will be using for the rest of the class;
+2. Introduce you to t-tests;
+3. Introduce you to linear regression models;
+
 ## Types of relationships
 
 Of course, in practice we are often interested in studying relationships between different types of variables, and the choice of statistical method depends on the measurement scale of both the independent and dependent variables. When both the independent and dependent variables are categorical (for example, gender and voting preference), we typically use crosstabulation and chi-square tests to assess whether the distribution of one variable differs across the categories of the other. If the independent variable is categorical but the dependent variable is continuous (for example, comparing average incomes across two or more groups), we use mean comparison methods such as the t-test to determine whether group means differ. When the independent variable is continuous and the dependent variable is categorical (for example, predicting whether someone purchases a product based on age or income), logistic regression (often expressed in terms of logits) allows us to model the probability of category membership as a function of the continuous predictors. Finally, when both variables are continuous, we can assess their association with correlation and explore predictive relationships with regression analysis. Understanding these distinctions helps you choose appropriate analytical tools that match the nature of your data and research questions.
