@@ -309,7 +309,6 @@ window.Quarto = {
   </ul></li>
   <li><a href="#simple-regression-model-ols" id="toc-simple-regression-model-ols" class="nav-link" data-scroll-target="#simple-regression-model-ols">Simple regression model, OLS</a>
   <ul class="collapse">
-  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
   <li><a href="#linear-regression-in-r" id="toc-linear-regression-in-r" class="nav-link" data-scroll-target="#linear-regression-in-r">Linear regression in R</a></li>
   <li><a href="#interpretation-of-regression-results" id="toc-interpretation-of-regression-results" class="nav-link" data-scroll-target="#interpretation-of-regression-results">Interpretation of regression results</a></li>
   </ul></li>
@@ -321,8 +320,10 @@ window.Quarto = {
   <li><a href="#multiple-regressions-with-different-dependent-variables" id="toc-multiple-regressions-with-different-dependent-variables" class="nav-link" data-scroll-target="#multiple-regressions-with-different-dependent-variables">Multiple regressions with different dependent variables</a></li>
   <li><a href="#model-performance" id="toc-model-performance" class="nav-link" data-scroll-target="#model-performance">Model performance</a>
   <ul class="collapse">
-  <li><a href="#multicollinearity" id="toc-multicollinearity" class="nav-link" data-scroll-target="#multicollinearity">Multicollinearity</a></li>
-  <li><a href="#heteroskedasticity" id="toc-heteroskedasticity" class="nav-link" data-scroll-target="#heteroskedasticity">Heteroskedasticity</a></li>
+  <li><a href="#conditions-of-validity" id="toc-conditions-of-validity" class="nav-link" data-scroll-target="#conditions-of-validity">Conditions of validity</a></li>
+  <li><a href="#diagnostics" id="toc-diagnostics" class="nav-link" data-scroll-target="#diagnostics">Diagnostics</a></li>
+  <li><a href="#multicollinearity-1" id="toc-multicollinearity-1" class="nav-link" data-scroll-target="#multicollinearity-1">Multicollinearity</a></li>
+  <li><a href="#heteroskedasticity-1" id="toc-heteroskedasticity-1" class="nav-link" data-scroll-target="#heteroskedasticity-1">Heteroskedasticity</a></li>
   <li><a href="#outliers" id="toc-outliers" class="nav-link" data-scroll-target="#outliers">Outliers</a></li>
   </ul></li>
   </ul>
@@ -426,16 +427,16 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           y
-1  1.1631786
-2  1.9059643
-3  1.0634643
-4  1.2635000
-5  0.3455714
-6  2.3246429
-7  1.1701786
-8  1.2874643
-9  0.9361429
-10 1.9261071</code></pre>
+1  2.4131071
+2  1.0723571
+3  1.8515000
+4  0.4799643
+5  1.6839286
+6  1.2254643
+7  2.3531786
+8  1.1562143
+9  1.8989643
+10 1.3646071</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="at">x =</span> y)) <span class="sc">+</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density)), <span class="at">bins =</span> <span class="dv">100</span>)<span class="sc">+</span></span>
@@ -458,7 +459,7 @@ Attaching package: 'dplyr'</code></pre>
 [1] 1.291
 
 $y
-[1] 0.7102107</code></pre>
+[1] 0.7068226</code></pre>
 </div>
 </div>
 <p>You might ask yourself : what is the probability of obtaining 1.291 ? Of course, this probability would be extremely low : <span class="math inline">\(P_X(x) \rightarrow 0\)</span>. Instead, you would rather consider the probability of having a value falling in a given interval <span class="math inline">\([a,b]\)</span>, for instance <span class="math inline">\([1, 1.5]\)</span>. This probability would be given by: <span class="math display">\[\begin{equation}
@@ -538,11 +539,11 @@ f_N(x) = \mathcal{N}(x; \mu, \sigma) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.502028</code></pre>
+<pre><code>[1] 1.500427</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4993005</code></pre>
+<pre><code>[1] 0.5001973</code></pre>
 </div>
 </div>
 <p>which means that the normal distribution is centered in 1.5, and its standard deviation is 0.5 : 68% of the data is located within the interval between 1 and 2.</p>
@@ -1447,7 +1448,7 @@ Z \leq  \frac{2-\mu_Y}{\sigma} = 0.997941
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(int) <span class="co"># </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9758681</code></pre>
+<pre><code>[1] 0.9758098</code></pre>
 </div>
 </div>
 <p>This gives about 0.97, which is very close to what you had computed from the tables. Note how I am computing this integral : I am just summing over all the values <span class="math inline">\(x \leq 2.5\)</span>, with the very small steps <span class="math inline">\(\delta x = 0.0000001\)</span> and therefore $ x = 0.000005$ , <span class="math inline">\(x = 0.000015\)</span>,<span class="math inline">\(x = 0.000025\)</span>, <span class="math inline">\(x = 0.000035\)</span>,…, <span class="math inline">\(x = 2.500000\)</span> and adding the very small quantities:</p>
@@ -1457,7 +1458,7 @@ Z \leq  \frac{2-\mu_Y}{\sigma} = 0.997941
 <p>As already said, an integral is just a fancy way of writing a sum for continuous variables ! Hence, numerically, a way of computing that integral is just to take a very small step, and simulate the sum ! If you repeat the exact same process for 2 instead of 2.5, you get :</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8393868</code></pre>
+<pre><code>[1] 0.8396919</code></pre>
 </div>
 </div>
 <p>which is also very close to what we had found from the tables.</p>
@@ -1573,7 +1574,7 @@ T =
 <p>Let us again consider the example of median incomes in French municipalities.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>data_dem <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"/Users/paulservais/Downloads/demographics2024.xlsx"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>data_dem <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/demographics2024.xlsx"</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>((data_dem <span class="sc">%&gt;%</span> <span class="fu">drop_na</span>(revmoyfoy))<span class="sc">$</span>revmoyfoy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
@@ -1832,17 +1833,6 @@ Y_i = \beta_0 + \beta_1 X_i + \epsilon_i
 <p><span class="math display">\[\begin{equation}
 Y_i = \beta_0+ \beta_1 X_{i1} + \beta_2 X_{i2} + \beta_3 X_{i3} + ... + \beta_k X_{ik} + \epsilon_i
 \end{equation}\]</span></p>
-<section id="assumptions" class="level2">
-<h2 class="anchored" data-anchor-id="assumptions">Assumptions</h2>
-<p>For this relation to hold, the following hypotheses must be true :</p>
-<ul>
-<li><span class="math inline">\(\mathbb{E} (\epsilon_i) = 0\)</span>. That basically means that the expectation of the error should be (there is no systematic error in your estimation).</li>
-<li><span class="math inline">\(\mathbb{E} (\epsilon_i^2) = \sigma^2\)</span>. That means that the variance of the error is constant accross all values. This condition is called ‘homoskedasticity’. The case where <span class="math inline">\(\mathbb{E} (\epsilon_i^2) \ne \sigma^2\)</span> is called heteroskedasticity.</li>
-<li><span class="math inline">\(\mathbb{E} (\epsilon_i \epsilon_j)= 0\)</span> or <span class="math inline">\(\mathbb{C}ov(\epsilon_i, \epsilon_j) = 0\)</span>, which is called the linear independence of the errors assumption.</li>
-<li><span class="math inline">\(X_{ij}\)</span> is non random <span class="math inline">\(\forall  i = 1,...,n ; j = 1, ..., k\)</span> (X is not a random variable, contrary to the error and the dependent variable).</li>
-<li><span class="math inline">\(\text{rank}((X_{ij})) = k\)</span>. This is the mathematical way to say that the different independent variables are indeed independent from one another. That means that there is no way to obtain any <span class="math inline">\(X_j\)</span> using sums and combinations of all the other <span class="math inline">\(X_k\)</span> (where <span class="math inline">\(k \ne j\)</span>). You will understand that later, in the last section of this class.</li>
-</ul>
-</section>
 <section id="linear-regression-in-r" class="level2">
 <h2 class="anchored" data-anchor-id="linear-regression-in-r">Linear regression in R</h2>
 <p>Luckily for us, the linear estimator is present in base R, it’s called <code>lm</code> and we can use it straight for estimating regression coefficients : we just need to give our data-set and the relationship between our dependent and independent variable, and the machine does the rest for us ! We can also complete our initial graph with the <code>geom_smooth</code> function, that will draw this line that is the best line fitting the data, for us.</p>
@@ -2145,17 +2135,115 @@ Y_i = \beta_1 X_{1i} + \beta_2 X_{2i} + \beta_3 X_{3i} + \beta_4 X_{1i}*X_{3i}
 </section>
 <section id="model-performance" class="level1">
 <h1>Model performance</h1>
+<section id="conditions-of-validity" class="level2">
+<h2 class="anchored" data-anchor-id="conditions-of-validity">Conditions of validity</h2>
+<p>For this relation to hold, the following hypotheses must be true :</p>
+<ul>
+<li><p><span class="math inline">\(\mathbb{E} (\epsilon_i) = 0 = \mathbb{E}(X_i|\epsilon_i)\)</span>. That basically means that the expectation of the error should be (there is no systematic error in your estimation). Intuitively, this can be easily understood :</p></li>
+<li><p><span class="math inline">\(\mathbb{E} (\epsilon_i^2) = \sigma^2\)</span>. That means that the variance of the error is constant accross all values. This condition is called ‘homoskedasticity’. The case where <span class="math inline">\(\mathbb{E} (\epsilon_i^2) \ne \sigma^2\)</span> is called heteroskedasticity.</p></li>
+<li><p><span class="math inline">\(\mathbb{E} (\epsilon_i \epsilon_j)= 0\)</span> or <span class="math inline">\(\mathbb{C}ov(\epsilon_i, \epsilon_j) = 0\)</span>, which is called the linear independence of the errors assumption.</p></li>
+<li><p><span class="math inline">\(X_{ij}\)</span> is non random <span class="math inline">\(\forall  i = 1,...,n ; j = 1, ..., k\)</span> (X is not a random variable, contrary to the error and the dependent variable).</p></li>
+<li><p><span class="math inline">\(\text{rank}((X_{ij})) = k\)</span>. This is the mathematical way to say that the different independent variables are indeed independent from one another. That means that there is no way to obtain any <span class="math inline">\(X_j\)</span> using sums and combinations of all the other <span class="math inline">\(X_k\)</span> (where <span class="math inline">\(k \ne j\)</span>). You will understand that later, in the last section of this class.</p></li>
+</ul>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">Homoskedasticity</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">Heteroskedasticity</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-3" role="tab" aria-controls="tabset-4-3" aria-selected="false">Multicollinearity</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session2_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, <span class="dv">1000</span>, <span class="at">replace =</span> <span class="st">"TRUE"</span>)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="dv">0</span>, <span class="dv">10</span><span class="sc">*</span>(x))</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, x)</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> y)</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>y <span class="sc">%&gt;%</span> </span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>)<span class="sc">+</span></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session2_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model2<span class="sc">$</span>fitted.values,model2<span class="sc">$</span>residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session2_files/figure-html/unnamed-chunk-29-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-4-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-3-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="dv">0</span>, <span class="dv">10</span><span class="sc">*</span>(x))</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="dv">0</span>, <span class="fl">0.5</span>)</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x <span class="sc">+</span> w)</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(model1, model2, <span class="at">type =</span> <span class="st">"text"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+=====================================================================
+                                   Dependent variable:               
+                    -------------------------------------------------
+                                            y                        
+                              (1)                      (2)           
+---------------------------------------------------------------------
+x                           9.286***                 449.723         
+                            (0.608)                 (346.705)        
+                                                                     
+w                                                    -440.406        
+                                                    (346.680)        
+                                                                     
+Constant                    172.123                  170.120         
+                           (348.515)                (348.411)        
+                                                                     
+---------------------------------------------------------------------
+Observations                 1,000                    1,000          
+R2                           0.189                    0.191          
+Adjusted R2                  0.188                    0.189          
+Residual Std. Error   5,488.668 (df = 998)     5,486.981 (df = 997)  
+F Statistic         233.007*** (df = 1; 998) 117.382*** (df = 2; 997)
+=====================================================================
+Note:                                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="diagnostics" class="level2">
+<h2 class="anchored" data-anchor-id="diagnostics">Diagnostics</h2>
 <p>After fitting our model, it is essential to perform diagnostic checks to evaluate whether the model is correctly specified and whether the assumptions underlying regression analysis are being met. In this context, we use the performance package to assess various aspects of these assumptions and examine model quality.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="multicollinearity" class="level2">
-<h2 class="anchored" data-anchor-id="multicollinearity">Multicollinearity</h2>
+</section>
+<section id="multicollinearity-1" class="level2">
+<h2 class="anchored" data-anchor-id="multicollinearity-1">Multicollinearity</h2>
 <p>It’s essential to evaluate the correlation between predictors in regression analysis, as highly correlated predictors can introduce multicollinearity. This occurs when predictors capture overlapping information, which can distort the reliability of the model’s estimates.</p>
 <p>A useful tool for diagnosing multicollinearity is the Variance Inflation Factor (VIF), which measures how much the variance of a regression coefficient increases due to correlation among predictors. A VIF value above 10 generally signals problematic multicollinearity. Another helpful metric is tolerance (calculated as 1/VIF), which indicates the proportion of a predictor’s variance not explained by other predictors. Tolerance values near 1 suggest low collinearity. If multicollinearity is detected, techniques like Principal Component Analysis (PCA) can help address the issue.</p>
 <p>In R, you can assess multicollinearity using the check_collinearity() function from the performance package (or the car::vif function). These functions compute VIF, provide confidence intervals, and calculate tolerance for each predictor.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="fu">list</span>(model1, model2), check_collinearity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="fu">list</span>(model1, model2), check_collinearity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Not enough model terms in the conditional part of the model to check for
   multicollinearity.</code></pre>
@@ -2167,29 +2255,11 @@ NULL
 [[2]]
 # Check for Multicollinearity
 
-Low Correlation
-
-           Term  VIF     VIF 95% CI adj. VIF Tolerance Tolerance 95% CI
- log(revmoyfoy) 3.47 [ 3.28,  3.67]     1.86      0.29     [0.27, 0.30]
-           petr 1.10 [ 1.06,  1.14]     1.05      0.91     [0.87, 0.94]
-          pagri 1.28 [ 1.23,  1.33]     1.13      0.78     [0.75, 0.81]
-            age 2.14 [ 2.03,  2.25]     1.46      0.47     [0.44, 0.49]
-  log(prixbien) 2.54 [ 2.41,  2.68]     1.59      0.39     [0.37, 0.41]
-          pindp 3.59 [ 3.39,  3.80]     1.89      0.28     [0.26, 0.29]
-
-Moderate Correlation
-
-   Term  VIF     VIF 95% CI adj. VIF Tolerance Tolerance 95% CI
-  pouvr 9.36 [ 8.79,  9.96]     3.06      0.11     [0.10, 0.11]
-  pempl 8.89 [ 8.35,  9.46]     2.98      0.11     [0.11, 0.12]
-  ppint 8.92 [ 8.39,  9.50]     2.99      0.11     [0.11, 0.12]
-   psup 5.09 [ 4.80,  5.40]     2.26      0.20     [0.19, 0.21]
- pnodip 5.25 [ 4.95,  5.58]     2.29      0.19     [0.18, 0.20]
-
 High Correlation
 
-  Term   VIF     VIF 95% CI adj. VIF Tolerance Tolerance 95% CI
- pcadr 11.27 [10.58, 12.00]     3.36      0.09     [0.08, 0.09]</code></pre>
+ Term      VIF           VIF 95% CI adj. VIF Tolerance Tolerance 95% CI
+    x 3.25e+05 [2.87e+05, 3.68e+05]   570.12  3.08e-06     [0.00, 0.00]
+    w 3.25e+05 [2.87e+05, 3.68e+05]   570.12  3.08e-06     [0.00, 0.00]</code></pre>
 </div>
 </div>
 <p>You see here that for instance “pcadr” (% Executives) is highly correlated with the rest of the variables, which is expected, since you can express cadre as a combination of all the other variables, - which also explains why the other variables are also very correlated. The more you add variables about the occupational structure, the more they predict the others, because <span class="math display">\[\begin{equation}
@@ -2197,24 +2267,24 @@ High Correlation
 \end{equation}\]</span></p>
 <p>which is why pcadr is unsignificant.</p>
 </section>
-<section id="heteroskedasticity" class="level2">
-<h2 class="anchored" data-anchor-id="heteroskedasticity">Heteroskedasticity</h2>
+<section id="heteroskedasticity-1" class="level2">
+<h2 class="anchored" data-anchor-id="heteroskedasticity-1">Heteroskedasticity</h2>
 <p>Heteroskedasticity occurs in regression analysis when the spread of the residuals (or errors) varies depending on the values of the independent variables. This contradicts the classical linear regression assumption of homoskedasticity, which requires that the residuals have a constant variance.</p>
 <p>When heteroskedasticity is present, it can undermine the accuracy of statistical conclusions. The standard errors of the estimated coefficients may become unreliable, resulting in misleading p-values and confidence intervals. To detect heteroskedasticity, you can use diagnostic tools like plotting residuals against predicted values. Statistical tests, such as the Breusch-Pagan test, can also formally evaluate whether the residuals’ variance remains constant. If heteroskedasticity is confirmed, you may need to adjust the model, apply data transformations, or use robust standard errors to mitigate its impact.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(model2) <span class="sc">|&gt;</span>  </span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(.fitted, .resid)) <span class="sc">+</span> </span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(model2) <span class="sc">|&gt;</span>  </span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(.fitted, .resid)) <span class="sc">+</span> </span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="session2_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="session2_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_heteroscedasticity</span>(model2) <span class="co"># Run a Breush-Pagan test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_heteroscedasticity</span>(model2) <span class="co"># Run a Breush-Pagan test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Warning: Heteroscedasticity (non-constant error variance) detected (p = 0.016).</code></pre>
+<pre><code>Warning: Heteroscedasticity (non-constant error variance) detected (p &lt; .001).</code></pre>
 </div>
 </div>
 </section>
@@ -2222,10 +2292,10 @@ High Correlation
 <h2 class="anchored" data-anchor-id="outliers">Outliers</h2>
 <p>To detect outliers, we use the cook distance which is an outlier detection methods. It estimate how much our regression coefficients change if we remove each observation.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_outliers</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_outliers</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>OK: No outliers detected.
-- Based on the following method and threshold: cook (0.949).
+- Based on the following method and threshold: cook (0.8).
 - For variable: (Whole model)</code></pre>
 </div>
 </div>

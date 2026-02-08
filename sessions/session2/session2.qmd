@@ -1137,15 +1137,6 @@ In a case with $k$ independent variables :
 Y_i = \beta_0+ \beta_1 X_{i1} + \beta_2 X_{i2} + \beta_3 X_{i3} + ... + \beta_k X_{ik} + \epsilon_i
 \end{equation}
 
-## Assumptions
-For this relation to hold, the following hypotheses must be true :
-
-* $\mathbb{E} (\epsilon_i) = 0$. That basically means that the expectation of the error should be (there is no systematic error in your estimation).
-* $\mathbb{E} (\epsilon_i^2) = \sigma^2$. That means that the variance of the error is constant accross all values. This condition is called 'homoskedasticity'. The case where  $\mathbb{E} (\epsilon_i^2) \ne \sigma^2$ is called heteroskedasticity.
-* $\mathbb{E} (\epsilon_i \epsilon_j)= 0$ or $\mathbb{C}ov(\epsilon_i, \epsilon_j) = 0$, which is called the linear independence of the errors assumption.
-* $X_{ij}$ is non random $\forall  i = 1,...,n ; j = 1, ..., k$ (X is not a random variable, contrary to the error and the dependent variable).
-* $\text{rank}((X_{ij})) = k$. This is the mathematical way to say that the different independent variables are indeed independent from one another. That means that there is no way to obtain any $X_j$ using sums and combinations of all the other $X_k$ (where $k \ne j$). You will understand that later, in the last section of this class.
-
 ## Linear regression in R
 
 Luckily for us, the linear estimator is present in base R, it's called `lm`  and we can use it straight for estimating regression coefficients : we just need to give our data-set and the relationship between our dependent and independent variable, and the machine does the rest for us ! We can also complete our initial graph with the `geom_smooth` function, that will draw this line that is the best line fitting the data, for us.
@@ -1354,7 +1345,63 @@ parties_models %>%
   scale_colour_viridis_d()
 ```
 
+
 # Model performance 
+## Conditions of validity
+
+For this relation to hold, the following hypotheses must be true :
+
+* $\mathbb{E} (\epsilon_i) = 0 = \mathbb{E}(X_i|\epsilon_i)$. That basically means that the expectation of the error should be (there is no systematic error in your estimation). Intuitively, this can be easily understood : 
+
+
+* $\mathbb{E} (\epsilon_i^2) = \sigma^2$. That means that the variance of the error is constant accross all values. This condition is called 'homoskedasticity'. The case where  $\mathbb{E} (\epsilon_i^2) \ne \sigma^2$ is called heteroskedasticity.
+
+* $\mathbb{E} (\epsilon_i \epsilon_j)= 0$ or $\mathbb{C}ov(\epsilon_i, \epsilon_j) = 0$, which is called the linear independence of the errors assumption.
+* $X_{ij}$ is non random $\forall  i = 1,...,n ; j = 1, ..., k$ (X is not a random variable, contrary to the error and the dependent variable).
+* $\text{rank}((X_{ij})) = k$. This is the mathematical way to say that the different independent variables are indeed independent from one another. That means that there is no way to obtain any $X_j$ using sums and combinations of all the other $X_k$ (where $k \ne j$). You will understand that later, in the last section of this class.
+
+::: panel-tabset
+
+## Homoskedasticity
+```{r}
+#| echo: false
+#| eval: true
+x <- sample(1:1000, 1000, replace = "TRUE")
+y <- 10*x + rnorm(1000, 0, 1000)
+y <- data.frame(y, x)
+model1 <- lm(y ~ x, data = y)
+y %>% 
+  ggplot(aes(x = x, y = y)) + geom_point()+
+  geom_smooth(method = "lm", linetype = "dashed", color = "black", se = TRUE, linewidth = 1, alpha = 0.4)+
+  theme_minimal()
+```
+
+## Heteroskedasticity
+```{r}
+#| eval: true
+x <- sample(1:1000, 1000, replace = "TRUE")
+y <- 10*x + rnorm(1000, 0, 10*(x))
+y <- data.frame(y, x)
+model2 <- lm(y ~ x, data = y)
+y %>% 
+  ggplot(aes(x = x, y = y)) + geom_point()+
+  geom_smooth(method = "lm", linetype = "dashed", color = "black", se = TRUE, linewidth = 1, alpha = 0.4)+
+  theme_minimal()
+plot(model2$fitted.values,model2$residuals)
+```
+
+## Multicollinearity
+```{r}
+y <- 10*x + rnorm(1000, 0, 10*(x))
+w <- x + rnorm(1000, 0, 0.5)
+model1 <- lm(y ~ x)
+model2 <- lm(y ~ x + w)
+stargazer(model1, model2, type = "text")
+```
+
+:::
+
+## Diagnostics
 
 After fitting our model, it is essential to perform diagnostic checks to evaluate whether the model is correctly specified and whether the assumptions underlying regression analysis are being met. In this context, we use the performance package to assess various aspects of these assumptions and examine model quality.
 ```{r}
