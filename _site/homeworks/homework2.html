@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>homework2 – Methods for Research and Policy Evaluation</title>
+<title>Session 2 - OLS regressions – Methods for Research and Policy Evaluation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -216,26 +216,167 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Session 2 - OLS regressions</h1>
+</div>
 
 
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
 
 
 <section id="exercice-1---playing-with-data" class="level2">
 <h2 class="anchored" data-anchor-id="exercice-1---playing-with-data">Exercice 1 - playing with data</h2>
+<p>Download the European Social Survey wave 11 dataset (called ESS11) from &lt;“https://github.com/paulservais-1/methods_policyevaluation/raw/main/dataexos/ESS11_data/ESS11.csv”&gt;, using package <code>rio</code> and <code>import()</code>. Import the dataset in R. In this exercise, we are interested in understanding what explains trust in parliament (trstprl). The main factors considered are Education level (eduyrs), Political interest (polintr), Media Use (tvtot, netusoft);</p>
 <ol type="1">
-<li>Using the rio packages by calling <code>library(rio)</code> (if not already installed in your environment, install the package first), import the data from the ESS (wave 11), located at &lt;&gt;</li>
-<li>Using <code>colnames</code>, have a look at the names of your variables.</li>
-<li>Using function <code>unique</code>, have a look at the different years present in your data set</li>
+<li><p>Have a look at the summary statistics of all the variable mentioned before (trstprl, eduyrs, polintr, netusoft).</p></li>
+<li><p>In point 2, you see in the descriptive statistics that some variables have a maximum of 99. However, if you check the <a href="https://github.com/paulservais-1/methods_policyevaluation/raw/main/dataexos/ESS11_data/ESS11_codebook.html">codebook</a>, you will see that most of the questions are 10-point scale. Check the codebook to see if the 99 value is a code corresponding to missing values for example. If necessary, clean the data.</p></li>
+<li><p>Check the <code>summary()</code> once you have cleaned the data.</p></li>
+<li><p>Run a simple linear regression with trstprl as the dependent variable and eduyrs as independent variable.</p></li>
+</ol>
+<ol type="a">
+<li>What is the value of the coefficient of edurs ?</li>
+<li>Is the coefficient statistically different from 0?</li>
+</ol>
+<ol start="5" type="1">
+<li>From point 2, add the polintr and netusoft variables in the model.</li>
+</ol>
+<ol type="a">
+<li>Is there a variable that significantly influences trust ? Which one?</li>
+</ol>
+<ol start="6" type="1">
+<li>Present a clean regression table using the stargazer package.</li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>vot_turnout <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"/Users/paulservais/Library/CloudStorage/ProtonDrive-paservai@protonmail.com-folder/Website/methods_policyevaluation/dataexos/rain_turnout.dta"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(vot_turnout<span class="sc">$</span>year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.6
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.1     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.2
+✔ purrr     1.2.0     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#1.0</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ESS_11 <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"https://github.com/paulservais-1/methods_policyevaluation/raw/main/dataexos/ESS11_data/ESS11.csv"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#1.1</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ESS_11 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="st">"trstprl"</span>,<span class="st">"eduyrs"</span>,<span class="st">"polintr"</span>,<span class="st">"netusoft"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2012 2016 2020</code></pre>
+<pre><code>    trstprl           eduyrs         polintr         netusoft    
+ Min.   : 0.000   Min.   : 0.00   Min.   :1.000   Min.   :1.000  
+ 1st Qu.: 3.000   1st Qu.:11.00   1st Qu.:2.000   1st Qu.:4.000  
+ Median : 5.000   Median :13.00   Median :3.000   Median :5.000  
+ Mean   : 6.205   Mean   :14.26   Mean   :2.633   Mean   :4.221  
+ 3rd Qu.: 7.000   3rd Qu.:16.00   3rd Qu.:3.000   3rd Qu.:5.000  
+ Max.   :99.000   Max.   :99.00   Max.   :9.000   Max.   :9.000  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#1.2</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>data_set <span class="ot">&lt;-</span> ESS_11 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(trstprl <span class="sc">&lt;</span> <span class="dv">11</span> <span class="sc">&amp;</span> eduyrs <span class="sc">&lt;</span> <span class="dv">11</span> <span class="sc">&amp;</span> netusoft <span class="sc">&lt;</span> <span class="dv">6</span> <span class="sc">&amp;</span> polintr <span class="sc">&lt;</span> <span class="dv">6</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#1.3 </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>reg1<span class="ot">&lt;-</span><span class="fu">lm</span>(trstprl<span class="sc">~</span>eduyrs,<span class="at">data =</span> data_set)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = trstprl ~ eduyrs, data = data_set)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.6063 -2.1672  0.3937  1.9426  6.4914 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  3.50858    0.12016  29.199  &lt; 2e-16 ***
+eduyrs       0.10977    0.01476   7.437 1.14e-13 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.723 on 7696 degrees of freedom
+Multiple R-squared:  0.007136,  Adjusted R-squared:  0.007007 
+F-statistic: 55.31 on 1 and 7696 DF,  p-value: 1.141e-13</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#1.4</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>reg2<span class="ot">&lt;-</span><span class="fu">lm</span>(trstprl <span class="sc">~</span> eduyrs <span class="sc">+</span> polintr <span class="sc">+</span> netusoft, data_set)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = trstprl ~ eduyrs + polintr + netusoft, data = data_set)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.9330 -2.1212  0.2352  1.8143  6.7434 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  6.02057    0.16810  35.814  &lt; 2e-16 ***
+eduyrs       0.03545    0.01529   2.319  0.02040 *  
+polintr     -0.72274    0.03326 -21.730  &lt; 2e-16 ***
+netusoft     0.05614    0.01764   3.183  0.00146 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.639 on 7694 degrees of freedom
+Multiple R-squared:  0.06786,   Adjusted R-squared:  0.0675 
+F-statistic: 186.7 on 3 and 7694 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#1.5</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Please cite as: 
+
+ Hlavac, Marek (2022). stargazer: Well-Formatted Regression and Summary Statistics Tables.
+ R package version 5.2.3. https://CRAN.R-project.org/package=stargazer </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(reg1, reg2, <span class="at">type =</span> <span class="st">"text"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+======================================================================
+                                   Dependent variable:                
+                    --------------------------------------------------
+                                         trstprl                      
+                              (1)                       (2)           
+----------------------------------------------------------------------
+eduyrs                      0.110***                  0.035**         
+                            (0.015)                   (0.015)         
+                                                                      
+polintr                                              -0.723***        
+                                                      (0.033)         
+                                                                      
+netusoft                                             0.056***         
+                                                      (0.018)         
+                                                                      
+Constant                    3.509***                 6.021***         
+                            (0.120)                   (0.168)         
+                                                                      
+----------------------------------------------------------------------
+Observations                 7,698                     7,698          
+R2                           0.007                     0.068          
+Adjusted R2                  0.007                     0.068          
+Residual Std. Error    2.723 (df = 7696)         2.639 (df = 7694)    
+F Statistic         55.310*** (df = 1; 7696) 186.723*** (df = 3; 7694)
+======================================================================
+Note:                                      *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 </div>
 </div>
 </section>

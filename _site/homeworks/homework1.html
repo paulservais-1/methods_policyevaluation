@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>homework1 – Methods for Research and Policy Evaluation</title>
+<title>Session 1 — Descriptive statistics – Methods for Research and Policy Evaluation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -138,24 +173,8 @@ window.Quarto = {
  <span class="dropdown-text">Session 1: Dataset Building and Descriptive Statistics</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../sessions/session2.qmd">
+    <a class="dropdown-item" href="../sessions/session2/session2.html">
  <span class="dropdown-text">Session 2: OLS: Simple and Multiple Linear Regressions and Analysis</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../sessions/session3.html">
- <span class="dropdown-text">Session 3: Non-Linear Regressions and Analysis</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../sessions/session4.html">
- <span class="dropdown-text">Session 4: Difference-in-Differences (DiD)</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../sessions/session5.html">
- <span class="dropdown-text">Session 5: Regression Discontinuity Design (RDD)</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../sessions/session6.html">
- <span class="dropdown-text">Session 6: Instrumental Variables (IV), Two-Stage Least Squares (2SLS) and Two-Stage Residual Inclusion (2SRI)</span></a>
   </li>  
     </ul>
   </li>
@@ -175,23 +194,7 @@ window.Quarto = {
   </li>  
         <li>
     <a class="dropdown-item" href="../homeworks/homework2.html">
- <span class="dropdown-text">Session 2: OLS: Simple and Multiple Linear Regressions and Analysis</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../homeworks/homework3.html">
- <span class="dropdown-text">Session 3: Non-Linear Regressions and Analysis</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../homeworks/homework4.html">
- <span class="dropdown-text">Session 4: Difference-in-Differences (DiD)</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../homeworks/homework5.html">
- <span class="dropdown-text">Session 5: Regression Discontinuity Design (RDD)</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../homeworks/homework6.html">
- <span class="dropdown-text">Session 6: Instrumental Variables (IV), Two-Stage Least Squares (2SLS) and Two-Stage Residual Inclusion (2SRI)</span></a>
+ <span class="dropdown-text">Session 2: Statistical inference and linear regressions</span></a>
   </li>  
     </ul>
   </li>
@@ -208,6 +211,10 @@ window.Quarto = {
         <li>
     <a class="dropdown-item" href="../slides/session1/slides1.html">
  <span class="dropdown-text">Session 1: Dataset Building and Descriptive Statistics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../slides/session2/slides2.html">
+ <span class="dropdown-text">Session 2: Statistical inference and linear regressions</span></a>
   </li>  
     </ul>
   </li>
@@ -240,9 +247,25 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Session 1 — Descriptive statistics</h1>
+</div>
 
 
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
 
 
 <section id="exercice-1---manual-warm-up-1" class="level2">
@@ -285,6 +308,116 @@ window.Quarto = {
 <li>Plot the distribution of <code>happy</code> for <code>gndr == 1</code> and <code>gndr == 2</code>, using <code>ggplot2 : ggplot()</code> and <code>geom_bar(position = "dodge")</code></li>
 <li>Does being male/female influence your chances of self-reporting being happy ? Conduct a <code>t-test</code> to test the hypothesis that gender influences people’s self assessed level of happiness. What are the 95% and 99% confidence intervals ?</li>
 </ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.6
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.1     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.2
+✔ purrr     1.2.0     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ESS<span class="ot">&lt;-</span><span class="fu">import</span>(<span class="st">"https://jan-rovny.squarespace.com/s/ESS_FR.dta"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(ESS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,917
+Columns: 13
+$ essround &lt;dbl&gt; 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7…
+$ lrscale  &lt;dbl&gt; 4, 2, 5, 7, 6, 5, 7, 10, 3, 10, 4, 6, 2, 9, 5, 10, 6, 0, 5, 5…
+$ stflife  &lt;dbl&gt; 7, 7, 9, 8, 9, 9, 6, 1, 7, 8, 2, 5, 7, 9, 7, 5, 8, 7, 5, 8, 9…
+$ gincdif  &lt;dbl&gt; 2, 2, 5, 2, 2, 3, 2, 4, 4, 2, 1, 2, 2, 2, 1, 2, 2, 1, 4, 1, 3…
+$ euftf    &lt;dbl&gt; 6, 7, 4, 3, 3, 5, 4, 2, 4, 0, 9, 10, 9, 5, 1, 4, 5, 5, 5, 5, …
+$ imwbcnt  &lt;dbl&gt; 4, 5, 5, 6, 7, 5, 6, 5, 8, 0, 8, 5, 8, 7, 0, 5, 8, 5, 5, 6, 5…
+$ prtvtcfr &lt;dbl&gt; NA, 11, 11, NA, NA, NA, 10, 2, 9, 10, 9, NA, NA, 10, NA, 10, …
+$ happy    &lt;dbl&gt; 8, 8, 8, 7, 8, 10, 6, 3, 8, 8, 8, 8, 9, 9, 8, 8, 8, 7, 7, 8, …
+$ rlgatnd  &lt;dbl&gt; 5, 7, 7, 7, 7, 7, 6, 7, 7, 3, 5, 7, 7, 7, 3, 4, 5, 7, 7, 7, 6…
+$ gndr     &lt;dbl&gt; 2, 2, 1, 1, 2, 1, 2, 1, 1, 2, 1, 1, 2, 2, 1, 1, 1, 2, 2, 2, 1…
+$ yrbrn    &lt;dbl&gt; 1978, 1955, 1973, 1975, 1978, 1999, 1958, 1994, 1991, 1945, 1…
+$ eduyrs   &lt;dbl&gt; 11, 13, 18, 10, 17, 9, 14, 10, 19, NA, 20, 15, 14, 12, 11, 18…
+$ hinctnta &lt;dbl&gt; 7, 8, 10, 5, 7, 8, 7, NA, 1, 5, 1, NA, 1, NA, 1, 8, 1, 5, 7, …</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ESS <span class="ot">&lt;-</span> ESS <span class="sc">%&gt;%</span> <span class="fu">select</span>(euftf, happy,yrbrn, eduyrs, gndr)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(ESS<span class="sc">$</span>euftf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1917</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ESS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     euftf            happy            yrbrn          eduyrs     
+ Min.   : 0.000   Min.   : 0.000   Min.   :1916   Min.   : 0.00  
+ 1st Qu.: 3.000   1st Qu.: 6.000   1st Qu.:1950   1st Qu.:10.00  
+ Median : 5.000   Median : 8.000   Median :1964   Median :13.00  
+ Mean   : 4.946   Mean   : 7.192   Mean   :1964   Mean   :12.82  
+ 3rd Qu.: 7.000   3rd Qu.: 8.000   3rd Qu.:1979   3rd Qu.:16.00  
+ Max.   :10.000   Max.   :10.000   Max.   :2000   Max.   :50.00  
+ NA's   :74       NA's   :3        NA's   :3      NA's   :13     
+      gndr      
+ Min.   :1.000  
+ 1st Qu.:1.000  
+ Median :2.000  
+ Mean   :1.524  
+ 3rd Qu.:2.000  
+ Max.   :2.000  
+                </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ESS <span class="ot">&lt;-</span> ESS <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">age =</span> <span class="dv">2026</span><span class="sc">-</span>yrbrn)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(ESS<span class="sc">$</span>euftf)<span class="sc">/</span><span class="fu">length</span>(ESS<span class="sc">$</span>euftf))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="homework1_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(ESS<span class="sc">$</span>age, <span class="at">breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="homework1_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ESS, <span class="fu">aes</span>(<span class="at">x =</span> happy, <span class="at">fill =</span> <span class="fu">factor</span>(gndr))) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 3 rows containing non-finite outside the scale range
+(`stat_count()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="homework1_files/figure-html/unnamed-chunk-1-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>t_test_result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  ESS <span class="sc">%&gt;%</span> <span class="fu">filter</span>(gndr <span class="sc">==</span> <span class="dv">1</span>),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  ESS <span class="sc">%&gt;%</span> <span class="fu">filter</span>(gndr <span class="sc">==</span> <span class="dv">2</span>),</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">"two.sided"</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">conf.level =</span> <span class="fl">0.99</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">var.equal =</span> <span class="cn">FALSE</span>  <span class="co"># Use Welch's t-test for unequal variances</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>t_test_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  ESS %&gt;% filter(gndr == 1) and ESS %&gt;% filter(gndr == 2)
+t = -0.097359, df = 11313, p-value = 0.9224
+alternative hypothesis: true difference in means is not equal to 0
+99 percent confidence interval:
+ -36.47853  33.82184
+sample estimates:
+mean of x mean of y 
+ 343.6836  345.0119 </code></pre>
+</div>
+</div>
 </section>
 <section id="exercice-4-the-median-income-in-french-rural-communes" class="level2">
 <h2 class="anchored" data-anchor-id="exercice-4-the-median-income-in-french-rural-communes">Exercice 4 : the median income in French rural communes</h2>
@@ -300,6 +433,269 @@ window.Quarto = {
 <li>Plot the distributions of far-right voting in the different kinds of French rural communes (present in <code>dens7</code>), using <code>ggplot()</code>.</li>
 <li>Is the expected far-right voting significantly different in those different rural typologies ? Compute different t-tests, and conclude.</li>
 </ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>elec_eur <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/elections2024.csv"</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>socio_dem <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/demographics2024.xlsx"</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(elec_eur)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 34,400
+Columns: 15
+$ codecommune         &lt;int&gt; 1001, 1002, 1004, 1005, 1006, 1007, 1008, 1009, 10…
+$ codedep             &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+$ election_type       &lt;chr&gt; "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", …
+$ Year                &lt;int&gt; 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 20…
+$ far_right_relvotes  &lt;dbl&gt; 0.4281843, 0.2000000, 0.3453984, 0.4756258, 0.3692…
+$ far_right_votes     &lt;int&gt; 158, 30, 1565, 361, 24, 493, 144, 59, 191, 85, 59,…
+$ turnout             &lt;dbl&gt; 0.5574018, 0.6578947, 0.5203261, 0.5689655, 0.6435…
+$ incumbents_relvotes &lt;dbl&gt; 0.14363144, 0.14666667, 0.10836460, 0.14624506, 0.…
+$ incumbents_votes    &lt;int&gt; 53, 22, 491, 111, 15, 140, 39, 23, 56, 11, 21, 10,…
+$ greens_relvotes     &lt;dbl&gt; 0.05691057, 0.13333333, 0.04789230, 0.03162055, 0.…
+$ greens_votes        &lt;int&gt; 21, 20, 217, 24, 3, 65, 14, 3, 18, 15, 3, 3, 18, 1…
+$ right_relvotes      &lt;dbl&gt; 0.06504065, 0.06000000, 0.06488634, 0.06060606, 0.…
+$ right_votes         &lt;int&gt; 24, 9, 294, 46, 5, 83, 20, 15, 9, 6, 10, 2, 68, 26…
+$ socialists_relvotes &lt;dbl&gt; 0.07317073, 0.12000000, 0.12425513, 0.09090909, 0.…
+$ socialists_votes    &lt;int&gt; 27, 18, 563, 69, 9, 156, 40, 28, 35, 18, 27, 5, 10…</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(socio_dem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 34,596
+Columns: 43
+$ codecommune         &lt;chr&gt; "01001", "01002", "01004", "01005", "01006", "0100…
+$ Year                &lt;dbl&gt; 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 20…
+$ codedep             &lt;chr&gt; "01", "01", "01", "01", "01", "01", "01", "01", "0…
+$ agri                &lt;dbl&gt; 0, 0, 4, 11, 0, 15, 0, 0, 29, 11, 11, 2, 0, 11, 0,…
+$ indp                &lt;dbl&gt; 39, 39, 142, 37, 0, 39, 19, 41, 36, 0, 0, 0, 119, …
+$ cadr                &lt;dbl&gt; 33, 9, 678, 56, 0, 250, 18, 0, 58, 2, 0, 18, 19, 1…
+$ pint                &lt;dbl&gt; 14, 0, 1647, 192, 34, 311, 83, 95, 98, 78, 0, 13, …
+$ empl                &lt;dbl&gt; 86, 66, 1211, 185, 23, 339, 83, 21, 197, 17, 53, 1…
+$ ouvr                &lt;dbl&gt; 147, 0, 1235, 177, 23, 268, 122, 4, 154, 3, 68, 42…
+$ chom                &lt;dbl&gt; 26, 9, 427, 18, 0, 95, 7, 2, 47, 9, 9, 0, 22, 37, …
+$ pact                &lt;dbl&gt; 319, 114, 4917, 658, 80, 1222, 325, 161, 572, 111,…
+$ age                 &lt;dbl&gt; 44.20355, 36.97382, 39.07810, 43.10032, 44.01273, …
+$ popf                &lt;dbl&gt; 380, 128, 7490, 802, 56, 1613, 391, 191, 601, 173,…
+$ francais            &lt;dbl&gt; 776, 256, 12645, 1700, 107, 2867, 743, 316, 1111, …
+$ etranger            &lt;dbl&gt; 4, 1, 1248, 23, 5, 64, 18, 8, 37, 5, 5, 0, 402, 11…
+$ prixbien            &lt;dbl&gt; 231440.42, 136645.75, 190080.39, 228015.31, 172697…
+$ capitalratio        &lt;dbl&gt; 1.0423332, 0.6154085, 0.8560610, 1.0269077, 0.7777…
+$ npropri             &lt;dbl&gt; 345, 102, 3000, 464, 51, 845, 255, 149, 387, 126, …
+$ nlogement           &lt;dbl&gt; 418, 126, 7209, 604, 77, 1094, 354, 182, 524, 147,…
+$ pop                 &lt;dbl&gt; 747, 288, 14375, 1717, 116, 3057, 797, 325, 1300, …
+$ revmoyfoy           &lt;dbl&gt; 35802.43, 36150.97, 29982.14, 37242.09, 31769.92, …
+$ revtot              &lt;dbl&gt; 1.277961e-05, 3.862623e-06, 2.096039e-04, 2.853238…
+$ recetteimpotslocaux &lt;dbl&gt; 233.1938, 240.6562, 503.5779, 355.4615, 312.5804, …
+$ recette             &lt;dbl&gt; 608.9172, 796.6805, 1067.3215, 651.9904, 1026.0869…
+$ baseimpotslocaux    &lt;dbl&gt; 1905.169, 2244.090, 2895.855, 1900.238, 2077.438, …
+$ nodip               &lt;dbl&gt; 319, 57, 5361, 817, 0, 1026, 201, 69, 532, 124, 20…
+$ sup                 &lt;dbl&gt; 134, 15, 2884, 208, 1, 642, 201, 182, 197, 87, 9, …
+$ Libellé             &lt;chr&gt; "L'Abergement-Clémenciat", "L'Abergement-de-Varey"…
+$ Exploitations       &lt;dbl&gt; 11, 2, 2, 9, NA, 17, NA, 6, 10, 3, 5, 4, NA, 13, 4…
+$ Personnes           &lt;dbl&gt; 21, 6, 3, 17, NA, 30, NA, 13, 17, 6, 9, 15, NA, 19…
+$ UTA                 &lt;dbl&gt; 16, 6, 2, 11, NA, 25, NA, 9, 8, 7, 5, 16, NA, 8, 9…
+$ SAU                 &lt;dbl&gt; 889, 195, 71, 821, NA, 1888, NA, 122, 326, 584, 25…
+$ PBS                 &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ dens                &lt;chr&gt; "Rural", "Rural", "Urbain intermédiaire", "Rural",…
+$ densaav             &lt;chr&gt; "Rural non périurbain", "Rural non périurbain", "U…
+$ dens7               &lt;chr&gt; "Rural à habitat dispersé", "Rural à habitat dispe…
+$ ntot                &lt;dbl&gt; 345, 123, 5344, 676, 80, 1317, 332, 163, 619, 120,…
+$ pagri               &lt;dbl&gt; 0.000000000, 0.000000000, 0.000748503, 0.016272189…
+$ pindp               &lt;dbl&gt; 0.11304348, 0.31707317, 0.02657186, 0.05473373, 0.…
+$ pcadr               &lt;dbl&gt; 0.09565217, 0.07317073, 0.12687126, 0.08284024, 0.…
+$ ppint               &lt;dbl&gt; 0.04057971, 0.00000000, 0.30819611, 0.28402367, 0.…
+$ pempl               &lt;dbl&gt; 0.24927536, 0.53658537, 0.22660928, 0.27366864, 0.…
+$ pouvr               &lt;dbl&gt; 0.42608696, 0.00000000, 0.23110030, 0.26183432, 0.…</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>socio_dem<span class="sc">$</span>codecommune<span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(socio_dem<span class="sc">$</span>codecommune)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: NAs introduced by coercion</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>socio_dem<span class="sc">$</span>codedep <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(socio_dem<span class="sc">$</span>codedep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: NAs introduced by coercion</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>elec_eur <span class="ot">&lt;-</span> elec_eur <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(socio_dem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining with `by = join_by(codecommune, codedep, Year)`</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>elec_eur <span class="ot">&lt;-</span> elec_eur <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dens <span class="sc">==</span> <span class="st">"Rural"</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(variable <span class="cf">in</span> <span class="fu">colnames</span>(elec_eur)){</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.numeric</span>(elec_eur[[variable]])) {</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    elec_eur[[variable]] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(elec_eur[[variable]]),</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="fu">mean</span>(elec_eur[[variable]], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>                                   elec_eur[[variable]])</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(elec_eur)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  codecommune       codedep      election_type           Year     
+ Min.   : 1001   Min.   : 1.00   Length:30003       Min.   :2024  
+ 1st Qu.:24332   1st Qu.:24.00   Class :character   1st Qu.:2024  
+ Median :46335   Median :46.00   Mode  :character   Median :2024  
+ Mean   :45437   Mean   :45.19                      Mean   :2024  
+ 3rd Qu.:65306   3rd Qu.:65.00                      3rd Qu.:2024  
+ Max.   :95690   Max.   :95.00                      Max.   :2024  
+ far_right_relvotes far_right_votes     turnout       incumbents_relvotes
+ Min.   :0.0000     Min.   :   0.0   Min.   :0.2500   Min.   :0.00000    
+ 1st Qu.:0.3173     1st Qu.:  33.0   1st Qu.:0.5258   1st Qu.:0.09524    
+ Median :0.3911     Median :  67.0   Median :0.5680   Median :0.12500    
+ Mean   :0.3910     Mean   : 115.9   Mean   :0.5727   Mean   :0.12814    
+ 3rd Qu.:0.4648     3rd Qu.: 139.0   3rd Qu.:0.6140   3rd Qu.:0.15697    
+ Max.   :0.8636     Max.   :3062.0   Max.   :1.0000   Max.   :0.46154    
+ incumbents_votes  greens_relvotes    greens_votes    right_relvotes   
+ Min.   :   0.00   Min.   :0.00000   Min.   :  0.00   Min.   :0.00000  
+ 1st Qu.:  10.00   1st Qu.:0.02066   1st Qu.:  2.00   1st Qu.:0.04674  
+ Median :  21.00   Median :0.03613   Median :  6.00   Median :0.06691  
+ Mean   :  42.19   Mean   :0.04136   Mean   : 13.54   Mean   :0.07406  
+ 3rd Qu.:  47.00   3rd Qu.:0.05535   3rd Qu.: 15.00   3rd Qu.:0.09255  
+ Max.   :1988.00   Max.   :0.58333   Max.   :539.00   Max.   :0.57143  
+  right_votes     socialists_relvotes socialists_votes       agri        
+ Min.   :  0.00   Min.   :0.00000     Min.   :   0.00   Min.   :  0.000  
+ 1st Qu.:  6.00   1st Qu.:0.07353     1st Qu.:   8.00   1st Qu.:  0.000  
+ Median : 12.00   Median :0.10569     Median :  18.00   Median :  0.000  
+ Mean   : 21.45   Mean   :0.11134     Mean   :  36.83   Mean   :  9.453  
+ 3rd Qu.: 25.00   3rd Qu.:0.14258     3rd Qu.:  40.00   3rd Qu.: 12.000  
+ Max.   :835.00   Max.   :0.64706     Max.   :1317.00   Max.   :879.000  
+      indp              cadr              pint              empl        
+ Min.   :   0.00   Min.   :   0.00   Min.   :   0.00   Min.   :   0.00  
+ 1st Qu.:   0.00   1st Qu.:   0.00   1st Qu.:   7.00   1st Qu.:   9.00  
+ Median :   9.00   Median :  11.00   Median :  32.00   Median :  34.00  
+ Mean   :  21.05   Mean   :  29.12   Mean   :  67.66   Mean   :  70.04  
+ 3rd Qu.:  28.00   3rd Qu.:  34.00   3rd Qu.:  82.00   3rd Qu.:  84.00  
+ Max.   :1301.00   Max.   :1391.00   Max.   :4676.00   Max.   :4612.00  
+      ouvr              chom             pact              age       
+ Min.   :   0.00   Min.   :  0.00   Min.   :    0.0   Min.   :18.00  
+ 1st Qu.:   7.00   1st Qu.:  0.00   1st Qu.:   69.0   1st Qu.:38.76  
+ Median :  30.00   Median :  6.00   Median :  141.0   Median :43.65  
+ Mean   :  62.21   Mean   : 14.89   Mean   :  259.5   Mean   :44.41  
+ 3rd Qu.:  75.00   3rd Qu.: 18.00   3rd Qu.:  298.0   3rd Qu.:49.23  
+ Max.   :6248.00   Max.   :535.00   Max.   :18815.0   Max.   :82.00  
+      popf            francais          etranger          prixbien      
+ Min.   :    0.0   Min.   :    3.0   Min.   :   0.00   Min.   :   3618  
+ 1st Qu.:   93.0   1st Qu.:  176.0   1st Qu.:   2.00   1st Qu.:  96765  
+ Median :  193.0   Median :  368.0   Median :   6.00   Median : 132184  
+ Mean   :  378.4   Mean   :  701.1   Mean   :  18.17   Mean   : 143432  
+ 3rd Qu.:  421.0   3rd Qu.:  805.5   3rd Qu.:  18.00   3rd Qu.: 175150  
+ Max.   :24203.0   Max.   :26651.0   Max.   :1469.00   Max.   :1822672  
+  capitalratio        npropri         nlogement           pop         
+ Min.   :0.01629   Min.   :   0.0   Min.   :   0.0   Min.   :    0.0  
+ 1st Qu.:0.43580   1st Qu.:  70.0   1st Qu.:  85.0   1st Qu.:  192.0  
+ Median :0.59532   Median : 141.0   Median : 173.0   Median :  389.0  
+ Mean   :0.64597   Mean   : 241.8   Mean   : 319.5   Mean   :  748.1  
+ 3rd Qu.:0.78882   3rd Qu.: 293.0   3rd Qu.: 371.0   3rd Qu.:  842.0  
+ Max.   :8.20873   Max.   :6157.0   Max.   :9602.0   Max.   :47943.0  
+   revmoyfoy          revtot          recetteimpotslocaux    recette        
+ Min.   :  8151   Min.   :1.015e-07   Min.   :    0.0     Min.   :   84.22  
+ 1st Qu.: 25650   1st Qu.:2.355e-06   1st Qu.:  208.2     1st Qu.:  588.54  
+ Median : 29195   Median :5.110e-06   Median :  275.0     Median :  720.78  
+ Mean   : 30465   Mean   :9.997e-06   Mean   :  309.0     Mean   :  857.94  
+ 3rd Qu.: 33726   3rd Qu.:1.145e-05   3rd Qu.:  352.7     3rd Qu.:  922.12  
+ Max.   :167966   Max.   :3.300e-04   Max.   :22259.0     Max.   :56962.84  
+ baseimpotslocaux      nodip              sup           Libellé         
+ Min.   :  199.9   Min.   :    0.0   Min.   :   0.0   Length:30003      
+ 1st Qu.: 1588.3   1st Qu.:   71.0   1st Qu.:  27.0   Class :character  
+ Median : 1910.5   Median :  156.0   Median :  72.0   Mode  :character  
+ Mean   : 2181.5   Mean   :  303.8   Mean   : 142.8                     
+ 3rd Qu.: 2344.3   3rd Qu.:  340.0   3rd Qu.: 166.0                     
+ Max.   :58601.6   Max.   :20594.0   Max.   :6131.0                     
+ Exploitations      Personnes            UTA               SAU         
+ Min.   :  0.00   Min.   :   0.00   Min.   :   0.00   Min.   :    0.0  
+ 1st Qu.:  5.00   1st Qu.:  10.00   1st Qu.:   7.00   1st Qu.:  399.0  
+ Median : 10.00   Median :  20.00   Median :  14.00   Median :  762.0  
+ Mean   : 12.73   Mean   :  27.38   Mean   :  20.72   Mean   :  902.2  
+ 3rd Qu.: 14.00   3rd Qu.:  28.00   3rd Qu.:  20.72   3rd Qu.: 1038.0  
+ Max.   :518.00   Max.   :1299.00   Max.   :1086.00   Max.   :25923.0  
+   PBS              dens             densaav             dens7          
+ Mode:logical   Length:30003       Length:30003       Length:30003      
+ NA's:30003     Class :character   Class :character   Class :character  
+                Mode  :character   Mode  :character   Mode  :character  
+                                                                        
+                                                                        
+                                                                        
+      ntot             pagri              pindp             pcadr        
+ Min.   :    0.0   Min.   :0.000000   Min.   :0.00000   Min.   :0.00000  
+ 1st Qu.:   73.0   1st Qu.:0.000000   1st Qu.:0.00000   1st Qu.:0.00000  
+ Median :  150.0   Median :0.001299   Median :0.05060   Median :0.06562  
+ Mean   :  274.4   Mean   :0.063918   Mean   :0.08754   Mean   :0.10268  
+ 3rd Qu.:  315.0   3rd Qu.:0.073569   3rd Qu.:0.12838   3rd Qu.:0.15686  
+ Max.   :19298.0   Max.   :1.000000   Max.   :1.00000   Max.   :1.00000  
+     ppint             pempl            pouvr        
+ Min.   :0.00000   Min.   :0.0000   Min.   :0.00000  
+ 1st Qu.:0.08271   1st Qu.:0.1024   1st Qu.:0.06897  
+ Median :0.21951   Median :0.2334   Median :0.20300  
+ Mean   :0.23059   Mean   :0.2371   Mean   :0.22387  
+ 3rd Qu.:0.33735   3rd Qu.:0.3404   3rd Qu.:0.33030  
+ Max.   :1.00000   Max.   :1.0000   Max.   :1.00000  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> elec_eur, <span class="fu">aes</span>(<span class="at">x =</span> far_right_relvotes, <span class="at">color =</span> dens7))<span class="sc">+</span><span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="homework1_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example numeric variable (replace with your actual variable)</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>numeric_var <span class="ot">&lt;-</span> elec_eur<span class="sc">$</span>far_right_relvotes</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data by dens7 categories</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>group1 <span class="ot">&lt;-</span> numeric_var[elec_eur<span class="sc">$</span>dens7 <span class="sc">==</span> <span class="st">"Rural à habitat dispersé"</span>]</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>group2 <span class="ot">&lt;-</span> numeric_var[elec_eur<span class="sc">$</span>dens7 <span class="sc">==</span> <span class="st">"Bourgs ruraux"</span>]</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>group3 <span class="ot">&lt;-</span> numeric_var[elec_eur<span class="sc">$</span>dens7 <span class="sc">==</span> <span class="st">"Rural à habitat très dispersé"</span>]</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform pairwise t-tests</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>t_test_1_2 <span class="ot">&lt;-</span> <span class="fu">t.test</span>(group1, group2)</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>t_test_1_3 <span class="ot">&lt;-</span> <span class="fu">t.test</span>(group1, group3)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>t_test_2_3 <span class="ot">&lt;-</span> <span class="fu">t.test</span>(group2, group3)</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Print results</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(t_test_1_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  group1 and group2
+t = 6.0094, df = 9040.5, p-value = 1.934e-09
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 0.006204481 0.012211744
+sample estimates:
+mean of x mean of y 
+0.4069688 0.3977607 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(t_test_1_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  group1 and group3
+t = 38.528, df = 11589, p-value &lt; 2.2e-16
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 0.05926961 0.06562374
+sample estimates:
+mean of x mean of y 
+0.4069688 0.3445221 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(t_test_2_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  group2 and group3
+t = 27.637, df = 11860, p-value &lt; 2.2e-16
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 0.04946262 0.05701450
+sample estimates:
+mean of x mean of y 
+0.3977607 0.3445221 </code></pre>
+</div>
+</div>
 </section>
 <section id="take-home-assignement" class="level2">
 <h2 class="anchored" data-anchor-id="take-home-assignement">Take-home assignement</h2>
