@@ -211,3 +211,4 @@ check_heteroscedasticity(model4) # Run a Breush-Pagan test
 
 ```
 
+
