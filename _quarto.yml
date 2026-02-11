@@ -13,33 +13,18 @@ website:
             href: sessions/session1/session1.qmd
           - text: "Session 2: OLS: Simple and Multiple Linear Regressions and Analysis"
             href: sessions/session2/session2.qmd
-          - text: "Session 3: Non-Linear Regressions and Analysis"
-            href: sessions/session3.qmd
-          - text: "Session 4: Difference-in-Differences (DiD)"
-            href: sessions/session4.qmd
-          - text: "Session 5: Regression Discontinuity Design (RDD)"
-            href: sessions/session5.qmd
-          - text: "Session 6: Instrumental Variables (IV), Two-Stage Least Squares (2SLS) and Two-Stage Residual Inclusion (2SRI)"
-            href: sessions/session6.qmd
-       
       - text: Exercices
       - menu:
           - text: "Session 1: Dataset Building and Descriptive Statistics"
             href: homeworks/homework1.qmd
-          - text: "Session 2: OLS: Simple and Multiple Linear Regressions and Analysis"
+          - text: "Session 2: Statistical inference and linear regressions"
             href: homeworks/homework2.qmd
-          - text: "Session 3: Non-Linear Regressions and Analysis"
-            href: homeworks/homework3.qmd
-          - text: "Session 4: Difference-in-Differences (DiD)"
-            href: homeworks/homework4.qmd
-          - text: "Session 5: Regression Discontinuity Design (RDD)"
-            href: homeworks/homework5.qmd
-          - text: "Session 6: Instrumental Variables (IV), Two-Stage Least Squares (2SLS) and Two-Stage Residual Inclusion (2SRI)"
-            href: homeworks/homework6.qmd
       - text: Slides
       - menu:
           - text: "Session 1: Dataset Building and Descriptive Statistics"
             href: slides/session1/slides1.qmd
+          - text: "Session 2: Statistical inference and linear regressions"
+            href: slides/session2/slides2.qmd
       - href: about.qmd
         text: About
 

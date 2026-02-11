@@ -865,14 +865,14 @@
     "href": "sessions/session2/session2.html",
     "title": "Session 2 — Relationships between variables",
     "section": "",
-    "text": "In our previous session, we focused on describing individual variables. We explored measures of central tendency—such as the mean, median, and mode—as well as measures of dispersion, which show how values are spread around these central points. We also examined graphical methods like histograms and density plots, which help visualize the distribution of a variable. Histograms display the frequency of values within intervals, while density plots represent the distribution as a continuous curve. These tools led us to the concept of the probability density function, a continuous function that best represents the distribution of a variable.\nWhile describing a single variable is informative and foundational, most research aims to go further by examining relationships between variables. The goal is often to determine whether one variable (X) influences another (Y), or vice versa. This was briefly introduced at the end of Session 1, where we considered whether density could be reliably linked to a significant effect on the median income of municipalities. This question was complex because the subgroups not only had different means but also different dispersions—higher deviations around those means. To address this, we introduced the t-test, a method for comparing the means of two groups.\n\n\n\nOf course, in practice we are often interested in studying relationships between different types of variables, and the choice of statistical method depends on the measurement scale of both the independent and dependent variables. When both the independent and dependent variables are categorical (for example, gender and voting preference), we typically use crosstabulation and chi-square tests to assess whether the distribution of one variable differs across the categories of the other. If the independent variable is categorical but the dependent variable is continuous (for example, comparing average incomes across two or more groups), we use mean comparison methods such as the t-test to determine whether group means differ. When the independent variable is continuous and the dependent variable is categorical (for example, predicting whether someone purchases a product based on age or income), logistic regression (often expressed in terms of logits) allows us to model the probability of category membership as a function of the continuous predictors. Finally, when both variables are continuous, we can assess their association with correlation and explore predictive relationships with regression analysis. Understanding these distinctions helps you choose appropriate analytical tools that match the nature of your data and research questions.\n\nRecommended types of analysis based on variable types\n\n\n\n\n\n\n\n\nDV: Categorical\nDV: Interval/Continuous\n\n\n\n\nIV: Categorical\nCrosstabs / χ² Test\nCompare Means / t-Test\n\n\nIV: Interval/Continuous\nLogistic Regression / Logits\nCorrelation / Scatter / Regression\n\n\n\nIn this session, we will build on these ideas by presenting two key approaches for analyzing relationships between variables:\n\nt-tests : when your dependent variable is continuous (e.g. median income), your independent variable is categorical (e.g. density category)\nLinear regressions : when your dependent variable and your independent variables are continuous"
+    "text": "In our previous session, we focused on describing individual variables. We explored measures of central tendency—such as the mean, median, and mode—as well as measures of dispersion, which show how values are spread around these central points. We also examined graphical methods like histograms and density plots, which help visualize the distribution of a variable. Histograms display the frequency of values within intervals, while density plots represent the distribution as a continuous curve. These tools led us to the concept of the probability density function, a continuous function that best represents the distribution of a variable.\nWhile describing a single variable is informative and foundational, most research aims to go further by examining relationships between variables. The goal is often to determine whether one variable (X) influences another (Y), or vice versa. This was briefly introduced at the end of Session 1, where we considered whether density could be reliably linked to a significant effect on the median income of municipalities. This question was complex because the subgroups not only had different means but also different dispersions—higher deviations around those means. To address this, we introduced the t-test, a method for comparing the means of two groups.\nIn this session, we will :\n\nRemind you important notions of statistical inference, which we will be using for the rest of the class;\nIntroduce you to t-tests;\nIntroduce you to linear regression models;\n\n\n\n\nOf course, in practice we are often interested in studying relationships between different types of variables, and the choice of statistical method depends on the measurement scale of both the independent and dependent variables. When both the independent and dependent variables are categorical (for example, gender and voting preference), we typically use crosstabulation and chi-square tests to assess whether the distribution of one variable differs across the categories of the other. If the independent variable is categorical but the dependent variable is continuous (for example, comparing average incomes across two or more groups), we use mean comparison methods such as the t-test to determine whether group means differ. When the independent variable is continuous and the dependent variable is categorical (for example, predicting whether someone purchases a product based on age or income), logistic regression (often expressed in terms of logits) allows us to model the probability of category membership as a function of the continuous predictors. Finally, when both variables are continuous, we can assess their association with correlation and explore predictive relationships with regression analysis. Understanding these distinctions helps you choose appropriate analytical tools that match the nature of your data and research questions.\n\nRecommended types of analysis based on variable types\n\n\n\n\n\n\n\n\nDV: Categorical\nDV: Interval/Continuous\n\n\n\n\nIV: Categorical\nCrosstabs / χ² Test\nCompare Means / t-Test\n\n\nIV: Interval/Continuous\nLogistic Regression / Logits\nCorrelation / Scatter / Regression\n\n\n\nIn this session, we will build on these ideas by presenting two key approaches for analyzing relationships between variables:\n\nt-tests : when your dependent variable is continuous (e.g. median income), your independent variable is categorical (e.g. density category)\nLinear regressions : when your dependent variable and your independent variables are continuous"
   },
   {
     "objectID": "sessions/session2/session2.html#motivation",
     "href": "sessions/session2/session2.html#motivation",
     "title": "Session 2 — Relationships between variables",
     "section": "",
-    "text": "In our previous session, we focused on describing individual variables. We explored measures of central tendency—such as the mean, median, and mode—as well as measures of dispersion, which show how values are spread around these central points. We also examined graphical methods like histograms and density plots, which help visualize the distribution of a variable. Histograms display the frequency of values within intervals, while density plots represent the distribution as a continuous curve. These tools led us to the concept of the probability density function, a continuous function that best represents the distribution of a variable.\nWhile describing a single variable is informative and foundational, most research aims to go further by examining relationships between variables. The goal is often to determine whether one variable (X) influences another (Y), or vice versa. This was briefly introduced at the end of Session 1, where we considered whether density could be reliably linked to a significant effect on the median income of municipalities. This question was complex because the subgroups not only had different means but also different dispersions—higher deviations around those means. To address this, we introduced the t-test, a method for comparing the means of two groups."
+    "text": "In our previous session, we focused on describing individual variables. We explored measures of central tendency—such as the mean, median, and mode—as well as measures of dispersion, which show how values are spread around these central points. We also examined graphical methods like histograms and density plots, which help visualize the distribution of a variable. Histograms display the frequency of values within intervals, while density plots represent the distribution as a continuous curve. These tools led us to the concept of the probability density function, a continuous function that best represents the distribution of a variable.\nWhile describing a single variable is informative and foundational, most research aims to go further by examining relationships between variables. The goal is often to determine whether one variable (X) influences another (Y), or vice versa. This was briefly introduced at the end of Session 1, where we considered whether density could be reliably linked to a significant effect on the median income of municipalities. This question was complex because the subgroups not only had different means but also different dispersions—higher deviations around those means. To address this, we introduced the t-test, a method for comparing the means of two groups.\nIn this session, we will :\n\nRemind you important notions of statistical inference, which we will be using for the rest of the class;\nIntroduce you to t-tests;\nIntroduce you to linear regression models;"
   },
   {
     "objectID": "sessions/session2/session2.html#dependent-and-independent-variables",
@@ -893,14 +893,14 @@
     "href": "sessions/session2/session2.html#probability-density-function",
     "title": "Session 2 — Relationships between variables",
     "section": "Probability density function",
-    "text": "Probability density function\nLet’s come back to our example with three dices with (1) 1000 faces, 1400 faces, and 800 faces, with values respectively ranging between 1/1000 to 1, 1/1400 to 1, and 1/800 to 1. You have three random variables \\(X_1, X_2,X_3\\) corresponding to the outcome of each dice, and \\(Y\\) being the sum of these dices.\nImagine rolling those three dices, and plotting the resulting distribution. You could simulate that in R this way.\n\nlibrary(ggplot2)\nlibrary(dplyr)\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\nN = 100000 #number of measurements\nx1 = sample(1:1000,N, replace=T)/1000 # first dice (values are from 1 to 6)\nx2 = sample(1:1400,N, replace = T)/1400\nx3 = sample(1:800,N,replace = T)/800\ny = x1+x2+x3\ndat &lt;- data.frame(y)\nhead(dat, 10)\n\n           y\n1  2.4131071\n2  1.0723571\n3  1.8515000\n4  0.4799643\n5  1.6839286\n6  1.2254643\n7  2.3531786\n8  1.1562143\n9  1.8989643\n10 1.3646071\n\nggplot(dat, aes(x = y)) +\n  geom_histogram(aes(y = after_stat(density)), bins = 100)+\n  geom_density(color = \"red\", linewidth = 1) +\n  labs(title = \"Distribution of y = x1 + x2 + x3\",\n       x = \"y\",\n       y = \"Density\") +\n  theme_minimal()\n\n\n\n\n\n\n\ndens &lt;- density(dat$y)\napprox(dens$x, dens$y, xout = 1.291)\n\n$x\n[1] 1.291\n\n$y\n[1] 0.7068226\n\n\nYou might ask yourself : what is the probability of obtaining 1.291 ? Of course, this probability would be extremely low : \\(P_X(x) \\rightarrow 0\\). Instead, you would rather consider the probability of having a value falling in a given interval \\([a,b]\\), for instance \\([1, 1.5]\\). This probability would be given by: \\[\\begin{equation}\n\\int_a^b f_X(x) \\text{d}x\n\\end{equation}\\]\nThis fancy integral means nothing more than the sum of all values of \\(f_X\\) multiplied by tiny intervals \\(\\delta x \\rightarrow 0\\). Graphically, it is the area under the curve \\(f_X\\), for x varying from \\(a\\) to \\(b\\). This is shown visually on the graph below :\n\n\n\n\n\n\n\n\n\n\\(f_X\\) is called a density because it is normalised in such way that when summing all the values over the range of potential outcomes \\(x\\), which is written by the integral : \\[\\begin{equation}\n\\int f_X(x) dx = 1\n\\end{equation}\\]\nHence, for continuous random variables, the probability that the variable falls within a given interval, is calculated as the integral of the probability density function (PDF) over that interval:\n\\[\\begin{equation}\n\\Pr(a \\leq X \\leq b) = \\int_a^b f_X(x) \\, dx\n\\end{equation}\\]\nAnother way of seeing that the probability of obtaining a single value \\(\\rightarrow 0\\) for continuous variable is to compute the probability that X lies within an extremely small interval : \\[\\begin{equation}\n\\mathbb{P}(a \\leq X \\leq a + \\epsilon),\n\\end{equation}\\]\nWhere epsilon is an extremely small number. In the case where \\(\\epsilon = 0.01\\) and \\(a = 1\\), we have the following visualisation (a smaller epsilon would become impossible for us to see).\n\n\n\n\n\n\n\n\n\nIf the interval \\([a, a+\\epsilon]\\) is very small (for example, around \\(x = 1.291\\)), the integral of the PDF \\(f_X(x)\\) over that range is close to 0 (the area under the curve along this interval is almost zero). This shows that as the interval shrinks, and if \\(\\epsilon \\rightarrow 0\\), the probability approaches zero. Therefore, for a continuous variable, the probability of obtaining any single exact value is zero."
+    "text": "Probability density function\nLet’s come back to our example with three dices with (1) 1000 faces, 1400 faces, and 800 faces, with values respectively ranging between 1/1000 to 1, 1/1400 to 1, and 1/800 to 1. You have three random variables \\(X_1, X_2,X_3\\) corresponding to the outcome of each dice, and \\(Y\\) being the sum of these dices.\nImagine rolling those three dices, and plotting the resulting distribution. You could simulate that in R this way.\n\nlibrary(ggplot2)\nlibrary(dplyr)\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\nN = 100000 #number of measurements\nx1 = sample(1:1000,N, replace=T)/1000 # first dice (values are from 1 to 6)\nx2 = sample(1:1400,N, replace = T)/1400\nx3 = sample(1:800,N,replace = T)/800\ny = x1+x2+x3\ndat &lt;- data.frame(y)\nhead(dat, 10)\n\n           y\n1  0.5765000\n2  0.7694643\n3  1.4046429\n4  0.3458214\n5  1.5523929\n6  1.8858571\n7  2.1070714\n8  2.3204286\n9  1.9109286\n10 1.4282857\n\nggplot(dat, aes(x = y)) +\n  geom_histogram(aes(y = after_stat(density)), bins = 100)+\n  geom_density(color = \"red\", linewidth = 1) +\n  labs(title = \"Distribution of y = x1 + x2 + x3\",\n       x = \"y\",\n       y = \"Density\") +\n  theme_minimal()\n\n\n\n\n\n\n\ndens &lt;- density(dat$y)\napprox(dens$x, dens$y, xout = 1.291)\n\n$x\n[1] 1.291\n\n$y\n[1] 0.7068518\n\n\nYou might ask yourself : what is the probability of obtaining 1.291 ? Of course, this probability would be extremely low : \\(P_X(x) \\rightarrow 0\\). Instead, you would rather consider the probability of having a value falling in a given interval \\([a,b]\\), for instance \\([1, 1.5]\\). This probability would be given by: \\[\\begin{equation}\n\\int_a^b f_X(x) \\text{d}x\n\\end{equation}\\]\nThis fancy integral means nothing more than the sum of all values of \\(f_X\\) multiplied by tiny intervals \\(\\delta x \\rightarrow 0\\). Graphically, it is the area under the curve \\(f_X\\), for x varying from \\(a\\) to \\(b\\). This is shown visually on the graph below :\n\n\n\n\n\n\n\n\n\n\\(f_X\\) is called a density because it is normalised in such way that when summing all the values over the range of potential outcomes \\(x\\), which is written by the integral : \\[\\begin{equation}\n\\int f_X(x) dx = 1\n\\end{equation}\\]\nHence, for continuous random variables, the probability that the variable falls within a given interval, is calculated as the integral of the probability density function (PDF) over that interval:\n\\[\\begin{equation}\n\\Pr(a \\leq X \\leq b) = \\int_a^b f_X(x) \\, dx\n\\end{equation}\\]\nAnother way of seeing that the probability of obtaining a single value \\(\\rightarrow 0\\) for continuous variable is to compute the probability that X lies within an extremely small interval : \\[\\begin{equation}\n\\mathbb{P}(a \\leq X \\leq a + \\epsilon),\n\\end{equation}\\]\nWhere epsilon is an extremely small number. In the case where \\(\\epsilon = 0.01\\) and \\(a = 1\\), we have the following visualisation (a smaller epsilon would become impossible for us to see).\n\n\n\n\n\n\n\n\n\nIf the interval \\([a, a+\\epsilon]\\) is very small (for example, around \\(x = 1.291\\)), the integral of the PDF \\(f_X(x)\\) over that range is close to 0 (the area under the curve along this interval is almost zero). This shows that as the interval shrinks, and if \\(\\epsilon \\rightarrow 0\\), the probability approaches zero. Therefore, for a continuous variable, the probability of obtaining any single exact value is zero."
   },
   {
     "objectID": "sessions/session2/session2.html#the-normal-distribution",
     "href": "sessions/session2/session2.html#the-normal-distribution",
     "title": "Session 2 — Relationships between variables",
     "section": "The normal distribution",
-    "text": "The normal distribution\nThe normal distribution has the following expression :\n\\[\\begin{equation}\nf_N(x) = \\mathcal{N}(x; \\mu, \\sigma) = \\frac{1}{\\sigma \\sqrt{2\\pi}} e^{-\\frac{1}{2}(\\frac{x-\\mu}{\\sigma})^2}\n\\end{equation}\\]\nwhere “e” stands for the exponential (\\(\\approx  2.71828\\)). It is generally noted \\(\\mathcal{N}(\\mu, \\sigma^2)\\), where \\(\\mu\\) stands for its mean, and \\(\\sigma^2\\) for its variance. The normal distribution is therefore defined by two parameters : one parameter of position, \\(\\mu\\), and one parameter of dispersion, \\(\\sigma\\).\nThe canonical form of the normal distribution, called the ‘standard normal distribution’, is \\[\\begin{equation}\n\\mathcal{N}(0,1) = \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{1}{2}x^2},\n\\end{equation}\\] which is a normal distribution with a mean that is zero, and a standard deviation of 1.\nThe normal distribution has important properties, that make it extremely useful in practice :\n\nIt is continuous\nUnbounded (it ranges from \\(-\\infty \\text{ to } +\\infty\\))\nSymmetrical\nThe mode = median = mean\n\nThe following graph shows you three different normal distributions with different means and variances. You can see that the peak of the distribution is located at its mean, and that the variance translates how dispersed the distribution is around its mean.\n\n\n\n\n\n\n\n\n\nIn general, we will assume that our random variables follow normal distributions. If that is not the case, and the distribution is heavily skewed, you could transform your values by either logging it (when positively skewed, as the log will attenuate the highest values) or exponentiating it (when negatively skewed, as the exponential will push the lowest values). If our random variables follow a normal distribution, then their mean and standard deviations correspond to the parameters \\(\\mu\\) and \\(\\sigma\\) of the normal distribution, and we can easily compute the probabilities.\n\nEstimation of probabilities\nConsider again the random variable y, obtained from the sum of dices x1, x2, x3. \\(Y\\) is a normal distribution and you have the parameters :\n\nmean(y)\n\n[1] 1.500427\n\nsd(y)\n\n[1] 0.5001973\n\n\nwhich means that the normal distribution is centered in 1.5, and its standard deviation is 0.5 : 68% of the data is located within the interval between 1 and 2.\nSince you now know that : \\[\\begin{equation}\nP(y \\leq 2.5) = \\int_{-\\infty}^{2.5} \\mathcal{N}(x; 1.5, 0.5) \\text{d}x\n\\end{equation}\\]\nyou can therefore easily compute the probability that, if you roll your dices once, you get a value below or equal to 2.5. Since you now know that your random variable follows a normal distribution, this means should you compute ::\n\\[\\begin{equation}\n\\int_{0}^{2.5} \\mathcal{N}(x; 1.5, 0.5) \\text{d}x = \\int_0^{2.5} \\frac{1}{1.5 \\sqrt{2\\pi}} e^{-\\frac{1}{2}(\\frac{x-0.5}{1.5})^2} = P(x \\leq 2.5),\n\\end{equation}\\]\nwhich is of course very difficult if you don’t know much about integrals (and even if you know much about integrals, Gaussians are in fact very difficult to integrate). That is why you have two in this case : either you use the tables, which is more elegant and what you must master, or you integrate this numerically (less efficient and less precise, though).\n\n\nStatistical tables\nOne way of estimating that integral, that we more commonly use in practice, is the following. You could easily switch from this \\(\\mathcal{N}_Y(1.5, 0.5)\\) to the normal \\(\\mathcal{N}(0,1)\\) by considering the random variable Z, made from Y:\n\\[\\begin{equation}\nZ = \\frac{Y-\\mu_y}{\\sigma_y}\n\\end{equation}\\]\nThis random variable Z follows a standard normal distribution \\(\\mathcal{N}(0,1)\\). Tables which associate for each level of confidence (or probability), the value of that corresponding Z variable, exist online. You can find such “z” table here or here. They basically have computed the exact value of that difficult integral for many different values of Z, and give the result.\n\nZ-tableT-table\n\n\n\n\n\nStandard Normal Distribution Table Φ(z)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nZ\n.00\n.01\n.02\n.03\n.04\n.05\n.06\n.07\n.08\n.09\n\n\n\n\n0.0\n0.50000\n0.50399\n0.50798\n0.51197\n0.51595\n0.51994\n0.52392\n0.52790\n0.53188\n0.53586\n\n\n0.1\n0.53983\n0.54380\n0.54776\n0.55172\n0.55567\n0.55962\n0.56356\n0.56749\n0.57142\n0.57535\n\n\n0.2\n0.57926\n0.58317\n0.58706\n0.59095\n0.59483\n0.59871\n0.60257\n0.60642\n0.61026\n0.61409\n\n\n0.3\n0.61791\n0.62172\n0.62552\n0.62930\n0.63307\n0.63683\n0.64058\n0.64431\n0.64803\n0.65173\n\n\n0.4\n0.65542\n0.65910\n0.66276\n0.66640\n0.67003\n0.67364\n0.67724\n0.68082\n0.68439\n0.68793\n\n\n0.5\n0.69146\n0.69497\n0.69847\n0.70194\n0.70540\n0.70884\n0.71226\n0.71566\n0.71904\n0.72240\n\n\n0.6\n0.72575\n0.72907\n0.73237\n0.73565\n0.73891\n0.74215\n0.74537\n0.74857\n0.75175\n0.75490\n\n\n0.7\n0.75804\n0.76115\n0.76424\n0.76730\n0.77035\n0.77337\n0.77637\n0.77935\n0.78230\n0.78524\n\n\n0.8\n0.78814\n0.79103\n0.79389\n0.79673\n0.79955\n0.80234\n0.80511\n0.80785\n0.81057\n0.81327\n\n\n0.9\n0.81594\n0.81859\n0.82121\n0.82381\n0.82639\n0.82894\n0.83147\n0.83398\n0.83646\n0.83891\n\n\n1.0\n0.84134\n0.84375\n0.84614\n0.84849\n0.85083\n0.85314\n0.85543\n0.85769\n0.85993\n0.86214\n\n\n1.1\n0.86433\n0.86650\n0.86864\n0.87076\n0.87286\n0.87493\n0.87698\n0.87900\n0.88100\n0.88298\n\n\n1.2\n0.88493\n0.88686\n0.88877\n0.89065\n0.89251\n0.89435\n0.89617\n0.89796\n0.89973\n0.90147\n\n\n1.3\n0.90320\n0.90490\n0.90658\n0.90824\n0.90988\n0.91149\n0.91309\n0.91466\n0.91621\n0.91774\n\n\n1.4\n0.91924\n0.92073\n0.92220\n0.92364\n0.92507\n0.92647\n0.92785\n0.92922\n0.93056\n0.93189\n\n\n1.5\n0.93319\n0.93448\n0.93574\n0.93699\n0.93822\n0.93943\n0.94062\n0.94179\n0.94295\n0.94408\n\n\n1.6\n0.94520\n0.94630\n0.94738\n0.94845\n0.94950\n0.95053\n0.95154\n0.95254\n0.95352\n0.95449\n\n\n1.7\n0.95543\n0.95637\n0.95728\n0.95818\n0.95907\n0.95994\n0.96080\n0.96164\n0.96246\n0.96327\n\n\n1.8\n0.96407\n0.96485\n0.96562\n0.96638\n0.96712\n0.96784\n0.96856\n0.96926\n0.96995\n0.97062\n\n\n1.9\n0.97128\n0.97193\n0.97257\n0.97320\n0.97381\n0.97441\n0.97500\n0.97558\n0.97615\n0.97670\n\n\n2.0\n0.97725\n0.97778\n0.97831\n0.97882\n0.97932\n0.97982\n0.98030\n0.98077\n0.98124\n0.98169\n\n\n2.1\n0.98214\n0.98257\n0.98300\n0.98341\n0.98382\n0.98422\n0.98461\n0.98500\n0.98537\n0.98574\n\n\n2.2\n0.98610\n0.98645\n0.98679\n0.98713\n0.98745\n0.98778\n0.98809\n0.98840\n0.98870\n0.98899\n\n\n2.3\n0.98928\n0.98956\n0.98983\n0.99010\n0.99036\n0.99061\n0.99086\n0.99111\n0.99134\n0.99158\n\n\n2.4\n0.99180\n0.99202\n0.99224\n0.99245\n0.99266\n0.99286\n0.99305\n0.99324\n0.99343\n0.99361\n\n\n2.5\n0.99379\n0.99396\n0.99413\n0.99430\n0.99446\n0.99461\n0.99477\n0.99492\n0.99506\n0.99520\n\n\n2.6\n0.99534\n0.99547\n0.99560\n0.99573\n0.99585\n0.99598\n0.99609\n0.99621\n0.99632\n0.99643\n\n\n2.7\n0.99653\n0.99664\n0.99674\n0.99683\n0.99693\n0.99702\n0.99711\n0.99720\n0.99728\n0.99736\n\n\n2.8\n0.99744\n0.99752\n0.99760\n0.99767\n0.99774\n0.99781\n0.99788\n0.99795\n0.99801\n0.99807\n\n\n2.9\n0.99813\n0.99819\n0.99825\n0.99831\n0.99836\n0.99841\n0.99846\n0.99851\n0.99856\n0.99861\n\n\n3.0\n0.99865\n0.99869\n0.99874\n0.99878\n0.99882\n0.99886\n0.99889\n0.99893\n0.99896\n0.99900\n\n\n3.1\n0.99903\n0.99906\n0.99910\n0.99913\n0.99916\n0.99918\n0.99921\n0.99924\n0.99926\n0.99929\n\n\n3.2\n0.99931\n0.99934\n0.99936\n0.99938\n0.99940\n0.99942\n0.99944\n0.99946\n0.99948\n0.99950\n\n\n3.3\n0.99952\n0.99953\n0.99955\n0.99957\n0.99958\n0.99960\n0.99961\n0.99962\n0.99964\n0.99965\n\n\n3.4\n0.99966\n0.99968\n0.99969\n0.99970\n0.99971\n0.99972\n0.99973\n0.99974\n0.99975\n0.99976\n\n\n3.5\n0.99977\n0.99978\n0.99978\n0.99979\n0.99980\n0.99981\n0.99981\n0.99982\n0.99983\n0.99983\n\n\n3.6\n0.99984\n0.99985\n0.99985\n0.99986\n0.99986\n0.99987\n0.99987\n0.99988\n0.99988\n0.99989\n\n\n3.7\n0.99989\n0.99990\n0.99990\n0.99990\n0.99991\n0.99991\n0.99992\n0.99992\n0.99992\n0.99992\n\n\n3.8\n0.99993\n0.99993\n0.99993\n0.99994\n0.99994\n0.99994\n0.99994\n0.99995\n0.99995\n0.99995\n\n\n3.9\n0.99995\n0.99995\n0.99996\n0.99996\n0.99996\n0.99996\n0.99996\n0.99996\n0.99997\n0.99997\n\n\n\n\n\n\n\n\n\n\nStudent’s t Distribution Table (Upper-tail critical values)\n\n\nDF\n0.10\n0.05\n0.025\n0.01\n0.005\n\n\n\n\n1\n3.078\n6.314\n12.706\n31.821\n63.657\n\n\n2\n1.886\n2.920\n4.303\n6.965\n9.925\n\n\n3\n1.638\n2.353\n3.182\n4.541\n5.841\n\n\n4\n1.533\n2.132\n2.776\n3.747\n4.604\n\n\n5\n1.476\n2.015\n2.571\n3.365\n4.032\n\n\n6\n1.440\n1.943\n2.447\n3.143\n3.707\n\n\n7\n1.415\n1.895\n2.365\n2.998\n3.499\n\n\n8\n1.397\n1.860\n2.306\n2.896\n3.355\n\n\n9\n1.383\n1.833\n2.262\n2.821\n3.250\n\n\n10\n1.372\n1.812\n2.228\n2.764\n3.169\n\n\n11\n1.363\n1.796\n2.201\n2.718\n3.106\n\n\n12\n1.356\n1.782\n2.179\n2.681\n3.055\n\n\n13\n1.350\n1.771\n2.160\n2.650\n3.012\n\n\n14\n1.345\n1.761\n2.145\n2.624\n2.977\n\n\n15\n1.341\n1.753\n2.131\n2.602\n2.947\n\n\n16\n1.337\n1.746\n2.120\n2.583\n2.921\n\n\n17\n1.333\n1.740\n2.110\n2.567\n2.898\n\n\n18\n1.330\n1.734\n2.101\n2.552\n2.878\n\n\n19\n1.328\n1.729\n2.093\n2.539\n2.861\n\n\n20\n1.325\n1.725\n2.086\n2.528\n2.845\n\n\n21\n1.323\n1.721\n2.080\n2.518\n2.831\n\n\n22\n1.321\n1.717\n2.074\n2.508\n2.819\n\n\n23\n1.319\n1.714\n2.069\n2.500\n2.807\n\n\n24\n1.318\n1.711\n2.064\n2.492\n2.797\n\n\n25\n1.316\n1.708\n2.060\n2.485\n2.787\n\n\n26\n1.315\n1.706\n2.056\n2.479\n2.779\n\n\n27\n1.314\n1.703\n2.052\n2.473\n2.771\n\n\n28\n1.313\n1.701\n2.048\n2.467\n2.763\n\n\n29\n1.311\n1.699\n2.045\n2.462\n2.756\n\n\n30\n1.310\n1.697\n2.042\n2.457\n2.750\n\n\n\n\n\n\n\n\nSo for instance, if you consider your variable Z, and you want to know the probabilities that\n\\[\\begin{equation}\nY = \\sigma_Y Z + \\mu_Y \\leq 2.5,\n\\end{equation}\\] that means you are seeking to know the probabilities that \\[\\begin{equation}\nZ \\leq \\frac{2.5-\\mu_Y}{\\sigma} = 1.9986\n\\end{equation}\\]\nand this value can be found in the tables ! If you go to the z-value \\(\\approx 1.9986\\), this gives you about 0.97670, hence you have a 97% probability that your dice will be \\(\\leq 2.5\\) (and less than 3% that it will be \\(\\geq 2.5\\)).\n\nIf you repeat the same process for \\(\\leq 2\\), you get through the tables\n\n\\[\\begin{equation}\nZ \\leq  \\frac{2-\\mu_Y}{\\sigma} = 0.997941\n\\end{equation}\\]\n\n\nThis gives you a probability of about 0.83891 in the tables - about 83.891%. Again, the two estimations are extremely close ! That is why we couldn’t insist more on the importance of the mean and the variance in the previous class : if your random variable follows a normal distribution, they basically contain all the information you need to compute probabilities !\n\n\nNumerical integration (optional)\nYou can also estimate such integrals with numerical methods. As we have seen before, an integral is graphically worth the area under a curve (a function), along a certain range.\nThe basic idea behind such numerical integration is to divide your range in many small rectangles, with equal width, here for instance \\(0.05\\), and each length worth \\(\\mathcal{N}(x; \\mu, \\sigma^2)\\) and consider the sum of the areas of these rectangles to be close to the exact integral. The smaller the width you choose, the more precise your estimation will be, of course.\nIn our case, evaluation of the integral would therefore look like the figure below, where we would sum all the areas of the rectangles for \\(x \\leq 2.5\\).\n\nP(X ≤ 2.5)P(X ≤ 2)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWith rectangles \\(0.000001\\) large, numerically computing this integral therefore gives:\n\nint = 0\ndeltax = 0.000001\nx = deltax/2\nwhile(x &lt;= 2.5){\n  x = x + deltax\n  int = int+deltax*1/(sigma*sqrt(2*pi))*exp(-1/2*((x-mu)/sigma)**2)\n}\nprint(int) # \n\n[1] 0.9758098\n\n\nThis gives about 0.97, which is very close to what you had computed from the tables. Note how I am computing this integral : I am just summing over all the values \\(x \\leq 2.5\\), with the very small steps \\(\\delta x = 0.0000001\\) and therefore $ x = 0.000005$ , \\(x = 0.000015\\),\\(x = 0.000025\\), \\(x = 0.000035\\),…, \\(x = 2.500000\\) and adding the very small quantities:\n\\[\\begin{equation}\n\\delta x \\times \\frac{1}{\\sigma \\sqrt{2\\pi}} e^{-\\frac{1}{2}(\\frac{x-\\mu}{\\sigma})^2}\n\\end{equation}\\]\nAs already said, an integral is just a fancy way of writing a sum for continuous variables ! Hence, numerically, a way of computing that integral is just to take a very small step, and simulate the sum ! If you repeat the exact same process for 2 instead of 2.5, you get :\n\n\n[1] 0.8396919\n\n\nwhich is also very close to what we had found from the tables."
+    "text": "The normal distribution\nThe normal distribution has the following expression :\n\\[\\begin{equation}\nf_N(x) = \\mathcal{N}(x; \\mu, \\sigma) = \\frac{1}{\\sigma \\sqrt{2\\pi}} e^{-\\frac{1}{2}(\\frac{x-\\mu}{\\sigma})^2}\n\\end{equation}\\]\nwhere “e” stands for the exponential (\\(\\approx  2.71828\\)). It is generally noted \\(\\mathcal{N}(\\mu, \\sigma^2)\\), where \\(\\mu\\) stands for its mean, and \\(\\sigma^2\\) for its variance. The normal distribution is therefore defined by two parameters : one parameter of position, \\(\\mu\\), and one parameter of dispersion, \\(\\sigma\\).\nThe canonical form of the normal distribution, called the ‘standard normal distribution’, is \\[\\begin{equation}\n\\mathcal{N}(0,1) = \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{1}{2}x^2},\n\\end{equation}\\] which is a normal distribution with a mean that is zero, and a standard deviation of 1.\nThe normal distribution has important properties, that make it extremely useful in practice :\n\nIt is continuous\nUnbounded (it ranges from \\(-\\infty \\text{ to } +\\infty\\))\nSymmetrical\nThe mode = median = mean\n\nThe following graph shows you three different normal distributions with different means and variances. You can see that the peak of the distribution is located at its mean, and that the variance translates how dispersed the distribution is around its mean.\n\n\n\n\n\n\n\n\n\nIn general, we will assume that our random variables follow normal distributions. If that is not the case, and the distribution is heavily skewed, you could transform your values by either logging it (when positively skewed, as the log will attenuate the highest values) or exponentiating it (when negatively skewed, as the exponential will push the lowest values). If our random variables follow a normal distribution, then their mean and standard deviations correspond to the parameters \\(\\mu\\) and \\(\\sigma\\) of the normal distribution, and we can easily compute the probabilities.\n\nEstimation of probabilities\nConsider again the random variable y, obtained from the sum of dices x1, x2, x3. \\(Y\\) is a normal distribution and you have the parameters :\n\nmean(y)\n\n[1] 1.502537\n\nsd(y)\n\n[1] 0.500995\n\n\nwhich means that the normal distribution is centered in 1.5, and its standard deviation is 0.5 : 68% of the data is located within the interval between 1 and 2.\nSince you now know that : \\[\\begin{equation}\nP(y \\leq 2.5) = \\int_{-\\infty}^{2.5} \\mathcal{N}(x; 1.5, 0.5) \\text{d}x\n\\end{equation}\\]\nyou can therefore easily compute the probability that, if you roll your dices once, you get a value below or equal to 2.5. Since you now know that your random variable follows a normal distribution, this means should you compute ::\n\\[\\begin{equation}\n\\int_{0}^{2.5} \\mathcal{N}(x; 1.5, 0.5) \\text{d}x = \\int_0^{2.5} \\frac{1}{1.5 \\sqrt{2\\pi}} e^{-\\frac{1}{2}(\\frac{x-0.5}{1.5})^2} = P(x \\leq 2.5),\n\\end{equation}\\]\nwhich is of course very difficult if you don’t know much about integrals (and even if you know much about integrals, Gaussians are in fact very difficult to integrate). That is why you have two in this case : either you use the tables, which is more elegant and what you must master, or you integrate this numerically (less efficient and less precise, though).\n\n\nStatistical tables\nOne way of estimating that integral, that we more commonly use in practice, is the following. You could easily switch from this \\(\\mathcal{N}_Y(1.5, 0.5)\\) to the normal \\(\\mathcal{N}(0,1)\\) by considering the random variable Z, made from Y:\n\\[\\begin{equation}\nZ = \\frac{Y-\\mu_y}{\\sigma_y}\n\\end{equation}\\]\nThis random variable Z follows a standard normal distribution \\(\\mathcal{N}(0,1)\\). Tables which associate for each level of confidence (or probability), the value of that corresponding Z variable, exist online. You can find such “z” table here or here. They basically have computed the exact value of that difficult integral for many different values of Z, and give the result.\n\nZ-tableT-table\n\n\n\n\n\nStandard Normal Distribution Table Φ(z)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nZ\n.00\n.01\n.02\n.03\n.04\n.05\n.06\n.07\n.08\n.09\n\n\n\n\n0.0\n0.50000\n0.50399\n0.50798\n0.51197\n0.51595\n0.51994\n0.52392\n0.52790\n0.53188\n0.53586\n\n\n0.1\n0.53983\n0.54380\n0.54776\n0.55172\n0.55567\n0.55962\n0.56356\n0.56749\n0.57142\n0.57535\n\n\n0.2\n0.57926\n0.58317\n0.58706\n0.59095\n0.59483\n0.59871\n0.60257\n0.60642\n0.61026\n0.61409\n\n\n0.3\n0.61791\n0.62172\n0.62552\n0.62930\n0.63307\n0.63683\n0.64058\n0.64431\n0.64803\n0.65173\n\n\n0.4\n0.65542\n0.65910\n0.66276\n0.66640\n0.67003\n0.67364\n0.67724\n0.68082\n0.68439\n0.68793\n\n\n0.5\n0.69146\n0.69497\n0.69847\n0.70194\n0.70540\n0.70884\n0.71226\n0.71566\n0.71904\n0.72240\n\n\n0.6\n0.72575\n0.72907\n0.73237\n0.73565\n0.73891\n0.74215\n0.74537\n0.74857\n0.75175\n0.75490\n\n\n0.7\n0.75804\n0.76115\n0.76424\n0.76730\n0.77035\n0.77337\n0.77637\n0.77935\n0.78230\n0.78524\n\n\n0.8\n0.78814\n0.79103\n0.79389\n0.79673\n0.79955\n0.80234\n0.80511\n0.80785\n0.81057\n0.81327\n\n\n0.9\n0.81594\n0.81859\n0.82121\n0.82381\n0.82639\n0.82894\n0.83147\n0.83398\n0.83646\n0.83891\n\n\n1.0\n0.84134\n0.84375\n0.84614\n0.84849\n0.85083\n0.85314\n0.85543\n0.85769\n0.85993\n0.86214\n\n\n1.1\n0.86433\n0.86650\n0.86864\n0.87076\n0.87286\n0.87493\n0.87698\n0.87900\n0.88100\n0.88298\n\n\n1.2\n0.88493\n0.88686\n0.88877\n0.89065\n0.89251\n0.89435\n0.89617\n0.89796\n0.89973\n0.90147\n\n\n1.3\n0.90320\n0.90490\n0.90658\n0.90824\n0.90988\n0.91149\n0.91309\n0.91466\n0.91621\n0.91774\n\n\n1.4\n0.91924\n0.92073\n0.92220\n0.92364\n0.92507\n0.92647\n0.92785\n0.92922\n0.93056\n0.93189\n\n\n1.5\n0.93319\n0.93448\n0.93574\n0.93699\n0.93822\n0.93943\n0.94062\n0.94179\n0.94295\n0.94408\n\n\n1.6\n0.94520\n0.94630\n0.94738\n0.94845\n0.94950\n0.95053\n0.95154\n0.95254\n0.95352\n0.95449\n\n\n1.7\n0.95543\n0.95637\n0.95728\n0.95818\n0.95907\n0.95994\n0.96080\n0.96164\n0.96246\n0.96327\n\n\n1.8\n0.96407\n0.96485\n0.96562\n0.96638\n0.96712\n0.96784\n0.96856\n0.96926\n0.96995\n0.97062\n\n\n1.9\n0.97128\n0.97193\n0.97257\n0.97320\n0.97381\n0.97441\n0.97500\n0.97558\n0.97615\n0.97670\n\n\n2.0\n0.97725\n0.97778\n0.97831\n0.97882\n0.97932\n0.97982\n0.98030\n0.98077\n0.98124\n0.98169\n\n\n2.1\n0.98214\n0.98257\n0.98300\n0.98341\n0.98382\n0.98422\n0.98461\n0.98500\n0.98537\n0.98574\n\n\n2.2\n0.98610\n0.98645\n0.98679\n0.98713\n0.98745\n0.98778\n0.98809\n0.98840\n0.98870\n0.98899\n\n\n2.3\n0.98928\n0.98956\n0.98983\n0.99010\n0.99036\n0.99061\n0.99086\n0.99111\n0.99134\n0.99158\n\n\n2.4\n0.99180\n0.99202\n0.99224\n0.99245\n0.99266\n0.99286\n0.99305\n0.99324\n0.99343\n0.99361\n\n\n2.5\n0.99379\n0.99396\n0.99413\n0.99430\n0.99446\n0.99461\n0.99477\n0.99492\n0.99506\n0.99520\n\n\n2.6\n0.99534\n0.99547\n0.99560\n0.99573\n0.99585\n0.99598\n0.99609\n0.99621\n0.99632\n0.99643\n\n\n2.7\n0.99653\n0.99664\n0.99674\n0.99683\n0.99693\n0.99702\n0.99711\n0.99720\n0.99728\n0.99736\n\n\n2.8\n0.99744\n0.99752\n0.99760\n0.99767\n0.99774\n0.99781\n0.99788\n0.99795\n0.99801\n0.99807\n\n\n2.9\n0.99813\n0.99819\n0.99825\n0.99831\n0.99836\n0.99841\n0.99846\n0.99851\n0.99856\n0.99861\n\n\n3.0\n0.99865\n0.99869\n0.99874\n0.99878\n0.99882\n0.99886\n0.99889\n0.99893\n0.99896\n0.99900\n\n\n3.1\n0.99903\n0.99906\n0.99910\n0.99913\n0.99916\n0.99918\n0.99921\n0.99924\n0.99926\n0.99929\n\n\n3.2\n0.99931\n0.99934\n0.99936\n0.99938\n0.99940\n0.99942\n0.99944\n0.99946\n0.99948\n0.99950\n\n\n3.3\n0.99952\n0.99953\n0.99955\n0.99957\n0.99958\n0.99960\n0.99961\n0.99962\n0.99964\n0.99965\n\n\n3.4\n0.99966\n0.99968\n0.99969\n0.99970\n0.99971\n0.99972\n0.99973\n0.99974\n0.99975\n0.99976\n\n\n3.5\n0.99977\n0.99978\n0.99978\n0.99979\n0.99980\n0.99981\n0.99981\n0.99982\n0.99983\n0.99983\n\n\n3.6\n0.99984\n0.99985\n0.99985\n0.99986\n0.99986\n0.99987\n0.99987\n0.99988\n0.99988\n0.99989\n\n\n3.7\n0.99989\n0.99990\n0.99990\n0.99990\n0.99991\n0.99991\n0.99992\n0.99992\n0.99992\n0.99992\n\n\n3.8\n0.99993\n0.99993\n0.99993\n0.99994\n0.99994\n0.99994\n0.99994\n0.99995\n0.99995\n0.99995\n\n\n3.9\n0.99995\n0.99995\n0.99996\n0.99996\n0.99996\n0.99996\n0.99996\n0.99996\n0.99997\n0.99997\n\n\n\n\n\n\n\n\n\n\nStudent’s t Distribution Table (Upper-tail critical values)\n\n\nDF\n0.10\n0.05\n0.025\n0.01\n0.005\n\n\n\n\n1\n3.078\n6.314\n12.706\n31.821\n63.657\n\n\n2\n1.886\n2.920\n4.303\n6.965\n9.925\n\n\n3\n1.638\n2.353\n3.182\n4.541\n5.841\n\n\n4\n1.533\n2.132\n2.776\n3.747\n4.604\n\n\n5\n1.476\n2.015\n2.571\n3.365\n4.032\n\n\n6\n1.440\n1.943\n2.447\n3.143\n3.707\n\n\n7\n1.415\n1.895\n2.365\n2.998\n3.499\n\n\n8\n1.397\n1.860\n2.306\n2.896\n3.355\n\n\n9\n1.383\n1.833\n2.262\n2.821\n3.250\n\n\n10\n1.372\n1.812\n2.228\n2.764\n3.169\n\n\n11\n1.363\n1.796\n2.201\n2.718\n3.106\n\n\n12\n1.356\n1.782\n2.179\n2.681\n3.055\n\n\n13\n1.350\n1.771\n2.160\n2.650\n3.012\n\n\n14\n1.345\n1.761\n2.145\n2.624\n2.977\n\n\n15\n1.341\n1.753\n2.131\n2.602\n2.947\n\n\n16\n1.337\n1.746\n2.120\n2.583\n2.921\n\n\n17\n1.333\n1.740\n2.110\n2.567\n2.898\n\n\n18\n1.330\n1.734\n2.101\n2.552\n2.878\n\n\n19\n1.328\n1.729\n2.093\n2.539\n2.861\n\n\n20\n1.325\n1.725\n2.086\n2.528\n2.845\n\n\n21\n1.323\n1.721\n2.080\n2.518\n2.831\n\n\n22\n1.321\n1.717\n2.074\n2.508\n2.819\n\n\n23\n1.319\n1.714\n2.069\n2.500\n2.807\n\n\n24\n1.318\n1.711\n2.064\n2.492\n2.797\n\n\n25\n1.316\n1.708\n2.060\n2.485\n2.787\n\n\n26\n1.315\n1.706\n2.056\n2.479\n2.779\n\n\n27\n1.314\n1.703\n2.052\n2.473\n2.771\n\n\n28\n1.313\n1.701\n2.048\n2.467\n2.763\n\n\n29\n1.311\n1.699\n2.045\n2.462\n2.756\n\n\n30\n1.310\n1.697\n2.042\n2.457\n2.750\n\n\n\n\n\n\n\n\nSo for instance, if you consider your variable Z, and you want to know the probabilities that\n\\[\\begin{equation}\nY = \\sigma_Y Z + \\mu_Y \\leq 2.5,\n\\end{equation}\\] that means you are seeking to know the probabilities that \\[\\begin{equation}\nZ \\leq \\frac{2.5-\\mu_Y}{\\sigma} = 1.9986\n\\end{equation}\\]\nand this value can be found in the tables ! If you go to the z-value \\(\\approx 1.9986\\), this gives you about 0.97670, hence you have a 97% probability that your dice will be \\(\\leq 2.5\\) (and less than 3% that it will be \\(\\geq 2.5\\)).\n\nIf you repeat the same process for \\(\\leq 2\\), you get through the tables\n\n\\[\\begin{equation}\nZ \\leq  \\frac{2-\\mu_Y}{\\sigma} = 0.997941\n\\end{equation}\\]\n\n\nThis gives you a probability of about 0.83891 in the tables - about 83.891%. Again, the two estimations are extremely close ! That is why we couldn’t insist more on the importance of the mean and the variance in the previous class : if your random variable follows a normal distribution, they basically contain all the information you need to compute probabilities !\n\n\nNumerical integration (optional)\nYou can also estimate such integrals with numerical methods. As we have seen before, an integral is graphically worth the area under a curve (a function), along a certain range.\nThe basic idea behind such numerical integration is to divide your range in many small rectangles, with equal width, here for instance \\(0.05\\), and each length worth \\(\\mathcal{N}(x; \\mu, \\sigma^2)\\) and consider the sum of the areas of these rectangles to be close to the exact integral. The smaller the width you choose, the more precise your estimation will be, of course.\nIn our case, evaluation of the integral would therefore look like the figure below, where we would sum all the areas of the rectangles for \\(x \\leq 2.5\\).\n\nP(X ≤ 2.5)P(X ≤ 2)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWith rectangles \\(0.000001\\) large, numerically computing this integral therefore gives:\n\nint = 0\ndeltax = 0.000001\nx = deltax/2\nwhile(x &lt;= 2.5){\n  x = x + deltax\n  int = int+deltax*1/(sigma*sqrt(2*pi))*exp(-1/2*((x-mu)/sigma)**2)\n}\nprint(int) # \n\n[1] 0.9754038\n\n\nThis gives about 0.97, which is very close to what you had computed from the tables. Note how I am computing this integral : I am just summing over all the values \\(x \\leq 2.5\\), with the very small steps \\(\\delta x = 0.0000001\\) and therefore $ x = 0.000005$ , \\(x = 0.000015\\),\\(x = 0.000025\\), \\(x = 0.000035\\),…, \\(x = 2.500000\\) and adding the very small quantities:\n\\[\\begin{equation}\n\\delta x \\times \\frac{1}{\\sigma \\sqrt{2\\pi}} e^{-\\frac{1}{2}(\\frac{x-\\mu}{\\sigma})^2}\n\\end{equation}\\]\nAs already said, an integral is just a fancy way of writing a sum for continuous variables ! Hence, numerically, a way of computing that integral is just to take a very small step, and simulate the sum ! If you repeat the exact same process for 2 instead of 2.5, you get :\n\n\n[1] 0.8382795\n\n\nwhich is also very close to what we had found from the tables."
   },
   {
     "objectID": "sessions/session2/session2.html#confidence-interval",
@@ -1090,5 +1090,341 @@
     "title": "Session 2 — Relationships between variables",
     "section": "Heteroskedasticity",
     "text": "Heteroskedasticity\nHeteroskedasticity occurs in regression analysis when the spread of the residuals (or errors) varies depending on the values of the independent variables. This contradicts the classical linear regression assumption of homoskedasticity, which requires that the residuals have a constant variance.\nWhen heteroskedasticity is present, it can undermine the accuracy of statistical conclusions. The standard errors of the estimated coefficients may become unreliable, resulting in misleading p-values and confidence intervals. To detect heteroskedasticity, you can use diagnostic tools like plotting residuals against predicted values. Statistical tests, such as the Breusch-Pagan test, can also formally evaluate whether the residuals’ variance remains constant. If heteroskedasticity is confirmed, you may need to adjust the model, apply data transformations, or use robust standard errors to mitigate its impact.\n\naugment(model2) |&gt;  \n  ggplot(aes(.fitted, .resid)) + \n  geom_point()\n\n\n\n\n\n\n\ncheck_heteroscedasticity(model2) # Run a Breush-Pagan test\n\nWarning: Heteroscedasticity (non-constant error variance) detected (p &lt; .001)."
+  },
+  {
+    "objectID": "slides/session2/slides2.html#content",
+    "href": "slides/session2/slides2.html#content",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Content",
+    "text": "Content\n\nQuick recap’\nTheory :\n\nStatistical inference\nT-tests\nOLS regression\n\nExercices"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#last-session",
+    "href": "slides/session2/slides2.html#last-session",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Last session",
+    "text": "Last session\n\nWe saw\nDescriptive statistics\n\nmean, median, variance, standard deviation\nexpectation, distribution\nprobability density function\n\nHow to code in R\n\nsummary(), IQR(),\nhist(), ggplot()+geom_density(), barplot()"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#last-session-1",
+    "href": "slides/session2/slides2.html#last-session-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Last session",
+    "text": "Last session\n\nWe saw for continuous variable \\(P(Y\\le Y_0)\\) (here 52.503)"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#last-session-2",
+    "href": "slides/session2/slides2.html#last-session-2",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Last session",
+    "text": "Last session\n\nAnd different distribution functions"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#statistical-inference",
+    "href": "slides/session2/slides2.html#statistical-inference",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Statistical inference",
+    "text": "Statistical inference\n\nGoal = find information on population based on sample\n\n\nPopulation and Sample"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#the-normal-distribution",
+    "href": "slides/session2/slides2.html#the-normal-distribution",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "The normal distribution",
+    "text": "The normal distribution"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#limitations",
+    "href": "slides/session2/slides2.html#limitations",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Limitations",
+    "text": "Limitations\n\nAlready gives hint on one variable\nbut…\n\ncomplete information on population\n\nstatistical inference\n\nwhat about relationships ?\n\nt-tests\nsimple and multiple regression"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#statistical-inference-1",
+    "href": "slides/session2/slides2.html#statistical-inference-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Statistical inference",
+    "text": "Statistical inference\n\nGoal = find information on population based on sample\n\n\nPopulation and Sample"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#the-normal-distribution-1",
+    "href": "slides/session2/slides2.html#the-normal-distribution-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "The normal distribution",
+    "text": "The normal distribution\n\nSymmetric, not bounded, continuous\nmode = median = mean \\[\\begin{equation}\nf_N(x) = \\mathcal{N}(x; \\mu, \\sigma) = \\frac{1}{\\sigma \\sqrt{2\\pi}} e^{-\\frac{1}{2}(\\frac{x-\\mu}{\\sigma})^2}\n\\end{equation}\\]\nstandard normal distribution \\[\\begin{equation}\n\\mathcal{N}(z; 0, 1) = \\frac{1}{\\sigma \\sqrt{2\\pi}} e^{-\\frac{1}{2}(\\frac{z}{1})^2}\n\\end{equation}\\]"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#estimation-of-parameters",
+    "href": "slides/session2/slides2.html#estimation-of-parameters",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Estimation of parameters",
+    "text": "Estimation of parameters\n\nIn general you seek to evaluate key parameters of your distribution\n\nmean \\(\\mu\\),\nstandard deviation \\(\\sigma\\)\n\nbased on a sample"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#confidence-interval",
+    "href": "slides/session2/slides2.html#confidence-interval",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Confidence interval",
+    "text": "Confidence interval\n\nYet your sampling procedure is random\nThe mean of your sample, \\(\\bar{X}\\), is a random variable that could be used to estimate the actual mean \\(\\mu\\): \\[\\begin{equation}\nZ = \\frac{\\bar{x} - \\mu}{\\sigma / \\sqrt{n}} \\sim \\mathcal{N}(0,1).\n\\end{equation}\\]\nthe statistical tables allow you to find the desired level of confidence !"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#ordinary-least-squares",
+    "href": "slides/session2/slides2.html#ordinary-least-squares",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Ordinary Least Squares",
+    "text": "Ordinary Least Squares"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#the-normal-distribution-2",
+    "href": "slides/session2/slides2.html#the-normal-distribution-2",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "The normal distribution",
+    "text": "The normal distribution\n\\[\\begin{equation}\n\\mathcal{N}(x; 1.5, 1)\n\\end{equation}\\]"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#statistical-tables",
+    "href": "slides/session2/slides2.html#statistical-tables",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Statistical tables",
+    "text": "Statistical tables\n\nIntegral difficult to compute…\nTake variable \\((X- \\mu)/\\sigma= z\\) \\[\\begin{equation}\nP(z \\leq (2-1.5)/1) = P(z \\leq 0.5) = P(X \\leq 2) \\approx 0.69\n\\end{equation}\\]\nRefer yourself to the statistical tables !"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#confidence-interval---knowing-sigma",
+    "href": "slides/session2/slides2.html#confidence-interval---knowing-sigma",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Confidence interval - knowing \\(\\sigma\\)",
+    "text": "Confidence interval - knowing \\(\\sigma\\)\n\nYet your sampling procedure is random\nThe mean of your sample, \\(\\bar{X}\\), is a random variable that could be used to estimate the actual mean \\(\\mu\\): \\[\\begin{equation}\nZ = \\frac{\\bar{x} - \\mu}{\\sigma / \\sqrt{n}} \\sim \\mathcal{N}(0,1).\n\\end{equation}\\]\n\n\\[\\begin{equation}\n\\bar{x} - z_{1-\\alpha/2}\\,\\frac{\\sigma}{\\sqrt{n}} \\le \\mu \\le \\bar{x} + z_{1-\\alpha/2}\\,\\frac{\\sigma}{\\sqrt{n}}\n\\end{equation}\\]"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#confidence-interval---not-knowing-sigma",
+    "href": "slides/session2/slides2.html#confidence-interval---not-knowing-sigma",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Confidence interval - not knowing \\(\\sigma\\)",
+    "text": "Confidence interval - not knowing \\(\\sigma\\)\n\nThe std. deviation of population, \\(\\sigma\\), unknown\nThe mean of your sample, \\(\\bar{X}\\), is a random variable following a Student’s law.\n\n\\[\\begin{equation}\n\\bar{x} \\pm t_{1-\\alpha/2,n-1}\\,\\frac{s}{\\sqrt{n}}.\n\\end{equation}\\]\n\nThe statistical tables allow you to find the desired level of confidence !"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#small-n-sample-more-robust",
+    "href": "slides/session2/slides2.html#small-n-sample-more-robust",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Small-n sample, more robust",
+    "text": "Small-n sample, more robust\n\nt-tests/estimates: \\[\\begin{equation}\n\\bar{x} \\pm t_{1-\\alpha/2,n-1}\\,\\frac{s}{\\sqrt{n}}.\n\\end{equation}\\]"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#p-value-validity",
+    "href": "slides/session2/slides2.html#p-value-validity",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "p-value, validity",
+    "text": "p-value, validity\n\nthe p-value gives you the probability of rejecting the null"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#confidence-interval-1",
+    "href": "slides/session2/slides2.html#confidence-interval-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Confidence interval",
+    "text": "Confidence interval\n\\[\\begin{equation}\n\\bar{x} - z_{1-\\alpha/2}\\,\\frac{\\sigma}{\\sqrt{n}} \\le \\mu \\le \\bar{x} + z_{1-\\alpha/2}\\,\\frac{\\sigma}{\\sqrt{n}}\n\\end{equation}\\]\n\nIntuitively, precision:\n\nincreases with the size of sample \\(n\\),\ndecreases with the variation in the population \\(\\sigma\\) or \\(s\\)\ndecreases with when your confidence level increases"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#confidence-interval-2",
+    "href": "slides/session2/slides2.html#confidence-interval-2",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Confidence interval",
+    "text": "Confidence interval\n\nSample of 40 communes\n\n\nmy_sample &lt;- sample(log_median_inc, 40, replace = FALSE)\nmean_x &lt;- mean(my_sample, na.rm = TRUE)\nsd(my_sample, na.rm =TRUE)\n\n[1] 0.2236594\n\n\n\nwith 95% confidence, your mean lies in :\n\n\nmean_x - 1.96*sig/sqrt(40)\n\n[1] 10.20491\n\nmean_x + 1.96*sig/sqrt(40)\n\n[1] 10.3537\n\nmean(log_median_inc, na.rm = TRUE)\n\n[1] 10.31475"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#confidence-interval---example",
+    "href": "slides/session2/slides2.html#confidence-interval---example",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Confidence interval - Example",
+    "text": "Confidence interval - Example\n\nThe average median income in French communes (log).\nYou know \\(\\sigma\\)\n\\(\\mu\\) = ?\n\n\nlibrary(readxl)\ndata_dem &lt;- read_excel(\"data/demographics2024.xlsx\")\nlog_median_inc &lt;- log(data_dem$revmoyfoy)\nsig &lt;- sd(log_median_inc, na.rm = TRUE)"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#confidence-interval-3",
+    "href": "slides/session2/slides2.html#confidence-interval-3",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Confidence interval",
+    "text": "Confidence interval\n\nThe randomness is on the sampling process ! If you repeat the process N times…\n95% of finding the actual mean within the interval !\n5% of confidence intervals do not include the mean, due to randomness of sampling \\(\\bar{x}\\) !"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#confidence-interval-95",
+    "href": "slides/session2/slides2.html#confidence-interval-95",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Confidence interval, 95%",
+    "text": "Confidence interval, 95%\n\nplot_ci(log_median_inc, 40, 300, 1.960) #data, sample size, n° estimations, conf level"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#sample-size",
+    "href": "slides/session2/slides2.html#sample-size",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Sample size",
+    "text": "Sample size\n\nplot_ci(log_median_inc, 100, 300, 1.960)"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#confidence-level",
+    "href": "slides/session2/slides2.html#confidence-level",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Confidence level",
+    "text": "Confidence level\n\nplot_ci(log_median_inc, 100, 300, 2.576)"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#hypothesis-testing",
+    "href": "slides/session2/slides2.html#hypothesis-testing",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Hypothesis testing",
+    "text": "Hypothesis testing\n\nNull Hypothesis, \\(H_0\\) : the hypothesis we seek to check/test\nAlternative Hypothesis (\\(H_a\\)) : its negative"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#mean",
+    "href": "slides/session2/slides2.html#mean",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Mean",
+    "text": "Mean\n\nNull Hypothesis (\\(H_0\\)): The mean income is equal to 35,000€ in French communes : \\(\\mu = 35000\\)\nAlternative Hypothesis (\\(H_a\\)): The population mean income is not equal to 35,000€.\n\n\n\n\n    One Sample t-test\n\ndata:  sample_data\nt = -9.9209, df = 149, p-value &lt; 2.2e-16\nalternative hypothesis: true mean is not equal to 10.4631\n95 percent confidence interval:\n 10.24216 10.31555\nsample estimates:\nmean of x \n 10.27886"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#p-value",
+    "href": "slides/session2/slides2.html#p-value",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "p-value",
+    "text": "p-value\n\nthe p-value is a measure of uncertainty coming from your sampling process\nyour probability to find"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#mean-estimation",
+    "href": "slides/session2/slides2.html#mean-estimation",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Mean estimation",
+    "text": "Mean estimation\n\nNull Hypothesis (\\(H_0\\)): The mean income is equal to 35,000€ in French communes : \\(\\mu = 35000\\)\nAlternative Hypothesis (\\(H_a\\)): The population mean income is not equal to 35,000€.\n\n\n# Sample data (assumed to be the log-transformed median income)\nsample_data &lt;- sample(log_median_inc, size = 150, replace = FALSE)\n\n\n\n\n    One Sample t-test\n\ndata:  sample_data\nt = -10.386, df = 149, p-value &lt; 2.2e-16\nalternative hypothesis: true mean is not equal to 10.4631\n95 percent confidence interval:\n 10.25798 10.32356\nsample estimates:\nmean of x \n 10.29077 \n\n\n\np-value : the probability of observing \\(\\bar{x} = 10.29077\\) (or even more extreme), if the true population mean is actually 10.4631.\nhere \\(&lt;2.2e^{-16}\\)\nyou reject the null hypothesis: your mean is not 35k€"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#mean-comparison",
+    "href": "slides/session2/slides2.html#mean-comparison",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Mean comparison",
+    "text": "Mean comparison\n\nAlso allows to look at the impact of categorical variables on estimates !\nTesting \\(\\mu_1 = \\mu_2\\)\n\n\nNull Hypothesis (\\(H_0\\)): The population means for urban and rural areas are equal, \\(\\mu_1 = \\mu_2\\) (or \\(\\mu_1 - \\mu_2 = 0\\))\nAlternative Hypothesis (\\(H_a\\)): The population means for urban and rural areas are different: \\(\\mu_1 != \\mu_2\\).\n\n\n# Split data by urban and rural communes\nurban_income &lt;- sample(log((data_dem %&gt;% filter(dens == \"Urbain dense\" | dens == \"Urbain intermédiaire\"))$revmoyfoy), 150, replace = FALSE)\nrural_income &lt;- sample(log((data_dem %&gt;% filter(dens == \"Rural\"))$revmoyfoy), 150, replace = FALSE)\n\n# Perform a two-sample t-test\nt_test_urban_rural &lt;- t.test(urban_income, \n                             rural_income, \n                             alternative = \"two.sided\", \n                             var.equal = FALSE,\n                             conf.level = 0.95)\n\n# Display the result\nt_test_urban_rural\n\n\n    Welch Two Sample t-test\n\ndata:  urban_income and rural_income\nt = 3.9075, df = 292.75, p-value = 0.0001159\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n 0.05493876 0.16644186\nsample estimates:\nmean of x mean of y \n 10.44437  10.33368 \n\n\n\nyour p value measures the probability of obtaining \\(\\mu_1 - \\mu_2\\) as extreme as \\(10.44-10.33\\), if it was \\(0\\)\nbelow 5% : you reject the null"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#statistical-inference-2",
+    "href": "slides/session2/slides2.html#statistical-inference-2",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Statistical inference",
+    "text": "Statistical inference\n\nGoal = find information on population based on sample\nE.g. You want to estimate the average French income\nAsking every French person is difficult…\nUse a sample with reduced size !"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#general-comments",
+    "href": "slides/session2/slides2.html#general-comments",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "General comments",
+    "text": "General comments\n\nYour finals\n\nemphasis on the question, the identification strategy, the limitations\nNULL results are good too !\n\nThe exercices of last session\nWe will try to do 1h theory (code) + 1h exercices"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#back-to-our-initial-puzzle",
+    "href": "slides/session2/slides2.html#back-to-our-initial-puzzle",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Back to our initial puzzle",
+    "text": "Back to our initial puzzle\n\n\\(Y \\leftarrow X\\)\nt.test() allows you to analyse :\n\neffect of categorical independent variables (being urban/rural)\non continuous dependent variable (income)\n\nwhat about continuous vs. continuous variables ?\n\ne.g. far-right votes (%) (Y) by income (X) ?"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#towards-simple-regression",
+    "href": "slides/session2/slides2.html#towards-simple-regression",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Towards simple regression",
+    "text": "Towards simple regression\n\nOnce you have decided of a Y (dependent variable) and X (independent variables), you can draw a cloud of points\n\n\nlibrary(ggplot2)\nlibrary(tidyverse)\nlibrary(rio)\n\nelections2024 &lt;- import(\"data/elections2024.csv\")\nsocio_demo &lt;- import(\"data/demographics2024.xlsx\")\nelections2024 &lt;- elections2024 %&gt;% left_join(socio_demo %&gt;% mutate(codecommune = as.numeric(codecommune), codedep = as.numeric(codedep)))"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#simple-linear-regression-model",
+    "href": "slides/session2/slides2.html#simple-linear-regression-model",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Simple linear regression model",
+    "text": "Simple linear regression model\n\nlibrary(ggplot2)\nelections2024 %&gt;% \n  filter(dens == \"Urbain intermédiaire\") %&gt;% \n  ggplot(aes(x = log(revmoyfoy), y = far_right_relvotes)) + geom_point() + labs(y = \"RN vote\", x = \"Median income in commune (log scale)\") + geom_smooth(method = \"lm\") +theme_minimal()"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#simple-linear-regression-model-1",
+    "href": "slides/session2/slides2.html#simple-linear-regression-model-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Simple linear regression model",
+    "text": "Simple linear regression model\n\nYour relation between your two variables : \\[\\begin{equation}\nY_i = f(X_i) + \\epsilon_i\n\\end{equation}\\]\nA linear function of \\(X\\) is simply a function that associates a constant value \\(\\beta\\) such that each increase \\(\\Delta X\\) produces a \\(\\beta \\Delta X\\) on Y, so that \\(\\Delta Y = \\beta \\Delta X\\). In other words, \\(f(X, \\epsilon) = \\beta_0 + \\beta_1 X+\\epsilon\\). \\[\\begin{equation}\nY_i = \\beta_0+\\beta_1 X_i + \\epsilon_i\n\\end{equation}\\]"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#simple-linear-regression-model-2",
+    "href": "slides/session2/slides2.html#simple-linear-regression-model-2",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Simple linear regression model",
+    "text": "Simple linear regression model\n\nWe want \\(\\beta\\) (or \\(f\\)) that minimises the error \\(\\epsilon\\): \\[\\begin{equation}\n\\sum_i^N \\epsilon_i^2 = \\sum_i^N(Y_i - \\beta_1 X_i - \\beta_0)^2 = S(\\beta_0,  \\beta_1)\n\\end{equation}\\]\nThis will give us the line that best fits the data\n“Ordinary Least Squares” (OLS)"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#linear-regression-in-r",
+    "href": "slides/session2/slides2.html#linear-regression-in-r",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Linear regression in R",
+    "text": "Linear regression in R\n\nLinear estimator is present in base R, it’s called lm\nsummary gives you the values\n\n\nelec_urbin &lt;- elections2024 %&gt;% filter(dens == \"Urbain intermédiaire\")\nmodel1 &lt;- lm(data = elec_urbin, far_right_relvotes ~ log(revmoyfoy))\n\nsummary(model1)\n\n\nCall:\nlm(formula = far_right_relvotes ~ log(revmoyfoy), data = elec_urbin)\n\nResiduals:\n      Min        1Q    Median        3Q       Max \n-0.312869 -0.059556  0.000578  0.061612  0.245735 \n\nCoefficients:\n                Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)     2.310232   0.054997   42.01   &lt;2e-16 ***\nlog(revmoyfoy) -0.185713   0.005257  -35.33   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.08438 on 3490 degrees of freedom\nMultiple R-squared:  0.2634,    Adjusted R-squared:  0.2632 \nF-statistic:  1248 on 1 and 3490 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#interpretation-of-linear-regression-in-r",
+    "href": "slides/session2/slides2.html#interpretation-of-linear-regression-in-r",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Interpretation of linear regression in R",
+    "text": "Interpretation of linear regression in R\n\nIntercept : predicted value when predictors = 0\nEstimate\n\nsign\nmagnitude\n\nSignificance levels : compares with \\(\\beta_1 = 0\\) (Null hypothesis)\n\nt-value (\\(df&gt;1000\\)) : \\(t_{.90} = 1.645\\), \\(t_{.95} = 1.96\\), \\(t_{.99} =2.58\\)\np-value : probability of obtaining such t-stat with \\(\\beta_1 = 0\\)"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#multiple-linear-regression",
+    "href": "slides/session2/slides2.html#multiple-linear-regression",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Multiple linear regression",
+    "text": "Multiple linear regression\n\nBut is that only an effect of income ?\nIncome is also correlated with many other variables, e.g. :\n\n% University graduates (interval)\nLocation (categorical)\n\nOmitted variable bias.\nNeed to add predictors !"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#towards-simple-linear-regression",
+    "href": "slides/session2/slides2.html#towards-simple-linear-regression",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Towards simple linear regression",
+    "text": "Towards simple linear regression"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#visualising-the-errors",
+    "href": "slides/session2/slides2.html#visualising-the-errors",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Visualising the errors",
+    "text": "Visualising the errors"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#multiple-linear-regression-1",
+    "href": "slides/session2/slides2.html#multiple-linear-regression-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Multiple linear regression",
+    "text": "Multiple linear regression\n\nelec_urbin &lt;- elections2024 %&gt;% mutate(psup = if_else(pact &gt; 0, sup / pact, NA_real_)) \nmodel2 &lt;- lm(data = elec_urbin %&gt;% filter(dens == \"Urbain intermédiaire\"), far_right_relvotes ~ log(revmoyfoy) + psup)\nsummary(model2)\n\n\nCall:\nlm(formula = far_right_relvotes ~ log(revmoyfoy) + psup, data = elec_urbin %&gt;% \n    filter(dens == \"Urbain intermédiaire\"))\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-0.30604 -0.05640 -0.00183  0.05605  0.35688 \n\nCoefficients:\n                Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)     1.663218   0.059892   27.77   &lt;2e-16 ***\nlog(revmoyfoy) -0.116205   0.005913  -19.65   &lt;2e-16 ***\npsup           -0.112047   0.005232  -21.41   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.07934 on 3489 degrees of freedom\nMultiple R-squared:  0.349, Adjusted R-squared:  0.3486 \nF-statistic: 935.1 on 2 and 3489 DF,  p-value: &lt; 2.2e-16\n\n\n\nAdding a single predictors considerably decreases the effect of income !"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#the-normal-distribution-3",
+    "href": "slides/session2/slides2.html#the-normal-distribution-3",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "The normal distribution",
+    "text": "The normal distribution\n\n\\(P(1 \\leq X \\leq 2) = \\int_1^2 N(x; 1.5, 1) \\text{d}x = P(X \\leq 2) - P(X\\leq 1)\\)"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#correlation-causality",
+    "href": "slides/session2/slides2.html#correlation-causality",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Correlation, causality",
+    "text": "Correlation, causality\n\nA correlation = two phenomena moove together,\n\nuseful to describe, predict, formulate hypotheses\nyet not causal ! (e.g. ice cream sales and shark attacks)\n\nA correlation can also be completely spurious"
+  },
+  {
+    "objectID": "slides/session2/slides2.html#causality",
+    "href": "slides/session2/slides2.html#causality",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Causality",
+    "text": "Causality\n\nOne phenomenon causes the other:\n5 rules :\n\nDoes the cause come before the effect ?\nIs there a possible alternative explanation ?\nDoes the relationship hold in different contexts ?\nIs the effect measured after the cause appears ?\nCould the effect actually be the cause ?"
+  },
+  {
+    "objectID": "homeworks/homework2.html",
+    "href": "homeworks/homework2.html",
+    "title": "Exercice 2 : analysing party positions",
+    "section": "",
+    "text": "Using the rio packages by calling library(rio) (if not already installed in your environment, install the package first), import the data from the ESS (wave 11), located at &lt;&gt;\nUsing colnames, have a look at the names of your variables.\nUsing function unique, have a look at the different years present in your data set\n\n\nlibrary(rio)\n\nvot_turnout &lt;- import(\"/Users/paulservais/Library/CloudStorage/ProtonDrive-paservai@protonmail.com-folder/Website/methods_policyevaluation/dataexos/rain_turnout.dta\")\n\nunique(vot_turnout$year)\n\n[1] 2012 2016 2020"
+  },
+  {
+    "objectID": "homeworks/homework2.html#exercice-1---playing-with-data",
+    "href": "homeworks/homework2.html#exercice-1---playing-with-data",
+    "title": "Exercice 2 : analysing party positions",
+    "section": "",
+    "text": "Using the rio packages by calling library(rio) (if not already installed in your environment, install the package first), import the data from the ESS (wave 11), located at &lt;&gt;\nUsing colnames, have a look at the names of your variables.\nUsing function unique, have a look at the different years present in your data set\n\n\nlibrary(rio)\n\nvot_turnout &lt;- import(\"/Users/paulservais/Library/CloudStorage/ProtonDrive-paservai@protonmail.com-folder/Website/methods_policyevaluation/dataexos/rain_turnout.dta\")\n\nunique(vot_turnout$year)\n\n[1] 2012 2016 2020"
   }
 ]

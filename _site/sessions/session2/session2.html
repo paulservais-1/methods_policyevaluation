@@ -176,22 +176,6 @@ window.Quarto = {
     <a class="dropdown-item" href="../../sessions/session2/session2.html">
  <span class="dropdown-text">Session 2: OLS: Simple and Multiple Linear Regressions and Analysis</span></a>
   </li>  
-        <li>
-    <a class="dropdown-item" href="../../sessions/session3.html">
- <span class="dropdown-text">Session 3: Non-Linear Regressions and Analysis</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../sessions/session4.html">
- <span class="dropdown-text">Session 4: Difference-in-Differences (DiD)</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../sessions/session5.html">
- <span class="dropdown-text">Session 5: Regression Discontinuity Design (RDD)</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../sessions/session6.html">
- <span class="dropdown-text">Session 6: Instrumental Variables (IV), Two-Stage Least Squares (2SLS) and Two-Stage Residual Inclusion (2SRI)</span></a>
-  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -210,23 +194,7 @@ window.Quarto = {
   </li>  
         <li>
     <a class="dropdown-item" href="../../homeworks/homework2.html">
- <span class="dropdown-text">Session 2: OLS: Simple and Multiple Linear Regressions and Analysis</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../homeworks/homework3.html">
- <span class="dropdown-text">Session 3: Non-Linear Regressions and Analysis</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../homeworks/homework4.html">
- <span class="dropdown-text">Session 4: Difference-in-Differences (DiD)</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../homeworks/homework5.html">
- <span class="dropdown-text">Session 5: Regression Discontinuity Design (RDD)</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../homeworks/homework6.html">
- <span class="dropdown-text">Session 6: Instrumental Variables (IV), Two-Stage Least Squares (2SLS) and Two-Stage Residual Inclusion (2SRI)</span></a>
+ <span class="dropdown-text">Session 2: Statistical inference and linear regressions</span></a>
   </li>  
     </ul>
   </li>
@@ -243,6 +211,10 @@ window.Quarto = {
         <li>
     <a class="dropdown-item" href="../../slides/session1/slides1.html">
  <span class="dropdown-text">Session 1: Dataset Building and Descriptive Statistics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../slides/session2/slides2.html">
+ <span class="dropdown-text">Session 2: Statistical inference and linear regressions</span></a>
   </li>  
     </ul>
   </li>
@@ -357,6 +329,12 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
 <p>In our previous session, we focused on describing individual variables. We explored measures of central tendency—such as the mean, median, and mode—as well as measures of dispersion, which show how values are spread around these central points. We also examined graphical methods like histograms and density plots, which help visualize the distribution of a variable. Histograms display the frequency of values within intervals, while density plots represent the distribution as a continuous curve. These tools led us to the concept of the probability density function, a continuous function that best represents the distribution of a variable.</p>
 <p>While describing a single variable is informative and foundational, most research aims to go further by examining relationships <strong>between</strong> variables. The goal is often to determine whether one variable (X) influences another (Y), or vice versa. This was briefly introduced at the end of Session 1, where we considered whether density could be reliably linked to a significant effect on the median income of municipalities. This question was complex because the subgroups not only had different means but also different dispersions—higher deviations around those means. To address this, we introduced the t-test, a method for comparing the means of two groups.</p>
+<p>In this session, we will :</p>
+<ol type="1">
+<li>Remind you important notions of statistical inference, which we will be using for the rest of the class;</li>
+<li>Introduce you to t-tests;</li>
+<li>Introduce you to linear regression models;</li>
+</ol>
 </section>
 <section id="types-of-relationships" class="level2">
 <h2 class="anchored" data-anchor-id="types-of-relationships">Types of relationships</h2>
@@ -427,16 +405,16 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           y
-1  2.4131071
-2  1.0723571
-3  1.8515000
-4  0.4799643
-5  1.6839286
-6  1.2254643
-7  2.3531786
-8  1.1562143
-9  1.8989643
-10 1.3646071</code></pre>
+1  0.5765000
+2  0.7694643
+3  1.4046429
+4  0.3458214
+5  1.5523929
+6  1.8858571
+7  2.1070714
+8  2.3204286
+9  1.9109286
+10 1.4282857</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="at">x =</span> y)) <span class="sc">+</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density)), <span class="at">bins =</span> <span class="dv">100</span>)<span class="sc">+</span></span>
@@ -459,7 +437,7 @@ Attaching package: 'dplyr'</code></pre>
 [1] 1.291
 
 $y
-[1] 0.7068226</code></pre>
+[1] 0.7068518</code></pre>
 </div>
 </div>
 <p>You might ask yourself : what is the probability of obtaining 1.291 ? Of course, this probability would be extremely low : <span class="math inline">\(P_X(x) \rightarrow 0\)</span>. Instead, you would rather consider the probability of having a value falling in a given interval <span class="math inline">\([a,b]\)</span>, for instance <span class="math inline">\([1, 1.5]\)</span>. This probability would be given by: <span class="math display">\[\begin{equation}
@@ -539,11 +517,11 @@ f_N(x) = \mathcal{N}(x; \mu, \sigma) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.500427</code></pre>
+<pre><code>[1] 1.502537</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5001973</code></pre>
+<pre><code>[1] 0.500995</code></pre>
 </div>
 </div>
 <p>which means that the normal distribution is centered in 1.5, and its standard deviation is 0.5 : 68% of the data is located within the interval between 1 and 2.</p>
@@ -1448,7 +1426,7 @@ Z \leq  \frac{2-\mu_Y}{\sigma} = 0.997941
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(int) <span class="co"># </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9758098</code></pre>
+<pre><code>[1] 0.9754038</code></pre>
 </div>
 </div>
 <p>This gives about 0.97, which is very close to what you had computed from the tables. Note how I am computing this integral : I am just summing over all the values <span class="math inline">\(x \leq 2.5\)</span>, with the very small steps <span class="math inline">\(\delta x = 0.0000001\)</span> and therefore $ x = 0.000005$ , <span class="math inline">\(x = 0.000015\)</span>,<span class="math inline">\(x = 0.000025\)</span>, <span class="math inline">\(x = 0.000035\)</span>,…, <span class="math inline">\(x = 2.500000\)</span> and adding the very small quantities:</p>
@@ -1458,7 +1436,7 @@ Z \leq  \frac{2-\mu_Y}{\sigma} = 0.997941
 <p>As already said, an integral is just a fancy way of writing a sum for continuous variables ! Hence, numerically, a way of computing that integral is just to take a very small step, and simulate the sum ! If you repeat the exact same process for 2 instead of 2.5, you get :</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8396919</code></pre>
+<pre><code>[1] 0.8382795</code></pre>
 </div>
 </div>
 <p>which is also very close to what we had found from the tables.</p>
