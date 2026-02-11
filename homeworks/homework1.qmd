@@ -47,6 +47,7 @@ The [European social survey](https://www.europeansocialsurvey.org/about-ess) "me
 ```{r}
 #| echo: true
 #| eval: true
+library(rio)
 ESS<-import("https://jan-rovny.squarespace.com/s/ESS_FR.dta")
 glimpse(ESS)
 ESS <- ESS %>% select(euftf, happy,yrbrn, eduyrs, gndr)
