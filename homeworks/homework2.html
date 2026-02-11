@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -113,22 +148,6 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="../sessions/session2/session2.html">
  <span class="dropdown-text">Session 2: OLS: Simple and Multiple Linear Regressions and Analysis</span></a>
   </li>  
-        <li>
-    <a class="dropdown-item" href="../sessions/session3.html">
- <span class="dropdown-text">Session 3: Non-Linear Regressions and Analysis</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../sessions/session4.html">
- <span class="dropdown-text">Session 4: Difference-in-Differences (DiD)</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../sessions/session5.html">
- <span class="dropdown-text">Session 5: Regression Discontinuity Design (RDD)</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../sessions/session6.html">
- <span class="dropdown-text">Session 6: Instrumental Variables (IV), Two-Stage Least Squares (2SLS) and Two-Stage Residual Inclusion (2SRI)</span></a>
-  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -147,23 +166,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="../homeworks/homework2.html">
- <span class="dropdown-text">Session 2: OLS: Simple and Multiple Linear Regressions and Analysis</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../homeworks/homework3.html">
- <span class="dropdown-text">Session 3: Non-Linear Regressions and Analysis</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../homeworks/homework4.html">
- <span class="dropdown-text">Session 4: Difference-in-Differences (DiD)</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../homeworks/homework5.html">
- <span class="dropdown-text">Session 5: Regression Discontinuity Design (RDD)</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../homeworks/homework6.html">
- <span class="dropdown-text">Session 6: Instrumental Variables (IV), Two-Stage Least Squares (2SLS) and Two-Stage Residual Inclusion (2SRI)</span></a>
+ <span class="dropdown-text">Session 2: Statistical inference and linear regressions</span></a>
   </li>  
     </ul>
   </li>
@@ -180,6 +183,10 @@ ul.task-list li input[type="checkbox"] {
         <li>
     <a class="dropdown-item" href="../slides/session1/slides1.html">
  <span class="dropdown-text">Session 1: Dataset Building and Descriptive Statistics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../slides/session2/slides2.html">
+ <span class="dropdown-text">Session 2: Statistical inference and linear regressions</span></a>
   </li>  
     </ul>
   </li>
@@ -198,8 +205,16 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#exercice-1---playing-with-data" id="toc-exercice-1---playing-with-data" class="nav-link active" data-scroll-target="#exercice-1---playing-with-data">Exercice 1 - playing with data</a></li>
+  <li><a href="#exercice-2-analysing-party-positions" id="toc-exercice-2-analysing-party-positions" class="nav-link" data-scroll-target="#exercice-2-analysing-party-positions">Exercice 2 : analysing party positions</a></li>
+  <li><a href="#exercice-3-comparing-electoral-outcomes-in-the-french-elections" id="toc-exercice-3-comparing-electoral-outcomes-in-the-french-elections" class="nav-link" data-scroll-target="#exercice-3-comparing-electoral-outcomes-in-the-french-elections">Exercice 3 : Comparing electoral outcomes in the French elections</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
@@ -207,8 +222,59 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+<section id="exercice-1---playing-with-data" class="level2">
+<h2 class="anchored" data-anchor-id="exercice-1---playing-with-data">Exercice 1 - playing with data</h2>
+<ol type="1">
+<li>Using the rio packages by calling <code>library(rio)</code> (if not already installed in your environment, install the package first), import the data from the ESS (wave 11), located at &lt;&gt;</li>
+<li>Using <code>colnames</code>, have a look at the names of your variables.</li>
+<li>Using function <code>unique</code>, have a look at the different years present in your data set</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="exercice-2-analysing-party-positions" class="level1">
+<h1>Exercice 2 : analysing party positions</h1>
+<p>The Chapel Hill expert survey data is a survey that “provides information about the positioning of the leadership of 279 parties in 31 countries over the course of 2024 on ideology, policy, populism, democracy, European integration, and select EU policy questions. Country coverage includes all European Union member states except for Luxembourg – plus Iceland, Norway, Switzerland, Turkey, and the United Kingdom.2 The dataset adopts the country code and party id schema of the CHES Trend file (Jolly et al.&nbsp;2022) and the Speed CHES survey on Ukraine (Hooghe et al.&nbsp;2024) with extensions for newly covered parties” (see <a href="https://static1.squarespace.com/static/5975c9bfdb29d6a05c65209b/t/69163d62e2606b5a3c46812b/1763065186525/CHES+2024+Codebook.pdf">documentation of CHES</a>).</p>
+<p>You can find the recent survey’s dataset on the internet at <a href="https://www.chesdata.eu/s/1999-2024_CHES_dataset_means.csv" class="uri">https://www.chesdata.eu/s/1999-2024_CHES_dataset_means.csv</a>, to perform the following tasks :</p>
+<ol type="1">
+<li>Import the data in your local environment. Use the <code>rio</code> package use <code>install.packages()</code> if you haven’t installed the packages yet) and library to import it directly from the internet.</li>
+<li>Use the glimpse() function to have a look at your data</li>
+<li>Filter the data set to only keep the most recent year, 2024.</li>
+<li>Using the identifiers and general information in the documentation, keep only the following items:“country”, “the overall ideology on a scale ranging from 0 (extreme left) to 10 (extreme right)”, “Thinking about the European Union’s relationship with Russia, where do you place each party on its preferred action for European countries to take?”, “Position on civil liberties VS. law and order”, “Position on same sex marriage”, “position on urban-rural”, “position on nationalism”, “left-right positioning”.</li>
+<li>Summarize three of these variables and comment on your findings.</li>
+<li>You now want to more specifically understand what drives a party to adopt favorable or more unfavorable stances on the EU’s relationship with Russia. What would be your dependent variable ? Plot a histogram of this DV and comment on the distribution.</li>
+<li>You want to understand if left-right positioning influences the EU-Russia position of a party: - draw a scatter plot of the two variables, using <code>ggplot2</code> and <code>geom_point()</code>, and add the regression line. - run a simple linear regression model, with EU-Russia as dependent variable, and left-right positioning of a party as independent variable. Display the regression table using <code>stargazer</code> and interpret the coefficients. Do you think this result could be biased ? If so, why ? How could you correct that ?</li>
+</ol>
+<ul>
+<li>Run a multiple linear regression to understand whether adding the party’s position on nationalism changes something. Store the value in another model, so that you can compare both in the same <code>stargazer</code> table. What do you observe ? Compare the values <code>lrgen</code> in both tables and comment on those.</li>
+<li>Run a last linear regression with the party’s left-right position, his urban-rural position, his position on same sex marriage, and use the binary variable east-west to know if being East or West changes your party’s position. What can you conclude ? Now add nationalism among the independent variables and comment? What is the best model ?</li>
+</ul>
+<ol start="8" type="1">
+<li>Now imagine wondering whether being in a country from Eastern or Western Europe influences how nationalism influences your position on this issue. How could you test that ? Plot the predicted values.</li>
+<li>Compute a last, fully saturated model, with all your variables except <code>country</code>, and run tests of multicollinearity and heteroskedasticity. What do you find ? Comment on the results. Add <code>as.factor(country)</code> in the regression and comment on the results.</li>
+</ol>
+</section>
+<section id="exercice-3-comparing-electoral-outcomes-in-the-french-elections" class="level1">
+<h1>Exercice 3 : Comparing electoral outcomes in the French elections</h1>
+<p>You are provided with data about the legislative and the presidential elections in France, in 2022, as well as socio-demographic data on French communes in 2022, for LR (coded as “right”) and RN (“far-right”). You are asked to :</p>
+<ol type="1">
+<li>Knowing that the data can be accessed online through URLs <a href="https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices1/data/elections_2022.csv" class="uri">https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices1/data/elections_2022.csv</a> and <a href="https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices1/data/soc_dem_2022.csv" class="uri">https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices1/data/soc_dem_2022.csv</a>, import the data in RStudio.</li>
+<li>Use <code>glimpse()</code> to have a quick look at your data</li>
+<li>Merge the two files together</li>
+<li>Plot a density plot of turnout with two different colors for the presidential and legislative elections. Do the same for the RN vote, and the LR vote. What do you see ?</li>
+<li>You seek to assess the impact of turnout on voting outcomes for the LR and the RN in the presidential and legislative elections. What would be your dependent variable(s) ?</li>
+</ol>
+<ul>
+<li>Create variables <code>petr</code> and <code>psup</code>, respectively the proportion of foreigners and proportion of university graduates in the overall population, by using the absolute counts <code>etranger</code>, <code>sup</code> and <code>pop</code> (population per commune)</li>
+<li>Take the following variables : % of blue-collar workers (pouvr), the % of university graduates (psup), the % of foreigners (petr), the log of median income in the commune, analyse their effect on voting for RN or LR in a commune, and compare the regression models.</li>
+<li>Add turnout to the regression model, and see whether turnout affects voting for these two parties. Is the effect similar for both parties ? To better visualise the coefficients, use <code>map_df(list(model1, model2), ~ tidy(.x, conf.int = T), .id = "model")</code> to plot the coefficients.</li>
+<li>Comment on the R2 and Adjusted R2 : is a model performing better than the other ?</li>
+<li>Check for multicollinearity and heteroskedasticity. Comment on your findings. Are the assumptions of linear regressions verified ?</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
