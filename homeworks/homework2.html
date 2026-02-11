@@ -275,10 +275,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#1.0</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ESS_11 <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"https://github.com/paulservais-1/methods_policyevaluation/raw/main/dataexos/ESS11_data/ESS11.csv"</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#1.1</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ESS_11 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="st">"trstprl"</span>,<span class="st">"eduyrs"</span>,<span class="st">"polintr"</span>,<span class="st">"netusoft"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#1.0</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ESS_11 <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"https://github.com/paulservais-1/methods_policyevaluation/raw/main/dataexos/ESS11_data/ESS11.csv"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#1.1</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ESS_11 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="st">"trstprl"</span>,<span class="st">"eduyrs"</span>,<span class="st">"polintr"</span>,<span class="st">"netusoft"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    trstprl           eduyrs         polintr         netusoft    
  Min.   : 0.000   Min.   : 0.00   Min.   :1.000   Min.   :1.000  
