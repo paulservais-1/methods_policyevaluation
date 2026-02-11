@@ -48,6 +48,7 @@ The [European social survey](https://www.europeansocialsurvey.org/about-ess) "me
 #| echo: true
 #| eval: true
 library(rio)
+library(tidyverse)
 ESS<-import("https://jan-rovny.squarespace.com/s/ESS_FR.dta")
 glimpse(ESS)
 ESS <- ESS %>% select(euftf, happy,yrbrn, eduyrs, gndr)
@@ -86,8 +87,9 @@ You want to analyse the electoral outcomes of the radical right in rural commune
 ```{r}
 #| echo: true
 #| eval: true
-
 library(rio)
+library(tidyverse)
+
 elec_eur <- import("https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/elections2024.csv")
 socio_dem <- import("https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/demographics2024.xlsx")
 
