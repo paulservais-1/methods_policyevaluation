@@ -1426,5 +1426,334 @@
     "title": "Exercice 2 : analysing party positions",
     "section": "",
     "text": "Using the rio packages by calling library(rio) (if not already installed in your environment, install the package first), import the data from the ESS (wave 11), located at &lt;&gt;\nUsing colnames, have a look at the names of your variables.\nUsing function unique, have a look at the different years present in your data set\n\n\nlibrary(rio)\n\nvot_turnout &lt;- import(\"/Users/paulservais/Library/CloudStorage/ProtonDrive-paservai@protonmail.com-folder/Website/methods_policyevaluation/dataexos/rain_turnout.dta\")\n\nunique(vot_turnout$year)\n\n[1] 2012 2016 2020"
+  },
+  {
+    "objectID": "slides/session2/correction.html#general-comments",
+    "href": "slides/session2/correction.html#general-comments",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "General comments",
+    "text": "General comments\n\nYour finals\n\nemphasis on the question, the identification strategy, the limitations\nNULL results are good too !\n\nThe exercices of last session\nWe will try to do 1h theory (code) + 1h exercices"
+  },
+  {
+    "objectID": "slides/session2/correction.html#content",
+    "href": "slides/session2/correction.html#content",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Content",
+    "text": "Content\n\nQuick recap’\nTheory :\n\nStatistical inference\nT-tests\nOLS regression\n\nExercices"
+  },
+  {
+    "objectID": "slides/session2/correction.html#last-session",
+    "href": "slides/session2/correction.html#last-session",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Last session",
+    "text": "Last session\n\nWe saw\nDescriptive statistics\n\nmean, median, variance, standard deviation\nexpectation, distribution\nprobability density function\n\nHow to code in R\n\nsummary(), IQR(),\nhist(), ggplot()+geom_density(), barplot()"
+  },
+  {
+    "objectID": "slides/session2/correction.html#last-session-1",
+    "href": "slides/session2/correction.html#last-session-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Last session",
+    "text": "Last session\n\nWe saw for continuous variable \\(P(Y\\le Y_0)\\) (here 52.503)"
+  },
+  {
+    "objectID": "slides/session2/correction.html#last-session-2",
+    "href": "slides/session2/correction.html#last-session-2",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Last session",
+    "text": "Last session\n\nAnd different distribution functions"
+  },
+  {
+    "objectID": "slides/session2/correction.html#the-normal-distribution",
+    "href": "slides/session2/correction.html#the-normal-distribution",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "The normal distribution",
+    "text": "The normal distribution"
+  },
+  {
+    "objectID": "slides/session2/correction.html#the-normal-distribution-1",
+    "href": "slides/session2/correction.html#the-normal-distribution-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "The normal distribution",
+    "text": "The normal distribution\n\nSymmetric, not bounded, continuous\nmode = median = mean \\[\\begin{equation}\nf_N(x) = \\mathcal{N}(x; \\mu, \\sigma) = \\frac{1}{\\sigma \\sqrt{2\\pi}} e^{-\\frac{1}{2}(\\frac{x-\\mu}{\\sigma})^2}\n\\end{equation}\\]\nstandard normal distribution \\[\\begin{equation}\n\\mathcal{N}(z; 0, 1) = \\frac{1}{\\sigma \\sqrt{2\\pi}} e^{-\\frac{1}{2}(\\frac{z}{1})^2}\n\\end{equation}\\]"
+  },
+  {
+    "objectID": "slides/session2/correction.html#the-normal-distribution-2",
+    "href": "slides/session2/correction.html#the-normal-distribution-2",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "The normal distribution",
+    "text": "The normal distribution\n\\[\\begin{equation}\n\\mathcal{N}(x; 1.5, 1)\n\\end{equation}\\]"
+  },
+  {
+    "objectID": "slides/session2/correction.html#the-normal-distribution-3",
+    "href": "slides/session2/correction.html#the-normal-distribution-3",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "The normal distribution",
+    "text": "The normal distribution\n\n\\(P(1 \\leq X \\leq 2) = \\int_1^2 N(x; 1.5, 1) \\text{d}x = P(X \\leq 2) - P(X\\leq 1)\\)"
+  },
+  {
+    "objectID": "slides/session2/correction.html#statistical-tables",
+    "href": "slides/session2/correction.html#statistical-tables",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Statistical tables",
+    "text": "Statistical tables\n\nIntegral difficult to compute…\nTake variable \\((X- \\mu)/\\sigma= z\\) \\[\\begin{equation}\nP(z \\leq (2-1.5)/1) = P(z \\leq 0.5) = P(X \\leq 2) \\approx 0.69\n\\end{equation}\\]\nRefer yourself to the statistical tables !"
+  },
+  {
+    "objectID": "slides/session2/correction.html#limitations",
+    "href": "slides/session2/correction.html#limitations",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Limitations",
+    "text": "Limitations\n\nAlready gives hint on one variable\nbut…\n\ncomplete information on population\n\nstatistical inference\n\nwhat about relationships ?\n\nt-tests\nsimple and multiple regression"
+  },
+  {
+    "objectID": "slides/session2/correction.html#statistical-inference-1",
+    "href": "slides/session2/correction.html#statistical-inference-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Statistical inference",
+    "text": "Statistical inference\n\nGoal = find information on population based on sample\n\n\nPopulation and Sample"
+  },
+  {
+    "objectID": "slides/session2/correction.html#statistical-inference-2",
+    "href": "slides/session2/correction.html#statistical-inference-2",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Statistical inference",
+    "text": "Statistical inference\n\nGoal = find information on population based on sample\nE.g. You want to estimate the average French income\nAsking every French person is difficult…\nUse a sample with reduced size !"
+  },
+  {
+    "objectID": "slides/session2/correction.html#estimation-of-parameters",
+    "href": "slides/session2/correction.html#estimation-of-parameters",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Estimation of parameters",
+    "text": "Estimation of parameters\n\nIn general you seek to evaluate key parameters of your distribution\n\nmean \\(\\mu\\),\nstandard deviation \\(\\sigma\\)\n\nbased on a sample"
+  },
+  {
+    "objectID": "slides/session2/correction.html#confidence-interval",
+    "href": "slides/session2/correction.html#confidence-interval",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Confidence interval",
+    "text": "Confidence interval\n\nYet your sampling procedure is random\nThe mean of your sample, \\(\\bar{X}\\), is a random variable that could be used to estimate the actual mean \\(\\mu\\): \\[\\begin{equation}\nZ = \\frac{\\bar{x} - \\mu}{\\sigma / \\sqrt{n}} \\sim \\mathcal{N}(0,1).\n\\end{equation}\\]\nthe statistical tables allow you to find the desired level of confidence !"
+  },
+  {
+    "objectID": "slides/session2/correction.html#confidence-interval---knowing-sigma",
+    "href": "slides/session2/correction.html#confidence-interval---knowing-sigma",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Confidence interval - knowing \\(\\sigma\\)",
+    "text": "Confidence interval - knowing \\(\\sigma\\)\n\nYet your sampling procedure is random\nThe mean of your sample, \\(\\bar{X}\\), is a random variable that could be used to estimate the actual mean \\(\\mu\\): \\[\\begin{equation}\nZ = \\frac{\\bar{x} - \\mu}{\\sigma / \\sqrt{n}} \\sim \\mathcal{N}(0,1).\n\\end{equation}\\]\n\n\\[\\begin{equation}\n\\bar{x} - z_{1-\\alpha/2}\\,\\frac{\\sigma}{\\sqrt{n}} \\le \\mu \\le \\bar{x} + z_{1-\\alpha/2}\\,\\frac{\\sigma}{\\sqrt{n}}\n\\end{equation}\\]"
+  },
+  {
+    "objectID": "slides/session2/correction.html#confidence-interval-1",
+    "href": "slides/session2/correction.html#confidence-interval-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Confidence interval",
+    "text": "Confidence interval\n\\[\\begin{equation}\n\\bar{x} - z_{1-\\alpha/2}\\,\\frac{\\sigma}{\\sqrt{n}} \\le \\mu \\le \\bar{x} + z_{1-\\alpha/2}\\,\\frac{\\sigma}{\\sqrt{n}}\n\\end{equation}\\]\n\nIntuitively, precision:\n\nincreases with the size of sample \\(n\\),\ndecreases with the variation in the population \\(\\sigma\\) or \\(s\\)\ndecreases with when your confidence level increases"
+  },
+  {
+    "objectID": "slides/session2/correction.html#confidence-interval---example",
+    "href": "slides/session2/correction.html#confidence-interval---example",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Confidence interval - Example",
+    "text": "Confidence interval - Example\n\nThe average median income in French communes (log).\nYou know \\(\\sigma\\)\n\\(\\mu\\) = ?\n\n\nlibrary(readxl)\ndata_dem &lt;- read_excel(\"data/demographics2024.xlsx\")\nlog_median_inc &lt;- log(data_dem$revmoyfoy)\nsig &lt;- sd(log_median_inc, na.rm = TRUE)"
+  },
+  {
+    "objectID": "slides/session2/correction.html#confidence-interval-2",
+    "href": "slides/session2/correction.html#confidence-interval-2",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Confidence interval",
+    "text": "Confidence interval\n\nSample of 40 communes\n\n\nmy_sample &lt;- sample(log_median_inc, 40, replace = FALSE)\nmean_x &lt;- mean(my_sample, na.rm = TRUE)\nsd(my_sample, na.rm =TRUE)\n\n[1] 0.1957132\n\n\n\nwith 95% confidence, your mean lies in :\n\n\nmean_x - 1.96*sig/sqrt(40)\n\n[1] 10.20891\n\nmean_x + 1.96*sig/sqrt(40)\n\n[1] 10.35771\n\nmean(log_median_inc, na.rm = TRUE)\n\n[1] 10.31475"
+  },
+  {
+    "objectID": "slides/session2/correction.html#confidence-interval-3",
+    "href": "slides/session2/correction.html#confidence-interval-3",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Confidence interval",
+    "text": "Confidence interval\n\nThe randomness is on the sampling process ! If you repeat the process N times…\n95% of finding the actual mean within the interval !\n5% of confidence intervals do not include the mean, due to randomness of sampling \\(\\bar{x}\\) !"
+  },
+  {
+    "objectID": "slides/session2/correction.html#confidence-interval-95",
+    "href": "slides/session2/correction.html#confidence-interval-95",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Confidence interval, 95%",
+    "text": "Confidence interval, 95%\n\nplot_ci(log_median_inc, 40, 300, 1.960) #data, sample size, n° estimations, conf level"
+  },
+  {
+    "objectID": "slides/session2/correction.html#sample-size",
+    "href": "slides/session2/correction.html#sample-size",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Sample size",
+    "text": "Sample size\n\nplot_ci(log_median_inc, 100, 300, 1.960)"
+  },
+  {
+    "objectID": "slides/session2/correction.html#confidence-level",
+    "href": "slides/session2/correction.html#confidence-level",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Confidence level",
+    "text": "Confidence level\n\nplot_ci(log_median_inc, 100, 300, 2.576)"
+  },
+  {
+    "objectID": "slides/session2/correction.html#confidence-interval---not-knowing-sigma",
+    "href": "slides/session2/correction.html#confidence-interval---not-knowing-sigma",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Confidence interval - not knowing \\(\\sigma\\)",
+    "text": "Confidence interval - not knowing \\(\\sigma\\)\n\nThe std. deviation of population, \\(\\sigma\\), unknown\nThe mean of your sample, \\(\\bar{X}\\), is a random variable following a Student’s law.\n\n\\[\\begin{equation}\n\\bar{x} \\pm t_{1-\\alpha/2,n-1}\\,\\frac{s}{\\sqrt{n}}.\n\\end{equation}\\]\n\nThe statistical tables allow you to find the desired level of confidence !"
+  },
+  {
+    "objectID": "slides/session2/correction.html#hypothesis-testing",
+    "href": "slides/session2/correction.html#hypothesis-testing",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Hypothesis testing",
+    "text": "Hypothesis testing\n\nNull Hypothesis, \\(H_0\\) : the hypothesis we seek to check/test\nAlternative Hypothesis (\\(H_a\\)) : its negative"
+  },
+  {
+    "objectID": "slides/session2/correction.html#mean-estimation",
+    "href": "slides/session2/correction.html#mean-estimation",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Mean estimation",
+    "text": "Mean estimation\n\nNull Hypothesis (\\(H_0\\)): The mean income is equal to 35,000€ in French communes : \\(\\mu = 35000\\)\nAlternative Hypothesis (\\(H_a\\)): The population mean income is not equal to 35,000€.\n\n\n# Sample data (assumed to be the log-transformed median income)\nsample_data &lt;- sample(log_median_inc, size = 150, replace = FALSE)\n\n\n\n\n    One Sample t-test\n\ndata:  sample_data\nt = -10.386, df = 149, p-value &lt; 2.2e-16\nalternative hypothesis: true mean is not equal to 10.4631\n95 percent confidence interval:\n 10.25798 10.32356\nsample estimates:\nmean of x \n 10.29077 \n\n\n\np-value : the probability of observing \\(\\bar{x} = 10.29077\\) (or even more extreme), if the true population mean is actually 10.4631.\nhere \\(&lt;2.2e^{-16}\\)\nyou reject the null hypothesis: your mean is not 35k€"
+  },
+  {
+    "objectID": "slides/session2/correction.html#mean-comparison",
+    "href": "slides/session2/correction.html#mean-comparison",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Mean comparison",
+    "text": "Mean comparison\n\nAlso allows to look at the impact of categorical variables on estimates !\nTesting \\(\\mu_1 = \\mu_2\\)\n\n\nNull Hypothesis (\\(H_0\\)): The population means for urban and rural areas are equal, \\(\\mu_1 = \\mu_2\\) (or \\(\\mu_1 - \\mu_2 = 0\\))\nAlternative Hypothesis (\\(H_a\\)): The population means for urban and rural areas are different: \\(\\mu_1 != \\mu_2\\).\n\n\n# Split data by urban and rural communes\nurban_income &lt;- sample(log((data_dem %&gt;% filter(dens == \"Urbain dense\" | dens == \"Urbain intermédiaire\"))$revmoyfoy), 150, replace = FALSE)\nrural_income &lt;- sample(log((data_dem %&gt;% filter(dens == \"Rural\"))$revmoyfoy), 150, replace = FALSE)\n\n# Perform a two-sample t-test\nt_test_urban_rural &lt;- t.test(urban_income, \n                             rural_income, \n                             alternative = \"two.sided\", \n                             var.equal = FALSE,\n                             conf.level = 0.95)\n\n# Display the result\nt_test_urban_rural\n\n\n    Welch Two Sample t-test\n\ndata:  urban_income and rural_income\nt = 3.9075, df = 292.75, p-value = 0.0001159\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n 0.05493876 0.16644186\nsample estimates:\nmean of x mean of y \n 10.44437  10.33368 \n\n\n\nyour p value measures the probability of obtaining \\(\\mu_1 - \\mu_2\\) as extreme as \\(10.44-10.33\\), if it was \\(0\\)\nbelow 5% : you reject the null"
+  },
+  {
+    "objectID": "slides/session2/correction.html#back-to-our-initial-puzzle",
+    "href": "slides/session2/correction.html#back-to-our-initial-puzzle",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Back to our initial puzzle",
+    "text": "Back to our initial puzzle\n\n\\(Y \\leftarrow X\\)\nt.test() allows you to analyse :\n\neffect of categorical independent variables (being urban/rural)\non continuous dependent variable (income)\n\nwhat about continuous vs. continuous variables ?\n\ne.g. far-right votes (%) (Y) by income (X) ?"
+  },
+  {
+    "objectID": "slides/session2/correction.html#towards-simple-regression",
+    "href": "slides/session2/correction.html#towards-simple-regression",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Towards simple regression",
+    "text": "Towards simple regression\n\nOnce you have decided of a Y (dependent variable) and X (independent variables), you can draw a cloud of points\n\n\nlibrary(ggplot2)\nlibrary(tidyverse)\nlibrary(rio)\n\nelections2024 &lt;- import(\"data/elections2024.csv\")\nsocio_demo &lt;- import(\"data/demographics2024.xlsx\")\nelections2024 &lt;- elections2024 %&gt;% left_join(socio_demo %&gt;% mutate(codecommune = as.numeric(codecommune), codedep = as.numeric(codedep)))"
+  },
+  {
+    "objectID": "slides/session2/correction.html#towards-simple-linear-regression",
+    "href": "slides/session2/correction.html#towards-simple-linear-regression",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Towards simple linear regression",
+    "text": "Towards simple linear regression"
+  },
+  {
+    "objectID": "slides/session2/correction.html#simple-linear-regression-model",
+    "href": "slides/session2/correction.html#simple-linear-regression-model",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Simple linear regression model",
+    "text": "Simple linear regression model\n\nlibrary(ggplot2)\nelections2024 %&gt;% \n  filter(dens == \"Urbain intermédiaire\") %&gt;% \n  ggplot(aes(x = log(revmoyfoy), y = far_right_relvotes)) + geom_point() + labs(y = \"RN vote\", x = \"Median income in commune (log scale)\") + geom_smooth(method = \"lm\") +theme_minimal()"
+  },
+  {
+    "objectID": "slides/session2/correction.html#simple-linear-regression-model-1",
+    "href": "slides/session2/correction.html#simple-linear-regression-model-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Simple linear regression model",
+    "text": "Simple linear regression model\n\nYour relation between your two variables : \\[\\begin{equation}\nY_i = f(X_i) + \\epsilon_i\n\\end{equation}\\]\nA linear function of \\(X\\) is simply a function that associates a constant value \\(\\beta\\) such that each increase \\(\\Delta X\\) produces a \\(\\beta \\Delta X\\) on Y, so that \\(\\Delta Y = \\beta \\Delta X\\). In other words, \\(f(X, \\epsilon) = \\beta_0 + \\beta_1 X+\\epsilon\\). \\[\\begin{equation}\nY_i = \\beta_0+\\beta_1 X_i + \\epsilon_i\n\\end{equation}\\]"
+  },
+  {
+    "objectID": "slides/session2/correction.html#simple-linear-regression-model-2",
+    "href": "slides/session2/correction.html#simple-linear-regression-model-2",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Simple linear regression model",
+    "text": "Simple linear regression model\n\nWe want \\(\\beta\\) (or \\(f\\)) that minimises the error \\(\\epsilon\\): \\[\\begin{equation}\n\\sum_i^N \\epsilon_i^2 = \\sum_i^N(Y_i - \\beta_1 X_i - \\beta_0)^2 = S(\\beta_0,  \\beta_1)\n\\end{equation}\\]\nThis will give us the line that best fits the data\n“Ordinary Least Squares” (OLS)"
+  },
+  {
+    "objectID": "slides/session2/correction.html#visualising-the-errors",
+    "href": "slides/session2/correction.html#visualising-the-errors",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Visualising the errors",
+    "text": "Visualising the errors"
+  },
+  {
+    "objectID": "slides/session2/correction.html#linear-regression-in-r",
+    "href": "slides/session2/correction.html#linear-regression-in-r",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Linear regression in R",
+    "text": "Linear regression in R\n\nLinear estimator is present in base R, it’s called lm\nsummary gives you the values\n\n\nelec_urbin &lt;- elections2024 %&gt;% filter(dens == \"Urbain intermédiaire\")\nmodel1 &lt;- lm(data = elec_urbin, far_right_relvotes ~ log(revmoyfoy))\n\nsummary(model1)\n\n\nCall:\nlm(formula = far_right_relvotes ~ log(revmoyfoy), data = elec_urbin)\n\nResiduals:\n      Min        1Q    Median        3Q       Max \n-0.312869 -0.059556  0.000578  0.061612  0.245735 \n\nCoefficients:\n                Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)     2.310232   0.054997   42.01   &lt;2e-16 ***\nlog(revmoyfoy) -0.185713   0.005257  -35.33   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.08438 on 3490 degrees of freedom\nMultiple R-squared:  0.2634,    Adjusted R-squared:  0.2632 \nF-statistic:  1248 on 1 and 3490 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "slides/session2/correction.html#interpretation-of-linear-regression-in-r",
+    "href": "slides/session2/correction.html#interpretation-of-linear-regression-in-r",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Interpretation of linear regression in R",
+    "text": "Interpretation of linear regression in R\n\nIntercept : predicted value when predictors = 0\nEstimate\n\nsign\nmagnitude\n\nSignificance levels : compares with \\(\\beta_1 = 0\\) (Null hypothesis)\n\nt-value (\\(df&gt;1000\\)) : \\(t_{.90} = 1.645\\), \\(t_{.95} = 1.96\\), \\(t_{.99} =2.58\\)\np-value : probability of obtaining such t-stat with \\(\\beta_1 = 0\\)"
+  },
+  {
+    "objectID": "slides/session2/correction.html#multiple-linear-regression",
+    "href": "slides/session2/correction.html#multiple-linear-regression",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Multiple linear regression",
+    "text": "Multiple linear regression\n\nBut is that only an effect of income ?\nIncome is also correlated with many other variables, e.g. :\n\n% University graduates (interval)\nLocation (categorical)\n\nOmitted variable bias.\nNeed to add predictors !"
+  },
+  {
+    "objectID": "slides/session2/correction.html#multiple-linear-regression-1",
+    "href": "slides/session2/correction.html#multiple-linear-regression-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Multiple linear regression",
+    "text": "Multiple linear regression\n\nelec_urbin &lt;- elections2024 %&gt;% mutate(psup = if_else(pact &gt; 0, sup / pact, NA_real_)) \nmodel2 &lt;- lm(data = elec_urbin %&gt;% filter(dens == \"Urbain intermédiaire\"), far_right_relvotes ~ log(revmoyfoy) + psup)\nsummary(model2)\n\n\nCall:\nlm(formula = far_right_relvotes ~ log(revmoyfoy) + psup, data = elec_urbin %&gt;% \n    filter(dens == \"Urbain intermédiaire\"))\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-0.30604 -0.05640 -0.00183  0.05605  0.35688 \n\nCoefficients:\n                Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)     1.663218   0.059892   27.77   &lt;2e-16 ***\nlog(revmoyfoy) -0.116205   0.005913  -19.65   &lt;2e-16 ***\npsup           -0.112047   0.005232  -21.41   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.07934 on 3489 degrees of freedom\nMultiple R-squared:  0.349, Adjusted R-squared:  0.3486 \nF-statistic: 935.1 on 2 and 3489 DF,  p-value: &lt; 2.2e-16\n\n\n\nAdding a single predictors considerably decreases the effect of income !"
+  },
+  {
+    "objectID": "slides/session2/correction.html#correlation-causality",
+    "href": "slides/session2/correction.html#correlation-causality",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Correlation, causality",
+    "text": "Correlation, causality\n\nA correlation = two phenomena moove together,\n\nuseful to describe, predict, formulate hypotheses\nyet not causal ! (e.g. ice cream sales and shark attacks)\n\nA correlation can also be completely spurious"
+  },
+  {
+    "objectID": "slides/session2/correction.html#causality",
+    "href": "slides/session2/correction.html#causality",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Causality",
+    "text": "Causality\n\nOne phenomenon causes the other:\n5 rules :\n\nDoes the cause come before the effect ?\nIs there a possible alternative explanation ?\nDoes the relationship hold in different contexts ?\nIs the effect measured after the cause appears ?\nCould the effect actually be the cause ?"
+  },
+  {
+    "objectID": "slides/session2/correction.html#exercice-1",
+    "href": "slides/session2/correction.html#exercice-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Exercice 1",
+    "text": "Exercice 1\nIn this exercise, we are interested in understanding what explains trust in parliament (trstprl). The main factors considered are Education level (eduyrs), Political interest (polintr), Media Use (tvtot, netusoft);"
+  },
+  {
+    "objectID": "slides/session2/correction.html#correction---exercice-1",
+    "href": "slides/session2/correction.html#correction---exercice-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Correction - Exercice 1",
+    "text": "Correction - Exercice 1\n\nlibrary(rio)\n#1.0\nESS_11 &lt;- import(\"https://github.com/paulservais-1/methods_policyevaluation/raw/main/dataexos/ESS11_data/ESS11.csv\")\n#1.1\nsummary(ESS_11 %&gt;% select(\"trstprl\",\"eduyrs\",\"polintr\",\"netusoft\"))\n\n    trstprl           eduyrs         polintr         netusoft    \n Min.   : 0.000   Min.   : 0.00   Min.   :1.000   Min.   :1.000  \n 1st Qu.: 3.000   1st Qu.:11.00   1st Qu.:2.000   1st Qu.:4.000  \n Median : 5.000   Median :13.00   Median :3.000   Median :5.000  \n Mean   : 6.205   Mean   :14.26   Mean   :2.633   Mean   :4.221  \n 3rd Qu.: 7.000   3rd Qu.:16.00   3rd Qu.:3.000   3rd Qu.:5.000  \n Max.   :99.000   Max.   :99.00   Max.   :9.000   Max.   :9.000  \n\n#1.2\ndata_set &lt;- ESS_11 %&gt;% filter(trstprl &lt; 11 & eduyrs &lt; 11 & netusoft &lt; 6 & polintr &lt; 6)\n#1.3 \nreg1&lt;-lm(trstprl~eduyrs,data = data_set)\nsummary(reg1)\n\n\nCall:\nlm(formula = trstprl ~ eduyrs, data = data_set)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-4.6063 -2.1672  0.3937  1.9426  6.4914 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  3.50858    0.12016  29.199  &lt; 2e-16 ***\neduyrs       0.10977    0.01476   7.437 1.14e-13 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 2.723 on 7696 degrees of freedom\nMultiple R-squared:  0.007136,  Adjusted R-squared:  0.007007 \nF-statistic: 55.31 on 1 and 7696 DF,  p-value: 1.141e-13\n\n#1.4\nreg2&lt;-lm(trstprl ~ eduyrs + polintr + netusoft, data_set)\nsummary(reg2)\n\n\nCall:\nlm(formula = trstprl ~ eduyrs + polintr + netusoft, data = data_set)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-5.9330 -2.1212  0.2352  1.8143  6.7434 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  6.02057    0.16810  35.814  &lt; 2e-16 ***\neduyrs       0.03545    0.01529   2.319  0.02040 *  \npolintr     -0.72274    0.03326 -21.730  &lt; 2e-16 ***\nnetusoft     0.05614    0.01764   3.183  0.00146 ** \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 2.639 on 7694 degrees of freedom\nMultiple R-squared:  0.06786,   Adjusted R-squared:  0.0675 \nF-statistic: 186.7 on 3 and 7694 DF,  p-value: &lt; 2.2e-16\n\n#1.5\nlibrary(stargazer)\nstargazer(reg1, reg2, type = \"text\")\n\n\n======================================================================\n                                   Dependent variable:                \n                    --------------------------------------------------\n                                         trstprl                      \n                              (1)                       (2)           \n----------------------------------------------------------------------\neduyrs                      0.110***                  0.035**         \n                            (0.015)                   (0.015)         \n                                                                      \npolintr                                              -0.723***        \n                                                      (0.033)         \n                                                                      \nnetusoft                                             0.056***         \n                                                      (0.018)         \n                                                                      \nConstant                    3.509***                 6.021***         \n                            (0.120)                   (0.168)         \n                                                                      \n----------------------------------------------------------------------\nObservations                 7,698                     7,698          \nR2                           0.007                     0.068          \nAdjusted R2                  0.007                     0.068          \nResidual Std. Error    2.723 (df = 7696)         2.639 (df = 7694)    \nF Statistic         55.310*** (df = 1; 7696) 186.723*** (df = 3; 7694)\n======================================================================\nNote:                                      *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01"
+  },
+  {
+    "objectID": "slides/session2/correction.html#exercice-2",
+    "href": "slides/session2/correction.html#exercice-2",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Exercice 2",
+    "text": "Exercice 2\nThe Chapel Hill expert survey data is a survey that “provides information about the positioning of the leadership of 279 parties in 31 countries over the course of 2024 on ideology, policy, populism, democracy, European integration, and select EU policy questions. Country coverage includes all European Union member states except for Luxembourg – plus Iceland, Norway, Switzerland, Turkey, and the United Kingdom.2 The dataset adopts the country code and party id schema of the CHES Trend file (Jolly et al. 2022) and the Speed CHES survey on Ukraine (Hooghe et al. 2024) with extensions for newly covered parties” (see documentation of CHES)."
+  },
+  {
+    "objectID": "slides/session2/correction.html#correction---exercice-2",
+    "href": "slides/session2/correction.html#correction---exercice-2",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Correction - Exercice 2",
+    "text": "Correction - Exercice 2\n\nlibrary(rio)\nlibrary(tidyverse)\nlibrary(stargazer)\n#Exercice 1\n#1.1\nches &lt;- import(\"https://www.chesdata.eu/s/1999-2024_CHES_dataset_means.csv\")\n#1.2\nglimpse(ches)\n\nRows: 1,441\nColumns: 90\n$ year                    &lt;int&gt; 1999, 2002, 2006, 2010, 2014, 2019, 2024, 1999…\n$ country                 &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n$ eastwest                &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n$ eumember                &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n$ party_id                &lt;int&gt; 102, 102, 102, 102, 102, 102, 102, 103, 103, 1…\n$ party                   &lt;chr&gt; \"PS\", \"PS\", \"PS\", \"PS\", \"PS\", \"PS\", \"PS\", \"SP\"…\n$ cmp_id                  &lt;int&gt; 21322, 21322, 21322, 21322, 21322, 21322, 2132…\n$ vote                    &lt;dbl&gt; 10.20, 10.20, 13.00, 13.70, 11.70, 9.46, 8.04,…\n$ seat                    &lt;dbl&gt; 12.7, 12.7, 16.7, 17.3, 15.3, 13.5, 16.0, 9.3,…\n$ electionyear            &lt;int&gt; 1999, 1999, 2003, 2010, 2014, 2019, 2024, 1999…\n$ epvote                  &lt;dbl&gt; 9.59, 9.59, 13.50, 10.88, 10.70, 9.74, 7.43, 8…\n$ family                  &lt;int&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 7, 7…\n$ govt                    &lt;dbl&gt; 1.0, 1.0, 1.0, 1.0, 0.5, 0.0, NA, 1.0, 1.0, 1.…\n$ lrgen                   &lt;dbl&gt; 3.111111, 3.350000, 3.500000, 2.500000, 2.6000…\n$ lrecon                  &lt;dbl&gt; 2.625000, 2.500000, 3.170000, 2.571429, 2.4000…\n$ lrecon_salience         &lt;dbl&gt; NA, NA, NA, NA, 8.400000, 8.166667, 7.444445, …\n$ lrecon_dissent          &lt;dbl&gt; NA, NA, NA, NA, NA, 2.2, 0.5, NA, NA, NA, NA, …\n$ lrecon_blur             &lt;dbl&gt; NA, NA, NA, NA, NA, 1.142857, 2.166667, NA, NA…\n$ galtan                  &lt;dbl&gt; 3.875000, 4.000000, 2.830000, 2.857143, 3.4000…\n$ galtan_salience         &lt;dbl&gt; NA, NA, NA, NA, 3.200000, 4.000000, 4.750000, …\n$ galtan_dissent          &lt;dbl&gt; NA, NA, NA, NA, NA, 2.500000, 3.666667, NA, NA…\n$ galtan_blur             &lt;dbl&gt; NA, NA, NA, NA, NA, 2.750000, 2.600000, NA, NA…\n$ eu_position             &lt;dbl&gt; 6.666667, 6.090000, 5.710000, 6.200000, 6.0000…\n$ eu_salience             &lt;dbl&gt; 4.722222, 4.533333, 4.300000, 4.523810, 3.2000…\n$ eu_dissent              &lt;dbl&gt; 1.388889, 2.111111, 3.430000, 2.461539, 3.0000…\n$ eu_blur                 &lt;dbl&gt; NA, NA, NA, NA, NA, 2.166667, 3.333333, NA, NA…\n$ spendvtax               &lt;dbl&gt; NA, NA, 2.670000, 1.692308, 2.400000, 2.000000…\n$ spendvtax_salience      &lt;dbl&gt; NA, NA, 6.500000, 7.615385, NA, NA, NA, NA, NA…\n$ deregulation            &lt;dbl&gt; NA, NA, 2.330000, 2.375000, 2.000000, 2.000000…\n$ dereg_salience          &lt;dbl&gt; NA, NA, 6.830, 4.500, NA, NA, NA, NA, NA, 8.00…\n$ redistribution          &lt;dbl&gt; NA, NA, 2.000000, 1.818182, 1.800000, 1.583333…\n$ redist_salience         &lt;dbl&gt; NA, NA, 8.000000, 7.583333, NA, 8.166667, 8.42…\n$ econ_interven           &lt;dbl&gt; NA, NA, NA, NA, 1.750000, 1.545454, NA, NA, NA…\n$ civlib_laworder         &lt;dbl&gt; NA, NA, 3.670000, 2.636364, 2.200000, 3.090909…\n$ civlib_salience         &lt;dbl&gt; NA, NA, 6.500000, 4.727273, NA, NA, NA, NA, NA…\n$ sociallifestyle         &lt;dbl&gt; NA, NA, 2.3299999, 1.8181819, 1.6000000, 2.000…\n$ social_salience         &lt;dbl&gt; NA, NA, 5.670000, 5.090909, NA, NA, NA, NA, NA…\n$ womens_rights           &lt;dbl&gt; NA, NA, NA, NA, NA, NA, 3.000000, NA, NA, NA, …\n$ lgbtq_rights            &lt;dbl&gt; NA, NA, NA, NA, NA, NA, 1.0, NA, NA, NA, NA, N…\n$ samesex_marriage        &lt;dbl&gt; NA, NA, NA, NA, NA, NA, 2.1428571, NA, NA, NA,…\n$ religious_principles    &lt;dbl&gt; NA, NA, 1.330000, 1.454545, 1.000000, 1.500000…\n$ relig_salience          &lt;dbl&gt; NA, NA, 5.670000, 2.545455, NA, NA, NA, NA, NA…\n$ immigrate_policy        &lt;dbl&gt; NA, NA, 2.500000, 2.000000, 2.800000, 3.416667…\n$ immigrate_salience      &lt;dbl&gt; NA, NA, 6.330000, 6.083333, NA, 4.250000, 3.22…\n$ immigrate_dissent       &lt;dbl&gt; NA, NA, NA, NA, NA, 3.400000, 4.333334, NA, NA…\n$ multiculturalism        &lt;dbl&gt; NA, NA, 4.200000, 3.250000, 2.000000, 3.083333…\n$ multicult_salience      &lt;dbl&gt; NA, NA, NA, 5.545454, NA, 4.454546, 4.000000, …\n$ multicult_dissent       &lt;dbl&gt; NA, NA, NA, NA, NA, 3.5, NA, NA, NA, NA, NA, N…\n$ nationalism             &lt;dbl&gt; NA, NA, 3.170000, NA, 2.250000, 3.454546, 3.75…\n$ nationalism_salience    &lt;dbl&gt; NA, NA, 4.33, NA, NA, NA, NA, NA, NA, 4.88, NA…\n$ ethnic_minorities       &lt;dbl&gt; NA, NA, 3.170000, 2.444444, 2.000000, 2.636364…\n$ ethnic_salience         &lt;dbl&gt; NA, NA, 6.330000, 5.333333, NA, NA, NA, NA, NA…\n$ urban_rural             &lt;dbl&gt; NA, NA, 4.400000, 4.000000, 3.333333, 3.333333…\n$ urban_salience          &lt;dbl&gt; NA, NA, 3.000000, 2.142857, NA, NA, NA, NA, NA…\n$ environment             &lt;dbl&gt; NA, NA, NA, 4.9166665, 3.8000000, 4.5000000, 3…\n$ enviro_salience         &lt;dbl&gt; NA, NA, NA, 4.833334, NA, 4.363637, 4.200000, …\n$ climate_change          &lt;dbl&gt; NA, NA, NA, NA, NA, NA, 4.0, NA, NA, NA, NA, N…\n$ climate_change_salience &lt;dbl&gt; NA, NA, NA, NA, NA, NA, 3.666667, NA, NA, NA, …\n$ protectionism           &lt;dbl&gt; NA, NA, NA, NA, NA, 6.272728, 5.750000, NA, NA…\n$ regions                 &lt;dbl&gt; NA, NA, 6.170000, 5.583334, 6.600000, 6.000000…\n$ region_salience         &lt;dbl&gt; NA, NA, 7.000000, 5.083334, NA, NA, NA, NA, NA…\n$ international_security  &lt;dbl&gt; NA, NA, NA, 6.090909, 5.800000, NA, NA, NA, NA…\n$ international_salience  &lt;dbl&gt; NA, NA, NA, 3.222222, NA, NA, NA, NA, NA, NA, …\n$ us                      &lt;dbl&gt; NA, NA, 2.67, NA, NA, NA, NA, NA, NA, 2.71, NA…\n$ us_salience             &lt;dbl&gt; NA, NA, 3.50, NA, NA, NA, NA, NA, NA, 3.29, NA…\n$ eu_benefit              &lt;dbl&gt; NA, NA, NA, 1.133333, 1.200000, NA, NA, NA, NA…\n$ eu_ep                   &lt;dbl&gt; 6.333333, 6.000000, 6.500000, 6.545455, 6.4000…\n$ eu_fiscal               &lt;dbl&gt; 6.666667, NA, NA, NA, NA, NA, NA, 6.666667, NA…\n$ eu_intmark              &lt;dbl&gt; NA, 4.100000, 4.000000, 5.083333, 5.000000, 4.…\n$ eu_employ               &lt;dbl&gt; 6.555555, 6.550000, NA, NA, NA, NA, NA, 6.5555…\n$ eu_budgets              &lt;dbl&gt; NA, NA, NA, NA, 4.200, 4.250, NA, NA, NA, NA, …\n$ eu_agri                 &lt;dbl&gt; NA, 4.88, NA, NA, NA, NA, NA, NA, 3.78, NA, NA…\n$ eu_cohesion             &lt;dbl&gt; 6.625000, 5.850000, 6.670000, 6.625000, 6.2500…\n$ eu_environ              &lt;dbl&gt; 5.888889, 5.000000, NA, NA, NA, NA, NA, 6.0000…\n$ eu_asylum               &lt;dbl&gt; 5.666667, 6.300000, NA, NA, NA, 5.555555, NA, …\n$ eu_foreign              &lt;dbl&gt; 6.555555, 6.330000, 5.830000, 6.333333, 6.0000…\n$ eu_turkey               &lt;dbl&gt; NA, NA, 6.000000, 5.750000, 5.500000, NA, NA, …\n$ eu_russia               &lt;dbl&gt; NA, NA, NA, NA, NA, NA, 4.500000, NA, NA, NA, …\n$ russian_interference    &lt;dbl&gt; NA, NA, NA, NA, NA, 0.1111111, NA, NA, NA, NA,…\n$ anti_islam_rhetoric     &lt;dbl&gt; NA, NA, NA, NA, NA, 2.111111, 0.000000, NA, NA…\n$ people_vs_elite         &lt;dbl&gt; NA, NA, NA, NA, NA, 3.363636, 4.000000, NA, NA…\n$ antielite_salience      &lt;dbl&gt; NA, NA, NA, NA, 2.600000, 2.181818, 4.400000, …\n$ corrupt_salience        &lt;dbl&gt; NA, NA, NA, NA, 2.250000, 1.909091, 0.500000, …\n$ members_vs_leadership   &lt;dbl&gt; NA, NA, NA, NA, NA, 7.500000, NA, NA, NA, NA, …\n$ executive_power         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, 4.5, NA, NA, NA, NA, N…\n$ judicial_independence   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, 1.75, NA, NA, NA, NA, …\n$ mip_one                 &lt;int&gt; NA, NA, NA, NA, 13, NA, NA, NA, NA, NA, NA, 13…\n$ mip_two                 &lt;int&gt; NA, NA, NA, NA, 14, NA, NA, NA, NA, NA, NA, 14…\n$ mip_three               &lt;int&gt; NA, NA, NA, NA, 17, NA, NA, NA, NA, NA, NA, 17…\n$ chesversion             &lt;dbl&gt; 2025.1, 2025.1, 2025.1, 2025.1, 2025.1, 2025.1…\n\n#1.3\nches &lt;- ches %&gt;% filter(year == 2024)\n#1.4\nches &lt;- ches %&gt;% select(country, eastwest, eu_russia, civlib_laworder, samesex_marriage, nationalism, urban_rural, lrgen)\n#1.5\nsummary(ches)\n\n    country         eastwest        eu_russia      civlib_laworder \n Min.   : 1.00   Min.   :0.0000   Min.   : 0.000   Min.   : 0.500  \n 1st Qu.: 6.00   1st Qu.:0.0000   1st Qu.: 2.000   1st Qu.: 3.000  \n Median :14.00   Median :1.0000   Median : 3.500   Median : 5.000  \n Mean   :15.57   Mean   :0.5633   Mean   : 4.117   Mean   : 5.237  \n 3rd Qu.:24.00   3rd Qu.:1.0000   3rd Qu.: 5.750   3rd Qu.: 7.450  \n Max.   :40.00   Max.   :1.0000   Max.   :10.000   Max.   :10.000  \n                                  NA's   :2        NA's   :2       \n samesex_marriage  nationalism      urban_rural        lrgen       \n Min.   : 0.000   Min.   : 0.200   Min.   :1.100   Min.   : 0.500  \n 1st Qu.: 1.500   1st Qu.: 3.000   1st Qu.:3.407   1st Qu.: 3.474  \n Median : 3.333   Median : 5.000   Median :4.833   Median : 5.818  \n Mean   : 4.332   Mean   : 5.253   Mean   :4.930   Mean   : 5.480  \n 3rd Qu.: 7.182   3rd Qu.: 7.333   3rd Qu.:6.227   3rd Qu.: 7.500  \n Max.   :10.000   Max.   :10.000   Max.   :9.875   Max.   :10.000  \n                                   NA's   :11                      \n\n#1.6\nhist(ches$eu_russia)\n\n\n\n\n\n\n\n#1.7.1\nggplot(data = ches, aes(x= lrgen, y = eu_russia)) + geom_point() +geom_smooth(method = \"lm\")\n\n\n\n\n\n\n\n#1.7.2\nmodel&lt;- lm(data = ches, eu_russia ~ lrgen)\nsummary(model)\n\n\nCall:\nlm(formula = eu_russia ~ lrgen, data = ches)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-4.4592 -1.9332 -0.5287  1.5507  6.3527 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  4.94190    0.40414  12.228   &lt;2e-16 ***\nlrgen       -0.15035    0.06744  -2.229   0.0267 *  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 2.53 on 241 degrees of freedom\n  (2 observations deleted due to missingness)\nMultiple R-squared:  0.02021,   Adjusted R-squared:  0.01614 \nF-statistic:  4.97 on 1 and 241 DF,  p-value: 0.02671\n\n#1.7.3\nmodel2 &lt;- lm(data = ches, eu_russia ~ lrgen + nationalism)\nmodel3 &lt;- lm(data = ches, eu_russia ~eastwest+ lrgen + urban_rural+ samesex_marriage)\nmodel4 &lt;- lm(data = ches, eu_russia ~eastwest+ lrgen + urban_rural+ samesex_marriage + nationalism)\nmodel5 &lt;- lm(data = ches, eu_russia ~eastwest*nationalism)\n\nstargazer(model, model2,model3, model4,model5,\n          title = \"EU - Russia results\", \n          align = TRUE, \n          type = \"text\")\n\n\nEU - Russia results\n=========================================================================================================================================\n                                                                     Dependent variable:                                                 \n                     --------------------------------------------------------------------------------------------------------------------\n                                                                          eu_russia                                                      \n                              (1)                    (2)                     (3)                     (4)                    (5)          \n-----------------------------------------------------------------------------------------------------------------------------------------\neastwest                                                                  0.955***                 0.804**                1.659**        \n                                                                           (0.360)                 (0.358)                (0.729)        \n                                                                                                                                         \nlrgen                      -0.150**               -0.642***               -0.586***               -0.702***                              \n                            (0.067)                (0.091)                 (0.084)                 (0.092)                               \n                                                                                                                                         \nnationalism                                       0.601***                                        0.308***                0.316***       \n                                                   (0.082)                                         (0.108)                (0.089)        \n                                                                                                                                         \nurban_rural                                                                 0.166                   0.065                                \n                                                                           (0.106)                 (0.110)                               \n                                                                                                                                         \nsamesex_marriage                                                          0.424***                0.308***                               \n                                                                           (0.082)                 (0.090)                               \n                                                                                                                                         \neastwest:nationalism                                                                                                      -0.250**       \n                                                                                                                          (0.122)        \n                                                                                                                                         \nConstant                   4.942***               4.471***                4.053***                4.169***                2.210***       \n                            (0.404)                (0.371)                 (0.485)                 (0.480)                (0.565)        \n                                                                                                                                         \n-----------------------------------------------------------------------------------------------------------------------------------------\nObservations                  243                    243                     232                     232                    243          \nR2                           0.020                  0.200                   0.212                   0.239                  0.053         \nAdjusted R2                  0.016                  0.194                   0.198                   0.223                  0.041         \nResidual Std. Error    2.530 (df = 241)       2.291 (df = 240)        2.231 (df = 227)        2.197 (df = 226)        2.497 (df = 239)   \nF Statistic          4.970** (df = 1; 241) 30.060*** (df = 2; 240) 15.276*** (df = 4; 227) 14.233*** (df = 5; 226) 4.489*** (df = 3; 239)\n=========================================================================================================================================\nNote:                                                                                                         *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01\n\nlibrary(ggeffects)\n#1.8\nggpredict(model5, terms = c(\"nationalism\", \"eastwest\")) |&gt;\n  as_tibble() |&gt;\n  mutate(\n    group = factor(\n      group,\n      levels = c(\"1\", \"0\"),\n      labels = c(\"East\", \"West\")\n    )\n  ) |&gt;\n  ggplot(aes(x = x, y = predicted, color = group, fill = group)) +\n  geom_line(linewidth = 1) +\n  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = 0.2)+ labs(x = \"Nationalism\", y =\"Predicted position on EU-Russia\")\n\n\n\n\n\n\n\n#1.9\nmodel6 &lt;- lm(data = ches, eu_russia ~ nationalism + civlib_laworder+ eastwest+ samesex_marriage + urban_rural + lrgen)\nlibrary(performance)\nmap(list(model6), check_collinearity)\n\n[[1]]\n# Check for Multicollinearity\n\nLow Correlation\n\n             Term  VIF   VIF 95% CI adj. VIF Tolerance Tolerance 95% CI\n         eastwest 1.56 [1.35, 1.89]     1.25      0.64     [0.53, 0.74]\n samesex_marriage 4.11 [3.34, 5.14]     2.03      0.24     [0.19, 0.30]\n      urban_rural 2.16 [1.81, 2.65]     1.47      0.46     [0.38, 0.55]\n            lrgen 2.66 [2.20, 3.29]     1.63      0.38     [0.30, 0.45]\n\nModerate Correlation\n\n            Term  VIF   VIF 95% CI adj. VIF Tolerance Tolerance 95% CI\n     nationalism 6.25 [5.01, 7.89]     2.50      0.16     [0.13, 0.20]\n civlib_laworder 7.07 [5.64, 8.93]     2.66      0.14     [0.11, 0.18]\n\ncheck_heteroscedasticity(model6) # Run a Breush-Pagan test\n\nOK: Error variance appears to be homoscedastic (p = 0.089)."
+  },
+  {
+    "objectID": "slides/session2/correction.html#exercice-3",
+    "href": "slides/session2/correction.html#exercice-3",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Exercice 3",
+    "text": "Exercice 3\nYou are provided with data about the legislative and the presidential elections in France, in 2022, as well as socio-demographic data on French communes in 2022, for LR (coded as “right”) and RN (“far-right”)."
+  },
+  {
+    "objectID": "slides/session2/correction.html#correction---exercice-3",
+    "href": "slides/session2/correction.html#correction---exercice-3",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Correction - Exercice 3",
+    "text": "Correction - Exercice 3\n\n#2.1\nelections_2022 &lt;- import(\"https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices1/data/elections_2022.csv\")\nsocio_demo &lt;- import(\"https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices1/data/soc_dem_2022.csv\")\n\n#2.2\nglimpse(elections_2022)\n\nRows: 68,800\nColumns: 9\n$ codecommune        &lt;int&gt; 1001, 1001, 1002, 1002, 1004, 1004, 1005, 1005, 100…\n$ codedep            &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …\n$ election_type      &lt;chr&gt; \"L\", \"P\", \"L\", \"P\", \"L\", \"P\", \"L\", \"P\", \"L\", \"P\", \"…\n$ Year               &lt;int&gt; 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 202…\n$ far_right_relvotes &lt;dbl&gt; 0.2566372, 0.2865385, 0.0625000, 0.1345029, 0.20588…\n$ far_right_votes    &lt;int&gt; 87, 149, 8, 23, 826, 1646, 197, 352, 8, 16, 243, 49…\n$ turnout            &lt;dbl&gt; 0.5263975, 0.8062016, 0.5871560, 0.8028169, 0.45364…\n$ right_relvotes     &lt;dbl&gt; 0.17404130, 0.05000000, 0.10937500, 0.04678363, 0.0…\n$ right_votes        &lt;int&gt; 59, 26, 14, 8, 351, 309, 69, 48, 17, 9, 50, 77, 52,…\n\nglimpse(socio_demo)\n\nRows: 34,596\nColumns: 43\n$ codecommune         &lt;chr&gt; \"01001\", \"01002\", \"01004\", \"01005\", \"01006\", \"0100…\n$ Year                &lt;int&gt; 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 20…\n$ codedep             &lt;chr&gt; \"01\", \"01\", \"01\", \"01\", \"01\", \"01\", \"01\", \"01\", \"0…\n$ agri                &lt;int&gt; 0, 0, 4, 11, 0, 15, 0, 0, 29, 11, 11, 2, 0, 11, 0,…\n$ indp                &lt;int&gt; 39, 39, 142, 37, 0, 39, 19, 41, 36, 0, 0, 0, 119, …\n$ cadr                &lt;int&gt; 33, 9, 678, 56, 0, 250, 18, 0, 58, 2, 0, 18, 19, 1…\n$ pint                &lt;int&gt; 14, 0, 1647, 192, 34, 311, 83, 95, 98, 78, 0, 13, …\n$ empl                &lt;int&gt; 86, 66, 1211, 185, 23, 339, 83, 21, 197, 17, 53, 1…\n$ ouvr                &lt;int&gt; 147, 0, 1235, 177, 23, 268, 122, 4, 154, 3, 68, 42…\n$ chom                &lt;int&gt; 26, 9, 427, 18, 0, 95, 7, 2, 47, 9, 9, 0, 22, 37, …\n$ pact                &lt;int&gt; 319, 114, 4917, 658, 80, 1222, 325, 161, 572, 111,…\n$ age                 &lt;dbl&gt; 44.20355, 36.97382, 39.07810, 43.10032, 44.01273, …\n$ popf                &lt;int&gt; 380, 128, 7490, 802, 56, 1613, 391, 191, 601, 173,…\n$ francais            &lt;int&gt; 776, 256, 12645, 1700, 107, 2867, 743, 316, 1111, …\n$ etranger            &lt;int&gt; 4, 1, 1248, 23, 5, 64, 18, 8, 37, 5, 5, 0, 402, 11…\n$ prixbien            &lt;dbl&gt; 231440.42, 136645.75, 190080.39, 228015.31, 172697…\n$ capitalratio        &lt;dbl&gt; 1.0423332, 0.6154085, 0.8560610, 1.0269077, 0.7777…\n$ npropri             &lt;int&gt; 345, 102, 3000, 464, 51, 845, 255, 149, 387, 126, …\n$ nlogement           &lt;int&gt; 418, 126, 7209, 604, 77, 1094, 354, 182, 524, 147,…\n$ pop                 &lt;int&gt; 747, 288, 14375, 1717, 116, 3057, 797, 325, 1300, …\n$ revmoyfoy           &lt;dbl&gt; 35802.43, 36150.97, 29982.14, 37242.09, 31769.92, …\n$ revtot              &lt;dbl&gt; 1.277961e-05, 3.862623e-06, 2.096039e-04, 2.853238…\n$ recetteimpotslocaux &lt;dbl&gt; 233.1938, 240.6562, 503.5779, 355.4615, 312.5804, …\n$ recette             &lt;dbl&gt; 608.9172, 796.6805, 1067.3215, 651.9904, 1026.0869…\n$ baseimpotslocaux    &lt;dbl&gt; 1905.169, 2244.090, 2895.855, 1900.238, 2077.438, …\n$ nodip               &lt;int&gt; 319, 57, 5361, 817, 0, 1026, 201, 69, 532, 124, 20…\n$ sup                 &lt;int&gt; 134, 15, 2884, 208, 1, 642, 201, 182, 197, 87, 9, …\n$ Libellé             &lt;chr&gt; \"L'Abergement-Clémenciat\", \"L'Abergement-de-Varey\"…\n$ Exploitations       &lt;int&gt; 11, 2, 2, 9, NA, 17, NA, 6, 10, 3, 5, 4, NA, 13, 4…\n$ Personnes           &lt;int&gt; 21, 6, 3, 17, NA, 30, NA, 13, 17, 6, 9, 15, NA, 19…\n$ UTA                 &lt;int&gt; 16, 6, 2, 11, NA, 25, NA, 9, 8, 7, 5, 16, NA, 8, 9…\n$ SAU                 &lt;int&gt; 889, 195, 71, 821, NA, 1888, NA, 122, 326, 584, 25…\n$ PBS                 &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…\n$ dens                &lt;chr&gt; \"Rural\", \"Rural\", \"Urbain intermédiaire\", \"Rural\",…\n$ densaav             &lt;chr&gt; \"Rural non périurbain\", \"Rural non périurbain\", \"U…\n$ dens7               &lt;chr&gt; \"Rural à habitat dispersé\", \"Rural à habitat dispe…\n$ ntot                &lt;int&gt; 345, 123, 5344, 676, 80, 1317, 332, 163, 619, 120,…\n$ pagri               &lt;dbl&gt; 0.000000000, 0.000000000, 0.000748503, 0.016272189…\n$ pindp               &lt;dbl&gt; 0.11304348, 0.31707317, 0.02657186, 0.05473373, 0.…\n$ pcadr               &lt;dbl&gt; 0.09565217, 0.07317073, 0.12687126, 0.08284024, 0.…\n$ ppint               &lt;dbl&gt; 0.04057971, 0.00000000, 0.30819611, 0.28402367, 0.…\n$ pempl               &lt;dbl&gt; 0.24927536, 0.53658537, 0.22660928, 0.27366864, 0.…\n$ pouvr               &lt;dbl&gt; 0.42608696, 0.00000000, 0.23110030, 0.26183432, 0.…\n\n#2.3\nelections &lt;- elections_2022 %&gt;% left_join(\n  socio_demo %&gt;% mutate(codecommune= as.numeric(codecommune), codedep = as.numeric(codedep)) %&gt;% drop_na(codecommune))\n\n#2.4\nlibrary(gridExtra)\nplot1 &lt;- ggplot(data = elections, aes(x=turnout, color = election_type)) + geom_density()\nplot2 &lt;- ggplot(data = elections, aes(x=far_right_relvotes, color = election_type)) + geom_density()\nplot3 &lt;- ggplot(data = elections, aes(x=right_relvotes, color = election_type)) + geom_density()\ngrid.arrange(plot1, plot2, plot3, ncol=3)\n\n\n\n\n\n\n\n#2.5\n# Taking the % of blue-collar workers (pouvr), the % of university graduates (psup), the % of foreigners (petr), the log of median income in the commune\nelections &lt;- elections %&gt;% filter(pop&gt;0) %&gt;% mutate(petr = etranger/pop, psup = sup/pop)\nmodel1 &lt;- lm(data = elections, far_right_relvotes ~ pouvr+psup+petr+log(revmoyfoy) + election_type)\nmodel2 &lt;- lm(data = elections, right_relvotes ~ pouvr+psup+petr+log(revmoyfoy) + election_type)\nmodel3 &lt;- lm(data = elections %&gt;% filter(psup&gt;0,pouvr&gt;0), far_right_relvotes ~ pouvr+psup+petr+log(revmoyfoy) +turnout + election_type)\nmodel4 &lt;- lm(data = elections, right_relvotes ~ pouvr+psup+petr+log(revmoyfoy) + turnout + election_type)\n\nstargazer(model1, model2,model3, model4,\n          title = \"Electoral results\", \n          align = TRUE, \n          type = \"text\")\n\n\nElectoral results\n=======================================================================================================================================\n                                                                    Dependent variable:                                                \n                    -------------------------------------------------------------------------------------------------------------------\n                         far_right_relvotes             right_relvotes             far_right_relvotes             right_relvotes       \n                                (1)                          (2)                          (3)                          (4)             \n---------------------------------------------------------------------------------------------------------------------------------------\npouvr                         0.042***                      0.004*                      0.047***                     0.006***          \n                              (0.002)                      (0.002)                      (0.002)                      (0.002)           \n                                                                                                                                       \npsup                         -0.139***                    -0.032***                    -0.136***                    -0.040***          \n                              (0.003)                      (0.003)                      (0.004)                      (0.003)           \n                                                                                                                                       \npetr                         -0.450***                    -0.153***                    -0.576***                    -0.130***          \n                              (0.009)                      (0.010)                      (0.010)                      (0.010)           \n                                                                                                                                       \nlog(revmoyfoy)               -0.036***                     0.018***                    -0.042***                     0.017***          \n                              (0.002)                      (0.002)                      (0.002)                      (0.002)           \n                                                                                                                                       \nturnout                                                                                -0.380***                     0.112***          \n                                                                                        (0.006)                      (0.006)           \n                                                                                                                                       \nelection_typeP                0.050***                    -0.080***                     0.149***                    -0.108***          \n                              (0.001)                      (0.001)                      (0.002)                      (0.002)           \n                                                                                                                                       \nConstant                      0.652***                     -0.039**                     0.910***                    -0.098***          \n                              (0.016)                      (0.017)                      (0.018)                      (0.017)           \n                                                                                                                                       \n---------------------------------------------------------------------------------------------------------------------------------------\nObservations                   68,006                       68,006                       54,134                       68,006           \nR2                             0.158                        0.151                        0.239                        0.156            \nAdjusted R2                    0.158                        0.151                        0.239                        0.156            \nResidual Std. Error      0.092 (df = 68000)           0.097 (df = 68000)           0.084 (df = 54127)           0.097 (df = 67999)     \nF Statistic         2,556.049*** (df = 5; 68000) 2,426.356*** (df = 5; 68000) 2,832.280*** (df = 6; 54127) 2,091.824*** (df = 6; 67999)\n=======================================================================================================================================\nNote:                                                                                                       *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01\n\nlibrary(broom)\n#Create coefficient tables for comparison\nmodels_coefficients &lt;- map_df(list(model3, model4), ~ tidy(.x, conf.int = T), .id = \"model\")\n\n#Plotting the coefficients of each models with their confidence intervals\nmodels_coefficients %&gt;% \n  # Remove the intercept\n  filter(term  != c(\"(Intercept)\")) %&gt;% \n  ggplot(aes(term, estimate, color = model)) +\n  # Add confidence intervals\n  geom_pointrange(aes(ymin = conf.low, ymax = conf.high), position = position_dodge(width = 0.5)) +\n  # Add a dashed line at 0 (0 means no effect)\n  geom_hline(yintercept = 0, linetype = \"dashed\") +\n  # Rotate the labels on the x axis\n  coord_flip() +\n  # Add a title and change the labels\n  labs(x = \"Coefficient\", y = NULL, title = \"Coefficients of the different models\") +\n  theme_minimal() +\n  scale_color_manual(labels = c(\"Far-right (RN)\", \"Right (LR)\"), values = c(\"#00AFBB\", \"#E7B800\"))\n\n\n\n\n\n\n\n#2.6\nmap(list(model4), check_collinearity)\n\n[[1]]\n# Check for Multicollinearity\n\nLow Correlation\n\n           Term  VIF   VIF 95% CI adj. VIF Tolerance Tolerance 95% CI\n          pouvr 1.10 [1.09, 1.11]     1.05      0.91     [0.90, 0.92]\n           psup 1.20 [1.19, 1.21]     1.09      0.84     [0.83, 0.84]\n           petr 1.04 [1.03, 1.05]     1.02      0.96     [0.96, 0.97]\n log(revmoyfoy) 1.11 [1.10, 1.12]     1.05      0.90     [0.89, 0.91]\n\nModerate Correlation\n\n          Term  VIF   VIF 95% CI adj. VIF Tolerance Tolerance 95% CI\n       turnout 5.07 [5.01, 5.14]     2.25      0.20     [0.19, 0.20]\n election_type 5.04 [4.97, 5.10]     2.24      0.20     [0.20, 0.20]\n\ncheck_heteroscedasticity(model4) # Run a Breush-Pagan test\n\nWarning: Heteroscedasticity (non-constant error variance) detected (p &lt; .001).\n\n#The linear regression is heteroskedastic... The assumption of linearity is not verified."
+  },
+  {
+    "objectID": "slides/session2/correction.html#conclusion",
+    "href": "slides/session2/correction.html#conclusion",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Conclusion",
+    "text": "Conclusion\n\nToday we saw\n\nt.test() : categorical variable (IV) x interval variable (DV)\nlinear regressions : interval variable/categorical variable (IV) x interval variable (DV)\n\nNext session :\n\nconditions for applying linear regressions\nnon-linear regressions"
   }
 ]

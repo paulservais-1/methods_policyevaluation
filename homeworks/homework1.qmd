@@ -1,3 +1,11 @@
+---
+title: Session 1 — Descriptive statistics
+toc: true
+toc-depth: 3
+editor: 
+  markdown: 
+    wrap: 72
+---
 
 ## Exercice 1 - manual warm up 1
   Imagine having 3 dices (one is blue, the other green and the last one is red) with 3 faces each, and values going from 1 to 3. Consider the sum of the three dices as random variable $X_{bgr}$:
@@ -37,8 +45,8 @@ The [European social survey](https://www.europeansocialsurvey.org/about-ess) "me
 
 
 ```{r}
-#| echo: false
-#| eval: false
+#| echo: true
+#| eval: true
 ESS<-import("https://jan-rovny.squarespace.com/s/ESS_FR.dta")
 glimpse(ESS)
 ESS <- ESS %>% select(euftf, happy,yrbrn, eduyrs, gndr)
@@ -75,8 +83,8 @@ You want to analyse the electoral outcomes of the radical right in rural commune
 
 
 ```{r}
-#| echo: false
-#| eval: false
+#| echo: true
+#| eval: true
 
 library(rio)
 elec_eur <- import("https://github.com/paulservais-1/methods_policyevaluation/raw/main/slides/session1/data/elections2024.csv")
