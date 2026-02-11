@@ -28,6 +28,7 @@ variable.
 
 ```{r}
 library(rio)
+library(tidyverse)
 #1.0
 ESS_11 <- import("https://github.com/paulservais-1/methods_policyevaluation/raw/main/dataexos/ESS11_data/ESS11.csv")
 #1.1
@@ -147,6 +148,8 @@ You are provided with data about the legislative and the presidential elections 
 ```{r}
 #| echo: false
 #| eval: false
+library(rio)
+library(tidyverse)
 #2.1
 elections_2022 <- import("https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices1/data/elections_2022.csv")
 socio_demo <- import("https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices1/data/soc_dem_2022.csv")
