@@ -6,9 +6,6 @@
 ```{r}
 library(rio)
 
-vot_turnout <- import("/Users/paulservais/Library/CloudStorage/ProtonDrive-paservai@protonmail.com-folder/Website/methods_policyevaluation/dataexos/rain_turnout.dta")
-
-unique(vot_turnout$year)
 
 ```
 
