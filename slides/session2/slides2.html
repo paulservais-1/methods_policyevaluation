@@ -410,7 +410,7 @@ Z = \frac{\bar{x} - \mu}{\sigma / \sqrt{n}} \sim \mathcal{N}(0,1).
 <span id="cb2-2"><a></a>mean_x <span class="ot">&lt;-</span> <span class="fu">mean</span>(my_sample, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb2-3"><a></a><span class="fu">sd</span>(my_sample, <span class="at">na.rm =</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2376463</code></pre>
+<pre><code>[1] 0.2312653</code></pre>
 </div>
 </div>
 <ul>
@@ -419,11 +419,11 @@ Z = \frac{\bar{x} - \mu}{\sigma / \sqrt{n}} \sim \mathcal{N}(0,1).
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>mean_x <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span>sig<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">40</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.24046</code></pre>
+<pre><code>[1] 10.21321</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>mean_x <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span>sig<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">40</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.38926</code></pre>
+<pre><code>[1] 10.36201</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">mean</span>(log_median_inc, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -748,11 +748,25 @@ F-statistic: 935.1 on 2 and 3489 DF,  p-value: &lt; 2.2e-16</code></pre>
 </ul></li>
 </ul>
 </section></section>
+<section>
 <section id="exercices" class="title-slide slide level1 center">
 <h1>Exercices</h1>
 
-
 </section>
+<section id="exercice-1" class="slide level2">
+<h2>Exercice 1</h2>
+<p>In this exercise, we are interested in understanding what explains trust in parliament (trstprl). The main factors considered are Education level (eduyrs), Political interest (polintr), Media Use (tvtot, netusoft);</p>
+</section>
+<section id="exercice-2" class="slide level2">
+<h2>Exercice 2</h2>
+<p>The Chapel Hill expert survey data is a survey that “provides information about the positioning of the leadership of 279 parties in 31 countries over the course of 2024 on ideology, policy, populism, democracy, European integration, and select EU policy questions. Country coverage includes all European Union member states except for Luxembourg – plus Iceland, Norway, Switzerland, Turkey, and the United Kingdom.2 The dataset adopts the country code and party id schema of the CHES Trend file (Jolly et al.&nbsp;2022) and the Speed CHES survey on Ukraine (Hooghe et al.&nbsp;2024) with extensions for newly covered parties” (see <a href="https://static1.squarespace.com/static/5975c9bfdb29d6a05c65209b/t/69163d62e2606b5a3c46812b/1763%2065186525/CHES+2024+Codebook.pdf">documentation of CHES</a>).</p>
+</section>
+<section id="exercice-3" class="slide level2">
+<h2>Exercice 3</h2>
+<p>You are provided with data about the legislative and the presidential elections in France, in 2022, as well as socio-demographic data on French communes in 2022, for LR (coded as “right”) and RN (“far-right”).</p>
+
+
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <p><img src="images/scpo.png" class="slide-logo"></p>

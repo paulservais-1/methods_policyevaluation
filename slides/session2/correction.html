@@ -1,0 +1,1770 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.27">
+
+  <meta name="author" content="Paul Servais">
+  <title>Methods for Research and Policy Evaluation</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-534cd8e3a96973385dffff3f4709048d.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Methods for Research and Policy Evaluation</h1>
+  <p class="subtitle">Session 2</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Paul Servais 
+</div>
+</div>
+</div>
+
+</section>
+<section id="general-comments" class="slide level2">
+<h2>General comments</h2>
+<ul>
+<li>Your finals
+<ul>
+<li>emphasis on the question, the identification strategy, the limitations</li>
+<li>NULL results are good too !</li>
+</ul></li>
+<li>The exercices of last session</li>
+<li>We will try to do 1h theory (code) + 1h exercices</li>
+</ul>
+</section>
+<section id="content" class="slide level2">
+<h2>Content</h2>
+<ul>
+<li>Quick recap’</li>
+<li>Theory :
+<ul>
+<li>Statistical inference</li>
+<li>T-tests</li>
+<li>OLS regression</li>
+</ul></li>
+<li>Exercices</li>
+</ul>
+</section>
+<section id="last-session" class="slide level2">
+<h2>Last session</h2>
+<ul>
+<li>We saw</li>
+<li>Descriptive statistics
+<ul>
+<li><strong>mean</strong>, <strong>median</strong>, <strong>variance</strong>, <strong>standard deviation</strong></li>
+<li><strong>expectation</strong>, <strong>distribution</strong></li>
+<li><strong>probability density function</strong></li>
+</ul></li>
+<li>How to code in R
+<ul>
+<li><code>summary()</code>, <code>IQR()</code>,</li>
+<li><code>hist()</code>, <code>ggplot()+geom_density()</code>, <code>barplot()</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="last-session-1" class="slide level2 scrollable">
+<h2>Last session</h2>
+<ul>
+<li>We saw for continuous variable <span class="math inline">\(P(Y\le Y_0)\)</span> (here 52.503)</li>
+</ul>
+
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+<section id="last-session-2" class="slide level2">
+<h2>Last session</h2>
+<ul>
+<li>And different distribution functions <img data-src="images/pdfs.png" style="width:80.0%"></li>
+</ul>
+</section>
+<section id="the-normal-distribution" class="slide level2 scrollable">
+<h2>The normal distribution</h2>
+
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<section id="the-normal-distribution-1" class="slide level2">
+<h2>The normal distribution</h2>
+<ul>
+<li>Symmetric, not bounded, continuous</li>
+<li>mode = median = mean <span class="math display">\[\begin{equation}
+f_N(x) = \mathcal{N}(x; \mu, \sigma) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
+\end{equation}\]</span></li>
+<li>standard normal distribution <span class="math display">\[\begin{equation}
+\mathcal{N}(z; 0, 1) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2}(\frac{z}{1})^2}
+\end{equation}\]</span></li>
+</ul>
+</section>
+<section id="the-normal-distribution-2" class="slide level2">
+<h2>The normal distribution</h2>
+<p><span class="math display">\[\begin{equation}
+\mathcal{N}(x; 1.5, 1)
+\end{equation}\]</span></p>
+
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
+<section id="the-normal-distribution-3" class="slide level2">
+<h2>The normal distribution</h2>
+<ul>
+<li><span class="math inline">\(P(1 \leq X \leq 2) = \int_1^2 N(x; 1.5, 1) \text{d}x = P(X \leq 2) - P(X\leq 1)\)</span></li>
+</ul>
+
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
+<section id="statistical-tables" class="slide level2">
+<h2>Statistical tables</h2>
+<ul>
+<li>Integral difficult to compute…</li>
+<li>Take variable <span class="math inline">\((X- \mu)/\sigma= z\)</span> <span class="math display">\[\begin{equation}
+P(z \leq (2-1.5)/1) = P(z \leq 0.5) = P(X \leq 2) \approx 0.69
+\end{equation}\]</span></li>
+<li>Refer yourself to the statistical tables !</li>
+</ul>
+</section>
+<section id="limitations" class="slide level2">
+<h2>Limitations</h2>
+<ul>
+<li>Already gives hint on one variable</li>
+<li>but…
+<ul>
+<li>complete information on population
+<ul>
+<li>statistical inference</li>
+</ul></li>
+<li>what about relationships ?
+<ul>
+<li>t-tests</li>
+<li>simple and multiple regression</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section>
+<section id="statistical-inference" class="title-slide slide level1 center">
+<h1>Statistical inference</h1>
+
+</section>
+<section id="statistical-inference-1" class="slide level2">
+<h2>Statistical inference</h2>
+<ul>
+<li>Goal = find information on population based on sample</li>
+</ul>
+
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-6-1.png" width="576" class="r-stretch quarto-figure-center"><p class="caption">Population and Sample</p></section>
+<section id="statistical-inference-2" class="slide level2">
+<h2>Statistical inference</h2>
+<ul>
+<li>Goal = find information on population based on sample</li>
+<li>E.g. You want to estimate the average French income</li>
+<li>Asking every French person is difficult…</li>
+<li>Use a sample with reduced size !</li>
+</ul>
+</section>
+<section id="estimation-of-parameters" class="slide level2">
+<h2>Estimation of parameters</h2>
+<ul>
+<li>In general you seek to evaluate key parameters of your distribution
+<ul>
+<li>mean <span class="math inline">\(\mu\)</span>,</li>
+<li>standard deviation <span class="math inline">\(\sigma\)</span></li>
+</ul></li>
+<li>based on a sample</li>
+</ul>
+</section>
+<section id="confidence-interval" class="slide level2">
+<h2>Confidence interval</h2>
+<ul>
+<li>Yet your sampling procedure is random</li>
+<li>The mean of your sample, <span class="math inline">\(\bar{X}\)</span>, is a random variable that could be used to estimate the actual mean <span class="math inline">\(\mu\)</span>: <span class="math display">\[\begin{equation}
+Z = \frac{\bar{x} - \mu}{\sigma / \sqrt{n}} \sim \mathcal{N}(0,1).
+\end{equation}\]</span></li>
+<li>the statistical tables allow you to find the desired level of confidence !</li>
+</ul>
+</section>
+<section id="confidence-interval---knowing-sigma" class="slide level2">
+<h2>Confidence interval - knowing <span class="math inline">\(\sigma\)</span></h2>
+<ul>
+<li>Yet your sampling procedure is random</li>
+<li>The mean of your sample, <span class="math inline">\(\bar{X}\)</span>, is a random variable that could be used to estimate the actual mean <span class="math inline">\(\mu\)</span>: <span class="math display">\[\begin{equation}
+Z = \frac{\bar{x} - \mu}{\sigma / \sqrt{n}} \sim \mathcal{N}(0,1).
+\end{equation}\]</span></li>
+</ul>
+<p><span class="math display">\[\begin{equation}
+\bar{x} - z_{1-\alpha/2}\,\frac{\sigma}{\sqrt{n}} \le \mu \le \bar{x} + z_{1-\alpha/2}\,\frac{\sigma}{\sqrt{n}}
+\end{equation}\]</span></p>
+</section>
+<section id="confidence-interval-1" class="slide level2">
+<h2>Confidence interval</h2>
+<p><span class="math display">\[\begin{equation}
+\bar{x} - z_{1-\alpha/2}\,\frac{\sigma}{\sqrt{n}} \le \mu \le \bar{x} + z_{1-\alpha/2}\,\frac{\sigma}{\sqrt{n}}
+\end{equation}\]</span></p>
+<ul>
+<li>Intuitively, precision:
+<ul>
+<li>increases with the size of sample <span class="math inline">\(n\)</span>,</li>
+<li>decreases with the variation in the population <span class="math inline">\(\sigma\)</span> or <span class="math inline">\(s\)</span></li>
+<li>decreases with when your confidence level increases</li>
+</ul></li>
+</ul>
+</section>
+<section id="confidence-interval---example" class="slide level2">
+<h2>Confidence interval - Example</h2>
+<ul>
+<li>The average median income in French communes (log).</li>
+<li>You know <span class="math inline">\(\sigma\)</span></li>
+<li><span class="math inline">\(\mu\)</span> = ?</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-2"><a></a>data_dem <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/demographics2024.xlsx"</span>)</span>
+<span id="cb1-3"><a></a>log_median_inc <span class="ot">&lt;-</span> <span class="fu">log</span>(data_dem<span class="sc">$</span>revmoyfoy)</span>
+<span id="cb1-4"><a></a>sig <span class="ot">&lt;-</span> <span class="fu">sd</span>(log_median_inc, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="confidence-interval-2" class="slide level2">
+<h2>Confidence interval</h2>
+<ul>
+<li>Sample of 40 communes</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>my_sample <span class="ot">&lt;-</span> <span class="fu">sample</span>(log_median_inc, <span class="dv">40</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-2"><a></a>mean_x <span class="ot">&lt;-</span> <span class="fu">mean</span>(my_sample, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-3"><a></a><span class="fu">sd</span>(my_sample, <span class="at">na.rm =</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.185428</code></pre>
+</div>
+</div>
+<ul>
+<li>with 95% confidence, your mean lies in :</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>mean_x <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span>sig<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">40</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10.23715</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>mean_x <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span>sig<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">40</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10.38595</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">mean</span>(log_median_inc, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10.31475</code></pre>
+</div>
+</div>
+</section>
+<section id="confidence-interval-3" class="slide level2">
+<h2>Confidence interval</h2>
+<ul>
+<li>The randomness is on the sampling process ! If you repeat the process N times…</li>
+<li>95% of finding the actual mean within the interval !</li>
+<li>5% of confidence intervals do not include the mean, due to randomness of sampling <span class="math inline">\(\bar{x}\)</span> !</li>
+</ul>
+</section>
+<section id="confidence-interval-95" class="slide level2">
+<h2>Confidence interval, 95%</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">plot_ci</span>(log_median_inc, <span class="dv">40</span>, <span class="dv">300</span>, <span class="fl">1.960</span>) <span class="co">#data, sample size, n° estimations, conf level</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+</div>
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section id="sample-size" class="slide level2">
+<h2>Sample size</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">plot_ci</span>(log_median_inc, <span class="dv">100</span>, <span class="dv">300</span>, <span class="fl">1.960</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+</div>
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<section id="confidence-level" class="slide level2">
+<h2>Confidence level</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">plot_ci</span>(log_median_inc, <span class="dv">100</span>, <span class="dv">300</span>, <span class="fl">2.576</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+</div>
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
+<section id="confidence-interval---not-knowing-sigma" class="slide level2">
+<h2>Confidence interval - not knowing <span class="math inline">\(\sigma\)</span></h2>
+<ul>
+<li>The std. deviation of population, <span class="math inline">\(\sigma\)</span>, unknown</li>
+<li>The mean of your sample, <span class="math inline">\(\bar{X}\)</span>, is a random variable following a Student’s law.</li>
+</ul>
+<p><span class="math display">\[\begin{equation}
+\bar{x} \pm t_{1-\alpha/2,n-1}\,\frac{s}{\sqrt{n}}.
+\end{equation}\]</span></p>
+<ul>
+<li>The statistical tables allow you to find the desired level of confidence !</li>
+</ul>
+</section>
+<section id="hypothesis-testing" class="slide level2">
+<h2>Hypothesis testing</h2>
+<ol type="1">
+<li>Null Hypothesis, <span class="math inline">\(H_0\)</span> : the hypothesis we seek to check/test</li>
+<li>Alternative Hypothesis (<span class="math inline">\(H_a\)</span>) : its negative</li>
+</ol>
+</section>
+<section id="mean-estimation" class="slide level2 scrollable">
+<h2>Mean estimation</h2>
+<ol type="1">
+<li>Null Hypothesis (<span class="math inline">\(H_0\)</span>): The mean income is equal to 35,000€ in French communes : <span class="math inline">\(\mu = 35000\)</span></li>
+<li>Alternative Hypothesis (<span class="math inline">\(H_a\)</span>): The population mean income is not equal to 35,000€.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="co"># Sample data (assumed to be the log-transformed median income)</span></span>
+<span id="cb13-2"><a></a>sample_data <span class="ot">&lt;-</span> <span class="fu">sample</span>(log_median_inc, <span class="at">size =</span> <span class="dv">150</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  sample_data
+t = -10.386, df = 149, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 10.4631
+95 percent confidence interval:
+ 10.25798 10.32356
+sample estimates:
+mean of x 
+ 10.29077 </code></pre>
+</div>
+</div>
+<ul>
+<li><strong>p-value</strong> : the probability of observing <span class="math inline">\(\bar{x} = 10.29077\)</span> (or even more extreme), if the true population mean is actually 10.4631.</li>
+<li>here <span class="math inline">\(&lt;2.2e^{-16}\)</span></li>
+<li>you reject the null hypothesis: your mean is not 35k€</li>
+</ul>
+</section>
+<section id="mean-comparison" class="slide level2 scrollable">
+<h2>Mean comparison</h2>
+<ul>
+<li>Also allows to look at the impact of categorical variables on estimates !</li>
+<li>Testing <span class="math inline">\(\mu_1 = \mu_2\)</span></li>
+</ul>
+<ol type="1">
+<li>Null Hypothesis (<span class="math inline">\(H_0\)</span>): The population means for urban and rural areas are equal, <span class="math inline">\(\mu_1 = \mu_2\)</span> (or <span class="math inline">\(\mu_1 - \mu_2 = 0\)</span>)</li>
+<li>Alternative Hypothesis (<span class="math inline">\(H_a\)</span>): The population means for urban and rural areas are different: <span class="math inline">\(\mu_1 != \mu_2\)</span>.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="co"># Split data by urban and rural communes</span></span>
+<span id="cb15-2"><a></a>urban_income <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">log</span>((data_dem <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dens <span class="sc">==</span> <span class="st">"Urbain dense"</span> <span class="sc">|</span> dens <span class="sc">==</span> <span class="st">"Urbain intermédiaire"</span>))<span class="sc">$</span>revmoyfoy), <span class="dv">150</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb15-3"><a></a>rural_income <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">log</span>((data_dem <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dens <span class="sc">==</span> <span class="st">"Rural"</span>))<span class="sc">$</span>revmoyfoy), <span class="dv">150</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb15-4"><a></a></span>
+<span id="cb15-5"><a></a><span class="co"># Perform a two-sample t-test</span></span>
+<span id="cb15-6"><a></a>t_test_urban_rural <span class="ot">&lt;-</span> <span class="fu">t.test</span>(urban_income, </span>
+<span id="cb15-7"><a></a>                             rural_income, </span>
+<span id="cb15-8"><a></a>                             <span class="at">alternative =</span> <span class="st">"two.sided"</span>, </span>
+<span id="cb15-9"><a></a>                             <span class="at">var.equal =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb15-10"><a></a>                             <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb15-11"><a></a></span>
+<span id="cb15-12"><a></a><span class="co"># Display the result</span></span>
+<span id="cb15-13"><a></a>t_test_urban_rural</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  urban_income and rural_income
+t = 3.9075, df = 292.75, p-value = 0.0001159
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 0.05493876 0.16644186
+sample estimates:
+mean of x mean of y 
+ 10.44437  10.33368 </code></pre>
+</div>
+</div>
+<ul>
+<li>your p value measures the probability of obtaining <span class="math inline">\(\mu_1 - \mu_2\)</span> as extreme as <span class="math inline">\(10.44-10.33\)</span>, if it was <span class="math inline">\(0\)</span></li>
+<li>below 5% : you reject the null</li>
+</ul>
+</section></section>
+<section>
+<section id="regressions" class="title-slide slide level1 center">
+<h1>Regressions</h1>
+
+</section>
+<section id="back-to-our-initial-puzzle" class="slide level2">
+<h2>Back to our initial puzzle</h2>
+<ul>
+<li><span class="math inline">\(Y \leftarrow X\)</span></li>
+<li><code>t.test()</code> allows you to analyse :
+<ul>
+<li>effect of categorical independent variables (being urban/rural)</li>
+<li>on continuous dependent variable (income)</li>
+</ul></li>
+<li>what about continuous vs.&nbsp;continuous variables ?
+<ul>
+<li>e.g.&nbsp;far-right votes (%) (Y) by income (X) ?</li>
+</ul></li>
+</ul>
+</section>
+<section id="towards-simple-regression" class="slide level2">
+<h2>Towards simple regression</h2>
+<ul>
+<li>Once you have decided of a Y (dependent variable) and X (independent variables), you can draw a cloud of points</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb17-2"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb17-3"><a></a><span class="fu">library</span>(rio)</span>
+<span id="cb17-4"><a></a></span>
+<span id="cb17-5"><a></a>elections2024 <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/elections2024.csv"</span>)</span>
+<span id="cb17-6"><a></a>socio_demo <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/demographics2024.xlsx"</span>)</span>
+<span id="cb17-7"><a></a>elections2024 <span class="ot">&lt;-</span> elections2024 <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(socio_demo <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">codecommune =</span> <span class="fu">as.numeric</span>(codecommune), <span class="at">codedep =</span> <span class="fu">as.numeric</span>(codedep)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="towards-simple-linear-regression" class="slide level2">
+<h2>Towards simple linear regression</h2>
+
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
+<section id="simple-linear-regression-model" class="slide level2 scrollable">
+<h2>Simple linear regression model</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb18-2"><a></a>elections2024 <span class="sc">%&gt;%</span> </span>
+<span id="cb18-3"><a></a>  <span class="fu">filter</span>(dens <span class="sc">==</span> <span class="st">"Urbain intermédiaire"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-4"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(revmoyfoy), <span class="at">y =</span> far_right_relvotes)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"RN vote"</span>, <span class="at">x =</span> <span class="st">"Median income in commune (log scale)"</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span><span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+</div>
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch"></section>
+<section id="simple-linear-regression-model-1" class="slide level2 scrollable">
+<h2>Simple linear regression model</h2>
+<ul>
+<li>Your relation between your two variables : <span class="math display">\[\begin{equation}
+Y_i = f(X_i) + \epsilon_i
+\end{equation}\]</span></li>
+<li>A linear function of <span class="math inline">\(X\)</span> is simply a function that associates a constant value <span class="math inline">\(\beta\)</span> such that each increase <span class="math inline">\(\Delta X\)</span> produces a <span class="math inline">\(\beta \Delta X\)</span> on Y, so that <span class="math inline">\(\Delta Y = \beta \Delta X\)</span>. In other words, <span class="math inline">\(f(X, \epsilon) = \beta_0 + \beta_1 X+\epsilon\)</span>. <span class="math display">\[\begin{equation}
+Y_i = \beta_0+\beta_1 X_i + \epsilon_i
+\end{equation}\]</span></li>
+</ul>
+</section>
+<section id="simple-linear-regression-model-2" class="slide level2">
+<h2>Simple linear regression model</h2>
+<ul>
+<li>We want <span class="math inline">\(\beta\)</span> (or <span class="math inline">\(f\)</span>) that minimises the error <span class="math inline">\(\epsilon\)</span>: <span class="math display">\[\begin{equation}
+\sum_i^N \epsilon_i^2 = \sum_i^N(Y_i - \beta_1 X_i - \beta_0)^2 = S(\beta_0,  \beta_1)
+\end{equation}\]</span></li>
+<li>This will give us the line that best fits the data</li>
+<li>“Ordinary Least Squares” (OLS)</li>
+</ul>
+</section>
+<section id="visualising-the-errors" class="slide level2">
+<h2>Visualising the errors</h2>
+
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-20-1.png" width="960" class="r-stretch"></section>
+<section id="linear-regression-in-r" class="slide level2 scrollable">
+<h2>Linear regression in R</h2>
+<ul>
+<li>Linear estimator is present in base R, it’s called <code>lm</code></li>
+<li><code>summary</code> gives you the values</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>elec_urbin <span class="ot">&lt;-</span> elections2024 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dens <span class="sc">==</span> <span class="st">"Urbain intermédiaire"</span>)</span>
+<span id="cb19-2"><a></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> elec_urbin, far_right_relvotes <span class="sc">~</span> <span class="fu">log</span>(revmoyfoy))</span>
+<span id="cb19-3"><a></a></span>
+<span id="cb19-4"><a></a><span class="fu">summary</span>(model1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = far_right_relvotes ~ log(revmoyfoy), data = elec_urbin)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.312869 -0.059556  0.000578  0.061612  0.245735 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     2.310232   0.054997   42.01   &lt;2e-16 ***
+log(revmoyfoy) -0.185713   0.005257  -35.33   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.08438 on 3490 degrees of freedom
+Multiple R-squared:  0.2634,    Adjusted R-squared:  0.2632 
+F-statistic:  1248 on 1 and 3490 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="interpretation-of-linear-regression-in-r" class="slide level2">
+<h2>Interpretation of linear regression in R</h2>
+<ul>
+<li>Intercept : predicted value when predictors = 0</li>
+<li>Estimate
+<ul>
+<li>sign</li>
+<li>magnitude</li>
+</ul></li>
+<li>Significance levels : compares with <span class="math inline">\(\beta_1 = 0\)</span> (Null hypothesis)
+<ul>
+<li>t-value (<span class="math inline">\(df&gt;1000\)</span>) : <span class="math inline">\(t_{.90} = 1.645\)</span>, <span class="math inline">\(t_{.95} = 1.96\)</span>, <span class="math inline">\(t_{.99} =2.58\)</span></li>
+<li>p-value : probability of obtaining such t-stat with <span class="math inline">\(\beta_1 = 0\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="multiple-linear-regression" class="slide level2">
+<h2>Multiple linear regression</h2>
+<ul>
+<li>But is that only an effect of income ?</li>
+<li>Income is also correlated with many other variables, e.g.&nbsp;:
+<ul>
+<li>% University graduates (interval)</li>
+<li>Location (categorical)</li>
+</ul></li>
+<li>Omitted variable bias.</li>
+<li>Need to add predictors !</li>
+</ul>
+</section>
+<section id="multiple-linear-regression-1" class="slide level2 scrollable">
+<h2>Multiple linear regression</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>elec_urbin <span class="ot">&lt;-</span> elections2024 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">psup =</span> <span class="fu">if_else</span>(pact <span class="sc">&gt;</span> <span class="dv">0</span>, sup <span class="sc">/</span> pact, <span class="cn">NA_real_</span>)) </span>
+<span id="cb21-2"><a></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> elec_urbin <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dens <span class="sc">==</span> <span class="st">"Urbain intermédiaire"</span>), far_right_relvotes <span class="sc">~</span> <span class="fu">log</span>(revmoyfoy) <span class="sc">+</span> psup)</span>
+<span id="cb21-3"><a></a><span class="fu">summary</span>(model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = far_right_relvotes ~ log(revmoyfoy) + psup, data = elec_urbin %&gt;% 
+    filter(dens == "Urbain intermédiaire"))
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.30604 -0.05640 -0.00183  0.05605  0.35688 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     1.663218   0.059892   27.77   &lt;2e-16 ***
+log(revmoyfoy) -0.116205   0.005913  -19.65   &lt;2e-16 ***
+psup           -0.112047   0.005232  -21.41   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.07934 on 3489 degrees of freedom
+Multiple R-squared:  0.349, Adjusted R-squared:  0.3486 
+F-statistic: 935.1 on 2 and 3489 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<ul>
+<li>Adding a single predictors considerably decreases the effect of income !</li>
+</ul>
+</section>
+<section id="correlation-causality" class="slide level2">
+<h2>Correlation, causality</h2>
+<ul>
+<li>A correlation = two phenomena moove together,
+<ul>
+<li>useful to describe, predict, formulate hypotheses</li>
+<li>yet not causal ! (e.g.&nbsp;ice cream sales and shark attacks)</li>
+</ul></li>
+<li>A correlation can also be completely spurious <img data-src="images/spurious_corr.png" style="width:100.0%"></li>
+</ul>
+</section>
+<section id="causality" class="slide level2">
+<h2>Causality</h2>
+<ul>
+<li>One phenomenon causes the other:</li>
+<li>5 rules :
+<ul>
+<li>Does the cause come before the effect ?</li>
+<li>Is there a possible alternative explanation ?</li>
+<li>Does the relationship hold in different contexts ?</li>
+<li>Is the effect measured after the cause appears ?</li>
+<li>Could the effect actually be the cause ?</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="exercices" class="title-slide slide level1 center">
+<h1>Exercices</h1>
+
+</section>
+<section id="exercice-1" class="slide level2">
+<h2>Exercice 1</h2>
+<p>In this exercise, we are interested in understanding what explains trust in parliament (trstprl). The main factors considered are Education level (eduyrs), Political interest (polintr), Media Use (tvtot, netusoft);</p>
+</section>
+<section id="correction---exercice-1" class="slide level2 scrollable">
+<h2>Correction - Exercice 1</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">library</span>(rio)</span>
+<span id="cb23-2"><a></a><span class="co">#1.0</span></span>
+<span id="cb23-3"><a></a>ESS_11 <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"https://github.com/paulservais-1/methods_policyevaluation/raw/main/dataexos/ESS11_data/ESS11.csv"</span>)</span>
+<span id="cb23-4"><a></a><span class="co">#1.1</span></span>
+<span id="cb23-5"><a></a><span class="fu">summary</span>(ESS_11 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="st">"trstprl"</span>,<span class="st">"eduyrs"</span>,<span class="st">"polintr"</span>,<span class="st">"netusoft"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    trstprl           eduyrs         polintr         netusoft    
+ Min.   : 0.000   Min.   : 0.00   Min.   :1.000   Min.   :1.000  
+ 1st Qu.: 3.000   1st Qu.:11.00   1st Qu.:2.000   1st Qu.:4.000  
+ Median : 5.000   Median :13.00   Median :3.000   Median :5.000  
+ Mean   : 6.205   Mean   :14.26   Mean   :2.633   Mean   :4.221  
+ 3rd Qu.: 7.000   3rd Qu.:16.00   3rd Qu.:3.000   3rd Qu.:5.000  
+ Max.   :99.000   Max.   :99.00   Max.   :9.000   Max.   :9.000  </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="co">#1.2</span></span>
+<span id="cb25-2"><a></a>data_set <span class="ot">&lt;-</span> ESS_11 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(trstprl <span class="sc">&lt;</span> <span class="dv">11</span> <span class="sc">&amp;</span> eduyrs <span class="sc">&lt;</span> <span class="dv">11</span> <span class="sc">&amp;</span> netusoft <span class="sc">&lt;</span> <span class="dv">6</span> <span class="sc">&amp;</span> polintr <span class="sc">&lt;</span> <span class="dv">6</span>)</span>
+<span id="cb25-3"><a></a><span class="co">#1.3 </span></span>
+<span id="cb25-4"><a></a>reg1<span class="ot">&lt;-</span><span class="fu">lm</span>(trstprl<span class="sc">~</span>eduyrs,<span class="at">data =</span> data_set)</span>
+<span id="cb25-5"><a></a><span class="fu">summary</span>(reg1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = trstprl ~ eduyrs, data = data_set)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.6063 -2.1672  0.3937  1.9426  6.4914 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  3.50858    0.12016  29.199  &lt; 2e-16 ***
+eduyrs       0.10977    0.01476   7.437 1.14e-13 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.723 on 7696 degrees of freedom
+Multiple R-squared:  0.007136,  Adjusted R-squared:  0.007007 
+F-statistic: 55.31 on 1 and 7696 DF,  p-value: 1.141e-13</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="co">#1.4</span></span>
+<span id="cb27-2"><a></a>reg2<span class="ot">&lt;-</span><span class="fu">lm</span>(trstprl <span class="sc">~</span> eduyrs <span class="sc">+</span> polintr <span class="sc">+</span> netusoft, data_set)</span>
+<span id="cb27-3"><a></a><span class="fu">summary</span>(reg2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = trstprl ~ eduyrs + polintr + netusoft, data = data_set)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.9330 -2.1212  0.2352  1.8143  6.7434 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  6.02057    0.16810  35.814  &lt; 2e-16 ***
+eduyrs       0.03545    0.01529   2.319  0.02040 *  
+polintr     -0.72274    0.03326 -21.730  &lt; 2e-16 ***
+netusoft     0.05614    0.01764   3.183  0.00146 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.639 on 7694 degrees of freedom
+Multiple R-squared:  0.06786,   Adjusted R-squared:  0.0675 
+F-statistic: 186.7 on 3 and 7694 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="co">#1.5</span></span>
+<span id="cb29-2"><a></a><span class="fu">library</span>(stargazer)</span>
+<span id="cb29-3"><a></a><span class="fu">stargazer</span>(reg1, reg2, <span class="at">type =</span> <span class="st">"text"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+======================================================================
+                                   Dependent variable:                
+                    --------------------------------------------------
+                                         trstprl                      
+                              (1)                       (2)           
+----------------------------------------------------------------------
+eduyrs                      0.110***                  0.035**         
+                            (0.015)                   (0.015)         
+                                                                      
+polintr                                              -0.723***        
+                                                      (0.033)         
+                                                                      
+netusoft                                             0.056***         
+                                                      (0.018)         
+                                                                      
+Constant                    3.509***                 6.021***         
+                            (0.120)                   (0.168)         
+                                                                      
+----------------------------------------------------------------------
+Observations                 7,698                     7,698          
+R2                           0.007                     0.068          
+Adjusted R2                  0.007                     0.068          
+Residual Std. Error    2.723 (df = 7696)         2.639 (df = 7694)    
+F Statistic         55.310*** (df = 1; 7696) 186.723*** (df = 3; 7694)
+======================================================================
+Note:                                      *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+</div>
+</div>
+</section>
+<section id="exercice-2" class="slide level2">
+<h2>Exercice 2</h2>
+<p>The Chapel Hill expert survey data is a survey that “provides information about the positioning of the leadership of 279 parties in 31 countries over the course of 2024 on ideology, policy, populism, democracy, European integration, and select EU policy questions. Country coverage includes all European Union member states except for Luxembourg – plus Iceland, Norway, Switzerland, Turkey, and the United Kingdom.2 The dataset adopts the country code and party id schema of the CHES Trend file (Jolly et al.&nbsp;2022) and the Speed CHES survey on Ukraine (Hooghe et al.&nbsp;2024) with extensions for newly covered parties” (see <a href="https://static1.squarespace.com/static/5975c9bfdb29d6a05c65209b/t/69163d62e2606b5a3c46812b/1763%2065186525/CHES+2024+Codebook.pdf">documentation of CHES</a>).</p>
+</section>
+<section id="correction---exercice-2" class="slide level2 scrollable">
+<h2>Correction - Exercice 2</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a><span class="fu">library</span>(rio)</span>
+<span id="cb31-2"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb31-3"><a></a><span class="fu">library</span>(stargazer)</span>
+<span id="cb31-4"><a></a><span class="co">#Exercice 1</span></span>
+<span id="cb31-5"><a></a><span class="co">#1.1</span></span>
+<span id="cb31-6"><a></a>ches <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"https://www.chesdata.eu/s/1999-2024_CHES_dataset_means.csv"</span>)</span>
+<span id="cb31-7"><a></a><span class="co">#1.2</span></span>
+<span id="cb31-8"><a></a><span class="fu">glimpse</span>(ches)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,441
+Columns: 90
+$ year                    &lt;int&gt; 1999, 2002, 2006, 2010, 2014, 2019, 2024, 1999…
+$ country                 &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+$ eastwest                &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+$ eumember                &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+$ party_id                &lt;int&gt; 102, 102, 102, 102, 102, 102, 102, 103, 103, 1…
+$ party                   &lt;chr&gt; "PS", "PS", "PS", "PS", "PS", "PS", "PS", "SP"…
+$ cmp_id                  &lt;int&gt; 21322, 21322, 21322, 21322, 21322, 21322, 2132…
+$ vote                    &lt;dbl&gt; 10.20, 10.20, 13.00, 13.70, 11.70, 9.46, 8.04,…
+$ seat                    &lt;dbl&gt; 12.7, 12.7, 16.7, 17.3, 15.3, 13.5, 16.0, 9.3,…
+$ electionyear            &lt;int&gt; 1999, 1999, 2003, 2010, 2014, 2019, 2024, 1999…
+$ epvote                  &lt;dbl&gt; 9.59, 9.59, 13.50, 10.88, 10.70, 9.74, 7.43, 8…
+$ family                  &lt;int&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 7, 7…
+$ govt                    &lt;dbl&gt; 1.0, 1.0, 1.0, 1.0, 0.5, 0.0, NA, 1.0, 1.0, 1.…
+$ lrgen                   &lt;dbl&gt; 3.111111, 3.350000, 3.500000, 2.500000, 2.6000…
+$ lrecon                  &lt;dbl&gt; 2.625000, 2.500000, 3.170000, 2.571429, 2.4000…
+$ lrecon_salience         &lt;dbl&gt; NA, NA, NA, NA, 8.400000, 8.166667, 7.444445, …
+$ lrecon_dissent          &lt;dbl&gt; NA, NA, NA, NA, NA, 2.2, 0.5, NA, NA, NA, NA, …
+$ lrecon_blur             &lt;dbl&gt; NA, NA, NA, NA, NA, 1.142857, 2.166667, NA, NA…
+$ galtan                  &lt;dbl&gt; 3.875000, 4.000000, 2.830000, 2.857143, 3.4000…
+$ galtan_salience         &lt;dbl&gt; NA, NA, NA, NA, 3.200000, 4.000000, 4.750000, …
+$ galtan_dissent          &lt;dbl&gt; NA, NA, NA, NA, NA, 2.500000, 3.666667, NA, NA…
+$ galtan_blur             &lt;dbl&gt; NA, NA, NA, NA, NA, 2.750000, 2.600000, NA, NA…
+$ eu_position             &lt;dbl&gt; 6.666667, 6.090000, 5.710000, 6.200000, 6.0000…
+$ eu_salience             &lt;dbl&gt; 4.722222, 4.533333, 4.300000, 4.523810, 3.2000…
+$ eu_dissent              &lt;dbl&gt; 1.388889, 2.111111, 3.430000, 2.461539, 3.0000…
+$ eu_blur                 &lt;dbl&gt; NA, NA, NA, NA, NA, 2.166667, 3.333333, NA, NA…
+$ spendvtax               &lt;dbl&gt; NA, NA, 2.670000, 1.692308, 2.400000, 2.000000…
+$ spendvtax_salience      &lt;dbl&gt; NA, NA, 6.500000, 7.615385, NA, NA, NA, NA, NA…
+$ deregulation            &lt;dbl&gt; NA, NA, 2.330000, 2.375000, 2.000000, 2.000000…
+$ dereg_salience          &lt;dbl&gt; NA, NA, 6.830, 4.500, NA, NA, NA, NA, NA, 8.00…
+$ redistribution          &lt;dbl&gt; NA, NA, 2.000000, 1.818182, 1.800000, 1.583333…
+$ redist_salience         &lt;dbl&gt; NA, NA, 8.000000, 7.583333, NA, 8.166667, 8.42…
+$ econ_interven           &lt;dbl&gt; NA, NA, NA, NA, 1.750000, 1.545454, NA, NA, NA…
+$ civlib_laworder         &lt;dbl&gt; NA, NA, 3.670000, 2.636364, 2.200000, 3.090909…
+$ civlib_salience         &lt;dbl&gt; NA, NA, 6.500000, 4.727273, NA, NA, NA, NA, NA…
+$ sociallifestyle         &lt;dbl&gt; NA, NA, 2.3299999, 1.8181819, 1.6000000, 2.000…
+$ social_salience         &lt;dbl&gt; NA, NA, 5.670000, 5.090909, NA, NA, NA, NA, NA…
+$ womens_rights           &lt;dbl&gt; NA, NA, NA, NA, NA, NA, 3.000000, NA, NA, NA, …
+$ lgbtq_rights            &lt;dbl&gt; NA, NA, NA, NA, NA, NA, 1.0, NA, NA, NA, NA, N…
+$ samesex_marriage        &lt;dbl&gt; NA, NA, NA, NA, NA, NA, 2.1428571, NA, NA, NA,…
+$ religious_principles    &lt;dbl&gt; NA, NA, 1.330000, 1.454545, 1.000000, 1.500000…
+$ relig_salience          &lt;dbl&gt; NA, NA, 5.670000, 2.545455, NA, NA, NA, NA, NA…
+$ immigrate_policy        &lt;dbl&gt; NA, NA, 2.500000, 2.000000, 2.800000, 3.416667…
+$ immigrate_salience      &lt;dbl&gt; NA, NA, 6.330000, 6.083333, NA, 4.250000, 3.22…
+$ immigrate_dissent       &lt;dbl&gt; NA, NA, NA, NA, NA, 3.400000, 4.333334, NA, NA…
+$ multiculturalism        &lt;dbl&gt; NA, NA, 4.200000, 3.250000, 2.000000, 3.083333…
+$ multicult_salience      &lt;dbl&gt; NA, NA, NA, 5.545454, NA, 4.454546, 4.000000, …
+$ multicult_dissent       &lt;dbl&gt; NA, NA, NA, NA, NA, 3.5, NA, NA, NA, NA, NA, N…
+$ nationalism             &lt;dbl&gt; NA, NA, 3.170000, NA, 2.250000, 3.454546, 3.75…
+$ nationalism_salience    &lt;dbl&gt; NA, NA, 4.33, NA, NA, NA, NA, NA, NA, 4.88, NA…
+$ ethnic_minorities       &lt;dbl&gt; NA, NA, 3.170000, 2.444444, 2.000000, 2.636364…
+$ ethnic_salience         &lt;dbl&gt; NA, NA, 6.330000, 5.333333, NA, NA, NA, NA, NA…
+$ urban_rural             &lt;dbl&gt; NA, NA, 4.400000, 4.000000, 3.333333, 3.333333…
+$ urban_salience          &lt;dbl&gt; NA, NA, 3.000000, 2.142857, NA, NA, NA, NA, NA…
+$ environment             &lt;dbl&gt; NA, NA, NA, 4.9166665, 3.8000000, 4.5000000, 3…
+$ enviro_salience         &lt;dbl&gt; NA, NA, NA, 4.833334, NA, 4.363637, 4.200000, …
+$ climate_change          &lt;dbl&gt; NA, NA, NA, NA, NA, NA, 4.0, NA, NA, NA, NA, N…
+$ climate_change_salience &lt;dbl&gt; NA, NA, NA, NA, NA, NA, 3.666667, NA, NA, NA, …
+$ protectionism           &lt;dbl&gt; NA, NA, NA, NA, NA, 6.272728, 5.750000, NA, NA…
+$ regions                 &lt;dbl&gt; NA, NA, 6.170000, 5.583334, 6.600000, 6.000000…
+$ region_salience         &lt;dbl&gt; NA, NA, 7.000000, 5.083334, NA, NA, NA, NA, NA…
+$ international_security  &lt;dbl&gt; NA, NA, NA, 6.090909, 5.800000, NA, NA, NA, NA…
+$ international_salience  &lt;dbl&gt; NA, NA, NA, 3.222222, NA, NA, NA, NA, NA, NA, …
+$ us                      &lt;dbl&gt; NA, NA, 2.67, NA, NA, NA, NA, NA, NA, 2.71, NA…
+$ us_salience             &lt;dbl&gt; NA, NA, 3.50, NA, NA, NA, NA, NA, NA, 3.29, NA…
+$ eu_benefit              &lt;dbl&gt; NA, NA, NA, 1.133333, 1.200000, NA, NA, NA, NA…
+$ eu_ep                   &lt;dbl&gt; 6.333333, 6.000000, 6.500000, 6.545455, 6.4000…
+$ eu_fiscal               &lt;dbl&gt; 6.666667, NA, NA, NA, NA, NA, NA, 6.666667, NA…
+$ eu_intmark              &lt;dbl&gt; NA, 4.100000, 4.000000, 5.083333, 5.000000, 4.…
+$ eu_employ               &lt;dbl&gt; 6.555555, 6.550000, NA, NA, NA, NA, NA, 6.5555…
+$ eu_budgets              &lt;dbl&gt; NA, NA, NA, NA, 4.200, 4.250, NA, NA, NA, NA, …
+$ eu_agri                 &lt;dbl&gt; NA, 4.88, NA, NA, NA, NA, NA, NA, 3.78, NA, NA…
+$ eu_cohesion             &lt;dbl&gt; 6.625000, 5.850000, 6.670000, 6.625000, 6.2500…
+$ eu_environ              &lt;dbl&gt; 5.888889, 5.000000, NA, NA, NA, NA, NA, 6.0000…
+$ eu_asylum               &lt;dbl&gt; 5.666667, 6.300000, NA, NA, NA, 5.555555, NA, …
+$ eu_foreign              &lt;dbl&gt; 6.555555, 6.330000, 5.830000, 6.333333, 6.0000…
+$ eu_turkey               &lt;dbl&gt; NA, NA, 6.000000, 5.750000, 5.500000, NA, NA, …
+$ eu_russia               &lt;dbl&gt; NA, NA, NA, NA, NA, NA, 4.500000, NA, NA, NA, …
+$ russian_interference    &lt;dbl&gt; NA, NA, NA, NA, NA, 0.1111111, NA, NA, NA, NA,…
+$ anti_islam_rhetoric     &lt;dbl&gt; NA, NA, NA, NA, NA, 2.111111, 0.000000, NA, NA…
+$ people_vs_elite         &lt;dbl&gt; NA, NA, NA, NA, NA, 3.363636, 4.000000, NA, NA…
+$ antielite_salience      &lt;dbl&gt; NA, NA, NA, NA, 2.600000, 2.181818, 4.400000, …
+$ corrupt_salience        &lt;dbl&gt; NA, NA, NA, NA, 2.250000, 1.909091, 0.500000, …
+$ members_vs_leadership   &lt;dbl&gt; NA, NA, NA, NA, NA, 7.500000, NA, NA, NA, NA, …
+$ executive_power         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, 4.5, NA, NA, NA, NA, N…
+$ judicial_independence   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, 1.75, NA, NA, NA, NA, …
+$ mip_one                 &lt;int&gt; NA, NA, NA, NA, 13, NA, NA, NA, NA, NA, NA, 13…
+$ mip_two                 &lt;int&gt; NA, NA, NA, NA, 14, NA, NA, NA, NA, NA, NA, 14…
+$ mip_three               &lt;int&gt; NA, NA, NA, NA, 17, NA, NA, NA, NA, NA, NA, 17…
+$ chesversion             &lt;dbl&gt; 2025.1, 2025.1, 2025.1, 2025.1, 2025.1, 2025.1…</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="co">#1.3</span></span>
+<span id="cb33-2"><a></a>ches <span class="ot">&lt;-</span> ches <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2024</span>)</span>
+<span id="cb33-3"><a></a><span class="co">#1.4</span></span>
+<span id="cb33-4"><a></a>ches <span class="ot">&lt;-</span> ches <span class="sc">%&gt;%</span> <span class="fu">select</span>(country, eastwest, eu_russia, civlib_laworder, samesex_marriage, nationalism, urban_rural, lrgen)</span>
+<span id="cb33-5"><a></a><span class="co">#1.5</span></span>
+<span id="cb33-6"><a></a><span class="fu">summary</span>(ches)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    country         eastwest        eu_russia      civlib_laworder 
+ Min.   : 1.00   Min.   :0.0000   Min.   : 0.000   Min.   : 0.500  
+ 1st Qu.: 6.00   1st Qu.:0.0000   1st Qu.: 2.000   1st Qu.: 3.000  
+ Median :14.00   Median :1.0000   Median : 3.500   Median : 5.000  
+ Mean   :15.57   Mean   :0.5633   Mean   : 4.117   Mean   : 5.237  
+ 3rd Qu.:24.00   3rd Qu.:1.0000   3rd Qu.: 5.750   3rd Qu.: 7.450  
+ Max.   :40.00   Max.   :1.0000   Max.   :10.000   Max.   :10.000  
+                                  NA's   :2        NA's   :2       
+ samesex_marriage  nationalism      urban_rural        lrgen       
+ Min.   : 0.000   Min.   : 0.200   Min.   :1.100   Min.   : 0.500  
+ 1st Qu.: 1.500   1st Qu.: 3.000   1st Qu.:3.407   1st Qu.: 3.474  
+ Median : 3.333   Median : 5.000   Median :4.833   Median : 5.818  
+ Mean   : 4.332   Mean   : 5.253   Mean   :4.930   Mean   : 5.480  
+ 3rd Qu.: 7.182   3rd Qu.: 7.333   3rd Qu.:6.227   3rd Qu.: 7.500  
+ Max.   :10.000   Max.   :10.000   Max.   :9.875   Max.   :10.000  
+                                   NA's   :11                      </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="co">#1.6</span></span>
+<span id="cb35-2"><a></a><span class="fu">hist</span>(ches<span class="sc">$</span>eu_russia)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="correction_files/figure-revealjs/unnamed-chunk-24-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a><span class="co">#1.7.1</span></span>
+<span id="cb36-2"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> ches, <span class="fu">aes</span>(<span class="at">x=</span> lrgen, <span class="at">y =</span> eu_russia)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span><span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="correction_files/figure-revealjs/unnamed-chunk-24-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a><span class="co">#1.7.2</span></span>
+<span id="cb37-2"><a></a>model<span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> ches, eu_russia <span class="sc">~</span> lrgen)</span>
+<span id="cb37-3"><a></a><span class="fu">summary</span>(model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = eu_russia ~ lrgen, data = ches)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.4592 -1.9332 -0.5287  1.5507  6.3527 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  4.94190    0.40414  12.228   &lt;2e-16 ***
+lrgen       -0.15035    0.06744  -2.229   0.0267 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.53 on 241 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.02021,   Adjusted R-squared:  0.01614 
+F-statistic:  4.97 on 1 and 241 DF,  p-value: 0.02671</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="co">#1.7.3</span></span>
+<span id="cb39-2"><a></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> ches, eu_russia <span class="sc">~</span> lrgen <span class="sc">+</span> nationalism)</span>
+<span id="cb39-3"><a></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> ches, eu_russia <span class="sc">~</span>eastwest<span class="sc">+</span> lrgen <span class="sc">+</span> urban_rural<span class="sc">+</span> samesex_marriage)</span>
+<span id="cb39-4"><a></a>model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> ches, eu_russia <span class="sc">~</span>eastwest<span class="sc">+</span> lrgen <span class="sc">+</span> urban_rural<span class="sc">+</span> samesex_marriage <span class="sc">+</span> nationalism)</span>
+<span id="cb39-5"><a></a>model5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> ches, eu_russia <span class="sc">~</span>eastwest<span class="sc">*</span>nationalism)</span>
+<span id="cb39-6"><a></a></span>
+<span id="cb39-7"><a></a><span class="fu">stargazer</span>(model, model2,model3, model4,model5,</span>
+<span id="cb39-8"><a></a>          <span class="at">title =</span> <span class="st">"EU - Russia results"</span>, </span>
+<span id="cb39-9"><a></a>          <span class="at">align =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb39-10"><a></a>          <span class="at">type =</span> <span class="st">"text"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+EU - Russia results
+=========================================================================================================================================
+                                                                     Dependent variable:                                                 
+                     --------------------------------------------------------------------------------------------------------------------
+                                                                          eu_russia                                                      
+                              (1)                    (2)                     (3)                     (4)                    (5)          
+-----------------------------------------------------------------------------------------------------------------------------------------
+eastwest                                                                  0.955***                 0.804**                1.659**        
+                                                                           (0.360)                 (0.358)                (0.729)        
+                                                                                                                                         
+lrgen                      -0.150**               -0.642***               -0.586***               -0.702***                              
+                            (0.067)                (0.091)                 (0.084)                 (0.092)                               
+                                                                                                                                         
+nationalism                                       0.601***                                        0.308***                0.316***       
+                                                   (0.082)                                         (0.108)                (0.089)        
+                                                                                                                                         
+urban_rural                                                                 0.166                   0.065                                
+                                                                           (0.106)                 (0.110)                               
+                                                                                                                                         
+samesex_marriage                                                          0.424***                0.308***                               
+                                                                           (0.082)                 (0.090)                               
+                                                                                                                                         
+eastwest:nationalism                                                                                                      -0.250**       
+                                                                                                                          (0.122)        
+                                                                                                                                         
+Constant                   4.942***               4.471***                4.053***                4.169***                2.210***       
+                            (0.404)                (0.371)                 (0.485)                 (0.480)                (0.565)        
+                                                                                                                                         
+-----------------------------------------------------------------------------------------------------------------------------------------
+Observations                  243                    243                     232                     232                    243          
+R2                           0.020                  0.200                   0.212                   0.239                  0.053         
+Adjusted R2                  0.016                  0.194                   0.198                   0.223                  0.041         
+Residual Std. Error    2.530 (df = 241)       2.291 (df = 240)        2.231 (df = 227)        2.197 (df = 226)        2.497 (df = 239)   
+F Statistic          4.970** (df = 1; 241) 30.060*** (df = 2; 240) 15.276*** (df = 4; 227) 14.233*** (df = 5; 226) 4.489*** (df = 3; 239)
+=========================================================================================================================================
+Note:                                                                                                         *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="fu">library</span>(ggeffects)</span>
+<span id="cb41-2"><a></a><span class="co">#1.8</span></span>
+<span id="cb41-3"><a></a><span class="fu">ggpredict</span>(model5, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"nationalism"</span>, <span class="st">"eastwest"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb41-4"><a></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
+<span id="cb41-5"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb41-6"><a></a>    <span class="at">group =</span> <span class="fu">factor</span>(</span>
+<span id="cb41-7"><a></a>      group,</span>
+<span id="cb41-8"><a></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"0"</span>),</span>
+<span id="cb41-9"><a></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"East"</span>, <span class="st">"West"</span>)</span>
+<span id="cb41-10"><a></a>    )</span>
+<span id="cb41-11"><a></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb41-12"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> predicted, <span class="at">color =</span> group, <span class="at">fill =</span> group)) <span class="sc">+</span></span>
+<span id="cb41-13"><a></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb41-14"><a></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), <span class="at">alpha =</span> <span class="fl">0.2</span>)<span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Nationalism"</span>, <span class="at">y =</span><span class="st">"Predicted position on EU-Russia"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="correction_files/figure-revealjs/unnamed-chunk-24-3.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a><span class="co">#1.9</span></span>
+<span id="cb42-2"><a></a>model6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> ches, eu_russia <span class="sc">~</span> nationalism <span class="sc">+</span> civlib_laworder<span class="sc">+</span> eastwest<span class="sc">+</span> samesex_marriage <span class="sc">+</span> urban_rural <span class="sc">+</span> lrgen)</span>
+<span id="cb42-3"><a></a><span class="fu">library</span>(performance)</span>
+<span id="cb42-4"><a></a><span class="fu">map</span>(<span class="fu">list</span>(model6), check_collinearity)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+# Check for Multicollinearity
+
+Low Correlation
+
+             Term  VIF   VIF 95% CI adj. VIF Tolerance Tolerance 95% CI
+         eastwest 1.56 [1.35, 1.89]     1.25      0.64     [0.53, 0.74]
+ samesex_marriage 4.11 [3.34, 5.14]     2.03      0.24     [0.19, 0.30]
+      urban_rural 2.16 [1.81, 2.65]     1.47      0.46     [0.38, 0.55]
+            lrgen 2.66 [2.20, 3.29]     1.63      0.38     [0.30, 0.45]
+
+Moderate Correlation
+
+            Term  VIF   VIF 95% CI adj. VIF Tolerance Tolerance 95% CI
+     nationalism 6.25 [5.01, 7.89]     2.50      0.16     [0.13, 0.20]
+ civlib_laworder 7.07 [5.64, 8.93]     2.66      0.14     [0.11, 0.18]</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a><span class="fu">check_heteroscedasticity</span>(model6) <span class="co"># Run a Breush-Pagan test</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OK: Error variance appears to be homoscedastic (p = 0.089).</code></pre>
+</div>
+</div>
+</section>
+<section id="exercice-3" class="slide level2">
+<h2>Exercice 3</h2>
+<p>You are provided with data about the legislative and the presidential elections in France, in 2022, as well as socio-demographic data on French communes in 2022, for LR (coded as “right”) and RN (“far-right”).</p>
+</section>
+<section id="correction---exercice-3" class="slide level2 scrollable">
+<h2>Correction - Exercice 3</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a><span class="co">#2.1</span></span>
+<span id="cb46-2"><a></a>elections_2022 <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices1/data/elections_2022.csv"</span>)</span>
+<span id="cb46-3"><a></a>socio_demo <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices1/data/soc_dem_2022.csv"</span>)</span>
+<span id="cb46-4"><a></a></span>
+<span id="cb46-5"><a></a><span class="co">#2.2</span></span>
+<span id="cb46-6"><a></a><span class="fu">glimpse</span>(elections_2022)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 68,800
+Columns: 9
+$ codecommune        &lt;int&gt; 1001, 1001, 1002, 1002, 1004, 1004, 1005, 1005, 100…
+$ codedep            &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+$ election_type      &lt;chr&gt; "L", "P", "L", "P", "L", "P", "L", "P", "L", "P", "…
+$ Year               &lt;int&gt; 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 202…
+$ far_right_relvotes &lt;dbl&gt; 0.2566372, 0.2865385, 0.0625000, 0.1345029, 0.20588…
+$ far_right_votes    &lt;int&gt; 87, 149, 8, 23, 826, 1646, 197, 352, 8, 16, 243, 49…
+$ turnout            &lt;dbl&gt; 0.5263975, 0.8062016, 0.5871560, 0.8028169, 0.45364…
+$ right_relvotes     &lt;dbl&gt; 0.17404130, 0.05000000, 0.10937500, 0.04678363, 0.0…
+$ right_votes        &lt;int&gt; 59, 26, 14, 8, 351, 309, 69, 48, 17, 9, 50, 77, 52,…</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a><span class="fu">glimpse</span>(socio_demo)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 34,596
+Columns: 43
+$ codecommune         &lt;chr&gt; "01001", "01002", "01004", "01005", "01006", "0100…
+$ Year                &lt;int&gt; 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 20…
+$ codedep             &lt;chr&gt; "01", "01", "01", "01", "01", "01", "01", "01", "0…
+$ agri                &lt;int&gt; 0, 0, 4, 11, 0, 15, 0, 0, 29, 11, 11, 2, 0, 11, 0,…
+$ indp                &lt;int&gt; 39, 39, 142, 37, 0, 39, 19, 41, 36, 0, 0, 0, 119, …
+$ cadr                &lt;int&gt; 33, 9, 678, 56, 0, 250, 18, 0, 58, 2, 0, 18, 19, 1…
+$ pint                &lt;int&gt; 14, 0, 1647, 192, 34, 311, 83, 95, 98, 78, 0, 13, …
+$ empl                &lt;int&gt; 86, 66, 1211, 185, 23, 339, 83, 21, 197, 17, 53, 1…
+$ ouvr                &lt;int&gt; 147, 0, 1235, 177, 23, 268, 122, 4, 154, 3, 68, 42…
+$ chom                &lt;int&gt; 26, 9, 427, 18, 0, 95, 7, 2, 47, 9, 9, 0, 22, 37, …
+$ pact                &lt;int&gt; 319, 114, 4917, 658, 80, 1222, 325, 161, 572, 111,…
+$ age                 &lt;dbl&gt; 44.20355, 36.97382, 39.07810, 43.10032, 44.01273, …
+$ popf                &lt;int&gt; 380, 128, 7490, 802, 56, 1613, 391, 191, 601, 173,…
+$ francais            &lt;int&gt; 776, 256, 12645, 1700, 107, 2867, 743, 316, 1111, …
+$ etranger            &lt;int&gt; 4, 1, 1248, 23, 5, 64, 18, 8, 37, 5, 5, 0, 402, 11…
+$ prixbien            &lt;dbl&gt; 231440.42, 136645.75, 190080.39, 228015.31, 172697…
+$ capitalratio        &lt;dbl&gt; 1.0423332, 0.6154085, 0.8560610, 1.0269077, 0.7777…
+$ npropri             &lt;int&gt; 345, 102, 3000, 464, 51, 845, 255, 149, 387, 126, …
+$ nlogement           &lt;int&gt; 418, 126, 7209, 604, 77, 1094, 354, 182, 524, 147,…
+$ pop                 &lt;int&gt; 747, 288, 14375, 1717, 116, 3057, 797, 325, 1300, …
+$ revmoyfoy           &lt;dbl&gt; 35802.43, 36150.97, 29982.14, 37242.09, 31769.92, …
+$ revtot              &lt;dbl&gt; 1.277961e-05, 3.862623e-06, 2.096039e-04, 2.853238…
+$ recetteimpotslocaux &lt;dbl&gt; 233.1938, 240.6562, 503.5779, 355.4615, 312.5804, …
+$ recette             &lt;dbl&gt; 608.9172, 796.6805, 1067.3215, 651.9904, 1026.0869…
+$ baseimpotslocaux    &lt;dbl&gt; 1905.169, 2244.090, 2895.855, 1900.238, 2077.438, …
+$ nodip               &lt;int&gt; 319, 57, 5361, 817, 0, 1026, 201, 69, 532, 124, 20…
+$ sup                 &lt;int&gt; 134, 15, 2884, 208, 1, 642, 201, 182, 197, 87, 9, …
+$ Libellé             &lt;chr&gt; "L'Abergement-Clémenciat", "L'Abergement-de-Varey"…
+$ Exploitations       &lt;int&gt; 11, 2, 2, 9, NA, 17, NA, 6, 10, 3, 5, 4, NA, 13, 4…
+$ Personnes           &lt;int&gt; 21, 6, 3, 17, NA, 30, NA, 13, 17, 6, 9, 15, NA, 19…
+$ UTA                 &lt;int&gt; 16, 6, 2, 11, NA, 25, NA, 9, 8, 7, 5, 16, NA, 8, 9…
+$ SAU                 &lt;int&gt; 889, 195, 71, 821, NA, 1888, NA, 122, 326, 584, 25…
+$ PBS                 &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ dens                &lt;chr&gt; "Rural", "Rural", "Urbain intermédiaire", "Rural",…
+$ densaav             &lt;chr&gt; "Rural non périurbain", "Rural non périurbain", "U…
+$ dens7               &lt;chr&gt; "Rural à habitat dispersé", "Rural à habitat dispe…
+$ ntot                &lt;int&gt; 345, 123, 5344, 676, 80, 1317, 332, 163, 619, 120,…
+$ pagri               &lt;dbl&gt; 0.000000000, 0.000000000, 0.000748503, 0.016272189…
+$ pindp               &lt;dbl&gt; 0.11304348, 0.31707317, 0.02657186, 0.05473373, 0.…
+$ pcadr               &lt;dbl&gt; 0.09565217, 0.07317073, 0.12687126, 0.08284024, 0.…
+$ ppint               &lt;dbl&gt; 0.04057971, 0.00000000, 0.30819611, 0.28402367, 0.…
+$ pempl               &lt;dbl&gt; 0.24927536, 0.53658537, 0.22660928, 0.27366864, 0.…
+$ pouvr               &lt;dbl&gt; 0.42608696, 0.00000000, 0.23110030, 0.26183432, 0.…</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a><span class="co">#2.3</span></span>
+<span id="cb50-2"><a></a>elections <span class="ot">&lt;-</span> elections_2022 <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(</span>
+<span id="cb50-3"><a></a>  socio_demo <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">codecommune=</span> <span class="fu">as.numeric</span>(codecommune), <span class="at">codedep =</span> <span class="fu">as.numeric</span>(codedep)) <span class="sc">%&gt;%</span> <span class="fu">drop_na</span>(codecommune))</span>
+<span id="cb50-4"><a></a></span>
+<span id="cb50-5"><a></a><span class="co">#2.4</span></span>
+<span id="cb50-6"><a></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb50-7"><a></a>plot1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> elections, <span class="fu">aes</span>(<span class="at">x=</span>turnout, <span class="at">color =</span> election_type)) <span class="sc">+</span> <span class="fu">geom_density</span>()</span>
+<span id="cb50-8"><a></a>plot2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> elections, <span class="fu">aes</span>(<span class="at">x=</span>far_right_relvotes, <span class="at">color =</span> election_type)) <span class="sc">+</span> <span class="fu">geom_density</span>()</span>
+<span id="cb50-9"><a></a>plot3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> elections, <span class="fu">aes</span>(<span class="at">x=</span>right_relvotes, <span class="at">color =</span> election_type)) <span class="sc">+</span> <span class="fu">geom_density</span>()</span>
+<span id="cb50-10"><a></a><span class="fu">grid.arrange</span>(plot1, plot2, plot3, <span class="at">ncol=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="correction_files/figure-revealjs/unnamed-chunk-25-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a><span class="co">#2.5</span></span>
+<span id="cb51-2"><a></a><span class="co"># Taking the % of blue-collar workers (pouvr), the % of university graduates (psup), the % of foreigners (petr), the log of median income in the commune</span></span>
+<span id="cb51-3"><a></a>elections <span class="ot">&lt;-</span> elections <span class="sc">%&gt;%</span> <span class="fu">filter</span>(pop<span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">petr =</span> etranger<span class="sc">/</span>pop, <span class="at">psup =</span> sup<span class="sc">/</span>pop)</span>
+<span id="cb51-4"><a></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> elections, far_right_relvotes <span class="sc">~</span> pouvr<span class="sc">+</span>psup<span class="sc">+</span>petr<span class="sc">+</span><span class="fu">log</span>(revmoyfoy) <span class="sc">+</span> election_type)</span>
+<span id="cb51-5"><a></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> elections, right_relvotes <span class="sc">~</span> pouvr<span class="sc">+</span>psup<span class="sc">+</span>petr<span class="sc">+</span><span class="fu">log</span>(revmoyfoy) <span class="sc">+</span> election_type)</span>
+<span id="cb51-6"><a></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> elections <span class="sc">%&gt;%</span> <span class="fu">filter</span>(psup<span class="sc">&gt;</span><span class="dv">0</span>,pouvr<span class="sc">&gt;</span><span class="dv">0</span>), far_right_relvotes <span class="sc">~</span> pouvr<span class="sc">+</span>psup<span class="sc">+</span>petr<span class="sc">+</span><span class="fu">log</span>(revmoyfoy) <span class="sc">+</span>turnout <span class="sc">+</span> election_type)</span>
+<span id="cb51-7"><a></a>model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> elections, right_relvotes <span class="sc">~</span> pouvr<span class="sc">+</span>psup<span class="sc">+</span>petr<span class="sc">+</span><span class="fu">log</span>(revmoyfoy) <span class="sc">+</span> turnout <span class="sc">+</span> election_type)</span>
+<span id="cb51-8"><a></a></span>
+<span id="cb51-9"><a></a><span class="fu">stargazer</span>(model1, model2,model3, model4,</span>
+<span id="cb51-10"><a></a>          <span class="at">title =</span> <span class="st">"Electoral results"</span>, </span>
+<span id="cb51-11"><a></a>          <span class="at">align =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb51-12"><a></a>          <span class="at">type =</span> <span class="st">"text"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Electoral results
+=======================================================================================================================================
+                                                                    Dependent variable:                                                
+                    -------------------------------------------------------------------------------------------------------------------
+                         far_right_relvotes             right_relvotes             far_right_relvotes             right_relvotes       
+                                (1)                          (2)                          (3)                          (4)             
+---------------------------------------------------------------------------------------------------------------------------------------
+pouvr                         0.042***                      0.004*                      0.047***                     0.006***          
+                              (0.002)                      (0.002)                      (0.002)                      (0.002)           
+                                                                                                                                       
+psup                         -0.139***                    -0.032***                    -0.136***                    -0.040***          
+                              (0.003)                      (0.003)                      (0.004)                      (0.003)           
+                                                                                                                                       
+petr                         -0.450***                    -0.153***                    -0.576***                    -0.130***          
+                              (0.009)                      (0.010)                      (0.010)                      (0.010)           
+                                                                                                                                       
+log(revmoyfoy)               -0.036***                     0.018***                    -0.042***                     0.017***          
+                              (0.002)                      (0.002)                      (0.002)                      (0.002)           
+                                                                                                                                       
+turnout                                                                                -0.380***                     0.112***          
+                                                                                        (0.006)                      (0.006)           
+                                                                                                                                       
+election_typeP                0.050***                    -0.080***                     0.149***                    -0.108***          
+                              (0.001)                      (0.001)                      (0.002)                      (0.002)           
+                                                                                                                                       
+Constant                      0.652***                     -0.039**                     0.910***                    -0.098***          
+                              (0.016)                      (0.017)                      (0.018)                      (0.017)           
+                                                                                                                                       
+---------------------------------------------------------------------------------------------------------------------------------------
+Observations                   68,006                       68,006                       54,134                       68,006           
+R2                             0.158                        0.151                        0.239                        0.156            
+Adjusted R2                    0.158                        0.151                        0.239                        0.156            
+Residual Std. Error      0.092 (df = 68000)           0.097 (df = 68000)           0.084 (df = 54127)           0.097 (df = 67999)     
+F Statistic         2,556.049*** (df = 5; 68000) 2,426.356*** (df = 5; 68000) 2,832.280*** (df = 6; 54127) 2,091.824*** (df = 6; 67999)
+=======================================================================================================================================
+Note:                                                                                                       *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a><span class="fu">library</span>(broom)</span>
+<span id="cb53-2"><a></a><span class="co">#Create coefficient tables for comparison</span></span>
+<span id="cb53-3"><a></a>models_coefficients <span class="ot">&lt;-</span> <span class="fu">map_df</span>(<span class="fu">list</span>(model3, model4), <span class="sc">~</span> <span class="fu">tidy</span>(.x, <span class="at">conf.int =</span> T), <span class="at">.id =</span> <span class="st">"model"</span>)</span>
+<span id="cb53-4"><a></a></span>
+<span id="cb53-5"><a></a><span class="co">#Plotting the coefficients of each models with their confidence intervals</span></span>
+<span id="cb53-6"><a></a>models_coefficients <span class="sc">%&gt;%</span> </span>
+<span id="cb53-7"><a></a>  <span class="co"># Remove the intercept</span></span>
+<span id="cb53-8"><a></a>  <span class="fu">filter</span>(term  <span class="sc">!=</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-9"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(term, estimate, <span class="at">color =</span> model)) <span class="sc">+</span></span>
+<span id="cb53-10"><a></a>  <span class="co"># Add confidence intervals</span></span>
+<span id="cb53-11"><a></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb53-12"><a></a>  <span class="co"># Add a dashed line at 0 (0 means no effect)</span></span>
+<span id="cb53-13"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb53-14"><a></a>  <span class="co"># Rotate the labels on the x axis</span></span>
+<span id="cb53-15"><a></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb53-16"><a></a>  <span class="co"># Add a title and change the labels</span></span>
+<span id="cb53-17"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Coefficient"</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">title =</span> <span class="st">"Coefficients of the different models"</span>) <span class="sc">+</span></span>
+<span id="cb53-18"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb53-19"><a></a>  <span class="fu">scale_color_manual</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Far-right (RN)"</span>, <span class="st">"Right (LR)"</span>), <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="correction_files/figure-revealjs/unnamed-chunk-25-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a><span class="co">#2.6</span></span>
+<span id="cb54-2"><a></a><span class="fu">map</span>(<span class="fu">list</span>(model4), check_collinearity)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+# Check for Multicollinearity
+
+Low Correlation
+
+           Term  VIF   VIF 95% CI adj. VIF Tolerance Tolerance 95% CI
+          pouvr 1.10 [1.09, 1.11]     1.05      0.91     [0.90, 0.92]
+           psup 1.20 [1.19, 1.21]     1.09      0.84     [0.83, 0.84]
+           petr 1.04 [1.03, 1.05]     1.02      0.96     [0.96, 0.97]
+ log(revmoyfoy) 1.11 [1.10, 1.12]     1.05      0.90     [0.89, 0.91]
+
+Moderate Correlation
+
+          Term  VIF   VIF 95% CI adj. VIF Tolerance Tolerance 95% CI
+       turnout 5.07 [5.01, 5.14]     2.25      0.20     [0.19, 0.20]
+ election_type 5.04 [4.97, 5.10]     2.24      0.20     [0.20, 0.20]</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a><span class="fu">check_heteroscedasticity</span>(model4) <span class="co"># Run a Breush-Pagan test</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Warning: Heteroscedasticity (non-constant error variance) detected (p &lt; .001).</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a></a><span class="co">#The linear regression is heteroskedastic... The assumption of linearity is not verified.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="conclusion" class="slide level2">
+<h2>Conclusion</h2>
+<ul>
+<li>Today we saw
+<ul>
+<li>t.test() : categorical variable (IV) x interval variable (DV)</li>
+<li>linear regressions : interval variable/categorical variable (IV) x interval variable (DV)</li>
+</ul></li>
+<li>Next session :
+<ul>
+<li>conditions for applying linear regressions</li>
+<li>non-linear regressions</li>
+</ul></li>
+</ul>
+
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="images/scpo.png" class="slide-logo"></p>
+<div class="footer footer-default">
+<p>Session 2 - Relationships between variables</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/paulservais-1\.github\.io\/methods_policyevaluation\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
