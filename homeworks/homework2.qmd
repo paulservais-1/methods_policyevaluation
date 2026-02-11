@@ -27,10 +27,12 @@ variable.
 
 
 ```{r}
-library(rio)
-library(tidyverse)
 #| echo: false
 #| eval: false
+
+library(rio)
+library(tidyverse)
+
 #1.0
 ESS_11 <- import("https://github.com/paulservais-1/methods_policyevaluation/raw/main/dataexos/ESS11_data/ESS11.csv")
 #1.1
