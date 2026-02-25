@@ -1,0 +1,1018 @@
+---
+title: "Methods for Research and Policy Evaluation"
+subtitle: "Session 3"
+author: "Paul Servais"
+format: revealjs
+---
+
+
+## We saw in previous sessions
+- How to describe variables : descriptive statistics
+- How to infer from sample to larger population : statistical inference
+- How to analyse relations between variables : 
+  - When DV is continuous:
+    - Indep. variable = categorical : t-test
+    e.g. Urban/rural on median income
+    - Indep. variable = continuous : linear regressions
+    e.g. Far-right vote share in communes and income
+    
+## Summary 
+- You can have different types of independent and dependent variables
+
+|                         | **DV: Categorical**              | **DV: Interval/Continuous**          |
+|-------------------------|-----------------------------------|----------------------------------------|
+| **IV: Categorical**                | **Crosstabs / χ² Test**          | **Compare Means / t-Test**             |
+| **IV: Interval/Continuous**        | **Logistic Regression / Logits** | **Correlation / Scatter / Regression**  |
+
+- Today : Correlations, and logistic regressions
+
+# Yet we did not discuss
+- Under which assumptions is OLS reliable ?
+- Can independent variables interact between each other ?
+- What if the dependent variable is not categorical ?
+  - e.g. many policy outcomes are binary : 
+    - did the policy increase school enrollment ?
+    - did the policy increase program participation ?
+    - did the policy decrease hospital admissions ?
+
+## Content
+
+- Theory : 
+  - OLS regressions : diagnostics 
+  - Interactions in linear regressions
+  - Non-linear regressions (logit/logistic regressions)
+- Exercices
+
+## Objectives 
+- For you to know the limitations of linear regressions
+  - multicollinearity
+  - heteroskedasticity 
+  - endogeneity
+- For you to know about alternative regression models
+  - logits, probits
+  - be able to interpret the regression coefficients 
+
+# OLS regressions : diagnostics 
+
+## The linear regression {.scrollable}
+- We saw :
+\begin{equation}
+Y_i = \beta_0 + \beta_1 X_i + \epsilon_i
+\end{equation}
+- Note about notations
+- Cross section :
+\begin{equation}
+Y_i = \beta_0 + \beta_1 X_i + \epsilon_i
+\end{equation}
+- Time series data :
+\begin{equation}
+Y_t = \beta_0 + \beta_1 X_t + \epsilon_t
+\end{equation}
+- Panel data :
+\begin{equation}
+Y_{it} = \beta_0 + \beta_1 X_{it} + \epsilon_{it}
+\end{equation}
+
+
+
+- Coming back to our example
+```{r}
+#| echo: true
+library(ggplot2)
+library(tidyverse)
+library(rio)
+
+elections2024 <- import("data/elections2024.csv")
+socio_demo <- import("data/demographics2024.xlsx")
+elections2024 <- elections2024 %>% left_join(socio_demo %>% mutate(codecommune = as.numeric(codecommune), codedep = as.numeric(codedep)))
+```
+
+## Simple linear regression model {.scrollable}
+
+```{r}
+#| echo: true
+#| eval: true
+library(ggplot2)
+elections2024 %>% 
+  filter(dens == "Urbain intermédiaire") %>% 
+  ggplot(aes(x = log(revmoyfoy), y = far_right_relvotes)) + geom_point() + labs(y = "RN vote", x = "Median income in commune (log scale)") + geom_smooth(method = "lm") +theme_minimal()
+```
+
+## Minimising the errors 
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(ggplot2)
+
+df_plot <- elections2024 %>% 
+  filter(dens == "Urbain intermédiaire") %>% 
+  mutate(x = log(revmoyfoy)) %>% 
+  mutate(
+    y_hat = predict(
+      lm(far_right_relvotes ~ x, data = .)
+    )
+  )
+
+ggplot(df_plot, aes(x = x, y = far_right_relvotes)) +
+  geom_point() +
+  geom_segment(
+    aes(
+      xend = x,
+      yend = y_hat
+    ),
+    color = "red",
+    alpha = 0.5
+  ) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    y = "RN vote",
+    x = "Median income in commune (log scale)"
+  ) +
+  theme_minimal()
+```
+
+## Interpretation of linear regression in R
+- Intercept : predicted value when predictors = 0
+- Estimate  
+  - sign
+  - magnitude 
+- Significance levels : compares with $\beta_1 = 0$
+  - t-value ($df>1000$) : $t_{.90} = 1.645$, $t_{.95} = 1.96$, $t_{.99} =2.58$
+  - p-value : probability that your result is due to NULL
+
+
+## The $R^2$ value
+- You can divide your explained variance by your total variance:
+\begin{equation}
+R^2 = \frac{\text{ESS}}{\text{TSS}} = \frac{\sum_i^N (\hat{Y}_i - \bar{Y})^2}{\sum_i^N (Y_i - \bar{Y})^2}
+\end{equation}
+- A higher $R^2$ indicates how much of the variance is explained by the model
+
+
+## There are five assumptions 
+
+* Exogeneity : $\mathbb{E} (\epsilon_i|X_i) = 0$. 
+* Homoskedasticity : $\mathbb{E} (\epsilon_i^2) = \sigma^2$.
+* $\mathbb{E} (\epsilon_i \epsilon_j)= 0$ or $\mathbb{C}ov(\epsilon_i, \epsilon_j) = 0$
+* $X_{ij}$ is non random $\forall  i = 1,...,n ; j = 1, ..., k$ (X is not a random variable, contrary to the error and the dependent variable).
+* Multicollinearity : $\text{rank}((X_{ij})) = k$. In the econometric jargon, violating that assumption would lead to a model with so-called *multicollinearity* between predictors.
+
+## Take a simple example {.scrollable}
+
+- You want to verify the physical linear law :
+\begin{equation}
+W = m g
+\end{equation}
+- You ask 100 people to measure the weight of 100 copper masses of 0.1 to 10kg.
+- Your model would be :
+\begin{equation}
+W_i = g m_i + \epsilon_i
+\end{equation}
+
+```{r}
+#| echo: true
+#| eval: false
+library(tidyverse)
+library(tidyverse)
+
+m <- sample(1:100, 100, replace = FALSE) / 10
+W <- 9.81 * m + rnorm(100, 0, 15)
+
+dat <- data.frame(m, W)
+lm_model_biased <- lm(W ~ m, data = dat)
+```
+
+## You might get something like...
+
+```{r}
+#| echo: false
+#| eval: true
+library(tidyverse)
+library(tidyverse)
+
+m <- sample(1:100, 100, replace = FALSE) / 10
+W <- 9.81 * m + rnorm(100, 0, 15)
+
+dat <- data.frame(m, W)
+lm_model_biased <- lm(W ~ m, data = dat)
+
+dat %>% 
+  ggplot(aes(x = m, y = W)) + 
+  geom_point() +
+  geom_smooth(method = "lm",
+              linetype = "dashed",
+              color = "black",
+              se = TRUE,
+              linewidth = 1,
+              alpha = 0.4)+
+  theme_minimal()
+```
+
+## And your estimates
+```{r}
+summary(lm_model_biased)
+```
+
+## Yet other factors can influence the precision of the estimate
+- The calibration of the measuring instrument
+- The individual abilities of the people measuring
+- etc. 
+- Exogeneity = once you control for mass, the expectation of the error is zero
+- In other words, the error is not related to mass in a systematic way
+
+## Endogeneity
+- Imagine the case where your weighing machine is sensitive to mass
+- the precision decreases with $m^3$ : much less precise for larger masses
+\begin{equation}
+E(\epsilon|X) =/= 0
+\end{equation}
+- Important bias
+- Also appearing with omitted variable bias (e.g. income and education on far-right vote)
+
+## Endogeneity {.scrollable}
+```{r}
+#| echo: false
+#| eval: true
+library(tidyverse)
+library(tidyverse)
+
+m <- sample(1:100, 100, replace = FALSE) / 10
+W <- 9.81 * m + rnorm(100, m**3, 15)
+
+dat <- data.frame(m, W)
+lm_model_biased <- lm(W ~ m, data = dat)
+summary(lm_model_biased)
+
+```
+- Important bias
+
+## Endogeneity 
+
+```{r}
+#| echo: false
+#| eval: true
+library(tidyverse)
+library(tidyverse)
+dat %>% 
+  ggplot(aes(x = m, y = W)) + 
+  geom_point() +
+  geom_smooth(method = "lm",
+              linetype = "dashed",
+              color = "black",
+              se = TRUE,
+              linewidth = 1,
+              alpha = 0.4)+
+  theme_minimal()
+```
+
+## Endogeneity
+- Remedies : 
+  - theoretical grounding : adding predictors (like the weighing machine calibration)
+  - We will see other methods that ensure exogeneity later
+
+## Heteroskedasticity {.scrollable}
+- Now imagine that your machine gives good estimates on average, but is much less reliable for higher masses
+- The variance of the error changes with X
+- $\sigma^2$ is not constant
+- This would be heteroskedastic
+```{r}
+#| echo: false
+#| eval: true
+library(tidyverse)
+library(tidyverse)
+
+m <- sample(1:100, 100, replace = FALSE) / 10
+W <- 9.81 * m + rnorm(100,0, 2*m)
+
+dat <- data.frame(m, W)
+lm_model <- lm(W ~ m, data = dat)
+summary(lm_model)
+```
+
+## Heteroskedasticity
+```{r}
+#| echo: false
+#| eval: true
+library(tidyverse)
+library(tidyverse)
+
+m <- sample(1:100, 100, replace = FALSE) / 10
+W <- 9.81 * m + rnorm(100,0, 2*m)
+
+dat <- data.frame(m, W)
+lm_model_biased <- lm(W ~ m, data = dat)
+
+dat %>% 
+  ggplot(aes(x = m, y = W)) + 
+  geom_point() +
+  geom_smooth(method = "lm",
+              linetype = "dashed",
+              color = "black",
+              se = TRUE,
+              linewidth = 1,
+              alpha = 0.4)+
+  theme_minimal()
+```
+
+## Heteroskedasticity {.scrollable}
+- It can change the values of your standard errors
+- Hence your hypotheses: run "robust" linear models instead
+```{r}
+#| echo: true
+#| eval: false
+library(performance)
+library(MASS)
+plot(model$fitted.values, model$residuals)
+check_heteroscedasticity(model) # Run a Breush-Pagan test
+robust_model <- MASS::rlm(y ~ x, data = y)
+
+```
+```{r}
+
+library(performance)
+library(MASS)
+library(stargazer)
+
+x <- sample(1:1000, 1000, replace = "TRUE")
+
+y <- 10*x + rnorm(1000, 0, 10)
+y <- data.frame(y, x)
+model1 <- lm(y ~ x, data = y)
+
+y <- 10*x + rnorm(1000, 0, 10*(x))
+y <- data.frame(y, x)
+model2 <- lm(y ~ x, data = y)
+
+y %>% 
+  ggplot(aes(x = x, y = y)) + geom_point()+
+  geom_smooth(method = "lm", linetype = "dashed", color = "black", se = TRUE, linewidth = 1, alpha = 0.4)+
+  theme_minimal()
+
+mean(model2$residuals)
+plot(model2$fitted.values, model2$residuals)
+check_heteroscedasticity(model2) # Run a Breush-Pagan test
+
+model2 <- lm(y ~ x, data = y)
+# Fit robust regression
+robust_model <- MASS::rlm(y ~ x, data = y)
+
+stargazer(model1, model2, robust_model, align = TRUE, 
+          type = "text")
+```
+
+## Multicollinearity {.scrollable}
+- Two predictors are extremely close, or several predictors summed give another predictor
+- E.g. in the case of the weights : 
+  - you add volume in the predictors :
+
+\begin{equation}
+W_i = \gamma + \alpha m_i + \beta V_i + \epsilon_i
+\end{equation}
+- You can use `check_collinearity(model)`
+- variance inflation factor (VIF) : VIF > 10 is highly colinear
+```{r}
+#| echo: true
+library(performance)
+
+set.seed(123)
+
+m <- sample(1:100, 100, replace = FALSE) / 10
+
+# density of copper ≈ 8920 kg/m^3
+v <- m/8920 + rnorm(100, 0, 0.00001)  # small measurement error
+
+y <- 9.81*m + rnorm(100, 0, 10)
+
+model1 <- lm(y ~ m)
+model2 <- lm(y ~ m + v)
+
+summary(model1)
+summary(model2)
+
+check_collinearity(model2)
+```
+
+## Remedies
+- You should theoretically discuss your choice of predictors!
+  - here, you know that mass is the driver of weight, and not volume... hence remove volume
+
+- In more tricky cases, you can use principal component analysis to determine your main predictor (not covered here)
+
+## Another example
+```{r}
+#| echo: true
+library(performance)
+model1 <- lm(far_right_relvotes ~ pagri+pindp+pcadr+ppint+pempl+pouvr+sup, data = elections2024 %>% filter(dens == "Urbain intermédiaire"))
+model2 <- lm(far_right_relvotes ~ pcadr+pouvr+dens, data = elections2024)
+
+summary(model1)
+summary(model2)
+
+check_collinearity(model1)
+check_collinearity(model2)
+
+```
+# Interactions in linear regressions
+
+## What we saw so far {.scrollable}
+
+\begin{equation}
+Y_i = (\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 +...+\beta_k X_k + \epsilon)_i
+\end{equation}
+
+- Predictors can be categorical (t-test) or continuous
+- what if they interact ?
+- e.g. does being rich has the same effect on the vote for the far-right in lower-educated and higher-educated communes ?
+
+\begin{equation}
+Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \gamma X_1 X_2 + ... + \epsilon
+\end{equation}
+
+- Any increase $\delta X_1$ leads to $\delta X_1 (\beta_1 + \gamma X_2)$ increase in $Y$
+
+## How to run and interpret {.scrollable}
+- You just add `lm(Y ~ X_1+X_2 + X_1*X_2)`
+- Use `ggpredict()` to visualise and interpret
+
+```{r}
+#| echo: true
+#| eval: false
+
+elections2024 <- elections2024 %>% filter(dens == "Urbain intermédiaire") %>% 
+               mutate(petr = etranger/pop, psup = sup/pop, pnodip = nodip/pop, log_revmoyfoy = log(revmoyfoy))
+
+model3 <- lm(data = elections2024,
+             far_right_relvotes ~ log_revmoyfoy +psup + log_revmoyfoy*psup +petr+ pagri+pouvr+ pcadr+age+log(prixbien)+pempl+ppint+pindp+psup+pnodip)
+
+library(ggeffects)
+
+ggpredict(model3, terms = c("log_revmoyfoy", "psup")) |> 
+  as_tibble() |> 
+  mutate(
+    group = factor(
+      group,
+      levels = c("0.14", "0.23", "0.32"),
+      labels = c(
+        "Low share of higher education (14%)",
+        "Medium share of higher education (23%)",
+        "High share of higher education (32%)"
+      )
+    )
+  ) |> 
+  ggplot(aes(x, predicted, color = group, fill = group)) + 
+  geom_line(linewidth = 1) +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = 0.2) +
+  labs(
+    color = "Share with higher education",
+    fill  = "Share with higher education"
+  )
+```
+
+## You get with continuous variables
+```{r}
+#| echo: false
+#| eval: true
+
+elections2024 <- elections2024 %>% filter(dens == "Urbain intermédiaire") %>% 
+               mutate(petr = etranger/pop, psup = sup/pop, pnodip = nodip/pop, log_revmoyfoy = log(revmoyfoy))
+
+model3 <- lm(data = elections2024,
+             far_right_relvotes ~ log_revmoyfoy +psup + log_revmoyfoy*psup +petr+ pagri+pouvr+ pcadr+age+log(prixbien)+pempl+ppint+pindp+psup+pnodip)
+
+library(ggeffects)
+
+ggpredict(model3, terms = c("log_revmoyfoy", "psup")) |> 
+  as_tibble() |> 
+  mutate(
+    group = factor(
+      group,
+      levels = c("0.14", "0.23", "0.32"),
+      labels = c(
+        "Low share of higher education (14%)",
+        "Medium share of higher education (23%)",
+        "High share of higher education (32%)"
+      )
+    )
+  ) |> 
+  ggplot(aes(x, predicted, color = group, fill = group)) + 
+  geom_line(linewidth = 1) +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = 0.2) +
+  labs(
+    color = "Share with higher education",
+    fill  = "Share with higher education"
+  )
+```
+
+
+# Non-linear models
+## Motivation
+- Linear regressions are good for continuous DVs
+- What if Y is binary and your IV continuous ?
+- Many dependent variables are binary in policy evaluation...
+- school enrollment, hospital admissions, etc. can be coded as 0 and 1s at the individual level
+
+## Your scatter plot
+```{r}
+# Load necessary library
+# Load necessary library
+library(ggplot2)
+
+set.seed(123)
+
+# Simulate continuous independent variable
+n <- 300
+x <- rnorm(n, mean = 0, sd = 1)
+
+# Create probability using logistic function
+true_prob <- 1 / (1 + exp(-( -1 + 2*x )))
+
+# Generate binary outcome
+y <- rbinom(n, size = 1, prob = true_prob)
+
+data <- data.frame(x = x, y = y)
+
+# Fit models
+linear_model  <- lm(y ~ x, data = data)
+logit_model   <- glm(y ~ x, data = data, family = binomial)
+
+# Create prediction grid
+x_seq <- seq(min(x), max(x), length.out = 200)
+pred_data <- data.frame(x = x_seq)
+
+pred_data$linear_pred <- predict(linear_model, newdata = pred_data)
+pred_data$logit_pred  <- predict(logit_model, newdata = pred_data, type = "response")
+
+# Plot
+ggplot(data, aes(x = x, y = y)) +
+  geom_jitter(height = 0.05, alpha = 0.4) +
+  labs(title = "Linear vs Logistic Regression for Binary Outcome",
+       subtitle = " ",
+       x = "Continuous Independent Variable",
+       y = "Binary Outcome (0/1) - (e.g. voting)") +
+  theme_minimal()
+
+```
+
+## A linear regression 
+```{r}
+# Load necessary library
+# Load necessary library
+library(ggplot2)
+
+set.seed(123)
+
+# Simulate continuous independent variable
+n <- 300
+x <- rnorm(n, mean = 0, sd = 1)
+
+# Create probability using logistic function
+true_prob <- 1 / (1 + exp(-( -1 + 2*x )))
+
+# Generate binary outcome
+y <- rbinom(n, size = 1, prob = true_prob)
+
+data <- data.frame(x = x, y = y)
+
+# Fit models
+linear_model  <- lm(y ~ x, data = data)
+logit_model   <- glm(y ~ x, data = data, family = binomial)
+
+# Create prediction grid
+x_seq <- seq(min(x), max(x), length.out = 200)
+pred_data <- data.frame(x = x_seq)
+
+pred_data$linear_pred <- predict(linear_model, newdata = pred_data)
+pred_data$logit_pred  <- predict(logit_model, newdata = pred_data, type = "response")
+
+# Plot
+ggplot(data, aes(x = x, y = y)) +
+  geom_jitter(height = 0.05, alpha = 0.4) +
+  geom_line(data = pred_data, aes(y = linear_pred), 
+            color = "red", size = 1.2) +
+  labs(title = "Linear vs Logistic Regression for Binary Outcome",
+       subtitle = "Red = Linear Regression | Blue = Logistic Regression",
+       x = "Continuous Independent Variable",
+       y = "Binary Outcome (0/1)") +
+  theme_minimal()
+
+```
+
+## A linear regression
+- Violates several assumptions about linear models
+- Heteroskedastic
+- Irrelevant
+
+## But there are probabilities... {.scrollable}
+- Take different intervals of X
+```{r}
+library(ggplot2)
+
+set.seed(123)
+
+# Simulate continuous independent variable
+n <- 300
+x <- rnorm(n, mean = 0, sd = 1)
+
+# Create probability using logistic function
+true_prob <- 1 / (1 + exp(-( -1 + 2*x )))
+
+# Generate binary outcome
+y <- rbinom(n, size = 1, prob = true_prob)
+
+data <- data.frame(x = x, y = y)
+
+# ---- Create 3 equal-width intervals of x ----
+breaks <- seq(min(data$x), max(data$x), length.out = 4)
+data$x_group <- cut(data$x, breaks = breaks, include.lowest = TRUE)
+
+# Fit models
+linear_model  <- lm(y ~ x, data = data)
+logit_model   <- glm(y ~ x, data = data, family = binomial)
+
+# Create prediction grid
+x_seq <- seq(min(x), max(x), length.out = 200)
+pred_data <- data.frame(x = x_seq)
+
+pred_data$linear_pred <- predict(linear_model, newdata = pred_data)
+pred_data$logit_pred  <- predict(logit_model, newdata = pred_data, type = "response")
+
+# Plot
+ggplot(data, aes(x = x, y = y, color = x_group)) +
+  geom_jitter(height = 0.05, alpha = 0.6) +
+  geom_line(data = pred_data, aes(y = logit_pred), 
+            color = "blue", size = 1.2) +
+  labs(title = "Linear vs Logistic Regression for Binary Outcome",
+       subtitle = "Red = Linear Regression | Blue = Logistic Regression",
+       x = "Continuous Independent Variable",
+       y = "Binary Outcome (0/1)",
+       color = "X Interval") +
+  theme_minimal()
+
+```
+
+- it is continuous :
+
+```{r}
+ggplot(data, aes(x = x, y = y, color = x)) +
+  
+  # Points
+  geom_jitter(height = 0.06, size = 2.5, alpha = 0.8) +
+  
+  # Logistic regression (main focus)
+  geom_line(data = pred_data, 
+            aes(x = x, y = logit_pred),
+            inherit.aes = FALSE,
+            color = "#2C3E50",
+            linewidth = 1.6) +
+  
+  # Linear regression (lighter, secondary)
+  geom_line(data = pred_data, 
+            aes(x = x, y = linear_pred),
+            inherit.aes = FALSE,
+            color = "#E74C3C",
+            linewidth = 1.2,
+            linetype = "dashed") +
+  
+  # Beautiful continuous gradient
+  scale_color_viridis_c(option = "plasma", direction = -1) +
+  
+  labs(
+    title = "Why Logistic Regression Fits Binary Data Better",
+    subtitle = "Solid curve = Logistic model | Dashed line = Linear model",
+    x = "Continuous Predictor (x)",
+    y = "Probability / Binary Outcome",
+    color = "Value of x"
+  ) +
+  
+  theme_minimal(base_size = 15) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    panel.grid.minor = element_blank(),
+    legend.position = "right"
+  )
+```
+## A logistic regression
+```{r}
+# Load necessary library
+# Load necessary library
+library(ggplot2)
+
+set.seed(123)
+
+# Simulate continuous independent variable
+n <- 300
+x <- rnorm(n, mean = 0, sd = 1)
+
+# Create probability using logistic function
+true_prob <- 1 / (1 + exp(-( -1 + 2*x )))
+
+# Generate binary outcome
+y <- rbinom(n, size = 1, prob = true_prob)
+
+data <- data.frame(x = x, y = y)
+
+# Fit models
+linear_model  <- lm(y ~ x, data = data)
+logit_model   <- glm(y ~ x, data = data, family = binomial)
+
+# Create prediction grid
+x_seq <- seq(min(x), max(x), length.out = 200)
+pred_data <- data.frame(x = x_seq)
+
+pred_data$linear_pred <- predict(linear_model, newdata = pred_data)
+pred_data$logit_pred  <- predict(logit_model, newdata = pred_data, type = "response")
+
+# Plot
+ggplot(data, aes(x = x, y = y)) +
+  geom_jitter(height = 0.05, alpha = 0.4) +
+  geom_line(data = pred_data, aes(y = linear_pred), 
+            color = "red", size = 1.2) +
+  geom_line(data = pred_data, aes(y = logit_pred), 
+            color = "blue", size = 1.2) +
+  labs(title = "Linear vs Logistic Regression for Binary Outcome",
+       subtitle = "Red = Linear Regression | Blue = Logistic Regression",
+       x = "Continuous Independent Variable",
+       y = "Binary Outcome (0/1)") +
+  theme_minimal()
+
+```
+
+## A logistic regression
+```{r}
+# Load necessary library
+# Load necessary library
+library(ggplot2)
+
+set.seed(123)
+
+# Simulate continuous independent variable
+n <- 300
+x <- rnorm(n, mean = 0, sd = 1)
+
+# Create probability using logistic function
+true_prob <- 1 / (1 + exp(-( -3 + 10*x )))
+
+# Generate binary outcome
+y <- rbinom(n, size = 1, prob = true_prob)
+
+data <- data.frame(x = x, y = y)
+
+# Fit models
+linear_model  <- lm(y ~ x, data = data)
+logit_model   <- glm(y ~ x, data = data, family = binomial)
+
+# Create prediction grid
+x_seq <- seq(min(x), max(x), length.out = 200)
+pred_data <- data.frame(x = x_seq)
+
+pred_data$linear_pred <- predict(linear_model, newdata = pred_data)
+pred_data$logit_pred  <- predict(logit_model, newdata = pred_data, type = "response")
+
+# Plot
+ggplot(data, aes(x = x, y = y)) +
+  geom_jitter(height = 0.05, alpha = 0.4) +
+  geom_line(data = pred_data, aes(y = linear_pred), 
+            color = "red", size = 1.2) +
+  geom_line(data = pred_data, aes(y = logit_pred), 
+            color = "blue", size = 1.2) +
+  labs(title = "Linear vs Logistic Regression for Binary Outcome",
+       subtitle = "Red = Linear Regression | Blue = Logistic Regression",
+       x = "Continuous Independent Variable",
+       y = "Binary Outcome (0/1)") +
+  theme_minimal()
+
+```
+
+## Logistic regression
+- Instead of a linear function 
+\begin{equation}
+Y = \beta_0 + \beta_1 X
+\end{equation}
+- We assume that Y has a predicted probability that is a non-linear function of X :
+\begin{equation}
+\mathcal{P}(Y = 1) = f_\mathcal{L}(\beta_0 + \beta_1 X) = \frac{1}{1 + e^{(-(\beta_0 + \beta_1 * X))}}
+\end{equation}
+- The goal is to find $\beta_0, \beta_1$ !
+
+## Different logistic regressions
+```{r}
+library(ggplot2)
+
+# Logistic function
+logistic <- function(x, b0, b1) {
+  1 / (1 + exp(-(b0 + b1 * x)))
+}
+
+# Create x grid
+x <- seq(-5, 5, length.out = 400)
+
+# Define parameter combinations
+params <- data.frame(
+  b0 = c(0, 0, -2, 2, 1),
+  b1 = c(1, 2, 1, 1, -2),
+  label = c("β0=0, β1=1 (baseline)",
+            "β0=0, β1=2 (steeper)",
+            "β0=-2, β1=1 (shift right)",
+            "β0=2, β1=1 (shift left)",
+            "β0=1, β1=-2 (negative slope)")
+)
+
+# Generate predictions
+plot_data <- do.call(rbind, lapply(1:nrow(params), function(i) {
+  data.frame(
+    x = x,
+    prob = logistic(x, params$b0[i], params$b1[i]),
+    label = params$label[i]
+  )
+}))
+
+# Plot
+ggplot(plot_data, aes(x = x, y = prob, color = label)) +
+  geom_line(size = 1.2) +
+  labs(title = "Effect of β0 and β1 in Logistic Regression",
+       x = "X",
+       y = "Predicted Probability",
+       color = "Parameter Values") +
+  theme_minimal() +
+  ylim(0,1)
+
+```
+
+## Finding these parameters
+- Done through so-called maximum likelihood estimation, based on your data ! 
+- $\beta_0$, $\beta_1$ is for one predictor
+- You can have k predictors :
+\begin{equation}
+\mathcal{P}(Y = 1) = \frac{1}{1 + e^{(-(\beta_0 + \beta_1 * X_1+\beta_2 X_2 + \beta_3 X_3 +...+ \beta_k X_k))}}
+\end{equation}
+- that can be continuous or categorical !
+
+
+## Logistic regression in R {.scrollable}
+- You can perform a logistic regression in R using `glm`:
+```{r}
+#| eval: false
+#| echo: true
+
+logit_model <- glm(binary_var ~ continuous_var, 
+                   data = your_data,
+                   family = 'binomial')
+summary(logit_model)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+set.seed(42)
+
+n <- 400
+
+# Nicely scaled continuous predictor
+continuous_var <- rnorm(n, mean = 0, sd = 1)
+
+# Moderate true relationship
+# Intercept = -0.5
+# Slope = 1.2  (reasonable effect size)
+true_prob <- plogis(-0.5 + 1.2 * continuous_var)
+
+# Binary outcome
+binary_var <- rbinom(n, size = 1, prob = true_prob)
+
+data <- data.frame(
+  continuous_var = continuous_var,
+  binary_var = binary_var
+)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+library(tidyverse)
+logit_model   <- glm(binary_var ~ continuous_var, data = data, family = binomial)
+summary(logit_model)
+```
+
+- You need a binary DV ! 
+- How can you interpret ?
+
+
+## Coming back to our made-up data... {.scrollable}
+```{r}
+#| echo: true
+#| eval: true
+library(ggeffects)
+
+# like the predcit() function of Base R, we use ggpredict() and specify
+# our variable of interest
+predicted_probs <- ggpredict(logit_model, terms = "continuous_var")
+predicted_probs
+```
+
+```{r} 
+#| echo: true
+#| eval: false
+# this is the simplest way of plotting this
+ggplot(predicted_probs, aes(x = x, y = predicted)) +
+  # our graph is more or less a line, so geom_line() applies
+  geom_line(color = "blue", size = 1) +
+  geom_point() +
+  # geom_ribbon() with the values that ggpredict() provided for the confidence
+  # intervals then gives
+  # us a shade around the geom_()line as CIs
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), fill = "grey", alpha = 0.3) +
+  labs(
+    title = "Predicted Probability of Voting by Political Interest",
+    x = "Political Interest",
+    y = "Predicted Probability of Voting"
+  ) + 
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold", hjust = 0.5),
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10)
+  )
+```
+
+## Predicted probabilities
+
+```{r} 
+#| echo: false
+#| eval: true
+# this is the simplest way of plotting this
+ggplot(predicted_probs, aes(x = x, y = predicted)) +
+  # our graph is more or less a line, so geom_line() applies
+  geom_line(color = "blue", size = 1) +
+  geom_point() +
+  # geom_ribbon() with the values that ggpredict() provided for the confidence
+  # intervals then gives
+  # us a shade around the geom_()line as CIs
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), fill = "grey", alpha = 0.3) +
+  labs(
+    title = "Predicted Probability",
+    x = "Continuous variable",
+    y = "Predicted probability"
+  ) + 
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold", hjust = 0.5),
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10)
+  )
+```
+
+## Exercice 1 
+```{r}
+#| eval: true
+#| echo: true
+library(rio)
+library(performance)
+
+data <- import("data/schooltutorprog.csv") %>% filter(test_score > 0 & test_score <=100)
+glimpse(data)
+summary(data)
+
+
+data %>% count(treatment)
+data %>% summarise(
+  mean_score = mean(test_score),
+  sd_score = sd(test_score),
+  min_score = min(test_score),
+  max_score = max(test_score),
+  mean_income = mean(income)
+)
+
+model1 <- lm(test_score ~ treatment, data = data)
+summary(model1)
+
+model2 <- lm(test_score ~ treatment + income + parent_edu +
+             class_size + teacher_experience + school_funding,
+             data = data)
+
+summary(model2)
+
+stargazer(model1, model2, type = "text")
+
+check_collinearity(model2)
+check_heteroskedasticity(model2)
+plot(model2, which = 1)
+
+model_rlm <- rlm(test_score ~ treatment + income + parent_edu +
+                 class_size + teacher_experience + school_funding,
+                 data = data)
+
+summary(model_rlm)
+stargazer(model2, model_rlm, type = "text")
+
+pred <- ggpredict(model2, terms = "income")
+head(pred)
+ggplot(pred, aes(x = x, y = predicted)) +
+  geom_line() +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = 0.2) +
+  labs(
+    x = "Income",
+    y = "Predicted test score",
+    title = "Predicted test score as a function of income"
+  )
+
+```

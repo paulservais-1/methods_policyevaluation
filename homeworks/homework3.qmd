@@ -36,7 +36,7 @@ library(ggplot2)
   - ggeffects  
   - ggplot2  
   
-2. Import the data set. Using the `rio` package and the function `import`, import the dataset <>. Inspect the dataset using appropriate functions, and clean some variables eventually. The dataset contains the following variables:
+2. Import the data set. Using the `rio` package and the function `import`, import the dataset <https://github.com/paulservais-1/methods_policyevaluation/raw/main/homeworks/data/schooltutorprog.csv>. Inspect the dataset using appropriate functions, and clean some variables eventually. The dataset contains the following variables:
   - test_score: student's test score
   - treatment: whether the student received tutoring (1 = yes, 0 = no)
   - income: household income (euros)
