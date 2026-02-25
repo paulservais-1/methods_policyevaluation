@@ -961,14 +961,16 @@ ggplot(predicted_probs, aes(x = x, y = predicted)) +
   )
 ```
 
+# Exercices 
+
 ## Exercice 1 
 ```{r}
-#| eval: true
-#| echo: true
+#| eval: false
+#| echo: false
 library(rio)
 library(performance)
 
-data <- import("data/schooltutorprog.csv") %>% filter(test_score > 0 & test_score <=100)
+data <- import("https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices2/data/ess_it.csv") %>% filter(test_score > 0 & test_score <=100)
 glimpse(data)
 summary(data)
 
