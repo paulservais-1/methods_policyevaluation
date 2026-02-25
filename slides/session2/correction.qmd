@@ -742,7 +742,7 @@ You are provided with data about the legislative and the presidential elections 
 
 ```{r}
 #| echo: true
-#| eval: true
+#| eval: false
 #2.1
 elections_2022 <- import("https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices1/data/elections_2022.csv")
 socio_demo <- import("https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices1/data/soc_dem_2022.csv")
