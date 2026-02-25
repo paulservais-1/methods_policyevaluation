@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Session 2 — Relationships between variables – Methods for Research and Policy Evaluation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Methods for Research and Policy Evaluation</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <span class="nav-link">
+<span class="menu-text">Sessions</span>
+    </span>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text"></span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
+        <li>
+    <a class="dropdown-item" href="../../sessions/session1/session1.html">
+ <span class="dropdown-text">Session 1: Dataset Building and Descriptive Statistics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../sessions/session2/session2.html">
+ <span class="dropdown-text">Session 2: OLS: Simple and Multiple Linear Regressions and Analysis</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <span class="nav-link">
+<span class="menu-text">Exercices</span>
+    </span>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu--1" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text"></span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu--1">    
+        <li>
+    <a class="dropdown-item" href="../../homeworks/homework1.html">
+ <span class="dropdown-text">Session 1: Dataset Building and Descriptive Statistics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../homeworks/homework2.html">
+ <span class="dropdown-text">Session 2: Statistical inference and linear regressions</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <span class="nav-link">
+<span class="menu-text">Slides</span>
+    </span>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu--2" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text"></span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu--2">    
+        <li>
+    <a class="dropdown-item" href="../../slides/session1/slides1.html">
+ <span class="dropdown-text">Session 1: Dataset Building and Descriptive Statistics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../slides/session2/slides2.html">
+ <span class="dropdown-text">Session 2: Statistical inference and linear regressions</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#linear-and-non-linear-regressions" id="toc-linear-and-non-linear-regressions" class="nav-link active" data-scroll-target="#linear-and-non-linear-regressions">Linear and non-linear regressions</a>
+  <ul class="collapse">
+  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation">Motivation</a></li>
+  <li><a href="#types-of-relationships" id="toc-types-of-relationships" class="nav-link" data-scroll-target="#types-of-relationships">Types of relationships</a></li>
+  <li><a href="#linear-regressions-hypotheses" id="toc-linear-regressions-hypotheses" class="nav-link" data-scroll-target="#linear-regressions-hypotheses">Linear regressions : hypotheses</a></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
+  <li><a href="#visualising-the-different-assumptions" id="toc-visualising-the-different-assumptions" class="nav-link" data-scroll-target="#visualising-the-different-assumptions">Visualising the different assumptions</a>
+  <ul class="collapse">
+  <li><a href="#when-the-exogeneity-assumption-is-violated-biased-measurement-for-large-masses" id="toc-when-the-exogeneity-assumption-is-violated-biased-measurement-for-large-masses" class="nav-link" data-scroll-target="#when-the-exogeneity-assumption-is-violated-biased-measurement-for-large-masses">When the exogeneity assumption is violated: biased measurement for large masses</a></li>
+  </ul></li>
+  <li><a href="#homoskedasticity-and-heteroskedasticity" id="toc-homoskedasticity-and-heteroskedasticity" class="nav-link" data-scroll-target="#homoskedasticity-and-heteroskedasticity">Homoskedasticity and heteroskedasticity</a></li>
+  <li><a href="#multicollinearity" id="toc-multicollinearity" class="nav-link" data-scroll-target="#multicollinearity">Multicollinearity</a></li>
+  <li><a href="#models-with-interactions" id="toc-models-with-interactions" class="nav-link" data-scroll-target="#models-with-interactions">Models with interactions</a></li>
+  <li><a href="#non-linear-regressions" id="toc-non-linear-regressions" class="nav-link" data-scroll-target="#non-linear-regressions">Non-linear regressions</a></li>
+  </ul></li>
+  <li><a href="#concept-of-logistic-regression" id="toc-concept-of-logistic-regression" class="nav-link" data-scroll-target="#concept-of-logistic-regression">Concept of logistic regression</a>
+  <ul class="collapse">
+  <li><a href="#the-maximum-of-likelihood-estimation" id="toc-the-maximum-of-likelihood-estimation" class="nav-link" data-scroll-target="#the-maximum-of-likelihood-estimation">The maximum of likelihood estimation</a>
+  <ul class="collapse">
+  <li><a href="#constant-probabilities" id="toc-constant-probabilities" class="nav-link" data-scroll-target="#constant-probabilities">Constant probabilities</a></li>
+  <li><a href="#a-simple-example" id="toc-a-simple-example" class="nav-link" data-scroll-target="#a-simple-example">A simple example</a></li>
+  </ul></li>
+  <li><a href="#non-constant-probabilities" id="toc-non-constant-probabilities" class="nav-link" data-scroll-target="#non-constant-probabilities">Non-constant probabilities</a></li>
+  <li><a href="#logistic-function" id="toc-logistic-function" class="nav-link" data-scroll-target="#logistic-function">Logistic function</a></li>
+  <li><a href="#logit" id="toc-logit" class="nav-link" data-scroll-target="#logit">Logit</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Session 2 — Relationships between variables</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="linear-and-non-linear-regressions" class="level1">
+<h1>Linear and non-linear regressions</h1>
+<section id="motivation" class="level2">
+<h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
+</section>
+<section id="types-of-relationships" class="level2">
+<h2 class="anchored" data-anchor-id="types-of-relationships">Types of relationships</h2>
+<p>Of course, in practice we are often interested in studying relationships between different types of variables, and the choice of statistical method depends on the measurement scale of both the independent and dependent variables. When both the independent and dependent variables are categorical (for example, gender and voting preference, coded at the individual level as 0 and 1), we typically use crosstabulation and chi-square tests to assess whether the distribution of one variable differs across the categories of the other. If the independent variable is categorical but the dependent variable is continuous (for example, comparing average incomes across two or more groups), we use mean comparison methods such as the t-test to determine whether group means differ. When the independent variable is continuous and the dependent variable is categorical (for example, predicting whether someone purchases a product based on age or income), logistic regression (often expressed in terms of logits) allows us to model the probability of category membership as a function of the continuous predictors. Finally, when both variables are continuous, we can assess their association with correlation and explore predictive relationships with regression analysis. Understanding these distinctions helps you choose appropriate analytical tools that match the nature of your data and research questions.</p>
+<table class="caption-top table">
+<caption>Recommended types of analysis based on variable types</caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 35%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>DV: Categorical</strong></th>
+<th><strong>DV: Interval/Continuous</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>IV: Categorical</strong></td>
+<td><strong>Crosstabs / χ² Test</strong></td>
+<td><strong>Compare Means / t-Test</strong></td>
+</tr>
+<tr class="even">
+<td><strong>IV: Interval/Continuous</strong></td>
+<td><strong>Logistic Regression / Logits</strong></td>
+<td><strong>Correlation / Scatter / Regression</strong></td>
+</tr>
+</tbody>
+</table>
+<p>In the previous session, we examined how to conduct t-tests and perform correlation and linear regression analyses—two cases in which the dependent variable is continuous. However, we did not discuss the conditions under which linear regression provides a good approximation of the relationship between two variables, nor did we consider situations in which the dependent variable is categorical.</p>
+<p>This session therefore begins by reviewing the main assumptions underlying linear regression. It then introduces alternative models, such as logistic regression, which allow us to assess the impact of continuous independent variables on categorical dependent variables.</p>
+</section>
+<section id="linear-regressions-hypotheses" class="level2">
+<h2 class="anchored" data-anchor-id="linear-regressions-hypotheses">Linear regressions : hypotheses</h2>
+<p>We have seen previously that a linear model can be written as :</p>
+<p><span class="math display">\[\begin{equation}
+Y_i = \beta_0+ \beta_1 X_{i1} + \beta_2 X_{i2} + \beta_3 X_{i3} + ... + \beta_k X_{ik} + \epsilon_i
+\end{equation}\]</span></p>
+<p>where the <span class="math inline">\(\beta_i\)</span> coefficients are all constant - which is why it is a linear link between variable <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span>.</p>
+</section>
+<section id="assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="assumptions">Assumptions</h2>
+<p>For this relation to hold, the following hypotheses must be true :</p>
+<ul>
+<li><span class="math inline">\(\mathbb{E} (\epsilon_i|X_i) = 0\)</span>. That basically means that the expectation of the error should be (there is no systematic error in your estimation), once you know <span class="math inline">\(X_i\)</span>. This is called exogeneity : the error comes from elsewhere, and is not related to your variables.</li>
+<li><span class="math inline">\(\mathbb{E} (\epsilon_i^2) = \sigma^2\)</span>. That means that the variance of the error is constant accross all values. This condition is called ‘homoskedasticity’. The case where <span class="math inline">\(\mathbb{E} (\epsilon_i^2) \ne \sigma^2\)</span> is called heteroskedasticity.</li>
+<li><span class="math inline">\(\mathbb{E} (\epsilon_i \epsilon_j)= 0\)</span> or <span class="math inline">\(\mathbb{C}ov(\epsilon_i, \epsilon_j) = 0\)</span>, which is called the linear independence of the errors assumption.</li>
+<li><span class="math inline">\(X_{ij}\)</span> is non random <span class="math inline">\(\forall  i = 1,...,n ; j = 1, ..., k\)</span> (X is not a random variable, contrary to the error and the dependent variable).</li>
+<li><span class="math inline">\(\text{rank}((X_{ij})) = k\)</span>. This is the mathematical way to say that the different independent variables are indeed independent from one another. That means that there is no way to obtain any <span class="math inline">\(X_j\)</span> using sums and combinations of all the other <span class="math inline">\(X_k\)</span> (where <span class="math inline">\(k \ne j\)</span>). In the econometric jargon, violating that assumption would lead to a model with so-called <em>multicollinearity</em> between predictors.</li>
+</ul>
+</section>
+<section id="visualising-the-different-assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="visualising-the-different-assumptions">Visualising the different assumptions</h2>
+<p>You may very legitimately feel puzzled by these mathematical expressions, as their meaning is not always immediately intuitive. This is why plotting graphs and working through concrete examples can help clarify what these assumptions really mean. Imagine that you are studying a physical phenomenon.</p>
+<p>From physics, you know that the weight of an object is given by the formula:</p>
+<p><span class="math display">\[\begin{equation}
+W = m \times g,
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(m\)</span> is the mass of the object and <span class="math inline">\(g\)</span> is the acceleration due to gravity. On Earth, <span class="math inline">\(g \approx 9.81 \, \frac{m}{s^2}\)</span>.</p>
+<p>Now suppose you want to conduct a small experiment to verify this physical law using real data. For example, you could ask 100 students to each take an object with a mass between 0.01 kg and 10 kg and measure its weight using a dynamometer (an instrument that measures force in Newtons using a spring).</p>
+<p>In theory, each student should obtain a measurement equal to:</p>
+<p><span class="math display">\[\begin{equation}
+W_i = m_i \times 9.81.
+\end{equation}\]</span></p>
+<p>In practice, however, the measurements will not be perfectly equal to this theoretical prediction. Measurement accuracy may vary depending on the student’s handling of the instrument, the precision of the dynamometer, calibration issues, or other small sources of error. All these sources of errors can lead to a total error, <span class="math inline">\(\epsilon_i\)</span>, that should not be related to your prediction, in a systematic way.</p>
+<p>For example, a student measuring a mass of 0.1 kg might record a weight of 0.96 N instead of 0.981 N, while another student measuring a mass of 10 kg might record 102 N instead of 98.1 N.</p>
+<p>As a result, each observed weight <span class="math inline">\(W_i\)</span> will differ slightly from the theoretical prediction. We can write this as:</p>
+<p><span class="math display">\[\begin{equation}
+W_i = m_i \times 9.81 + \varepsilon_i,
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\varepsilon_i\)</span> represents the error term—that is, the difference between the observed value and the true physical relationship. You could simulate such sample in R by plotting the following graph, where I assume that the errors have a normal distribution with constant standard deviation <span class="math inline">\(\sigma\)</span> (meaning that the values of your errors may vary). This would be the perfect example of a linear regression model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.6
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.1     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.2
+✔ purrr     1.2.0     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>) <span class="sc">/</span> <span class="dv">10</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>W <span class="ot">&lt;-</span> <span class="fl">9.81</span> <span class="sc">*</span> m <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">15</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(m, W)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>lm_model_biased <span class="ot">&lt;-</span> <span class="fu">lm</span>(W <span class="sc">~</span> m, <span class="at">data =</span> dat)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_model_biased)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = W ~ m, data = dat)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-25.3547  -9.7773  -0.1643   8.2333  31.2058 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)    2.171      2.588   0.839    0.404    
+m              9.571      0.445  21.508   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 12.85 on 98 degrees of freedom
+Multiple R-squared:  0.8252,    Adjusted R-squared:  0.8234 
+F-statistic: 462.6 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> m, <span class="at">y =</span> W)) <span class="sc">+</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">linetype =</span> <span class="st">"dashed"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">linewidth =</span> <span class="dv">1</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.4</span>)<span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session3_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The exogeneity condition means that these errors are not systematically related to the mass. In other words, the measurement errors are purely random and do not depend on whether the mass is small or large:</p>
+<p><span class="math display">\[\begin{equation}
+E(\varepsilon_i \mid m_i) = 0.
+\end{equation}\]</span></p>
+<p>This assumption ensures that, on average, the errors cancel out, allowing us to recover the true relationship between mass and weight using linear regression.</p>
+<section id="when-the-exogeneity-assumption-is-violated-biased-measurement-for-large-masses" class="level3">
+<h3 class="anchored" data-anchor-id="when-the-exogeneity-assumption-is-violated-biased-measurement-for-large-masses">When the exogeneity assumption is violated: biased measurement for large masses</h3>
+<p>The exogeneity assumption requires that the error term is not systematically related to the explanatory variable:</p>
+<p><span class="math display">\[\begin{equation}
+E(\varepsilon_i \mid m_i) = 0.
+\end{equation}\]</span></p>
+<p>This means that measurement errors must be purely random and must not depend on the mass being measured.</p>
+<p>However, this assumption may be violated if the measurement instrument is imperfect in a systematic way. Suppose, for example, that the dynamometer is poorly calibrated for higher masses, and that the error of the calibrator is a function of <span class="math inline">\(m^3\)</span>. This could happen if the spring inside the dynamometer becomes slightly stiffer when stretched too much, causing the instrument to overestimate the true weight for heavier objects.</p>
+<p>In this case, the measurement error would no longer be random. Instead, it would increase with mass. Heavier objects would tend to have larger positive errors, while lighter objects would have smaller errors.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>) <span class="sc">/</span> <span class="dv">10</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>W <span class="ot">&lt;-</span> <span class="fl">9.81</span> <span class="sc">*</span> m <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, m<span class="sc">**</span><span class="dv">3</span>, <span class="dv">15</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(m, W)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>lm_model_biased <span class="ot">&lt;-</span> <span class="fu">lm</span>(W <span class="sc">~</span> m, <span class="at">data =</span> dat)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_model_biased)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = W ~ m, data = dat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-142.88 -101.17  -22.93   88.59  293.36 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  -206.77      22.86  -9.046 1.42e-14 ***
+m             101.23       3.93  25.762  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 113.4 on 98 degrees of freedom
+Multiple R-squared:  0.8713,    Adjusted R-squared:   0.87 
+F-statistic: 663.7 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> m, <span class="at">y =</span> W)) <span class="sc">+</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">linetype =</span> <span class="st">"dashed"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">linewidth =</span> <span class="dv">1</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.4</span>)<span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session3_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can still write the observed relationship as:</p>
+<p><span class="math display">\[\begin{equation}
+W_i = m_i \times 9.81 + \varepsilon_i,
+\end{equation}\]</span></p>
+<p>but now the error term depends on the mass:</p>
+<p><span class="math display">\[\begin{equation}
+E(\varepsilon_i \mid m_i) \neq 0.
+\end{equation}\]</span></p>
+<p>For example, the true physical relationship may be:</p>
+<p><span class="math display">\[\begin{equation}
+W_i^{true} = m_i \times 9.81,
+\end{equation}\]</span></p>
+<p>but the dynamometer introduces a systematic bias such as:</p>
+<p><span class="math display">\[\begin{equation}
+\varepsilon_i = 0.05 \times m_i + u_i,
+\end{equation}\]</span></p>
+<p>where (u_i) is a purely random error term satisfying:</p>
+<p><span class="math display">\[\begin{equation}
+E(u_i \mid m_i) = 0.
+\end{equation}\]</span></p>
+<p>In this situation, larger masses will tend to have larger errors on average. This creates a correlation between the error term and the explanatory variable:</p>
+<p><span class="math display">\[\begin{equation}
+\text{Cov}(m_i, \varepsilon_i) \neq 0.
+\end{equation}\]</span></p>
+<p>This violates the exogeneity assumption.</p>
+<p>As a result, linear regression will no longer recover the true physical relationship. Instead of estimating the true coefficient of 9.81, it will estimate a biased coefficient that incorporates both the true physical effect and the measurement bias.</p>
+<p>This example illustrates the key idea behind endogeneity: when the error term is correlated with the explanatory variable, the regression estimates become biased and do not reflect the true causal relationship. The error being endogenous basically means that your error term is actually caused by your independent variable. The error being exogeneous means that it is not caused by your independent variables.</p>
+</section>
+</section>
+<section id="homoskedasticity-and-heteroskedasticity" class="level2">
+<h2 class="anchored" data-anchor-id="homoskedasticity-and-heteroskedasticity">Homoskedasticity and heteroskedasticity</h2>
+<p>A second important assumption when conducting a linear regression is that the variance of the error term should be constant. This assumption is called <strong>homoskedasticity</strong>. It means that the variability of the error term should not depend on the value of the independent variable.</p>
+<p>Formally, this assumption can be written as:</p>
+<p><span class="math display">\[\begin{equation}
+\text{Var}(\varepsilon_i \mid m_i) = \sigma^2
+\end{equation}\]</span></p>
+<p>for all values of <span class="math inline">\(m_i\)</span>.</p>
+<p>Returning to our example, suppose that your dynamometer provides very precise measurements for small masses, but becomes less reliable for larger masses due to poor calibration or mechanical limitations. In this case, measurements for small masses will be tightly clustered around the true value, while measurements for larger masses will be more dispersed.</p>
+<p>This means that although the average relationship between mass and weight may still be correct, the variability of the errors increases with mass.</p>
+<p>We can represent this situation as:</p>
+<p><span class="math display">\[\begin{equation}
+W_i = m_i \times 9.81 + \varepsilon_i
+\end{equation}\]</span></p>
+<p>but now the variance of the error depends on the mass:</p>
+<p><span class="math display">\[\begin{equation}
+\text{Var}(\varepsilon_i \mid m_i) = \sigma_i^2
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\sigma_i^2\)</span> increases with <span class="math inline">\(m_i\)</span>.</p>
+<p>This situation is called <strong>heteroskedasticity</strong>.</p>
+<p>Graphically, this results in a “fan-shaped” pattern: observations are tightly grouped for small masses and become increasingly spread out as mass increases.</p>
+<p>Importantly, unlike violations of exogeneity, heteroskedasticity does not bias the estimated regression coefficients. However, it does affect the precision of the estimates and leads to incorrect standard errors, confidence intervals, and hypothesis tests if not properly accounted for. A solution to these problems is to run “robust linear models”, through <code>rlm</code>. These account for the heteroskedasticity and compute better versions of the standard errors (and associated hypotheses). A good diagnostics for heteroskedasticity is also to plot <code>residuals</code> against <code>fitted.values</code> and to see if you can detect clear patterns in the data. This is examplified in the examples below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>) <span class="sc">/</span> <span class="dv">10</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>W <span class="ot">&lt;-</span> <span class="fl">9.81</span> <span class="sc">*</span> m <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>,<span class="dv">0</span>, <span class="dv">2</span><span class="sc">*</span>m)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(m, W)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>lm_model_biased <span class="ot">&lt;-</span> <span class="fu">lm</span>(W <span class="sc">~</span> m, <span class="at">data =</span> dat)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_model_biased)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = W ~ m, data = dat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-37.545  -5.744  -0.201   4.726  49.344 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   0.5644     2.3333   0.242    0.809    
+m             9.5902     0.4011  23.908   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 11.58 on 98 degrees of freedom
+Multiple R-squared:  0.8536,    Adjusted R-squared:  0.8521 
+F-statistic: 571.6 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> m, <span class="at">y =</span> W)) <span class="sc">+</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">linetype =</span> <span class="st">"dashed"</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">linewidth =</span> <span class="dv">1</span>,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.4</span>)<span class="sc">+</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session3_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'MASS'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:dplyr':
+
+    select</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Please cite as: </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> Hlavac, Marek (2022). stargazer: Well-Formatted Regression and Summary Statistics Tables.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> R package version 5.2.3. https://CRAN.R-project.org/package=stargazer </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, <span class="dv">1000</span>, <span class="at">replace =</span> <span class="st">"TRUE"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="dv">0</span>, <span class="dv">10</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, x)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> y)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="dv">0</span>, <span class="dv">10</span><span class="sc">*</span>(x))</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, x)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> y)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>y <span class="sc">%&gt;%</span> </span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>)<span class="sc">+</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session3_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(model2<span class="sc">$</span>residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.418812e-13</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model2<span class="sc">$</span>fitted.values, model2<span class="sc">$</span>residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session3_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_heteroscedasticity</span>(model2) <span class="co"># Run a Breush-Pagan test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Warning: Heteroscedasticity (non-constant error variance) detected (p &lt; .001).</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> y)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit robust regression</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>robust_model <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">rlm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> y)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(model1, model2, robust_model, <span class="at">align =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">type =</span> <span class="st">"text"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+=====================================================================
+                                        Dependent variable:          
+                               --------------------------------------
+                                                 y                   
+                                           OLS               robust  
+                                                             linear  
+                                      (1)           (2)        (3)   
+---------------------------------------------------------------------
+x                                  10.000***     10.302***  10.161***
+                                    (0.001)       (0.608)    (0.476) 
+                                                                     
+Constant                             0.353        -29.992     2.742  
+                                    (0.627)      (351.530)  (275.432)
+                                                                     
+---------------------------------------------------------------------
+Observations                         1,000         1,000      1,000  
+R2                                   1.000         0.224             
+Adjusted R2                          1.000         0.223             
+Residual Std. Error (df = 998)      10.150       5,687.326  3,624.093
+F Statistic (df = 1; 998)      85,037,646.000*** 287.492***          
+=====================================================================
+Note:                                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+</div>
+</div>
+</section>
+<section id="multicollinearity" class="level2">
+<h2 class="anchored" data-anchor-id="multicollinearity">Multicollinearity</h2>
+<p>The last typical problem that can arise in linear regressions is <em>multicollinearity</em>. This occurs when two explanatory variables are highly correlated with each other.</p>
+<p>Returning to our weight-measurement example, suppose that in addition to mass, you would like to verify whether weight is influenced by the volume of the objects. To do this, you might ask all students to also compute the volume of their objects and include volume as a second explanatory variable in the regression.</p>
+<p>Your regression model would then become:</p>
+<p><span class="math display">\[\begin{equation}
+W_i = \alpha m_i + \beta V_i + \varepsilon_i,
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(m_i\)</span> is the mass, <span class="math inline">\(V_i\)</span> is the volume, and <span class="math inline">\(\varepsilon_i\)</span> is the error term. Your goal would be to estimate the coefficients <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>.</p>
+<p>However, suppose that all the objects are made of the same material, such as copper. In physics, mass and volume are mechanically related through the density:</p>
+<p><span class="math display">\[\begin{equation}
+m_i = \rho_c V_i,
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\rho_c\)</span> is the density of copper (in <span class="math inline">\(kg/m^3\)</span>). In practice, students may make small measurement errors when computing volumes, so the observed relationship becomes:</p>
+<p><span class="math display">\[\begin{equation}
+m_i = \rho_c V_i + \mu_i,
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\mu_i\)</span> represents measurement error.</p>
+<p>This means that mass and volume are almost perfectly correlated. As a result, the regression has difficulty distinguishing the individual effect of mass from the effect of volume, because both variables contain nearly the same information.</p>
+<p>This situation is called <em>multicollinearity</em>.</p>
+<p>Importantly, multicollinearity does not bias the estimated coefficients. However, it makes them much less precise: their standard errors increase, and the estimates may become unstable or highly sensitive to small changes in the data. As a result, it becomes difficult to determine which variable truly affects the outcome.</p>
+<p>In our example, since weight is physically determined by mass, adding volume does not provide meaningful additional information, but it does make the estimation less precise because of the strong correlation between mass and volume. Multicollinearity makes it difficult to separate the individual effects of correlated predictors, because changing one predictor almost mechanically implies changing the other.</p>
+<p>You can test for multicollinearity in R using the function <code>check_collinearity()</code>, which indicates whether your explanatory variables are highly correlated. This function typically reports the Variance Inflation Factor (VIF), a measure of how much the variance of a coefficient estimate is inflated due to multicollinearity. Large VIF values indicate problematic levels of collinearity between predictors.</p>
+<p>When multicollinearity is present, one possible solution is to reduce the number of explanatory variables. This can be done using advanced data reduction techniques, such as Principal Component Analysis (PCA), which combines correlated variables into a smaller number of independent components.</p>
+<p>However, an even more important approach is to rely on theory to guide variable selection.</p>
+<p>In our example, mass and volume are highly correlated because all objects are made of copper, which has a constant density. From physics, we know that weight depends on mass, not on volume directly. Volume only affects weight indirectly through its relationship with mass.</p>
+<p>Therefore, including both mass and volume in the regression does not provide meaningful additional information. Instead, it introduces multicollinearity and reduces the precision of the estimates. Based on theoretical considerations, the appropriate solution is to exclude volume from the regression and keep mass as the relevant explanatory variable.</p>
+<p>This reasoning also applies to social science data. When two variables measure closely related concepts, or when one variable mechanically determines another, including both in a regression may create multicollinearity without improving the model. In such cases, theory and substantive knowledge should guide the choice of which variables to include.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>) <span class="sc">/</span> <span class="dv">10</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co"># density of copper ≈ 8920 kg/m^3</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> m<span class="sc">/</span><span class="dv">8920</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="fl">0.00001</span>)  <span class="co"># small measurement error</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fl">9.81</span><span class="sc">*</span>m <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">10</span>)</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> m)</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> m <span class="sc">+</span> v)</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ m)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-33.348  -8.185  -0.711   7.229  27.163 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  -0.7584     2.2105  -0.343    0.732    
+m             9.9141     0.3800  26.088   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 10.97 on 98 degrees of freedom
+Multiple R-squared:  0.8741,    Adjusted R-squared:  0.8728 
+F-statistic: 680.6 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ m + v)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-33.327  -7.804  -0.782   7.123  26.686 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept) -7.326e-01  2.223e+00  -0.330    0.742
+m            1.350e+01  1.347e+01   1.002    0.319
+v           -3.203e+04  1.203e+05  -0.266    0.791
+
+Residual standard error: 11.02 on 97 degrees of freedom
+Multiple R-squared:  0.8742,    Adjusted R-squared:  0.8716 
+F-statistic: 337.1 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_collinearity</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Check for Multicollinearity
+
+High Correlation
+
+ Term     VIF        VIF 95% CI adj. VIF Tolerance Tolerance 95% CI
+    m 1243.97 [858.74, 1802.22]    35.27  8.04e-04     [0.00, 0.00]
+    v 1243.97 [858.74, 1802.22]    35.27  8.04e-04     [0.00, 0.00]</code></pre>
+</div>
+</div>
+</section>
+<section id="models-with-interactions" class="level2">
+<h2 class="anchored" data-anchor-id="models-with-interactions">Models with interactions</h2>
+<p>Another thing we didn’t cover in the last session was interactions. You may now wonder how heterogeneous your results are, and how your variables interact. In our example with the far-right vote, perhaps the effect of income on the far-right vote is conditional on another variable, that is for instance the level of education ; and vice-versa. In other words, the results might be heterogeneous : a rich commune with less educated people can potentially vote differently than a rich commune with many higher educated persons. This is what is meant by checking for interactions between independent variables. For instance, in the case of a regression model with three variables, instead of checking :</p>
+<p><span class="math display">\[\begin{equation}
+Y_i = \beta_1 X_{1i} + \beta_2 X_{2i} + \beta_3 X_{3i},
+\end{equation}\]</span></p>
+<p>you try : <span class="math display">\[\begin{equation}
+Y_i = \beta_1 X_{1i} + \beta_2 X_{2i} + \beta_3 X_{3i} + \beta_4 X_{1i}*X_{3i}
+\end{equation}\]</span></p>
+<p>Which means that any increase <span class="math inline">\(\Delta X_{1i}\)</span> in the variable <span class="math inline">\(X_{1i}\)</span> no longer has an impact <span class="math inline">\(\beta_1 \Delta X_{1i}\)</span> on <span class="math inline">\(Y_i\)</span>, but an impact <span class="math inline">\(\Delta X_{1i} (\beta_1 + \beta_3X_{3i})\)</span>, which therefore still depends on the variable <span class="math inline">\(X_{3i}\)</span>. Coming back to our example, we want to assess how income and education in a commune evolve and influence far-right voting. You only need to specify <code>*</code> in your regression to obtain the interaction, and we generally use <code>ggpredict()</code> to plot the predicted results associated with different levels in one of the two predictors.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>elections2024 <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/elections2024.csv"</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>demographics2024 <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/demographics2024.xlsx"</span>)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>elections2024<span class="ot">&lt;-</span>elections2024 <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(demographics2024 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">codecommune =</span> <span class="fu">as.numeric</span>(codecommune), <span class="at">codedep =</span> <span class="fu">as.numeric</span>(codedep)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: There were 2 warnings in `mutate()`.
+The first warning was:
+ℹ In argument: `codecommune = as.numeric(codecommune)`.
+Caused by warning:
+! NAs introduced by coercion
+ℹ Run `dplyr::last_dplyr_warnings()` to see the 1 remaining warning.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining with `by = join_by(codecommune, codedep, Year)`</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> elections2024 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dens <span class="sc">==</span> <span class="st">"Urbain intermédiaire"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>               <span class="fu">mutate</span>(<span class="at">petr =</span> etranger<span class="sc">/</span>pop, <span class="at">psup =</span> sup<span class="sc">/</span>pop, <span class="at">pnodip =</span> nodip<span class="sc">/</span>pop, <span class="at">log_revmoyfoy =</span> <span class="fu">log</span>(revmoyfoy)),</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>             far_right_relvotes <span class="sc">~</span> log_revmoyfoy <span class="sc">+</span>petr<span class="sc">+</span> pagri<span class="sc">+</span>pouvr<span class="sc">+</span> pcadr<span class="sc">+</span>age<span class="sc">+</span><span class="fu">log</span>(prixbien)<span class="sc">+</span>pempl<span class="sc">+</span>ppint<span class="sc">+</span>pindp<span class="sc">+</span>psup<span class="sc">+</span>pnodip <span class="sc">+</span> log_revmoyfoy<span class="sc">*</span>psup)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggeffects)</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpredict</span>(model3, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"log_revmoyfoy"</span>, <span class="st">"psup"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> <span class="fu">factor</span>(</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>      group,</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"0.14"</span>, <span class="st">"0.23"</span>, <span class="st">"0.32"</span>),</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Low share of higher education (14%)"</span>,</span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Medium share of higher education (23%)"</span>,</span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"High share of higher education (32%)"</span></span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, predicted, <span class="at">color =</span> group, <span class="at">fill =</span> group)) <span class="sc">+</span> </span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Share with higher education"</span>,</span>
+<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill  =</span> <span class="st">"Share with higher education"</span></span>
+<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session3_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>And you see that your predicted values change with the level of education : in the more educated cases, the line becomes less steep. Here, only three values of education are plotted by the program to give an idea of the interaction in three scenarios (commune with low/medium/high proportion of educated people), but this shows that the more educated people there are in a commune, the less the impact of income on the RN vote will be important in that commune.</p>
+</section>
+<section id="non-linear-regressions" class="level2">
+<h2 class="anchored" data-anchor-id="non-linear-regressions">Non-linear regressions</h2>
+<p>Linear regression relies on strong assumptions about the error term, in particular homoskedasticity and normality. However, there are many situations in which these assumptions are violated. A typical example arises when the outcome variable is binary, such as whether an individual voted in the last election (<span class="math inline">\(Y = 1\)</span> if yes, <span class="math inline">\(Y = 0\)</span> if no), and the explanatory variable is continuous, such as income.</p>
+<p>If we attempt to fit a linear regression in this context, the resulting model exhibits strong heteroskedasticity, since the variance of the error term depends on the value of <span class="math inline">\(X\)</span>. Indeed, when <span class="math inline">\(Y\)</span> is binary, the variance conditional on <span class="math inline">\(X\)</span> is given by <span class="math inline">\(P(Y=1|X)(1 - P(Y=1|X))\)</span>, which varies with <span class="math inline">\(X\)</span>. Moreover, the linear model may produce predicted values outside the logical range <span class="math inline">\([0,1]\)</span>, which is not meaningful when modeling probabilities.</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session3_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Instead, a more appropriate approach is to directly model the conditional probability of the outcome given the explanatory variable. That is, we aim to estimate:</p>
+<p><span class="math display">\[\begin{equation}
+P(Y = 1 \mid X)
+\end{equation}\]</span></p>
+<p>One intuitive way to understand this is to divide the continuous variable <span class="math inline">\(X\)</span> into intervals and compute, within each interval, the proportion of observations for which <span class="math inline">\(Y = 1\)</span>. This proportion provides an empirical estimate of the conditional probability of the outcome for values of <span class="math inline">\(X\)</span> in that interval.</p>
+<p>In the figure, this idea is illustrated using several intervals of <span class="math inline">\(X\)</span>. For each interval, the fraction of observations with <span class="math inline">\(Y = 1\)</span> is computed. We observe that this probability varies systematically with <span class="math inline">\(X\)</span>, showing that the relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is not linear in levels, but instead affects the probability of the outcome.</p>
+<p>This motivates the use of models specifically designed for binary outcomes, such as the logistic regression model, which ensures that predicted probabilities remain between 0 and 1 and properly accounts for the nonlinear relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(P(Y=1|X)\)</span>.</p>
+<p>The idea will instead be to associate every chunk of the continuous variables with probabilities of having, at this stage of the value <span class="math inline">\(X\)</span>, hence to estimate: <span class="math display">\[\begin{equation}
+P(Y = 1|X)
+\end{equation}\]</span></p>
+<p>Here, the example is shown for three different intervals of X :</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session3_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session3_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="concept-of-logistic-regression" class="level1">
+<h1>Concept of logistic regression</h1>
+<section id="the-maximum-of-likelihood-estimation" class="level2">
+<h2 class="anchored" data-anchor-id="the-maximum-of-likelihood-estimation">The maximum of likelihood estimation</h2>
+<section id="constant-probabilities" class="level3">
+<h3 class="anchored" data-anchor-id="constant-probabilities">Constant probabilities</h3>
+<p>Suppose you are interested in the outcome of a binary event, where the probability of the event occurring is <span class="math inline">\(p\)</span> and the probability of it not occurring is <span class="math inline">\(1 - p\)</span>. This follows Bernoulli’s probability distribution:</p>
+<p><span class="math display">\[\begin{equation}
+P(X = x) = p^x (1-p)^x \ \text{with} X \in \{0, 1\}
+\end{equation}\]</span></p>
+<p>For example, imagine rolling a fair six-sided die. The probability of rolling a 1 (i.e., <span class="math inline">\(X = 1\)</span>) is <span class="math inline">\(p = 1/6\)</span>, and the probability of rolling anything other than a 1 (i.e., <span class="math inline">\(X = 0\)</span>) is <span class="math inline">\(1 - p = 5/6\)</span>. Many research questions involve finding such probabilities for binary outcomes, such as understanding why people vote or abstain, or why they vote for a particular party. These are binary outcomes, and calculating their probabilities using linear regression would not be appropriate.</p>
+<p>Suppose you observe <span class="math inline">\(N\)</span> independent binary outcomes, each determined by an unknown probability <span class="math inline">\(p\)</span>. Let <span class="math inline">\(n_1\)</span> represent the number of outcomes where <span class="math inline">\(X = 1\)</span>, and <span class="math inline">\(N - n_1\)</span> the number of outcomes where <span class="math inline">\(X = 0\)</span>. The likelihood function is:</p>
+<p><span class="math display">\[\begin{equation}
+\mathcal{L}(p) = \prod_i^{n_1} (p_i) \prod_i^{N-n_1} (1-p_i) = p_i^{n_1}(1-p_i)^{N-n_1}
+\end{equation}\]</span></p>
+<p>This expression represents the probability of obtaining <span class="math inline">\(X = 1\)</span> <span class="math inline">\(n_1\)</span> times, multiplied by the probability of obtaining <span class="math inline">\(X = 0\)</span> <span class="math inline">\(N - n_1\)</span> times. If you do not know the probability <span class="math inline">\(p\)</span> but have the outcomes for a large number of observations, you can estimate <span class="math inline">\(p\)</span> by maximizing the likelihood function. This method is called .</p>
+</section>
+<section id="a-simple-example" class="level3">
+<h3 class="anchored" data-anchor-id="a-simple-example">A simple example</h3>
+<p>Let’s say you’re interested in estimating the probability of rolling a 1 on a fair die, but you don’t know the probability (which you know theoretically to be 1/6). Let <span class="math inline">\(X = 1\)</span> if you roll a 1 and <span class="math inline">\(X = 0\)</span> otherwise. The probabilities are:</p>
+<p><span class="math display">\[\begin{equation}
+P(X=1) = 1/6 = p_1
+\end{equation}\]</span></p>
+<p>and <span class="math display">\[\begin{equation}
+P(X=0) =5/6 = p_0 = 1-p_1
+\end{equation}\]</span></p>
+<p>You roll the die 10,000 times and want to estimate <span class="math inline">\(p_1\)</span>. The likelihood function for these observations would be:</p>
+<p><span class="math display">\[\begin{equation}
+\mathcal{L} = \Pi_i^{n_1} (p_i) \Pi_i^{10000-n_1} (1-p_i)
+\end{equation}\]</span></p>
+<p>You would typically compute the likelihood function as: <span class="math display">\[\begin{equation}
+\mathcal{L}(p) = \Pi_i^{n_1} (p_i) \Pi_i^{10000-n_1} (1-p_i) = p_i^{n_1} (1-p_i)^{10000-n_1}.
+\end{equation}\]</span> The goal is to maximize the likelihood function to find the value of <span class="math inline">\(p\)</span> that makes the observed data most probable. To do this, take the log of the likelihood function:</p>
+<p><span class="math display">\[\begin{equation}
+\text{log}(\mathcal{L}(p)) = \text{log}(\Pi_i^{10000} (p_i) \Pi_i^{10000} (1-p_i)) = \text{log}(p_i^{N_1})+\text{log}((1-p_i)^{10000-N_1
+\end{equation}\]</span></p>
+<p>which gives :</p>
+<p><span class="math display">\[\begin{equation}
+\text{log}(p_i^{N_1})+\text{log}((1-p_i)^{10000-N_1}) = N_1 \text{log}(p_i) + (10000-N_1)\text{log}(1-p_i)
+\end{equation}\]</span></p>
+<p>Next, differentiate with respect to <span class="math inline">\(p\)</span>: <span class="math display">\[\begin{equation}
+\frac{d\text{log}(\mathbb{L}(p))}{dp} = \frac{n_1}{p} - \frac{10000 - n_1}{1 - p}.
+\end{equation}\]</span> Set the derivative equal to zero to solve for <span class="math inline">\(p\)</span>: <span class="math display">\[\begin{equation}
+\frac{n_1}{p} = \frac{10000 - n_1}{1 - p}.
+\end{equation}\]</span></p>
+<p>This simplifies to: <span class="math display">\[\begin{equation}
+p = \frac{n_1}{10000}.
+\end{equation}\]</span></p>
+<p>This result is simply the proportion of 1’s in the 10,000 rolls, which is the maximum likelihood estimate of the probability. According to the law of large numbers, as <span class="math inline">\(N \to \infty\)</span>, this estimate will converge to the true probability <span class="math inline">\(p\)</span>. Thus, maximizing the likelihood function allows us to estimate the probability distribution that best fits the data.</p>
+</section>
+</section>
+<section id="non-constant-probabilities" class="level2">
+<h2 class="anchored" data-anchor-id="non-constant-probabilities">Non-constant probabilities</h2>
+<p>Now imagine that your probabilities depend on other explanatory variables <span class="math inline">\(x_1, x_2, x_3\)</span>. For example, in a research study seeking to understand voter behavior, the probability of an individual voting might depend on their income, gender, or political affiliation. In this case, you would seek to estimate the relationship between these variables and the outcome of voting.</p>
+<p>The likelihood function in this case would be:</p>
+<p><span class="math display">\[\begin{equation}
+L(x_1, x_2, x_3) = \Pi_{i\  (y_i = 1)}^n p(x_1, x_2, x_3)_i \Pi_{i\  (y_i = 0)}^n (1 - p(x_1, x_2, x_3))_i
+\end{equation}\]</span></p>
+<p>In the simpler case where only one explanatory variable <span class="math inline">\(x\)</span> is considered, the likelihood function is:</p>
+<p><span class="math display">\[\begin{equation}
+L(x) = \Pi_{i\  (y_i = 1)}^n p(x)_i \Pi_{i\  (y_i = 0)}^n (1 - p(x)_i)
+\end{equation}\]</span></p>
+<p>which you would maximize to find the parameters that best fit the data.</p>
+</section>
+<section id="logistic-function" class="level2">
+<h2 class="anchored" data-anchor-id="logistic-function">Logistic function</h2>
+<p>The logistic function is : <span class="math display">\[\begin{equation}
+p_L (x) = \frac{1}{1+ e^{-(\beta_0 + \beta_1 x)}} = \frac{1}{1+e^{-(x-\mu)/s}} = \frac{e^{(x-\mu)/s}}{1+e^{(x-\mu)/s}}
+\end{equation}\]</span> and it is strictly bounded between 0 and 1, which is expected for a probability.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="fu">exp</span>((x<span class="sc">-</span>mu)<span class="sc">/</span>s)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>((x<span class="sc">-</span>mu)<span class="sc">/</span>s)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session3_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You can use this logistic function in the likelihood function: <span class="math display">\[\begin{equation}
+\mathcal{L}(x) = \Pi_{i\  (y_i = 1)}^n p(x)_i \Pi_{i\  (y_i = 0)}^n (1 - p(x)_i),
+\end{equation}\]</span> maximize it, and find the parameters <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> that best fit your data.</p>
+<p>This is the logic behind maximum likelihood estimation: you assume your probability follows a certain distribution (in this case, the logistic distribution), and then estimate the parameters that maximize the likelihood of obtaining your data. This is precisely what the <code>glm</code> function in R does when it fits a logistic regression model — it computes the parameters that maximize the likelihood function using numerical methods.</p>
+</section>
+<section id="logit" class="level2">
+<h2 class="anchored" data-anchor-id="logit">Logit</h2>
+<p>The logit is the inverse of the logistic function. It is defined as: <span class="math display">\[\begin{equation}
+\text{logit}(p(x)) = \ln (\frac{p(x)}{1-p(x)}) = \beta_0 + \beta_1 x,
+\end{equation}\]</span></p>
+<p>The logit is the inverse of the logistic function. It is defined as:</p>
+<p><span class="math display">\[\begin{equation}
+\text{logit}(p(x)) = \ln \left( \frac{p(x)}{1-p(x)} \right) = \beta_0 + \beta_1 x,
+\end{equation}\]</span></p>
+<p>In other words, the logit is the logarithm of the odds. The odds is simply the ratio ($ $ ), and gives a real number that tells you how many times more likely (or less likely) you are to obtain the outcome. For example, if the probability of an event occurring is 20% (i.e., ($ p = 0.2 $)), the odds are: <span class="math display">\[\begin{equation}
+\text{odds} = \frac{0.2}{1 - 0.2} = 0.2 / 0.8 = 0.25.
+\end{equation}\]</span> This means the event is 4 times less likely to happen than not to happen.</p>
+<p>On the other hand, if the probability of an event occurring is 80% (i.e., ($ p = 0.8 $)), the odds are: <span class="math display">\[\begin{equation}
+\text{odds} = \frac{0.8}{1 - 0.8} = 0.8 / 0.2 = 4.
+\end{equation}\]</span> This means the event is 4 times more likely to happen than not to happen.</p>
+<p>When considering probabilities between 0 and 1, the odds function (<span class="math inline">\(\frac{x}{1-x}\)</span>) increases very rapidly as the denominator approaches zero. This is why the log of the odds (the logit) provides a more manageable and continuous scale. For a visual comparison, here’s a plot in R showing the relationship between the probability (<span class="math inline">\(p\)</span>) and the odds, as well as the logit :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>)<span class="sc">/</span><span class="dv">10000</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p, p<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>p))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session3_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p, <span class="fu">log</span>(p<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>p)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session3_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Hence, you see that the logit associates every probability <span class="math inline">\(p\)</span> with a continuous variable. In the special case where the probability <span class="math inline">\(p\)</span> is a logistic function of variables <span class="math inline">\(X_1, X_2, \dots, X_k\)</span>, we can express this relationship as:</p>
+<p><span class="math display">\[\begin{equation}
+\text{logit}(p | x_1, x_2, x_3) = \ln \left( \frac{p}{1 - p} \right) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3.
+\end{equation}\]</span></p>
+<p>This is why you can obtain the odds by simply exponentiating the logit, which essentially gives you the odds ratio. In other words:</p>
+<p><span class="math display">\[\begin{equation}
+\text{ODDs} = \frac{p}{1 - p} = e^{\text{logit}(p)} = e^{\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3}.
+\end{equation}\]</span></p>
+<p>Any variation <span class="math inline">\(\delta x_1\)</span> in the explanatory variable <span class="math inline">\(x_1\)</span> leads to a change in the odds:</p>
+<p><span class="math display">\[\begin{equation}
+\delta \text{ODDs} = e^{\beta_1 \delta x_1}.
+\end{equation}\]</span></p>
+<p>This means that any change in <span class="math inline">\(x_1\)</span> results in a multiplicative change in the odds of the outcome occurring. The model allows you to compute the probability that best characterizes your process and helps to understand how each explanatory variable influences the outcome.</p>
+<p>Now, if you decide that <span class="math inline">\(p\)</span> is a function of other variables <span class="math inline">\(x_1, x_2, x_3\)</span>, you need a function that associates these real numbers with probabilities that range from 0 to 1. This is exactly what the logistic regression model does — it provides a way to model the relationship between the independent variables and a binary outcome, ensuring that the probabilities stay within the valid range of 0 and 1.</p>
+<p>But now, imagine you want to understand what drives the probability. In other words, you want to know how different factors (i.e., the explanatory variables) affect the likelihood of the outcome. The logistic regression model, through maximum likelihood estimation, gives you the answer to this question by estimating the coefficients <span class="math inline">\(\beta_1, \beta_2, \dots, \beta_k\)</span>, which tell you the effect of each variable on the log-odds of the outcome.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+    tabsets.forEach(function(tabset) {
+      const tabby = new Tabby('#' + tabset.id);
+    });
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

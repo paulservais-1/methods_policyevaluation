@@ -1,0 +1,176 @@
+---
+title: Session 3 - OLS and logistic regressions 
+toc: true
+toc-depth: 3
+editor: 
+  markdown: 
+    wrap: 72
+---
+# OLS regressions
+
+## School tutoring program
+
+In this exercise, you will estimate the effect of a tutoring policy on students' test scores using OLS regression. You will also evaluate model assumptions such as collinearity and heteroskedasticity, and estimate a robust regression model.
+
+0. Load the following packages
+
+```{r}
+library(tidyverse)
+library(rio)
+library(performance)
+library(MASS)
+library(stargazer)
+library(ggeffects)
+library(ggplot2)
+```
+
+
+1. Load the following packages:
+  - tidyverse  
+  - rio  
+  - performance  
+  - MASS  
+  - lmtest  
+  - sandwich  
+  - stargazer  
+  - ggeffects  
+  - ggplot2  
+  
+2. Import the data set. Using the `rio` package and the function `import`, import the dataset <>. Inspect the dataset using appropriate functions, and clean some variables eventually. The dataset contains the following variables:
+  - test_score: student's test score
+  - treatment: whether the student received tutoring (1 = yes, 0 = no)
+  - income: household income (euros)
+  - parent_edu: years of parental education
+  - school_funding: school funding per student (euros)
+  - class_size: number of students in class
+  - teacher_experience: teacher's years of experience 
+Examine the structure of the dataset. If you are interested in how the exposure to the policy changed your outcome (test score), identify the dependent variable and the main independent variable of interest. Are these variables categorical or continuous? What is the policy being evaluated?
+
+3. Descriptive statistics. Count the number of observations in the treated and untreated groups. Summarize the main variables in the dataset. Are there extreme or unusual values? Why might such values exist in real-world data?
+
+4. Estimate a simple OLS regression. Estimate a simple linear regression where test scores are explained only by the treatment variable. Interpret the coefficient on the treatment variable. Does this estimate represent a causal effect? Why or why not?
+
+
+5. Estimate a multiple regression model. Estimate a multiple regression model including the following control variables:
+- income  
+- parental education  
+- class size  
+- teacher experience  
+- school funding  
+
+Compare the treatment coefficient to the one obtained in the simple regression. Why might the coefficient change after adding control variables?
+
+6. Compare model specifications. Compare the simple and multiple regression models. Which model appears more appropriate for policy evaluation? Why? What is the role of control variables in regression analysis?
+
+7. Assess multicollinearity. Use appropriate diagnostic tools to assess multicollinearity. Which variables appear to be highly correlated? What are the consequences of multicollinearity for OLS estimation and inference? Does multicollinearity bias the coefficients?
+
+8. Assess heteroskedasticity. Assess whether heteroskedasticity is present in the regression model. Explain what heteroskedasticity is. What consequences does heteroskedasticity have for statistical inference? Are the OLS coefficients still unbiased?
+
+9. Run a logistic regression model with treatment as dependent variable, and all your
+
+10. Estimate a robust regression model. Estimate the model using robust regression `rlm` from MASS package. Compare the coefficients with the OLS estimates. Why might robust regression produce different results? What problem does robust regression address?
+
+11. Generate predicted values. Use the regression model to generate predicted values of test scores as a function of income. How does predicted test score change with income?
+
+12. Visualize predictions. Plot the predicted values and their confidence intervals. Interpret the relationship between income and predicted test score. What does this relationship suggest?
+
+13. Policy evaluation. Based on your preferred model, answer the following questions:
+
+- What is the estimated effect of the tutoring program?
+- Is the effect statistically significant?
+- Is the effect economically meaningful?
+- Under what assumptions can this effect be interpreted as causal?
+- What are potential sources of bias in this analysis?
+
+
+```{r}
+#| eval: false
+#| echo: false
+library(rio)
+library(performance)
+
+data <- import("data/schooltutorprog.csv") %>% filter(test_score > 0 & test_score <=100)
+glimpse(data)
+summary(data)
+
+
+data %>% count(treatment)
+data %>% summarise(
+  mean_score = mean(test_score),
+  sd_score = sd(test_score),
+  min_score = min(test_score),
+  max_score = max(test_score),
+  mean_income = mean(income)
+)
+
+model1 <- lm(test_score ~ treatment, data = data)
+summary(model1)
+
+model2 <- lm(test_score ~ treatment + income + parent_edu +
+             class_size + teacher_experience + school_funding,
+             data = data)
+
+summary(model2)
+
+stargazer(model1, model2, type = "text")
+
+check_collinearity(model2)
+check_heteroskedasticity(model2)
+plot(model2, which = 1)
+
+model_rlm <- rlm(test_score ~ treatment + income + parent_edu +
+                 class_size + teacher_experience + school_funding,
+                 data = data)
+
+summary(model_rlm)
+stargazer(model2, model_rlm, type = "text")
+
+pred <- ggpredict(model2, terms = "income")
+head(pred)
+ggplot(pred, aes(x = x, y = predicted)) +
+  geom_line() +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = 0.2) +
+  labs(
+    x = "Income",
+    y = "Predicted test score",
+    title = "Predicted test score as a function of income"
+  )
+
+```
+# Logistic regressions 
+
+## 1. Turnout and rain
+
+You are interested in knowing whether turnout, the participation in elections, is conditional on weather: that is, do people vote less when it rains? To do so, you are provided with a (fictitious) data set on American elections in 2012, 2016, and 2020.
+
+0. Load the following packages : 
+```{r}
+library(ggeffects)
+library(ggplot2)
+library(tidyverse)
+library(rio)
+```
+1. Using `rio` and the function `import`, import the data from <https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices2/data/rainfall.dta>. 
+2. Have a look at your data using `glimpse()`. Drop all variables except `voted, voted_prev, rain_mm, age, female, year`.
+3. You want to inspect whether the chances of voting change with the rainfall on the day of the election, `rain_mm`. The variable `vote` tells if people have voted in the elections. What would be your dependent and independent variables ? Are they categorical or continuous ?
+4. Count the total number of voters and summarize the `rain_mm` variable. Are there NA's in the data set ?
+5. Using `mutate`, `case_when`, prepare the `voted` variable for the logistic regression. 
+6. Assuming you are estimating a logistic regression, what is the mathematical expression of the probability function as a function of rainfall, denoted $R_mm$ ? What is the corresponding expression for the logit of that probability? Finally, what is the expression for the odds ratio?
+7. Run a logistic regression with one variable to estimate whether the rain changes anything in the probabilities of voting. For a 1-mm increase in the rainfall, how does the likelihood of voting change ? How significant is that result ? 
+8. Does voting in the previous election change the probabilities of voting in the next one ?
+9. Add the variables `voted_prev, female, age, rain_mm, as.factor(year)` in the predictors, and compare the three models, using the `stargazer` package;
+10. Use the `ggpredict` function from package `ggeffects` to predict the probabilities of voting depending on rain_mm. Have a look at your predictions.
+11. Use `ggplot` to plot the predicted probabilities with their confidence intervals, with their confidence intervals. Hint : use `+ geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = 0.2)` to display smooth confidence intervals, and `geom_line()` to add a line connecting the dots.
+
+
+
+## 2. ESS : voting in Italy
+You are provided with a simplified dataset containing ESS data for Italy.
+
+1. Download the dataset and import it into your local environment, using the link <https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices2/data/ess_it.csv>.
+2. Inspect the dataset using `glimpse`.
+3. Examine the values of the vote variable and modify them using `case_when` if necessary. Prepare the variable for a logistic regression. Review the other variables as well and modify them as needed. You may draw on the theory section for this session for guidance.
+4. Run a logistic regression to analyze whether the number of years of education influences the probability of voting.
+5. Create a variable `age` and include the variables `polintr, trstplt, clsprty, gndr, age, eduyrs` in the logistic regression.
+6. Compare the two models using `stargazer`.
+7. Plot the predicted probability of voting by years of education.
