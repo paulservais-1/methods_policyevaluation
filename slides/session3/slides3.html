@@ -261,7 +261,7 @@ Paul Servais
 <ul>
 <li>Under which assumptions is OLS reliable ?</li>
 <li>Can independent variables interact between each other ?</li>
-<li>What if the dependent variable is not categorical ?
+<li>What if the dependent variable is not continuous ?
 <ul>
 <li>e.g.&nbsp;many policy outcomes are binary :
 <ul>
@@ -418,18 +418,18 @@ lm(formula = W ~ m, data = dat)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--38.799  -8.405   0.589   9.615  25.997 
+-36.218 -11.190  -0.592  10.222  36.179 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   8.2898     2.7894   2.972  0.00372 ** 
-m             8.8909     0.4795  18.540  &lt; 2e-16 ***
+(Intercept)  -4.1534     3.2314  -1.285    0.202    
+m            10.4414     0.5555  18.796   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 13.84 on 98 degrees of freedom
-Multiple R-squared:  0.7782,    Adjusted R-squared:  0.7759 
-F-statistic: 343.8 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 16.04 on 98 degrees of freedom
+Multiple R-squared:  0.7828,    Adjusted R-squared:  0.7806 
+F-statistic: 353.3 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
@@ -464,18 +464,18 @@ lm(formula = W ~ m, data = dat)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--161.94 -102.22  -23.20   76.81  311.86 
+-146.28 -102.32  -29.65   86.50  281.10 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -202.127     23.981  -8.429 3.06e-13 ***
-m            100.249      4.123  24.316  &lt; 2e-16 ***
+(Intercept) -208.584     23.194  -8.993 1.85e-14 ***
+m            101.782      3.987  25.526  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 119 on 98 degrees of freedom
-Multiple R-squared:  0.8578,    Adjusted R-squared:  0.8564 
-F-statistic: 591.3 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 115.1 on 98 degrees of freedom
+Multiple R-squared:  0.8693,    Adjusted R-squared:  0.8679 
+F-statistic: 651.6 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <ul>
@@ -512,18 +512,18 @@ lm(formula = W ~ m, data = dat)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--37.811  -4.983   0.878   6.828  31.566 
+-32.888  -5.508  -0.356   7.299  30.458 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  -0.4748     2.5789  -0.184    0.854    
-m             9.8529     0.4434  22.223   &lt;2e-16 ***
+(Intercept)   0.3576     2.6211   0.136    0.892    
+m             9.3933     0.4506  20.846   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 12.8 on 98 degrees of freedom
-Multiple R-squared:  0.8344,    Adjusted R-squared:  0.8327 
-F-statistic: 493.9 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 13.01 on 98 degrees of freedom
+Multiple R-squared:  0.816, Adjusted R-squared:  0.8141 
+F-statistic: 434.5 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
@@ -553,7 +553,7 @@ F-statistic: 493.9 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -6.675216e-16</code></pre>
+<pre><code>[1] -6.829323e-14</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
@@ -575,18 +575,18 @@ F-statistic: 493.9 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
                                                              linear  
                                       (1)           (2)        (3)   
 ---------------------------------------------------------------------
-x                                  9.999***       9.670***  9.749*** 
-                                    (0.001)       (0.647)    (0.559) 
+x                                  9.998***      10.342***  9.632*** 
+                                    (0.001)       (0.648)    (0.517) 
                                                                      
-Constant                            -0.145        172.120    71.744  
-                                    (0.653)      (383.961)  (331.622)
+Constant                             0.432        -233.100    6.756  
+                                    (0.622)      (373.652)  (297.981)
                                                                      
 ---------------------------------------------------------------------
 Observations                         1,000         1,000      1,000  
-R2                                   1.000         0.183             
-Adjusted R2                          1.000         0.182             
-Residual Std. Error (df = 998)      10.215       6,004.562  4,172.160
-F Statistic (df = 1; 998)      82,434,202.000*** 223.096***          
+R2                                   1.000         0.203             
+Adjusted R2                          1.000         0.202             
+Residual Std. Error (df = 998)       9.747       5,854.595  3,663.564
+F Statistic (df = 1; 998)      85,830,626.000*** 254.568***          
 =====================================================================
 Note:                                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 </div>

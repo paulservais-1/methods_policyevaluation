@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-afa37c5c79185640b9c231024f4fe5ea.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -394,7 +394,7 @@ Note:                                      *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01<
 <section id="exercice-2-analysing-party-positions" class="level1">
 <h1>Exercice 2 : analysing party positions</h1>
 <p>The Chapel Hill expert survey data is a survey that “provides information about the positioning of the leadership of 279 parties in 31 countries over the course of 2024 on ideology, policy, populism, democracy, European integration, and select EU policy questions. Country coverage includes all European Union member states except for Luxembourg – plus Iceland, Norway, Switzerland, Turkey, and the United Kingdom.2 The dataset adopts the country code and party id schema of the CHES Trend file (Jolly et al.&nbsp;2022) and the Speed CHES survey on Ukraine (Hooghe et al.&nbsp;2024) with extensions for newly covered parties” (see <a href="https://static1.squarespace.com/static/5975c9bfdb29d6a05c65209b/t/69163d62e2606b5a3c46812b/1763065186525/CHES+2024+Codebook.pdf">documentation of CHES</a>).</p>
-<p>You can find the recent survey’s dataset on the internet at <a href="https://www.chesdata.eu/s/1999-2024_CHES_dataset_means.csv" class="uri">https://www.chesdata.eu/s/1999-2024_CHES_dataset_means.csv</a>, to perform the following tasks :</p>
+<p>You can find the recent survey’s dataset on the internet at <a href="https://www.chesdata.eu/s/1999-2024_CHES_dataset_meansV2-3k4l.csv" class="uri">https://www.chesdata.eu/s/1999-2024_CHES_dataset_meansV2-3k4l.csv</a>, to perform the following tasks :</p>
 <ol type="1">
 <li>Import the data in your local environment. Use the <code>rio</code> package use <code>install.packages()</code> if you haven’t installed the packages yet) and library to import it directly from the internet.</li>
 <li>Use the glimpse() function to have a look at your data</li>
@@ -412,6 +412,283 @@ Note:                                      *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01<
 <li>Now imagine wondering whether being in a country from Eastern or Western Europe influences how nationalism influences your position on this issue. How could you test that ? Plot the predicted values.</li>
 <li>Compute a last, fully saturated model, with all your variables except <code>country</code>, and run tests of multicollinearity and heteroskedasticity. What do you find ? Comment on the results. Add <code>as.factor(country)</code> in the regression and comment on the results.</li>
 </ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Exercice 1</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#1.1</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>ches <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"https://www.chesdata.eu/s/1999-2024_CHES_dataset_meansV2-3k4l.csv"</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#1.2</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(ches)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,441
+Columns: 90
+$ year                    &lt;int&gt; 1999, 1999, 1999, 1999, 1999, 1999, 1999, 1999…
+$ country                 &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+$ eastwest                &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+$ eumember                &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+$ party_id                &lt;int&gt; 104, 112, 111, 110, 105, 115, 114, 113, 108, 1…
+$ party                   &lt;chr&gt; "ECOLO", "VB", "FDF", "VU", "AGALEV", "FN", "I…
+$ cmp_id                  &lt;int&gt; 21111, 21914, 21912, 21913, 21112, NA, NA, NA,…
+$ vote                    &lt;dbl&gt; 7.3, 9.9, 2.4, 5.6, 7.0, 1.5, NA, NA, 5.9, 9.6…
+$ seat                    &lt;dbl&gt; 7.3, 10.0, 3.0, 5.3, 6.0, 0.7, NA, NA, 6.7, 9.…
+$ electionyear            &lt;int&gt; 1999, 1999, 1999, 1999, 1999, 1999, 1999, 1999…
+$ epvote                  &lt;dbl&gt; 8.44, 9.39, 3.34, 7.57, 7.46, 1.52, NA, NA, 4.…
+$ family                  &lt;int&gt; 7, 1, 8, 8, 7, 1, 8, 4, 4, 5, 3, 3, 4, 5, 3, 8…
+$ govt                    &lt;dbl&gt; 0.5, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.5, 1…
+$ lrgen                   &lt;dbl&gt; 1.888889, 9.888889, 6.111111, 5.125000, 2.4444…
+$ lrecon                  &lt;dbl&gt; 1.750000, 8.750000, 6.250000, 5.000000, 2.1250…
+$ lrecon_salience         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ lrecon_dissent          &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ lrecon_blur             &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ galtan                  &lt;dbl&gt; 1.250000, 9.750000, 5.800000, 4.000000, 1.2500…
+$ galtan_salience         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ galtan_dissent          &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ galtan_blur             &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ eu_position             &lt;dbl&gt; 5.777778, 2.222222, 6.142857, 5.000000, 6.0000…
+$ eu_salience             &lt;dbl&gt; 3.611111, 1.944444, 3.611111, 3.611111, 3.6111…
+$ eu_dissent              &lt;dbl&gt; 1.6666665, 1.1111110, 1.4285713, 1.8750000, 1.…
+$ eu_blur                 &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ spendvtax               &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ spendvtax_salience      &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ deregulation            &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ dereg_salience          &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ redistribution          &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ redist_salience         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ econ_interven           &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ civlib_laworder         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ civlib_salience         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ sociallifestyle         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ social_salience         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ womens_rights           &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ lgbtq_rights            &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ samesex_marriage        &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ religious_principles    &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ relig_salience          &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ immigrate_policy        &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ immigrate_salience      &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ immigrate_dissent       &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ multiculturalism        &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ multicult_salience      &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ multicult_dissent       &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ nationalism             &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ nationalism_salience    &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ ethnic_minorities       &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ ethnic_salience         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ urban_rural             &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ urban_salience          &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ environment             &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ enviro_salience         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ climate_change          &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ climate_change_salience &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ protectionism           &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ regions                 &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ region_salience         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ international_security  &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ international_salience  &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ us                      &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ us_salience             &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ eu_benefit              &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ eu_ep                   &lt;dbl&gt; 6.777778, 4.125000, 6.428571, 6.000000, 6.7777…
+$ eu_fiscal               &lt;dbl&gt; 6.375000, 2.857143, 5.500000, 5.250000, 6.3750…
+$ eu_intmark              &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ eu_employ               &lt;dbl&gt; 6.000000, 2.500000, 5.333333, 5.400000, 6.0000…
+$ eu_budgets              &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ eu_agri                 &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ eu_cohesion             &lt;dbl&gt; 6.571429, 1.600000, 5.285714, 5.333333, 6.5714…
+$ eu_environ              &lt;dbl&gt; 6.777778, 3.428571, 5.571429, 5.444445, 6.8888…
+$ eu_asylum               &lt;dbl&gt; 5.875000, 1.625000, 4.833333, 5.000000, 5.8750…
+$ eu_foreign              &lt;dbl&gt; 5.111111, 3.125000, 6.285714, 4.875000, 5.1111…
+$ eu_turkey               &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ eu_russia               &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ russian_interference    &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ anti_islam_rhetoric     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ people_vs_elite         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ antielite_salience      &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ corrupt_salience        &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ members_vs_leadership   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ executive_power         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ judicial_independence   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ mip_one                 &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ mip_two                 &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ mip_three               &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ chesversion             &lt;dbl&gt; 2025.1, 2025.1, 2025.1, 2025.1, 2025.1, 2025.1…</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#1.3</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ches <span class="ot">&lt;-</span> ches <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2024</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#1.4</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>ches <span class="ot">&lt;-</span> ches <span class="sc">%&gt;%</span> <span class="fu">select</span>(country, eastwest, eu_russia, civlib_laworder, samesex_marriage, nationalism, urban_rural, lrgen)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#1.5</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ches)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    country         eastwest        eu_russia      civlib_laworder 
+ Min.   : 1.00   Min.   :0.0000   Min.   : 0.000   Min.   : 0.500  
+ 1st Qu.: 6.00   1st Qu.:0.0000   1st Qu.: 2.000   1st Qu.: 3.000  
+ Median :14.00   Median :1.0000   Median : 3.500   Median : 5.000  
+ Mean   :15.57   Mean   :0.5633   Mean   : 4.117   Mean   : 5.237  
+ 3rd Qu.:24.00   3rd Qu.:1.0000   3rd Qu.: 5.750   3rd Qu.: 7.450  
+ Max.   :40.00   Max.   :1.0000   Max.   :10.000   Max.   :10.000  
+                                  NA's   :2        NA's   :2       
+ samesex_marriage  nationalism      urban_rural        lrgen       
+ Min.   : 0.000   Min.   : 0.200   Min.   :1.100   Min.   : 0.500  
+ 1st Qu.: 1.500   1st Qu.: 3.000   1st Qu.:3.407   1st Qu.: 3.474  
+ Median : 3.333   Median : 5.000   Median :4.833   Median : 5.818  
+ Mean   : 4.332   Mean   : 5.253   Mean   :4.930   Mean   : 5.480  
+ 3rd Qu.: 7.182   3rd Qu.: 7.333   3rd Qu.:6.227   3rd Qu.: 7.500  
+ Max.   :10.000   Max.   :10.000   Max.   :9.875   Max.   :10.000  
+                                   NA's   :11                      </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#1.6</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(ches<span class="sc">$</span>eu_russia)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="homework2_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#1.7.1</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ches, <span class="fu">aes</span>(<span class="at">x=</span> lrgen, <span class="at">y =</span> eu_russia)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span><span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing non-finite outside the scale range
+(`stat_smooth()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="homework2_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#1.7.2</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>model<span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> ches, eu_russia <span class="sc">~</span> lrgen)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = eu_russia ~ lrgen, data = ches)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.4592 -1.9332 -0.5287  1.5507  6.3527 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  4.94190    0.40414  12.228   &lt;2e-16 ***
+lrgen       -0.15035    0.06744  -2.229   0.0267 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.53 on 241 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.02021,   Adjusted R-squared:  0.01614 
+F-statistic:  4.97 on 1 and 241 DF,  p-value: 0.02671</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#1.7.3</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> ches, eu_russia <span class="sc">~</span> lrgen <span class="sc">+</span> nationalism)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> ches, eu_russia <span class="sc">~</span>eastwest<span class="sc">+</span> lrgen <span class="sc">+</span> urban_rural<span class="sc">+</span> samesex_marriage)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> ches, eu_russia <span class="sc">~</span>eastwest<span class="sc">+</span> lrgen <span class="sc">+</span> urban_rural<span class="sc">+</span> samesex_marriage <span class="sc">+</span> nationalism)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>model5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> ches, eu_russia <span class="sc">~</span>eastwest<span class="sc">*</span>nationalism)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(model, model2,model3, model4,model5,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"EU - Russia results"</span>, </span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">align =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">type =</span> <span class="st">"text"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+EU - Russia results
+=========================================================================================================================================
+                                                                     Dependent variable:                                                 
+                     --------------------------------------------------------------------------------------------------------------------
+                                                                          eu_russia                                                      
+                              (1)                    (2)                     (3)                     (4)                    (5)          
+-----------------------------------------------------------------------------------------------------------------------------------------
+eastwest                                                                  0.955***                 0.804**                1.659**        
+                                                                           (0.360)                 (0.358)                (0.729)        
+                                                                                                                                         
+lrgen                      -0.150**               -0.642***               -0.586***               -0.702***                              
+                            (0.067)                (0.091)                 (0.084)                 (0.092)                               
+                                                                                                                                         
+nationalism                                       0.601***                                        0.308***                0.316***       
+                                                   (0.082)                                         (0.108)                (0.089)        
+                                                                                                                                         
+urban_rural                                                                 0.166                   0.065                                
+                                                                           (0.106)                 (0.110)                               
+                                                                                                                                         
+samesex_marriage                                                          0.424***                0.308***                               
+                                                                           (0.082)                 (0.090)                               
+                                                                                                                                         
+eastwest:nationalism                                                                                                      -0.250**       
+                                                                                                                          (0.122)        
+                                                                                                                                         
+Constant                   4.942***               4.471***                4.053***                4.169***                2.210***       
+                            (0.404)                (0.371)                 (0.485)                 (0.480)                (0.565)        
+                                                                                                                                         
+-----------------------------------------------------------------------------------------------------------------------------------------
+Observations                  243                    243                     232                     232                    243          
+R2                           0.020                  0.200                   0.212                   0.239                  0.053         
+Adjusted R2                  0.016                  0.194                   0.198                   0.223                  0.041         
+Residual Std. Error    2.530 (df = 241)       2.291 (df = 240)        2.231 (df = 227)        2.197 (df = 226)        2.497 (df = 239)   
+F Statistic          4.970** (df = 1; 241) 30.060*** (df = 2; 240) 15.276*** (df = 4; 227) 14.233*** (df = 5; 226) 4.489*** (df = 3; 239)
+=========================================================================================================================================
+Note:                                                                                                         *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggeffects)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#1.8</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpredict</span>(model5, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"nationalism"</span>, <span class="st">"eastwest"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> <span class="fu">factor</span>(</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>      group,</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"0"</span>),</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"East"</span>, <span class="st">"West"</span>)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> predicted, <span class="at">color =</span> group, <span class="at">fill =</span> group)) <span class="sc">+</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), <span class="at">alpha =</span> <span class="fl">0.2</span>)<span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Nationalism"</span>, <span class="at">y =</span><span class="st">"Predicted position on EU-Russia"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="homework2_files/figure-html/unnamed-chunk-2-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#1.9</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>model6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> ches, eu_russia <span class="sc">~</span> nationalism <span class="sc">+</span> civlib_laworder<span class="sc">+</span> eastwest<span class="sc">+</span> samesex_marriage <span class="sc">+</span> urban_rural <span class="sc">+</span> lrgen)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="fu">list</span>(model6), check_collinearity)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+# Check for Multicollinearity
+
+Low Correlation
+
+             Term  VIF   VIF 95% CI adj. VIF Tolerance Tolerance 95% CI
+         eastwest 1.56 [1.35, 1.89]     1.25      0.64     [0.53, 0.74]
+ samesex_marriage 4.11 [3.34, 5.14]     2.03      0.24     [0.19, 0.30]
+      urban_rural 2.16 [1.81, 2.65]     1.47      0.46     [0.38, 0.55]
+            lrgen 2.66 [2.20, 3.29]     1.63      0.38     [0.30, 0.45]
+
+Moderate Correlation
+
+            Term  VIF   VIF 95% CI adj. VIF Tolerance Tolerance 95% CI
+     nationalism 6.25 [5.01, 7.89]     2.50      0.16     [0.13, 0.20]
+ civlib_laworder 7.07 [5.64, 8.93]     2.66      0.14     [0.11, 0.18]</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_heteroscedasticity</span>(model6) <span class="co"># Run a Breush-Pagan test</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OK: Error variance appears to be homoscedastic (p = 0.089).</code></pre>
+</div>
+</div>
 </section>
 <section id="exercice-3-comparing-electoral-outcomes-in-the-french-elections" class="level1">
 <h1>Exercice 3 : Comparing electoral outcomes in the French elections</h1>
@@ -430,6 +707,222 @@ Note:                                      *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01<
 <li>Comment on the R2 and Adjusted R2 : is a model performing better than the other ?</li>
 <li>Check for multicollinearity and heteroskedasticity. Comment on your findings. Are the assumptions of linear regressions verified ?</li>
 </ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#2.1</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>elections_2022 <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices1/data/elections_2022.csv"</span>)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>socio_demo <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices1/data/soc_dem_2022.csv"</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co">#2.2</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(elections_2022)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 68,800
+Columns: 9
+$ codecommune        &lt;int&gt; 1001, 1001, 1002, 1002, 1004, 1004, 1005, 1005, 100…
+$ codedep            &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+$ election_type      &lt;chr&gt; "L", "P", "L", "P", "L", "P", "L", "P", "L", "P", "…
+$ Year               &lt;int&gt; 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 202…
+$ far_right_relvotes &lt;dbl&gt; 0.2566372, 0.2865385, 0.0625000, 0.1345029, 0.20588…
+$ far_right_votes    &lt;int&gt; 87, 149, 8, 23, 826, 1646, 197, 352, 8, 16, 243, 49…
+$ turnout            &lt;dbl&gt; 0.5263975, 0.8062016, 0.5871560, 0.8028169, 0.45364…
+$ right_relvotes     &lt;dbl&gt; 0.17404130, 0.05000000, 0.10937500, 0.04678363, 0.0…
+$ right_votes        &lt;int&gt; 59, 26, 14, 8, 351, 309, 69, 48, 17, 9, 50, 77, 52,…</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(socio_demo)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 34,596
+Columns: 43
+$ codecommune         &lt;chr&gt; "01001", "01002", "01004", "01005", "01006", "0100…
+$ Year                &lt;int&gt; 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 20…
+$ codedep             &lt;chr&gt; "01", "01", "01", "01", "01", "01", "01", "01", "0…
+$ agri                &lt;int&gt; 0, 0, 4, 11, 0, 15, 0, 0, 29, 11, 11, 2, 0, 11, 0,…
+$ indp                &lt;int&gt; 39, 39, 142, 37, 0, 39, 19, 41, 36, 0, 0, 0, 119, …
+$ cadr                &lt;int&gt; 33, 9, 678, 56, 0, 250, 18, 0, 58, 2, 0, 18, 19, 1…
+$ pint                &lt;int&gt; 14, 0, 1647, 192, 34, 311, 83, 95, 98, 78, 0, 13, …
+$ empl                &lt;int&gt; 86, 66, 1211, 185, 23, 339, 83, 21, 197, 17, 53, 1…
+$ ouvr                &lt;int&gt; 147, 0, 1235, 177, 23, 268, 122, 4, 154, 3, 68, 42…
+$ chom                &lt;int&gt; 26, 9, 427, 18, 0, 95, 7, 2, 47, 9, 9, 0, 22, 37, …
+$ pact                &lt;int&gt; 319, 114, 4917, 658, 80, 1222, 325, 161, 572, 111,…
+$ age                 &lt;dbl&gt; 44.20355, 36.97382, 39.07810, 43.10032, 44.01273, …
+$ popf                &lt;int&gt; 380, 128, 7490, 802, 56, 1613, 391, 191, 601, 173,…
+$ francais            &lt;int&gt; 776, 256, 12645, 1700, 107, 2867, 743, 316, 1111, …
+$ etranger            &lt;int&gt; 4, 1, 1248, 23, 5, 64, 18, 8, 37, 5, 5, 0, 402, 11…
+$ prixbien            &lt;dbl&gt; 231440.42, 136645.75, 190080.39, 228015.31, 172697…
+$ capitalratio        &lt;dbl&gt; 1.0423332, 0.6154085, 0.8560610, 1.0269077, 0.7777…
+$ npropri             &lt;int&gt; 345, 102, 3000, 464, 51, 845, 255, 149, 387, 126, …
+$ nlogement           &lt;int&gt; 418, 126, 7209, 604, 77, 1094, 354, 182, 524, 147,…
+$ pop                 &lt;int&gt; 747, 288, 14375, 1717, 116, 3057, 797, 325, 1300, …
+$ revmoyfoy           &lt;dbl&gt; 35802.43, 36150.97, 29982.14, 37242.09, 31769.92, …
+$ revtot              &lt;dbl&gt; 1.277961e-05, 3.862623e-06, 2.096039e-04, 2.853238…
+$ recetteimpotslocaux &lt;dbl&gt; 233.1938, 240.6562, 503.5779, 355.4615, 312.5804, …
+$ recette             &lt;dbl&gt; 608.9172, 796.6805, 1067.3215, 651.9904, 1026.0869…
+$ baseimpotslocaux    &lt;dbl&gt; 1905.169, 2244.090, 2895.855, 1900.238, 2077.438, …
+$ nodip               &lt;int&gt; 319, 57, 5361, 817, 0, 1026, 201, 69, 532, 124, 20…
+$ sup                 &lt;int&gt; 134, 15, 2884, 208, 1, 642, 201, 182, 197, 87, 9, …
+$ Libellé             &lt;chr&gt; "L'Abergement-Clémenciat", "L'Abergement-de-Varey"…
+$ Exploitations       &lt;int&gt; 11, 2, 2, 9, NA, 17, NA, 6, 10, 3, 5, 4, NA, 13, 4…
+$ Personnes           &lt;int&gt; 21, 6, 3, 17, NA, 30, NA, 13, 17, 6, 9, 15, NA, 19…
+$ UTA                 &lt;int&gt; 16, 6, 2, 11, NA, 25, NA, 9, 8, 7, 5, 16, NA, 8, 9…
+$ SAU                 &lt;int&gt; 889, 195, 71, 821, NA, 1888, NA, 122, 326, 584, 25…
+$ PBS                 &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ dens                &lt;chr&gt; "Rural", "Rural", "Urbain intermédiaire", "Rural",…
+$ densaav             &lt;chr&gt; "Rural non périurbain", "Rural non périurbain", "U…
+$ dens7               &lt;chr&gt; "Rural à habitat dispersé", "Rural à habitat dispe…
+$ ntot                &lt;int&gt; 345, 123, 5344, 676, 80, 1317, 332, 163, 619, 120,…
+$ pagri               &lt;dbl&gt; 0.000000000, 0.000000000, 0.000748503, 0.016272189…
+$ pindp               &lt;dbl&gt; 0.11304348, 0.31707317, 0.02657186, 0.05473373, 0.…
+$ pcadr               &lt;dbl&gt; 0.09565217, 0.07317073, 0.12687126, 0.08284024, 0.…
+$ ppint               &lt;dbl&gt; 0.04057971, 0.00000000, 0.30819611, 0.28402367, 0.…
+$ pempl               &lt;dbl&gt; 0.24927536, 0.53658537, 0.22660928, 0.27366864, 0.…
+$ pouvr               &lt;dbl&gt; 0.42608696, 0.00000000, 0.23110030, 0.26183432, 0.…</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#2.3</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>elections <span class="ot">&lt;-</span> elections_2022 <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  socio_demo <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">codecommune=</span> <span class="fu">as.numeric</span>(codecommune), <span class="at">codedep =</span> <span class="fu">as.numeric</span>(codedep)) <span class="sc">%&gt;%</span> <span class="fu">drop_na</span>(codecommune))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: There were 2 warnings in `mutate()`.
+The first warning was:
+ℹ In argument: `codecommune = as.numeric(codecommune)`.
+Caused by warning:
+! NAs introduced by coercion
+ℹ Run `dplyr::last_dplyr_warnings()` to see the 1 remaining warning.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining with `by = join_by(codecommune, codedep, Year)`</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#2.4</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'gridExtra'
+
+The following object is masked from 'package:dplyr':
+
+    combine</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> elections, <span class="fu">aes</span>(<span class="at">x=</span>turnout, <span class="at">color =</span> election_type)) <span class="sc">+</span> <span class="fu">geom_density</span>()</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> elections, <span class="fu">aes</span>(<span class="at">x=</span>far_right_relvotes, <span class="at">color =</span> election_type)) <span class="sc">+</span> <span class="fu">geom_density</span>()</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>plot3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> elections, <span class="fu">aes</span>(<span class="at">x=</span>right_relvotes, <span class="at">color =</span> election_type)) <span class="sc">+</span> <span class="fu">geom_density</span>()</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(plot1, plot2, plot3, <span class="at">ncol=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 12 rows containing non-finite outside the scale range
+(`stat_density()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 12 rows containing non-finite outside the scale range
+(`stat_density()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="homework2_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#2.5</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Taking the % of blue-collar workers (pouvr), the % of university graduates (psup), the % of foreigners (petr), the log of median income in the commune</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>elections <span class="ot">&lt;-</span> elections <span class="sc">%&gt;%</span> <span class="fu">filter</span>(pop<span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">petr =</span> etranger<span class="sc">/</span>pop, <span class="at">psup =</span> sup<span class="sc">/</span>pop)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> elections, far_right_relvotes <span class="sc">~</span> pouvr<span class="sc">+</span>psup<span class="sc">+</span>petr<span class="sc">+</span><span class="fu">log</span>(revmoyfoy) <span class="sc">+</span> election_type)</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> elections, right_relvotes <span class="sc">~</span> pouvr<span class="sc">+</span>psup<span class="sc">+</span>petr<span class="sc">+</span><span class="fu">log</span>(revmoyfoy) <span class="sc">+</span> election_type)</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> elections <span class="sc">%&gt;%</span> <span class="fu">filter</span>(psup<span class="sc">&gt;</span><span class="dv">0</span>,pouvr<span class="sc">&gt;</span><span class="dv">0</span>), far_right_relvotes <span class="sc">~</span> pouvr<span class="sc">+</span>psup<span class="sc">+</span>petr<span class="sc">+</span><span class="fu">log</span>(revmoyfoy) <span class="sc">+</span>turnout <span class="sc">+</span> election_type)</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> elections, right_relvotes <span class="sc">~</span> pouvr<span class="sc">+</span>psup<span class="sc">+</span>petr<span class="sc">+</span><span class="fu">log</span>(revmoyfoy) <span class="sc">+</span> turnout <span class="sc">+</span> election_type)</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(model1, model2,model3, model4,</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"Electoral results"</span>, </span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">align =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">type =</span> <span class="st">"text"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Electoral results
+=======================================================================================================================================
+                                                                    Dependent variable:                                                
+                    -------------------------------------------------------------------------------------------------------------------
+                         far_right_relvotes             right_relvotes             far_right_relvotes             right_relvotes       
+                                (1)                          (2)                          (3)                          (4)             
+---------------------------------------------------------------------------------------------------------------------------------------
+pouvr                         0.042***                      0.004*                      0.047***                     0.006***          
+                              (0.002)                      (0.002)                      (0.002)                      (0.002)           
+                                                                                                                                       
+psup                         -0.139***                    -0.032***                    -0.136***                    -0.040***          
+                              (0.003)                      (0.003)                      (0.004)                      (0.003)           
+                                                                                                                                       
+petr                         -0.450***                    -0.153***                    -0.576***                    -0.130***          
+                              (0.009)                      (0.010)                      (0.010)                      (0.010)           
+                                                                                                                                       
+log(revmoyfoy)               -0.036***                     0.018***                    -0.042***                     0.017***          
+                              (0.002)                      (0.002)                      (0.002)                      (0.002)           
+                                                                                                                                       
+turnout                                                                                -0.380***                     0.112***          
+                                                                                        (0.006)                      (0.006)           
+                                                                                                                                       
+election_typeP                0.050***                    -0.080***                     0.149***                    -0.108***          
+                              (0.001)                      (0.001)                      (0.002)                      (0.002)           
+                                                                                                                                       
+Constant                      0.652***                     -0.039**                     0.910***                    -0.098***          
+                              (0.016)                      (0.017)                      (0.018)                      (0.017)           
+                                                                                                                                       
+---------------------------------------------------------------------------------------------------------------------------------------
+Observations                   68,006                       68,006                       54,134                       68,006           
+R2                             0.158                        0.151                        0.239                        0.156            
+Adjusted R2                    0.158                        0.151                        0.239                        0.156            
+Residual Std. Error      0.092 (df = 68000)           0.097 (df = 68000)           0.084 (df = 54127)           0.097 (df = 67999)     
+F Statistic         2,556.049*** (df = 5; 68000) 2,426.356*** (df = 5; 68000) 2,832.280*** (df = 6; 54127) 2,091.824*** (df = 6; 67999)
+=======================================================================================================================================
+Note:                                                                                                       *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Create coefficient tables for comparison</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>models_coefficients <span class="ot">&lt;-</span> <span class="fu">map_df</span>(<span class="fu">list</span>(model3, model4), <span class="sc">~</span> <span class="fu">tidy</span>(.x, <span class="at">conf.int =</span> T), <span class="at">.id =</span> <span class="st">"model"</span>)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Plotting the coefficients of each models with their confidence intervals</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>models_coefficients <span class="sc">%&gt;%</span> </span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove the intercept</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(term  <span class="sc">!=</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(term, estimate, <span class="at">color =</span> model)) <span class="sc">+</span></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add confidence intervals</span></span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add a dashed line at 0 (0 means no effect)</span></span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Rotate the labels on the x axis</span></span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add a title and change the labels</span></span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Coefficient"</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">title =</span> <span class="st">"Coefficients of the different models"</span>) <span class="sc">+</span></span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Far-right (RN)"</span>, <span class="st">"Right (LR)"</span>), <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="homework2_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">#2.6</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="fu">list</span>(model4), check_collinearity)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+# Check for Multicollinearity
+
+Low Correlation
+
+           Term  VIF   VIF 95% CI adj. VIF Tolerance Tolerance 95% CI
+          pouvr 1.10 [1.09, 1.11]     1.05      0.91     [0.90, 0.92]
+           psup 1.20 [1.19, 1.21]     1.09      0.84     [0.83, 0.84]
+           petr 1.04 [1.03, 1.05]     1.02      0.96     [0.96, 0.97]
+ log(revmoyfoy) 1.11 [1.10, 1.12]     1.05      0.90     [0.89, 0.91]
+
+Moderate Correlation
+
+          Term  VIF   VIF 95% CI adj. VIF Tolerance Tolerance 95% CI
+       turnout 5.07 [5.01, 5.14]     2.25      0.20     [0.19, 0.20]
+ election_type 5.04 [4.97, 5.10]     2.24      0.20     [0.20, 0.20]</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_heteroscedasticity</span>(model4) <span class="co"># Run a Breush-Pagan test</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Warning: Heteroscedasticity (non-constant error variance) detected (p &lt; .001).</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co">#The linear regression is heteroskedastic... The assumption of linearity is not verified.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 
 
 </section>

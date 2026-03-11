@@ -261,7 +261,7 @@ Paul Servais
 <ul>
 <li>Under which assumptions is OLS reliable ?</li>
 <li>Can independent variables interact between each other ?</li>
-<li>What if the dependent variable is not categorical ?
+<li>What if the dependent variable is not continuous ?
 <ul>
 <li>e.g.&nbsp;many policy outcomes are binary :
 <ul>
@@ -418,18 +418,18 @@ lm(formula = W ~ m, data = dat)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--29.872 -11.100   1.963  10.077  38.327 
+-33.222  -8.685  -1.479   9.366  44.385 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  -3.7478     3.1022  -1.208     0.23    
-m            10.0639     0.5333  18.870   &lt;2e-16 ***
+(Intercept)  -0.3687     3.0660   -0.12    0.905    
+m            10.1276     0.5271   19.21   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 15.39 on 98 degrees of freedom
-Multiple R-squared:  0.7842,    Adjusted R-squared:  0.782 
-F-statistic: 356.1 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 15.22 on 98 degrees of freedom
+Multiple R-squared:  0.7902,    Adjusted R-squared:  0.7881 
+F-statistic: 369.2 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
@@ -464,18 +464,18 @@ lm(formula = W ~ m, data = dat)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--149.53 -105.74  -37.43   87.48  284.48 
+-144.80 -103.08  -29.33   82.98  291.36 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -203.878     23.319  -8.743 6.44e-14 ***
-m            100.573      4.009  25.087  &lt; 2e-16 ***
+(Intercept) -207.840     23.031  -9.024 1.59e-14 ***
+m            101.222      3.959  25.565  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 115.7 on 98 degrees of freedom
-Multiple R-squared:  0.8653,    Adjusted R-squared:  0.8639 
-F-statistic: 629.4 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 114.3 on 98 degrees of freedom
+Multiple R-squared:  0.8696,    Adjusted R-squared:  0.8683 
+F-statistic: 653.6 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <ul>
@@ -511,19 +511,19 @@ Call:
 lm(formula = W ~ m, data = dat)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--28.939  -5.747   0.211   5.222  29.907 
+     Min       1Q   Median       3Q      Max 
+-29.3605  -5.6721   0.2374   5.5895  23.1192 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  -0.8592     2.2371  -0.384    0.702    
-m            10.1226     0.3846  26.320   &lt;2e-16 ***
+(Intercept)  -0.5182     1.8483   -0.28     0.78    
+m            10.0984     0.3177   31.78   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 11.1 on 98 degrees of freedom
-Multiple R-squared:  0.8761,    Adjusted R-squared:  0.8748 
-F-statistic: 692.7 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 9.172 on 98 degrees of freedom
+Multiple R-squared:  0.9116,    Adjusted R-squared:  0.9107 
+F-statistic:  1010 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
@@ -545,6 +545,24 @@ F-statistic: 692.7 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb7-5"><a></a>robust_model <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">rlm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">library</span>(performance)</span>
+<span id="cb8-2"><a></a><span class="fu">library</span>(MASS)</span>
+<span id="cb8-3"><a></a><span class="fu">library</span>(stargazer)</span>
+<span id="cb8-4"><a></a></span>
+<span id="cb8-5"><a></a>x <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, <span class="dv">1000</span>, <span class="at">replace =</span> <span class="st">"TRUE"</span>)</span>
+<span id="cb8-6"><a></a></span>
+<span id="cb8-7"><a></a>y <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="dv">0</span>, <span class="dv">10</span>)</span>
+<span id="cb8-8"><a></a>y <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, x)</span>
+<span id="cb8-9"><a></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> y)</span>
+<span id="cb8-10"><a></a></span>
+<span id="cb8-11"><a></a>y <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="dv">0</span>, <span class="dv">10</span><span class="sc">*</span>(x))</span>
+<span id="cb8-12"><a></a>y <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, x)</span>
+<span id="cb8-13"><a></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> y)</span>
+<span id="cb8-14"><a></a></span>
+<span id="cb8-15"><a></a>y <span class="sc">%&gt;%</span> </span>
+<span id="cb8-16"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb8-17"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>)<span class="sc">+</span></span>
+<span id="cb8-18"><a></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure>
@@ -552,9 +570,11 @@ F-statistic: 692.7 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </figure>
 </div>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">mean</span>(model2<span class="sc">$</span>residuals)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 8.039469e-14</code></pre>
+<pre><code>[1] -8.96847e-14</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">plot</span>(model2<span class="sc">$</span>fitted.values, model2<span class="sc">$</span>residuals)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure>
@@ -562,9 +582,16 @@ F-statistic: 692.7 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </figure>
 </div>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">check_heteroscedasticity</span>(model2) <span class="co"># Run a Breush-Pagan test</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Warning: Heteroscedasticity (non-constant error variance) detected (p &lt; .001).</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> y)</span>
+<span id="cb14-2"><a></a><span class="co"># Fit robust regression</span></span>
+<span id="cb14-3"><a></a>robust_model <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">rlm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> y)</span>
+<span id="cb14-4"><a></a></span>
+<span id="cb14-5"><a></a><span class="fu">stargazer</span>(model1, model2, robust_model, <span class="at">align =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb14-6"><a></a>          <span class="at">type =</span> <span class="st">"text"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 =====================================================================
@@ -575,18 +602,18 @@ F-statistic: 692.7 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
                                                              linear  
                                       (1)           (2)        (3)   
 ---------------------------------------------------------------------
-x                                  10.001***     10.064***  9.696*** 
-                                    (0.001)       (0.652)    (0.505) 
+x                                  10.001***      9.676***  9.951*** 
+                                    (0.001)       (0.673)    (0.572) 
                                                                      
-Constant                            -0.121        -12.994    52.310  
-                                    (0.647)      (386.775)  (299.538)
+Constant                            -0.748        290.142    184.293 
+                                    (0.610)      (395.063)  (336.014)
                                                                      
 ---------------------------------------------------------------------
 Observations                         1,000         1,000      1,000  
-R2                                   1.000         0.193             
-Adjusted R2                          1.000         0.192             
-Residual Std. Error (df = 998)       9.848       5,889.111  3,604.280
-F Statistic (df = 1; 998)      84,018,198.000*** 237.946***          
+R2                                   1.000         0.172             
+Adjusted R2                          1.000         0.171             
+Residual Std. Error (df = 998)       9.666       6,260.556  4,278.354
+F Statistic (df = 1; 998)      92,641,501.000*** 206.734***          
 =====================================================================
 Note:                                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 </div>
@@ -605,21 +632,21 @@ Note:                                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</
 W_i = \gamma + \alpha m_i + \beta V_i + \epsilon_i
 \end{equation}\]</span> - You can use <code>check_collinearity(model)</code> - variance inflation factor (VIF) : VIF &gt; 10 is highly colinear</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">library</span>(performance)</span>
-<span id="cb11-2"><a></a></span>
-<span id="cb11-3"><a></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb11-4"><a></a></span>
-<span id="cb11-5"><a></a>m <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>) <span class="sc">/</span> <span class="dv">10</span></span>
-<span id="cb11-6"><a></a></span>
-<span id="cb11-7"><a></a><span class="co"># density of copper ≈ 8920 kg/m^3</span></span>
-<span id="cb11-8"><a></a>v <span class="ot">&lt;-</span> m<span class="sc">/</span><span class="dv">8920</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="fl">0.00001</span>)  <span class="co"># small measurement error</span></span>
-<span id="cb11-9"><a></a></span>
-<span id="cb11-10"><a></a>y <span class="ot">&lt;-</span> <span class="fl">9.81</span><span class="sc">*</span>m <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">10</span>)</span>
-<span id="cb11-11"><a></a></span>
-<span id="cb11-12"><a></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> m)</span>
-<span id="cb11-13"><a></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> m <span class="sc">+</span> v)</span>
-<span id="cb11-14"><a></a></span>
-<span id="cb11-15"><a></a><span class="fu">summary</span>(model1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">library</span>(performance)</span>
+<span id="cb16-2"><a></a></span>
+<span id="cb16-3"><a></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb16-4"><a></a></span>
+<span id="cb16-5"><a></a>m <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>) <span class="sc">/</span> <span class="dv">10</span></span>
+<span id="cb16-6"><a></a></span>
+<span id="cb16-7"><a></a><span class="co"># density of copper ≈ 8920 kg/m^3</span></span>
+<span id="cb16-8"><a></a>v <span class="ot">&lt;-</span> m<span class="sc">/</span><span class="dv">8920</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="fl">0.00001</span>)  <span class="co"># small measurement error</span></span>
+<span id="cb16-9"><a></a></span>
+<span id="cb16-10"><a></a>y <span class="ot">&lt;-</span> <span class="fl">9.81</span><span class="sc">*</span>m <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">10</span>)</span>
+<span id="cb16-11"><a></a></span>
+<span id="cb16-12"><a></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> m)</span>
+<span id="cb16-13"><a></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> m <span class="sc">+</span> v)</span>
+<span id="cb16-14"><a></a></span>
+<span id="cb16-15"><a></a><span class="fu">summary</span>(model1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -640,7 +667,7 @@ Residual standard error: 10.97 on 98 degrees of freedom
 Multiple R-squared:  0.8741,    Adjusted R-squared:  0.8728 
 F-statistic: 680.6 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">summary</span>(model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">summary</span>(model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -660,7 +687,7 @@ Residual standard error: 11.02 on 97 degrees of freedom
 Multiple R-squared:  0.8742,    Adjusted R-squared:  0.8716 
 F-statistic: 337.1 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">check_collinearity</span>(model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">check_collinearity</span>(model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Check for Multicollinearity
 
@@ -682,14 +709,14 @@ High Correlation
 <li>In more tricky cases, you can use principal component analysis to determine your main predictor (not covered here)</li>
 </ul>
 </section>
-<section id="another-example" class="slide level2">
+<section id="another-example" class="slide level2 scrollable">
 <h2>Another example</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">library</span>(performance)</span>
-<span id="cb17-2"><a></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(far_right_relvotes <span class="sc">~</span> pagri<span class="sc">+</span>pindp<span class="sc">+</span>pcadr<span class="sc">+</span>ppint<span class="sc">+</span>pempl<span class="sc">+</span>pouvr<span class="sc">+</span>sup, <span class="at">data =</span> elections2024 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dens <span class="sc">==</span> <span class="st">"Urbain intermédiaire"</span>))</span>
-<span id="cb17-3"><a></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(far_right_relvotes <span class="sc">~</span> pcadr<span class="sc">+</span>pouvr<span class="sc">+</span>dens, <span class="at">data =</span> elections2024)</span>
-<span id="cb17-4"><a></a></span>
-<span id="cb17-5"><a></a><span class="fu">summary</span>(model1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="fu">library</span>(performance)</span>
+<span id="cb22-2"><a></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(far_right_relvotes <span class="sc">~</span> pagri<span class="sc">+</span>pindp<span class="sc">+</span>pcadr<span class="sc">+</span>ppint<span class="sc">+</span>pempl<span class="sc">+</span>pouvr<span class="sc">+</span>sup, <span class="at">data =</span> elections2024 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dens <span class="sc">==</span> <span class="st">"Urbain intermédiaire"</span>))</span>
+<span id="cb22-3"><a></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(far_right_relvotes <span class="sc">~</span> pcadr<span class="sc">+</span>pouvr<span class="sc">+</span>dens, <span class="at">data =</span> elections2024)</span>
+<span id="cb22-4"><a></a></span>
+<span id="cb22-5"><a></a><span class="fu">summary</span>(model1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -718,7 +745,7 @@ Residual standard error: 0.08299 on 3484 degrees of freedom
 Multiple R-squared:  0.2886,    Adjusted R-squared:  0.2871 
 F-statistic: 201.9 on 7 and 3484 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">summary</span>(model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">summary</span>(model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -743,7 +770,7 @@ Residual standard error: 0.1067 on 34038 degrees of freedom
 Multiple R-squared:  0.05972,   Adjusted R-squared:  0.05961 
 F-statistic: 540.4 on 4 and 34038 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">check_collinearity</span>(model1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">check_collinearity</span>(model1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Check for Multicollinearity
 
@@ -762,7 +789,7 @@ Moderate Correlation
  pempl 8.39 [7.89, 8.93]     2.90      0.12     [0.11, 0.13]
  pouvr 8.84 [8.31, 9.41]     2.97      0.11     [0.11, 0.12]</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">check_collinearity</span>(model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="fu">check_collinearity</span>(model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Check for Multicollinearity
 
@@ -774,7 +801,25 @@ Low Correlation
   dens 1.03 [1.02, 1.04]     1.01      0.97     [0.96, 0.98]</code></pre>
 </div>
 </div>
-</section></section>
+</section>
+<section id="influential-points" class="slide level2">
+<h2>Influential points</h2>
+<ul>
+<li>Outlier</li>
+</ul>
+
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
+<section id="influential-points-1" class="slide level2">
+<h2>Influential points</h2>
+<ul>
+<li>High leverage point</li>
+</ul>
+
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
+<section id="influential-point" class="slide level2">
+<h2>Influential point</h2>
+
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section></section>
 <section>
 <section id="interactions-in-linear-regressions" class="title-slide slide level1 center">
 <h1>Interactions in linear regressions</h1>
@@ -804,40 +849,40 @@ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \gamma X_1 X_2 + ... + \epsilon
 <li>Use <code>ggpredict()</code> to visualise and interpret</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>elections2024 <span class="ot">&lt;-</span> elections2024 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dens <span class="sc">==</span> <span class="st">"Urbain intermédiaire"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-2"><a></a>               <span class="fu">mutate</span>(<span class="at">petr =</span> etranger<span class="sc">/</span>pop, <span class="at">psup =</span> sup<span class="sc">/</span>pop, <span class="at">pnodip =</span> nodip<span class="sc">/</span>pop, <span class="at">log_revmoyfoy =</span> <span class="fu">log</span>(revmoyfoy))</span>
-<span id="cb25-3"><a></a></span>
-<span id="cb25-4"><a></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> elections2024,</span>
-<span id="cb25-5"><a></a>             far_right_relvotes <span class="sc">~</span> log_revmoyfoy <span class="sc">+</span>psup <span class="sc">+</span> log_revmoyfoy<span class="sc">*</span>psup <span class="sc">+</span>petr<span class="sc">+</span> pagri<span class="sc">+</span>pouvr<span class="sc">+</span> pcadr<span class="sc">+</span>age<span class="sc">+</span><span class="fu">log</span>(prixbien)<span class="sc">+</span>pempl<span class="sc">+</span>ppint<span class="sc">+</span>pindp<span class="sc">+</span>psup<span class="sc">+</span>pnodip)</span>
-<span id="cb25-6"><a></a></span>
-<span id="cb25-7"><a></a><span class="fu">library</span>(ggeffects)</span>
-<span id="cb25-8"><a></a></span>
-<span id="cb25-9"><a></a><span class="fu">ggpredict</span>(model3, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"log_revmoyfoy"</span>, <span class="st">"psup"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb25-10"><a></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb25-11"><a></a>  <span class="fu">mutate</span>(</span>
-<span id="cb25-12"><a></a>    <span class="at">group =</span> <span class="fu">factor</span>(</span>
-<span id="cb25-13"><a></a>      group,</span>
-<span id="cb25-14"><a></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"0.14"</span>, <span class="st">"0.23"</span>, <span class="st">"0.32"</span>),</span>
-<span id="cb25-15"><a></a>      <span class="at">labels =</span> <span class="fu">c</span>(</span>
-<span id="cb25-16"><a></a>        <span class="st">"Low share of higher education (14%)"</span>,</span>
-<span id="cb25-17"><a></a>        <span class="st">"Medium share of higher education (23%)"</span>,</span>
-<span id="cb25-18"><a></a>        <span class="st">"High share of higher education (32%)"</span></span>
-<span id="cb25-19"><a></a>      )</span>
-<span id="cb25-20"><a></a>    )</span>
-<span id="cb25-21"><a></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb25-22"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, predicted, <span class="at">color =</span> group, <span class="at">fill =</span> group)) <span class="sc">+</span> </span>
-<span id="cb25-23"><a></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb25-24"><a></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb25-25"><a></a>  <span class="fu">labs</span>(</span>
-<span id="cb25-26"><a></a>    <span class="at">color =</span> <span class="st">"Share with higher education"</span>,</span>
-<span id="cb25-27"><a></a>    <span class="at">fill  =</span> <span class="st">"Share with higher education"</span></span>
-<span id="cb25-28"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>elections2024 <span class="ot">&lt;-</span> elections2024 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dens <span class="sc">==</span> <span class="st">"Urbain intermédiaire"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-2"><a></a>               <span class="fu">mutate</span>(<span class="at">petr =</span> etranger<span class="sc">/</span>pop, <span class="at">psup =</span> sup<span class="sc">/</span>pop, <span class="at">pnodip =</span> nodip<span class="sc">/</span>pop, <span class="at">log_revmoyfoy =</span> <span class="fu">log</span>(revmoyfoy))</span>
+<span id="cb30-3"><a></a></span>
+<span id="cb30-4"><a></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> elections2024,</span>
+<span id="cb30-5"><a></a>             far_right_relvotes <span class="sc">~</span> log_revmoyfoy <span class="sc">+</span>psup <span class="sc">+</span> log_revmoyfoy<span class="sc">*</span>psup <span class="sc">+</span>petr<span class="sc">+</span> pagri<span class="sc">+</span>pouvr<span class="sc">+</span> pcadr<span class="sc">+</span>age<span class="sc">+</span><span class="fu">log</span>(prixbien)<span class="sc">+</span>pempl<span class="sc">+</span>ppint<span class="sc">+</span>pindp<span class="sc">+</span>psup<span class="sc">+</span>pnodip)</span>
+<span id="cb30-6"><a></a></span>
+<span id="cb30-7"><a></a><span class="fu">library</span>(ggeffects)</span>
+<span id="cb30-8"><a></a></span>
+<span id="cb30-9"><a></a><span class="fu">ggpredict</span>(model3, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"log_revmoyfoy"</span>, <span class="st">"psup"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb30-10"><a></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb30-11"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb30-12"><a></a>    <span class="at">group =</span> <span class="fu">factor</span>(</span>
+<span id="cb30-13"><a></a>      group,</span>
+<span id="cb30-14"><a></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"0.14"</span>, <span class="st">"0.23"</span>, <span class="st">"0.32"</span>),</span>
+<span id="cb30-15"><a></a>      <span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb30-16"><a></a>        <span class="st">"Low share of higher education (14%)"</span>,</span>
+<span id="cb30-17"><a></a>        <span class="st">"Medium share of higher education (23%)"</span>,</span>
+<span id="cb30-18"><a></a>        <span class="st">"High share of higher education (32%)"</span></span>
+<span id="cb30-19"><a></a>      )</span>
+<span id="cb30-20"><a></a>    )</span>
+<span id="cb30-21"><a></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb30-22"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, predicted, <span class="at">color =</span> group, <span class="at">fill =</span> group)) <span class="sc">+</span> </span>
+<span id="cb30-23"><a></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb30-24"><a></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb30-25"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb30-26"><a></a>    <span class="at">color =</span> <span class="st">"Share with higher education"</span>,</span>
+<span id="cb30-27"><a></a>    <span class="at">fill  =</span> <span class="st">"Share with higher education"</span></span>
+<span id="cb30-28"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="you-get-with-continuous-variables" class="slide level2">
 <h2>You get with continuous variables</h2>
 
-<img data-src="correction_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section></section>
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch"></section></section>
 <section>
 <section id="non-linear-models" class="title-slide slide level1 center">
 <h1>Non-linear models</h1>
@@ -855,11 +900,11 @@ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \gamma X_1 X_2 + ... + \epsilon
 <section id="your-scatter-plot" class="slide level2">
 <h2>Your scatter plot</h2>
 
-<img data-src="correction_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-20-1.png" width="960" class="r-stretch"></section>
 <section id="a-linear-regression" class="slide level2">
 <h2>A linear regression</h2>
 
-<img data-src="correction_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch"></section>
 <section id="a-linear-regression-1" class="slide level2">
 <h2>A linear regression</h2>
 <ul>
@@ -877,7 +922,7 @@ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \gamma X_1 X_2 + ... + \epsilon
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="correction_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></p>
+<p><img data-src="correction_files/figure-revealjs/unnamed-chunk-22-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -889,7 +934,7 @@ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \gamma X_1 X_2 + ... + \epsilon
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="correction_files/figure-revealjs/unnamed-chunk-20-1.png" width="960"></p>
+<p><img data-src="correction_files/figure-revealjs/unnamed-chunk-23-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -898,11 +943,11 @@ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \gamma X_1 X_2 + ... + \epsilon
 <section id="a-logistic-regression" class="slide level2">
 <h2>A logistic regression</h2>
 
-<img data-src="correction_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch"></section>
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-24-1.png" width="960" class="r-stretch"></section>
 <section id="a-logistic-regression-1" class="slide level2">
 <h2>A logistic regression</h2>
 
-<img data-src="correction_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch"></section>
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" class="r-stretch"></section>
 <section id="logistic-regression" class="slide level2">
 <h2>Logistic regression</h2>
 <ul>
@@ -918,7 +963,7 @@ Y = \beta_0 + \beta_1 X
 <section id="different-logistic-regressions" class="slide level2">
 <h2>Different logistic regressions</h2>
 
-<img data-src="correction_files/figure-revealjs/unnamed-chunk-23-1.png" width="960" class="r-stretch"></section>
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch"></section>
 <section id="finding-these-parameters" class="slide level2">
 <h2>Finding these parameters</h2>
 <ul>
@@ -936,10 +981,10 @@ Y = \beta_0 + \beta_1 X
 <li>You can perform a logistic regression in R using <code>glm</code>:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>logit_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(binary_var <span class="sc">~</span> continuous_var, </span>
-<span id="cb26-2"><a></a>                   <span class="at">data =</span> your_data,</span>
-<span id="cb26-3"><a></a>                   <span class="at">family =</span> <span class="st">'binomial'</span>)</span>
-<span id="cb26-4"><a></a><span class="fu">summary</span>(logit_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>logit_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(binary_var <span class="sc">~</span> continuous_var, </span>
+<span id="cb31-2"><a></a>                   <span class="at">data =</span> your_data,</span>
+<span id="cb31-3"><a></a>                   <span class="at">family =</span> <span class="st">'binomial'</span>)</span>
+<span id="cb31-4"><a></a><span class="fu">summary</span>(logit_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -972,12 +1017,12 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <section id="coming-back-to-our-made-up-data" class="slide level2 scrollable">
 <h2>Coming back to our made-up data…</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="fu">library</span>(ggeffects)</span>
-<span id="cb28-2"><a></a></span>
-<span id="cb28-3"><a></a><span class="co"># like the predcit() function of Base R, we use ggpredict() and specify</span></span>
-<span id="cb28-4"><a></a><span class="co"># our variable of interest</span></span>
-<span id="cb28-5"><a></a>predicted_probs <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(logit_model, <span class="at">terms =</span> <span class="st">"continuous_var"</span>)</span>
-<span id="cb28-6"><a></a>predicted_probs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="fu">library</span>(ggeffects)</span>
+<span id="cb33-2"><a></a></span>
+<span id="cb33-3"><a></a><span class="co"># like the predcit() function of Base R, we use ggpredict() and specify</span></span>
+<span id="cb33-4"><a></a><span class="co"># our variable of interest</span></span>
+<span id="cb33-5"><a></a>predicted_probs <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(logit_model, <span class="at">terms =</span> <span class="st">"continuous_var"</span>)</span>
+<span id="cb33-6"><a></a>predicted_probs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Predicted probabilities of binary_var
 
@@ -993,39 +1038,311 @@ continuous_var | Predicted |     95% CI
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="co"># this is the simplest way of plotting this</span></span>
-<span id="cb30-2"><a></a><span class="fu">ggplot</span>(predicted_probs, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> predicted)) <span class="sc">+</span></span>
-<span id="cb30-3"><a></a>  <span class="co"># our graph is more or less a line, so geom_line() applies</span></span>
-<span id="cb30-4"><a></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb30-5"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb30-6"><a></a>  <span class="co"># geom_ribbon() with the values that ggpredict() provided for the confidence</span></span>
-<span id="cb30-7"><a></a>  <span class="co"># intervals then gives</span></span>
-<span id="cb30-8"><a></a>  <span class="co"># us a shade around the geom_()line as CIs</span></span>
-<span id="cb30-9"><a></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), <span class="at">fill =</span> <span class="st">"grey"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb30-10"><a></a>  <span class="fu">labs</span>(</span>
-<span id="cb30-11"><a></a>    <span class="at">title =</span> <span class="st">"Predicted Probability of Voting by Political Interest"</span>,</span>
-<span id="cb30-12"><a></a>    <span class="at">x =</span> <span class="st">"Political Interest"</span>,</span>
-<span id="cb30-13"><a></a>    <span class="at">y =</span> <span class="st">"Predicted Probability of Voting"</span></span>
-<span id="cb30-14"><a></a>  ) <span class="sc">+</span> </span>
-<span id="cb30-15"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb30-16"><a></a>  <span class="fu">theme</span>(</span>
-<span id="cb30-17"><a></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
-<span id="cb30-18"><a></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb30-19"><a></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>)</span>
-<span id="cb30-20"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="co"># this is the simplest way of plotting this</span></span>
+<span id="cb35-2"><a></a><span class="fu">ggplot</span>(predicted_probs, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> predicted)) <span class="sc">+</span></span>
+<span id="cb35-3"><a></a>  <span class="co"># our graph is more or less a line, so geom_line() applies</span></span>
+<span id="cb35-4"><a></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb35-5"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb35-6"><a></a>  <span class="co"># geom_ribbon() with the values that ggpredict() provided for the confidence</span></span>
+<span id="cb35-7"><a></a>  <span class="co"># intervals then gives</span></span>
+<span id="cb35-8"><a></a>  <span class="co"># us a shade around the geom_()line as CIs</span></span>
+<span id="cb35-9"><a></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), <span class="at">fill =</span> <span class="st">"grey"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb35-10"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb35-11"><a></a>    <span class="at">title =</span> <span class="st">"Predicted Probability of Voting by Political Interest"</span>,</span>
+<span id="cb35-12"><a></a>    <span class="at">x =</span> <span class="st">"Political Interest"</span>,</span>
+<span id="cb35-13"><a></a>    <span class="at">y =</span> <span class="st">"Predicted Probability of Voting"</span></span>
+<span id="cb35-14"><a></a>  ) <span class="sc">+</span> </span>
+<span id="cb35-15"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb35-16"><a></a>  <span class="fu">theme</span>(</span>
+<span id="cb35-17"><a></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb35-18"><a></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb35-19"><a></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>)</span>
+<span id="cb35-20"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="predicted-probabilities" class="slide level2">
 <h2>Predicted probabilities</h2>
 
-<img data-src="correction_files/figure-revealjs/unnamed-chunk-29-1.png" width="960" class="r-stretch"></section></section>
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-32-1.png" width="960" class="r-stretch"></section></section>
 <section>
 <section id="exercices" class="title-slide slide level1 center">
 <h1>Exercices</h1>
 
 </section>
-<section id="exercice-1" class="slide level2">
+<section id="exercice-1" class="slide level2 scrollable">
 <h2>Exercice 1</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a><span class="fu">library</span>(rio)</span>
+<span id="cb36-2"><a></a><span class="fu">library</span>(performance)</span>
+<span id="cb36-3"><a></a></span>
+<span id="cb36-4"><a></a>data <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"https://github.com/paulservais-1/methods_policyevaluation/raw/main/homeworks/data/schooltutorprog.csv"</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(test_score <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> test_score <span class="sc">&lt;=</span><span class="dv">100</span>)</span>
+<span id="cb36-5"><a></a><span class="fu">glimpse</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 465
+Columns: 7
+$ test_score         &lt;dbl&gt; 49.24914, 71.08647, 73.70798, 67.41474, 63.14723, 9…
+$ treatment          &lt;int&gt; 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, …
+$ income             &lt;int&gt; 20229, 38976, 32547, 16443, 24793, 44863, 8160, 261…
+$ parent_edu         &lt;int&gt; 14, 12, 11, 15, 16, 16, 9, 10, 7, 11, 13, 12, 18, 1…
+$ school_funding     &lt;int&gt; 4197, 13112, 11559, 2435, 8625, 8788, 1941, 5006, 1…
+$ class_size         &lt;int&gt; 33, 33, 22, 24, 17, 21, 18, 27, 22, 19, 23, 19, 27,…
+$ teacher_experience &lt;int&gt; 1, 5, 19, 17, 3, 9, 15, 14, 2, 14, 8, 19, 11, 14, 1…</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="fu">summary</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   test_score       treatment          income        parent_edu   
+ Min.   : 5.726   Min.   :0.0000   Min.   : 2000   Min.   : 2.00  
+ 1st Qu.:63.036   1st Qu.:0.0000   1st Qu.:23192   1st Qu.:10.00  
+ Median :74.404   Median :0.0000   Median :28907   Median :12.00  
+ Mean   :71.203   Mean   :0.4473   Mean   :29090   Mean   :11.77  
+ 3rd Qu.:82.192   3rd Qu.:1.0000   3rd Qu.:35164   3rd Qu.:14.00  
+ Max.   :99.968   Max.   :1.0000   Max.   :56628   Max.   :20.00  
+ school_funding    class_size    teacher_experience
+ Min.   :  445   Min.   :15.00   Min.   : 0.00     
+ 1st Qu.: 6521   1st Qu.:22.00   1st Qu.: 8.00     
+ Median : 8914   Median :25.00   Median :12.00     
+ Mean   : 8836   Mean   :24.93   Mean   :12.18     
+ 3rd Qu.:10889   3rd Qu.:28.00   3rd Qu.:16.00     
+ Max.   :20351   Max.   :39.00   Max.   :29.00     </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a>data <span class="sc">%&gt;%</span> <span class="fu">count</span>(treatment)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  treatment   n
+1         0 257
+2         1 208</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>data <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
+<span id="cb42-2"><a></a>  <span class="at">mean_score =</span> <span class="fu">mean</span>(test_score),</span>
+<span id="cb42-3"><a></a>  <span class="at">sd_score =</span> <span class="fu">sd</span>(test_score),</span>
+<span id="cb42-4"><a></a>  <span class="at">min_score =</span> <span class="fu">min</span>(test_score),</span>
+<span id="cb42-5"><a></a>  <span class="at">max_score =</span> <span class="fu">max</span>(test_score),</span>
+<span id="cb42-6"><a></a>  <span class="at">mean_income =</span> <span class="fu">mean</span>(income)</span>
+<span id="cb42-7"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  mean_score sd_score min_score max_score mean_income
+1   71.20339  17.8784  5.725896  99.96766    29090.45</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(test_score <span class="sc">~</span> treatment, <span class="at">data =</span> data)</span>
+<span id="cb44-2"><a></a><span class="fu">summary</span>(model1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = test_score ~ treatment, data = data)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-69.93  -7.79   3.04  11.31  31.23 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   67.603      1.088  62.133  &lt; 2e-16 ***
+treatment      8.049      1.627   4.948 1.05e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 17.44 on 463 degrees of freedom
+Multiple R-squared:  0.05022,   Adjusted R-squared:  0.04817 
+F-statistic: 24.48 on 1 and 463 DF,  p-value: 1.053e-06</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(test_score <span class="sc">~</span> treatment <span class="sc">+</span> income <span class="sc">+</span> parent_edu <span class="sc">+</span></span>
+<span id="cb46-2"><a></a>             class_size <span class="sc">+</span> teacher_experience <span class="sc">+</span> school_funding,</span>
+<span id="cb46-3"><a></a>             <span class="at">data =</span> data)</span>
+<span id="cb46-4"><a></a></span>
+<span id="cb46-5"><a></a><span class="fu">summary</span>(model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = test_score ~ treatment + income + parent_edu + class_size + 
+    teacher_experience + school_funding, data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-63.995  -6.372   2.599  10.133  28.789 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)        41.8099645  5.8479179   7.150 3.46e-12 ***
+treatment           3.9206510  1.5928098   2.461  0.01420 *  
+income              0.0007223  0.0001238   5.836 1.01e-08 ***
+parent_edu          1.2591914  0.2572074   4.896 1.36e-06 ***
+class_size         -0.3782983  0.1575814  -2.401  0.01676 *  
+teacher_experience  0.4278321  0.1335590   3.203  0.00145 ** 
+school_funding     -0.0004489  0.0003293  -1.363  0.17355    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 16.14 on 458 degrees of freedom
+Multiple R-squared:  0.1958,    Adjusted R-squared:  0.1853 
+F-statistic: 18.59 on 6 and 458 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a><span class="fu">stargazer</span>(model1, model2, <span class="at">type =</span> <span class="st">"text"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+===================================================================
+                                  Dependent variable:              
+                    -----------------------------------------------
+                                      test_score                   
+                              (1)                     (2)          
+-------------------------------------------------------------------
+treatment                  8.049***                 3.921**        
+                            (1.627)                 (1.593)        
+                                                                   
+income                                             0.001***        
+                                                   (0.0001)        
+                                                                   
+parent_edu                                         1.259***        
+                                                    (0.257)        
+                                                                   
+class_size                                         -0.378**        
+                                                    (0.158)        
+                                                                   
+teacher_experience                                 0.428***        
+                                                    (0.134)        
+                                                                   
+school_funding                                      -0.0004        
+                                                   (0.0003)        
+                                                                   
+Constant                   67.603***               41.810***       
+                            (1.088)                 (5.848)        
+                                                                   
+-------------------------------------------------------------------
+Observations                  465                     465          
+R2                           0.050                   0.196         
+Adjusted R2                  0.048                   0.185         
+Residual Std. Error    17.443 (df = 463)       16.137 (df = 458)   
+F Statistic         24.480*** (df = 1; 463) 18.585*** (df = 6; 458)
+===================================================================
+Note:                                   *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a><span class="fu">check_collinearity</span>(model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Check for Multicollinearity
+
+Low Correlation
+
+               Term  VIF      VIF 95% CI adj. VIF Tolerance Tolerance 95% CI
+          treatment 1.12 [1.05,    1.30]     1.06      0.89     [0.77, 0.95]
+             income 2.15 [1.89,    2.49]     1.47      0.46     [0.40, 0.53]
+         parent_edu 1.06 [1.01,    1.33]     1.03      0.95     [0.75, 0.99]
+         class_size 1.02 [1.00,    2.33]     1.01      0.98     [0.43, 1.00]
+ teacher_experience 1.01 [1.00, 5617.22]     1.00      0.99     [0.00, 1.00]
+     school_funding 2.09 [1.84,    2.41]     1.44      0.48     [0.41, 0.54]</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a><span class="fu">check_heteroskedasticity</span>(model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OK: Error variance appears to be homoscedastic (p = 0.639).</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a><span class="fu">plot</span>(model2, <span class="at">which =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="correction_files/figure-revealjs/unnamed-chunk-33-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a></a>model_rlm <span class="ot">&lt;-</span> <span class="fu">rlm</span>(test_score <span class="sc">~</span> treatment <span class="sc">+</span> income <span class="sc">+</span> parent_edu <span class="sc">+</span></span>
+<span id="cb55-2"><a></a>                 class_size <span class="sc">+</span> teacher_experience <span class="sc">+</span> school_funding,</span>
+<span id="cb55-3"><a></a>                 <span class="at">data =</span> data)</span>
+<span id="cb55-4"><a></a></span>
+<span id="cb55-5"><a></a><span class="fu">summary</span>(model_rlm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call: rlm(formula = test_score ~ treatment + income + parent_edu + 
+    class_size + teacher_experience + school_funding, data = data)
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-67.1722  -8.1904   0.6163   7.4985  26.5693 
+
+Coefficients:
+                   Value   Std. Error t value
+(Intercept)        42.9202  4.4358     9.6760
+treatment           4.0703  1.2082     3.3690
+income              0.0007  0.0001     7.7257
+parent_edu          1.1670  0.1951     5.9819
+class_size         -0.3958  0.1195    -3.3115
+teacher_experience  0.4962  0.1013     4.8976
+school_funding     -0.0003  0.0002    -1.1221
+
+Residual standard error: 11.7 on 458 degrees of freedom</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a></a><span class="fu">stargazer</span>(model2, model_rlm, <span class="at">type =</span> <span class="st">"text"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+================================================================
+                                      Dependent variable:       
+                               ---------------------------------
+                                          test_score            
+                                         OLS            robust  
+                                                        linear  
+                                         (1)              (2)   
+----------------------------------------------------------------
+treatment                              3.921**         4.070*** 
+                                       (1.593)          (1.208) 
+                                                                
+income                                0.001***         0.001*** 
+                                      (0.0001)         (0.0001) 
+                                                                
+parent_edu                            1.259***         1.167*** 
+                                       (0.257)          (0.195) 
+                                                                
+class_size                            -0.378**         -0.396***
+                                       (0.158)          (0.120) 
+                                                                
+teacher_experience                    0.428***         0.496*** 
+                                       (0.134)          (0.101) 
+                                                                
+school_funding                         -0.0004          -0.0003 
+                                      (0.0003)         (0.0002) 
+                                                                
+Constant                              41.810***        42.920***
+                                       (5.848)          (4.436) 
+                                                                
+----------------------------------------------------------------
+Observations                             465              465   
+R2                                      0.196                   
+Adjusted R2                             0.185                   
+Residual Std. Error (df = 458)         16.137           11.696  
+F Statistic                    18.585*** (df = 6; 458)          
+================================================================
+Note:                                *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a></a>pred <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(model2, <span class="at">terms =</span> <span class="st">"income"</span>)</span>
+<span id="cb59-2"><a></a><span class="fu">head</span>(pred)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Predicted values of test_score
+
+income | Predicted |       95% CI
+---------------------------------
+  2000 |     50.04 | 43.32, 56.76
+  4000 |     51.48 | 45.23, 57.74
+  6000 |     52.93 | 47.13, 58.73
+  8000 |     54.37 | 49.03, 59.72
+ 10000 |     55.82 | 50.92, 60.72
+ 12000 |     57.26 | 52.80, 61.72
+
+Adjusted for:
+*          treatment =    0.00
+*         parent_edu =   12.00
+*         class_size =   25.00
+* teacher_experience =   12.00
+*     school_funding = 8914.00</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a></a><span class="fu">ggplot</span>(pred, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> predicted)) <span class="sc">+</span></span>
+<span id="cb61-2"><a></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb61-3"><a></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb61-4"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb61-5"><a></a>    <span class="at">x =</span> <span class="st">"Income"</span>,</span>
+<span id="cb61-6"><a></a>    <span class="at">y =</span> <span class="st">"Predicted test score"</span>,</span>
+<span id="cb61-7"><a></a>    <span class="at">title =</span> <span class="st">"Predicted test score as a function of income"</span></span>
+<span id="cb61-8"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="correction_files/figure-revealjs/unnamed-chunk-33-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section></section>
