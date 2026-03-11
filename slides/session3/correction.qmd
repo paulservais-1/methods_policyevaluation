@@ -29,7 +29,7 @@ format: revealjs
 # Yet we did not discuss
 - Under which assumptions is OLS reliable ?
 - Can independent variables interact between each other ?
-- What if the dependent variable is not categorical ?
+- What if the dependent variable is not continuous ?
   - e.g. many policy outcomes are binary : 
     - did the policy increase school enrollment ?
     - did the policy increase program participation ?
@@ -329,7 +329,8 @@ robust_model <- MASS::rlm(y ~ x, data = y)
 
 ```
 ```{r}
-
+#| echo: true
+#| eval: true
 library(performance)
 library(MASS)
 library(stargazer)
@@ -399,7 +400,7 @@ check_collinearity(model2)
 
 - In more tricky cases, you can use principal component analysis to determine your main predictor (not covered here)
 
-## Another example
+## Another example {.scrollable}
 ```{r}
 #| echo: true
 library(performance)
@@ -412,6 +413,131 @@ summary(model2)
 check_collinearity(model1)
 check_collinearity(model2)
 
+```
+## Influential points
+- Outlier 
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(patchwork) # optional, to combine plots
+set.seed(123)
+# Base data
+n <- 30
+data_base <- tibble(
+  x = rnorm(n, 5, 1),
+  y = 2*x + rnorm(n, 0, 1)
+)
+
+# Add outlier (extreme Y, normal X)
+outlier <- tibble(
+  x = 5,
+  y = 20
+)
+
+data_outlier <- bind_rows(data_base, outlier)
+
+# Flag points
+data_outlier <- data_outlier %>%
+  mutate(type = ifelse(row_number() == n()+1, "Outlier", "Normal"))
+
+# Plot
+plot_outlier <- ggplot(data_outlier, aes(x, y)) +
+  geom_point(aes(color = type), size = 3) +
+
+  # regression with outlier
+  geom_smooth(method = "lm", se = FALSE, color = "red", linewidth = 1.2) +
+
+  # regression without outlier
+  geom_smooth(
+    data = data_base,
+    method = "lm",
+    se = FALSE,
+    color = "blue",
+    linewidth = 1.2,
+    linetype = "dashed"
+  ) +
+
+  scale_color_manual(values = c("black", "red")) +
+
+  labs(
+    title = "Effect of an Outlier on Regression",
+    subtitle = "Red line: with outlier | Blue dashed line: without outlier",
+    color = ""
+  ) +
+
+  theme_minimal(base_size = 16)
+
+plot_outlier
+```
+
+## Influential points
+- High leverage point 
+
+```{r}
+# High leverage point (extreme X)
+high_leverage <- tibble(
+  x = 12,
+  y = 2*12 + rnorm(1, 0, 1)
+)
+
+data_leverage <- bind_rows(data_base, high_leverage)
+
+# Flag points
+data_leverage <- data_leverage %>%
+  mutate(type = ifelse(row_number() == n()+1, "High leverage", "Normal"))
+
+# Plot
+plot_leverage <- ggplot(data_leverage, aes(x, y)) +
+  geom_point(aes(color = type), size = 3) +
+
+  # regression with leverage point
+  geom_smooth(method = "lm", se = FALSE, color = "red", linewidth = 1.2) +
+
+  # regression without leverage point
+  geom_smooth(
+    data = data_base,
+    method = "lm",
+    se = FALSE,
+    color = "blue",
+    linewidth = 1.2,
+    linetype = "dashed"
+  ) +
+
+  scale_color_manual(values = c("black", "red")) +
+
+  labs(
+    title = "Effect of a High Leverage Point on Regression",
+    subtitle = "Red line: with leverage point | Blue dashed line: without leverage point",
+    color = ""
+  ) +
+
+  theme_minimal(base_size = 16)
+
+plot_leverage
+```
+
+## Influential point
+```{r}
+influential <- tibble(
+  x = 12,
+  y = 35
+)
+
+data_influential <- bind_rows(data_base, influential) %>%
+  mutate(type = ifelse(row_number() == n()+1, "Influential", "Normal"))
+
+ggplot(data_influential, aes(x, y)) +
+  geom_point(aes(color = type), size = 3) +
+  geom_smooth(method = "lm", se = FALSE, color = "red", linewidth = 1.2) +
+  geom_smooth(data = data_base, method = "lm", se = FALSE,
+              color = "blue", linewidth = 1.2, linetype = "dashed") +
+  scale_color_manual(values = c("black", "red")) +
+  labs(
+    title = "Influential Point (High Leverage + Outlier)",
+    subtitle = "Largest impact on regression slope"
+  ) +
+  theme_minimal(base_size = 16)
 ```
 # Interactions in linear regressions
 
@@ -963,10 +1089,10 @@ ggplot(predicted_probs, aes(x = x, y = predicted)) +
 
 # Exercices 
 
-## Exercice 1 
+## Exercice 1 {.scrollable}
 ```{r}
-#| eval: false
-#| echo: false
+#| eval: true
+#| echo: true
 library(rio)
 library(performance)
 

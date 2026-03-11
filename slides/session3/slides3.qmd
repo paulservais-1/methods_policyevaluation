@@ -29,7 +29,7 @@ format: revealjs
 # Yet we did not discuss
 - Under which assumptions is OLS reliable ?
 - Can independent variables interact between each other ?
-- What if the dependent variable is not categorical ?
+- What if the dependent variable is not continuous ?
   - e.g. many policy outcomes are binary : 
     - did the policy increase school enrollment ?
     - did the policy increase program participation ?

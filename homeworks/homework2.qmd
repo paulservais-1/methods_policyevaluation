@@ -60,7 +60,7 @@ Luxembourg -- plus Iceland, Norway, Switzerland, Turkey, and the United Kingdom.
 adopts the country code and party id schema of the CHES Trend file (Jolly et al. 2022) and the
 Speed CHES survey on Ukraine (Hooghe et al. 2024) with extensions for newly covered parties" (see [documentation of CHES](https://static1.squarespace.com/static/5975c9bfdb29d6a05c65209b/t/69163d62e2606b5a3c46812b/1763065186525/CHES+2024+Codebook.pdf)). 
 
-You can find the recent survey's dataset on the internet at <https://www.chesdata.eu/s/1999-2024_CHES_dataset_means.csv>, to perform the following tasks :  
+You can find the recent survey's dataset on the internet at <https://www.chesdata.eu/s/1999-2024_CHES_dataset_meansV2-3k4l.csv>, to perform the following tasks :  
 
   1. Import the data in your local environment. Use the `rio` package use `install.packages()` if you haven't installed the packages yet) and library to import it directly from the internet. 
   2.  Use the glimpse() function to have a look at your data
@@ -77,14 +77,14 @@ You can find the recent survey's dataset on the internet at <https://www.chesdat
   9. Compute a last, fully saturated model, with all your variables except `country`, and run tests of multicollinearity and heteroskedasticity. What do you find ? Comment on the results. Add `as.factor(country)` in the regression and comment on the results.
 
 ```{r}
-#| echo: false
-#| eval: false
+#| echo: true
+#| eval: true
 library(rio)
 library(tidyverse)
 library(stargazer)
 #Exercice 1
 #1.1
-ches <- import("https://www.chesdata.eu/s/1999-2024_CHES_dataset_means.csv")
+ches <- import("https://www.chesdata.eu/s/1999-2024_CHES_dataset_meansV2-3k4l.csv")
 #1.2
 glimpse(ches)
 #1.3
@@ -150,8 +150,8 @@ You are provided with data about the legislative and the presidential elections 
 
 
 ```{r}
-#| echo: false
-#| eval: false
+#| echo: true
+#| eval: true
 library(rio)
 library(tidyverse)
 #2.1
