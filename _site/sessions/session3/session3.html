@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Session 2 — Relationships between variables – Methods for Research and Policy Evaluation</title>
+<title>Session 3 — Linear and non-linear regressions – Methods for Research and Policy Evaluation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -176,6 +176,10 @@ window.Quarto = {
     <a class="dropdown-item" href="../../sessions/session2/session2.html">
  <span class="dropdown-text">Session 2: OLS: Simple and Multiple Linear Regressions and Analysis</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../sessions/session3/session3.html">
+ <span class="dropdown-text">Session 3: OLS regressions and non-linear regressions</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -196,6 +200,10 @@ window.Quarto = {
     <a class="dropdown-item" href="../../homeworks/homework2.html">
  <span class="dropdown-text">Session 2: Statistical inference and linear regressions</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../homeworks/homework3.html">
+ <span class="dropdown-text">Session 3: OLS regressions and non-linear regressions</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -215,6 +223,10 @@ window.Quarto = {
         <li>
     <a class="dropdown-item" href="../../slides/session2/slides2.html">
  <span class="dropdown-text">Session 2: Statistical inference and linear regressions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../slides/session3/slides3.html">
+ <span class="dropdown-text">Session 3: OLS regressions and non-linear regressions</span></a>
   </li>  
     </ul>
   </li>
@@ -281,7 +293,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Session 2 — Relationships between variables</h1>
+<h1 class="title">Session 3 — Linear and non-linear regressions</h1>
 </div>
 
 
@@ -404,18 +416,18 @@ lm(formula = W ~ m, data = dat)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--37.100  -9.937   0.634   9.205  32.768 
+-42.021 -10.192  -1.425   8.689  41.679 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   2.6685     3.0498   0.875    0.384    
-m             9.9801     0.5243  19.035   &lt;2e-16 ***
+(Intercept)  -1.5225     3.2819  -0.464    0.644    
+m            10.1662     0.5642  18.018   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 15.13 on 98 degrees of freedom
-Multiple R-squared:  0.7871,    Adjusted R-squared:  0.7849 
-F-statistic: 362.3 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 16.29 on 98 degrees of freedom
+Multiple R-squared:  0.7681,    Adjusted R-squared:  0.7658 
+F-statistic: 324.7 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> m, <span class="at">y =</span> W)) <span class="sc">+</span> </span>
@@ -469,18 +481,18 @@ lm(formula = W ~ m, data = dat)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--147.17 -102.77  -38.79   87.17  286.12 
+-155.72  -98.54  -30.72   86.98  307.53 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -204.916     23.522  -8.712 7.51e-14 ***
-m            100.770      4.044  24.920  &lt; 2e-16 ***
+(Intercept) -209.956     23.975  -8.757 5.99e-14 ***
+m            101.696      4.122  24.673  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 116.7 on 98 degrees of freedom
-Multiple R-squared:  0.8637,    Adjusted R-squared:  0.8623 
-F-statistic:   621 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 119 on 98 degrees of freedom
+Multiple R-squared:  0.8613,    Adjusted R-squared:  0.8599 
+F-statistic: 608.8 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> </span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> m, <span class="at">y =</span> W)) <span class="sc">+</span> </span>
@@ -570,19 +582,19 @@ Call:
 lm(formula = W ~ m, data = dat)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--37.820  -5.111  -0.443   6.377  34.850 
+     Min       1Q   Median       3Q      Max 
+-21.4255  -5.9076  -0.0049   3.8814  25.9426 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   0.5173     2.3480    0.22    0.826    
-m             9.7138     0.4037   24.06   &lt;2e-16 ***
+(Intercept)  -1.0508     1.7532  -0.599     0.55    
+m             9.9219     0.3014  32.919   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 11.65 on 98 degrees of freedom
-Multiple R-squared:  0.8553,    Adjusted R-squared:  0.8538 
-F-statistic: 579.1 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 8.7 on 98 degrees of freedom
+Multiple R-squared:  0.9171,    Adjusted R-squared:  0.9162 
+F-statistic:  1084 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> m, <span class="at">y =</span> W)) <span class="sc">+</span> </span>
@@ -653,7 +665,7 @@ Please cite as: </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(model2<span class="sc">$</span>residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.848548e-13</code></pre>
+<pre><code>[1] 3.665264e-13</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model2<span class="sc">$</span>fitted.values, model2<span class="sc">$</span>residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -683,18 +695,18 @@ Please cite as: </code></pre>
                                                              linear  
                                       (1)           (2)        (3)   
 ---------------------------------------------------------------------
-x                                  9.999***      11.147***  11.763***
-                                    (0.001)       (0.617)    (0.512) 
+x                                  9.998***      10.331***  10.492***
+                                    (0.001)       (0.636)    (0.538) 
                                                                      
-Constant                            -0.146        -337.095  -443.981 
-                                    (0.654)      (367.083)  (304.580)
+Constant                             0.883        -10.245    -10.171 
+                                    (0.633)      (374.387)  (316.761)
                                                                      
 ---------------------------------------------------------------------
 Observations                         1,000         1,000      1,000  
-R2                                   1.000         0.246             
-Adjusted R2                          1.000         0.246             
-Residual Std. Error (df = 998)      10.309       5,782.715  3,807.668
-F Statistic (df = 1; 998)      82,589,732.000*** 326.200***          
+R2                                   1.000         0.209             
+Adjusted R2                          1.000         0.208             
+Residual Std. Error (df = 998)       9.994       5,915.165  3,910.289
+F Statistic (df = 1; 998)      86,538,290.000*** 263.769***          
 =====================================================================
 Note:                                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 </div>

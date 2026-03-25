@@ -1,0 +1,200 @@
+---
+title: Session 4 — Difference-in-differences
+toc: true
+toc-depth: 3
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+# Motivation
+
+So far, we have seen how to describe variables using descriptive statistics, as well as different statistical techniques to study relationships between variables, depending on their type (categorical or continuous). We have seen that linear regressions are useful for describing the relationship between a continuous dependent variable and either categorical or continuous independent variables, and that logistic regressions are useful for characterising binary outcomes.
+
+## Identification strategy 
+
+In the exercises from the last class, regressions allowed us to describe correlations between variables—that is, associations. However, these regressions do not, in general, allow us to identify causal relationships. Important variables that drive the observed effect may be omitted, leading to biased estimates or spurious correlations.
+
+Moreover, regression-based approaches often rely heavily on the researcher’s choices regarding which variables to include. This introduces a degree of arbitrariness. Consider the following example: if 99% of heroin users previously consumed cannabis, can we conclude that cannabis use causes heroin use? Clearly not—after all, 100% of heroin users have also consumed milk. This illustrates that simple associations are not sufficient to establish causality.
+
+That explains why in fields such as policy analysis, medicine, and political science, there is a growing interest in statistical methods that aim to identify causal relationships between variables. A causal question is inherently counterfactual: it asks what would have happened in a different scenario. For instance, what would have happened to an individual if they had not received a treatment?
+
+Causal analysis is therefore much more demanding than simple regressions. It requires stronger assumptions and careful research design. Causal inference addresses a specific type of research question. Some sociological approaches, especially more constructivist ones, question the very idea that variables can be cleanly isolated or that causal relationships exist independently “out there” in the world. In such perspectives, the goal may instead be to understand how variables are interconnected and how they jointly produce meaning through a chain of associative relationships.
+
+There are several key approaches to causal inference designed to reduce bias. One of the most intuitive (and, arguably, convincing) is the difference-in-differences design. The empirical approach used to uncover a causal effect is referred to as an identification strategy.
+
+In the next sessions, we will study two additional identification strategies: instrumental variables and regression discontinuity. These methods all rely on regression techniques, which is why the previous classes focused on building a solid understanding of regression analysis.
+
+## Difference-in-differences : theory
+
+The intuition behind difference-in-differences (DiD) is quite simple: it involves tracking two groups over time—one that receives a treatment (e.g., a policy intervention) and one that does not.
+
+- The group that receives the treatment is called the treatment group.
+
+- The group that does not receive the treatment is called the control group.
+
+By comparing the changes in outcomes over time between these two groups, we can estimate the effect of the treatment. The key idea is to compare the observed change in the treatment group with the counterfactual scenario—what would have happened to the treatment group if it had not received the treatment.
+
+In practice, the counterfactual is often derived from the parallel trends assumption, which posits that, in the absence of treatment, the treatment and control groups would have followed similar trends before the intervention. If this assumption holds, any divergence in trends after the treatment can be attributed to the treatment itself.
+
+```{r}
+#| echo: false
+# Load library
+library(ggplot2)
+
+# Time periods
+time <- -5:5
+
+# Control group trend
+control <- 2 + 0.5 * time
+
+# Treatment group: parallel pre-treatment trend with baseline shift, add treatment effect after Year 0
+treatment <- 3 + 0.5 * time            # starts higher than control but same slope
+treatment[time >= 0] <- treatment[time >= 0] + 2  # add treatment effect after Year 0
+
+# Counterfactual for treatment group (if no treatment)
+counterfactual <- 3 + 0.5 * time       # continues pre-treatment slope
+
+# Create data frame for ggplot
+df <- data.frame(
+  Time = rep(time, 3),
+  Outcome = c(control, treatment, counterfactual),
+  Group = factor(rep(c("Control Group", "Treatment Group", "Counterfactual"), each = length(time)),
+                 levels = c("Control Group", "Treatment Group", "Counterfactual"))
+)
+
+# Plot
+ggplot(df, aes(x = Time, y = Outcome, color = Group, linetype = Group)) +
+  geom_line(size = 1.2) +
+  scale_color_manual(values = c("blue", "red", "red")) +
+  scale_linetype_manual(values = c("solid", "solid", "dashed")) +
+  geom_vline(xintercept = 0, linetype = "dotted", color = "gray", size = 1) +
+  annotate("text", x = 0.5, y = max(treatment) - 1, label = "Treatment starts", angle = 90, color = "gray") +
+  labs(title = "Difference-in-Differences Illustration (Parallel Pre-Treatment Trends)",
+       x = "Time (Years)",
+       y = "Outcome") +
+  theme_minimal() +
+  theme(text = element_text(size = 14))
+```
+
+This is summarised on this figure, which shows the evolution of the outcome in two different groups, affected by the treatment in year 0. Before being affected by the treatment, the two groups evolve in parallel : yet, once the treatment is introduced, a new gap emerges between the groups. The dotted line shows the counterfactual, that is, under the parallel trends assumption, the evolution we would have expected for the treatment group, in the absence of treatment. The difference between that parallel counterfactual and the actual trend observed (in red), is the treatment effect. 
+
+Hence, the parallel trends assumption is the key requirement behind this causal method: it is only because we assume the counterfactual would have followed the control group's trend that we can estimate the causal effect. As such, an estimation based on difference-in-differences is generally conducted in two phases : first, the estimation of the causal effect, then - as important as the first step -, the verification of the parallel trends.
+
+## Two-way fixed effects
+
+Historically, the main estimator used for difference-in-differences estimations was the two-way fixed effects estimator (TWFE). It consists in computing :
+
+\begin{equation}
+Y_{it} = \alpha_i + \beta_t + \text{Group_i} + \text{Period}_t + \delta \text{Group_i} \times \text{Period}_t + \espilon_{it}
+\end{equation}
+where $\text{Group_i}$ and $\text{Period}_t$ respectively equal to one for units $i$ in the treatment group, and one for time periods $t$ in post-treatment. $\delta$ is the causal effect, also called ATT : average treatment effect on the treated (compared with the counterfactual of the treated). It is also possible to add covariates in that model $X_{it}$, which generally do not modify the results.
+
+
+## Other estimators
+
+Yet authors have recently shown that this method can lead to bias, especially when the treatment is staggered - that is, affecting multiple time periods -, or when it is heterogeneous (the effect is different depending on the characteristics of the treated units). Authors, such as De Chaisemartin or Callaway and Sant'Anna have therefore proposed alternative estimators, which are used in a very similar way as the TWFE.
+
+### Callaway and Sant'Anna
+THe 
+
+### De Chaisemartin 
+
+## An example : mortality rates and medicare 
+
+To introduce the idea behind causal estimation, consider the following example. Suppose we want to estimate the effect of Medicare on mortality rates : did the introduction of Medicare change the mortality rates or not ? This example is inspired from Miller et al., 2021. To do so, you can use made up data, downloaded here. For each individual $i$, in state $s$, time $t$ you observe:
+
+  - Mortality (binary: 0 = alive, 1 = dead)
+  - Medicare (0/1)
+  - Age
+  - Health status (e.g., index from 1 to 10)
+  - Income
+  - State
+  - Year
+
+
+```{r}
+library(rio)
+data <- import("data/medicare_did_data.csv")
+```
+
+From what we have seen so far, a natural approach might be to run a simple OLS regression of the form:
+
+\begin{equation}
+\text{Mortality}_i = \alpha + \beta \text{Medicare}_i + \epsilon_i,
+\end{equation}
+
+Where you basically estimate the relationship between medicare and mortality through so-called Linear Probability Model : a type of OLS regression applied to binary dependent variables, that gives you an approximation of the predicted probabilities (a better version would be to consider the logistic regression instead). Here, your dependent variable would be the mortality variable, worth 0 in case the person is not dead, and 1 in case the person is dead. Your potential outcomes would therefore be 0 or 1, and your groups would be either treated or not treated. 
+
+```{r}
+ols1 <- lm(mortality ~ medicare, data = data)
+summary(ols1)
+```
+Yet this regression would only give you the association between the two, and you might get that, without controlling for other factors, the effect of Medicare is positive on mortality ! Indeed, not adding any other control, you might have omitted variable bias, leading to a positive correlation between the two, because people receiving medicare are already those more prone to suffering from diseases.
+```{r}
+ols2 <- lm(mortality ~ medicare + age + health + income, data = data)
+summary(ols2)
+```
+That is why you might then add control variables, like age, health, income etc, and run your regression again. 
+```{r}
+library(dplyr)
+
+data %>%
+  group_by(treated_state, post) %>%
+  summarise(mean_mortality = mean(mortality), .groups = "drop")
+
+```
+This method of causal estimation would lead to different potential critiques. 
+
+First, there is a fundamental problem of selection bias. Medicare coverage is not randomly assigned. In the United States, eligibility is largely determined by age (65 and above) and, in some cases, by disability status. As a result, individuals on Medicare are, on average, older and in worse health than those who are not covered. Since both age and health status are strongly correlated with mortality, the regression will confound the effect of Medicare with these underlying differences. This could lead to the misleading conclusion that Medicare increases mortality, simply because its beneficiaries are more likely to die.
+
+Second, omitted variable bias is a major concern. Even if the researcher includes several control variables, it is unlikely that all relevant determinants of both Medicare enrollment and mortality are observed. Factors such as underlying health conditions, lifetime income, access to healthcare prior to eligibility, or health-related behaviors (e.g., smoking, diet) may be imperfectly measured or entirely unobserved. If these factors influence both treatment and outcome, the estimated coefficient on Medicare will be biased.
+
+Third, there may be issues of reverse causality. In some cases, individuals qualify for Medicare through disability pathways. This means that poor health can increase the likelihood of receiving Medicare, rather than Medicare affecting health. In such situations, the direction of causality is blurred, and a simple regression cannot disentangle the relationship.
+
+Fourth, the OLS framework imposes a homogeneous treatment effect: it assumes that Medicare has the same impact on mortality for all individuals. In reality, the effect is likely heterogeneous. For instance, Medicare may have a larger impact on low-income or high-risk individuals than on healthier populations. A single coefficient averages over these potentially very different effects.
+
+Fifth, researchers may inadvertently include bad controls—variables that are themselves affected by Medicare, such as the number of doctor visits or hospitalizations. Controlling for such variables blocks part of the causal mechanism through which Medicare operates, leading to biased (typically underestimated) effects.
+
+Sixth, there are timing issues to consider. Mortality is a dynamic outcome, and the effects of Medicare may take time to materialize. Moreover, individuals may enroll in Medicare shortly before death, which can create misleading correlations between coverage and mortality.
+
+Finally, measurement issues may arise. A simple binary indicator for Medicare coverage does not capture differences in duration of enrollment, quality of coverage, or actual healthcare utilization. Such measurement error can further bias the estimated relationship.
+
+More fundamentally, the regression estimates a conditional association—how mortality differs between those with and without Medicare. However, the causal question of interest is counterfactual: what would happen to mortality if individuals were given Medicare coverage? These are not the same object.
+
+For all these reasons, a simple OLS regression with a treatment dummy does not provide a credible estimate of the causal effect of Medicare on mortality. To answer this question properly, one needs a valid identification strategy, such as regression discontinuity (exploiting the age 65 eligibility threshold), difference-in-differences, or instrumental variables. These approaches aim to approximate a randomized experiment and isolate exogenous variation in treatment, allowing for a more credible causal interpretation.
+
+Hence, your treated units might still have characteristics that are not controlled for, and that also condition the outcome. In order to control for these characteristics, the difference-in-differences estimator controls for these fixed characteristics, by using the temporal variation in the introduction of the treatment. The canonical two-way fixed effects is written as :
+
+```{r}
+did1 <- lm(mortality ~ treated_state * post, data = data)
+summary(did1)
+```
+
+```{r}
+did2 <- lm(mortality ~ treated_state * post + age + health + income, data = data)
+summary(did2)
+```
+
+```{r}
+did_fe <- lm(mortality ~ treated_state * post + factor(state) + factor(year), data = data)
+summary(did_fe)
+```
+```{r}
+library(ggplot2)
+
+data %>%
+  group_by(year, treated_state) %>%
+  summarise(mortality = mean(mortality), .groups = "drop") %>%
+  ggplot(aes(x = year, y = mortality, color = factor(treated_state))) +
+  geom_line(size = 1.2) +
+  labs(color = "Treated State",
+       title = "Mortality Trends: Treated vs Control",
+       y = "Mortality rate")
+```
+
+
+
+
+
+

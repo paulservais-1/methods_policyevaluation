@@ -1,5 +1,5 @@
 ---
-title: Session 2 — Relationships between variables
+title: Session 3 — Linear and non-linear regressions
 toc: true
 toc-depth: 3
 editor: 
