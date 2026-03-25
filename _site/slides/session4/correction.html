@@ -205,14 +205,6 @@ Paul Servais
 </div>
 
 </section>
-<section id="on-the-finals" class="slide level2">
-<h2>On the finals</h2>
-<ul>
-<li>Have you started looking at data sets ? papers ?</li>
-<li>Don’t hesitate to reach out with proposition, questions !</li>
-<li>Submission date</li>
-</ul>
-</section>
 <section id="we-saw-in-previous-sessions" class="slide level2">
 <h2>We saw in previous sessions</h2>
 <ul>
@@ -286,58 +278,11 @@ Paul Servais
 <li>The control and treatment only need to evolve in parallel in pre-treatment</li>
 </ul>
 
-<img data-src="session4_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
-<section id="an-intuitive-example" class="slide level2">
-<h2>An intuitive example</h2>
-<ul>
-<li><p>Taylor Swift concerts : economic boom in the places where she went, surge in hotel bookings, restaurants etc.</p></li>
-<li><p>Yet other factors : post-pandemic increase in traveling, summer tourism, etc.</p></li>
-<li><p><strong>How can we isolate the Taylor effect</strong>?</p></li>
-</ul>
-</section>
-<section id="outcomes" class="slide level2">
-<h2>Outcomes</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th></th>
-<th>Before</th>
-<th>After</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>with Taylor</td>
-<td>X</td>
-<td>Y</td>
-</tr>
-<tr class="even">
-<td>without Taylor</td>
-<td>A</td>
-<td>B</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>All variables describe hotel and restaurants revenues</li>
-</ul>
-</section>
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
 <section id="difference-in-differences-1" class="slide level2">
-<h2>Difference-in-differences</h2>
-<ul>
-<li><p><span class="math inline">\(Y-X\)</span> : evolution of revenue in cities with Taylor Swift</p></li>
-<li><p><span class="math inline">\(B-A\)</span> : evolution of revenue in similar cities, but without Taylor Swift</p></li>
-<li><p>DID estimate : <span class="math display">\[\begin{equation}
-DiD = (Y-X) - (B-A)
-\end{equation}\]</span></p></li>
-<li><p>It removes the changes that have affected all cities, to isolate the specific effect of Taylor Swift.</p></li>
-<li><p>Ideally, you’d like your cities to be roughly similar before, to make sure you are isolating this effect…</p></li>
-</ul>
-</section>
-<section id="difference-in-differences-2" class="slide level2">
 <h2>Difference-in-Differences</h2>
 
-<img data-src="session4_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
 <section id="the-att" class="slide level2">
 <h2>The ATT</h2>
 <ul>
@@ -387,7 +332,7 @@ DiD = (Y-X) - (B-A)
 <h2>Event-study</h2>
 
 <img data-src="images/event_study.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="difference-in-differences-3" class="slide level2">
+<section id="difference-in-differences-2" class="slide level2">
 <h2>Difference-in-Differences</h2>
 <p><span class="math display">\[\begin{equation}
 Y_{it} = \alpha_i + \beta_t + \text{Group}_i + \text{Period}_t + \delta \text{Group}_i \times \text{Period}_t + \epsilon_{it}
@@ -397,17 +342,6 @@ Y_{it} = \alpha_i + \beta_t + \text{Group}_i + \text{Period}_t + \delta \text{Gr
 <li>This model is called two-way fixed effects: TWFE</li>
 <li>Good for one homogeneous treatment (eg. a policy switch affecting all states in a certain year)</li>
 <li>More robust and recent estimators exist in the literature (de Chaisemartin &amp; D’Haultfœuille, 2020; Callaway &amp; Sant’Anna, 2021), for heterogeneous or <strong>staggered treatment</strong></li>
-</ul>
-</section>
-<section id="identification" class="slide level2">
-<h2>Identification</h2>
-<ul>
-<li>The whole identification lies in the parallel trends assumption</li>
-<li>= <strong>The key assumption to verify in DiD</strong>
-<ul>
-<li>graphically</li>
-<li>event-study plots and placebos</li>
-</ul></li>
 </ul>
 </section>
 <section id="in-r" class="slide level2">
@@ -532,7 +466,7 @@ RMSE: 0.057996     Adj. R2: 0.997027
 <section id="checking-the-parallel-trends-1" class="slide level2">
 <h2>Checking the parallel trends</h2>
 
-<img data-src="session4_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
 <section id="event-study-2" class="slide level2">
 <h2>Event-study</h2>
 <div class="cell">
@@ -558,7 +492,7 @@ RMSE: 0.057996     Adj. R2: 0.997027
 <section id="event-study-3" class="slide level2">
 <h2>Event study</h2>
 
-<img data-src="session4_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
+<img data-src="correction_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
 <section id="event-study-4" class="slide level2">
 <h2>Event-study</h2>
 <ul>
@@ -638,11 +572,213 @@ Y_{it} = \alpha_i + \beta_t + \text{Group_i} + \text{Period}_t + \delta \text{Gr
 <h1>Exercices</h1>
 
 </section>
-<section id="exercice-1" class="slide level2">
+<section id="exercice-1" class="slide level2 scrollable">
 <h2>Exercice 1</h2>
-<ul>
-<li>You are asked to evaluate the effect of a <strong>tutoring program</strong> on students’ academic performance. The program is introduced in year 7 and affects only a subset of students, while others remain untreated. You observe a panel dataset that follows the same students over a period of 15 months.</li>
-</ul>
+<ol type="1">
+<li>Import the data, located at <a href="https://github.com/paulservais-1/methods_policyevaluation/raw/main/homeworks/data/schoolpanel.csv" class="uri">https://github.com/paulservais-1/methods_policyevaluation/raw/main/homeworks/data/schoolpanel.csv</a>. Have a look at the data set using <code>glimpse</code>. What will be your dependent variable ? Your independent variable ? How many individuals do you have in total ? How many individuals are treated ?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">library</span>(rio)</span>
+<span id="cb8-2"><a></a><span class="fu">library</span>(fixest)</span>
+<span id="cb8-3"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb8-4"><a></a><span class="fu">library</span>(MatchIt)</span>
+<span id="cb8-5"><a></a>data <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"https://github.com/paulservais-1/methods_policyevaluation/raw/main/homeworks/data/schoolpanel.csv"</span>)</span>
+<span id="cb8-6"><a></a><span class="fu">glimpse</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 7,500
+Columns: 9
+$ id                 &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, …
+$ month              &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, …
+$ test_score         &lt;dbl&gt; 82.33900, 80.74787, 83.22705, 75.29832, 83.59322, 1…
+$ treatment          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, …
+$ income             &lt;dbl&gt; 26849.53, 29099.22, 28905.42, 29442.97, 33317.20, 3…
+$ parent_edu         &lt;dbl&gt; 15.15510, 15.15510, 15.15510, 15.15510, 15.15510, 1…
+$ school_funding     &lt;dbl&gt; 5035.761, 4599.654, 5324.554, 6279.920, 5623.768, 6…
+$ class_size         &lt;int&gt; 28, 20, 29, 27, 30, 21, 21, 24, 24, 26, 24, 24, 21,…
+$ teacher_experience &lt;int&gt; 0, 5, 3, 1, 7, 8, 6, 6, 7, 9, 11, 13, 13, 12, 14, 0…</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">summary</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       id            month      test_score       treatment        income     
+ Min.   :  1.0   Min.   : 1   Min.   : 50.47   Min.   :0.00   Min.   : 8114  
+ 1st Qu.:125.8   1st Qu.: 4   1st Qu.: 83.59   1st Qu.:0.00   1st Qu.:30859  
+ Median :250.5   Median : 8   Median : 92.25   Median :0.00   Median :36880  
+ Mean   :250.5   Mean   : 8   Mean   : 92.14   Mean   :0.47   Mean   :36605  
+ 3rd Qu.:375.2   3rd Qu.:12   3rd Qu.:100.79   3rd Qu.:1.00   3rd Qu.:42451  
+ Max.   :500.0   Max.   :15   Max.   :131.00   Max.   :1.00   Max.   :67658  
+   parent_edu     school_funding   class_size    teacher_experience
+ Min.   : 2.856   Min.   :3499   Min.   :14.00   Min.   : 0.00     
+ 1st Qu.:10.236   1st Qu.:5830   1st Qu.:22.00   1st Qu.: 4.00     
+ Median :12.171   Median :6604   Median :24.00   Median : 8.00     
+ Mean   :12.126   Mean   :6597   Mean   :24.47   Mean   : 7.55     
+ 3rd Qu.:14.267   3rd Qu.:7363   3rd Qu.:27.00   3rd Qu.:11.00     
+ Max.   :22.171   Max.   :9637   Max.   :37.00   Max.   :21.00     </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>data <span class="sc">%&gt;%</span> <span class="fu">distinct</span>(id) <span class="sc">%&gt;%</span> <span class="fu">nrow</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 500</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(treatment <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>(id) <span class="sc">%&gt;%</span> <span class="fu">nrow</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 235</code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li>Create variable <code>post</code> worth 1 after month 7, and 0 before.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">post =</span> <span class="fu">ifelse</span>(month<span class="sc">&gt;=</span><span class="dv">7</span>, <span class="dv">1</span>,<span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="1">
+<li>Run a multiple regression with <code>test_score</code> as dependent variable and <code>treatment</code> as independent variable. What could go wrong with such specification ? Can you derive causal claims from it ?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>lm_simple <span class="ot">&lt;-</span> <span class="fu">lm</span>(test_score <span class="sc">~</span> treatment, <span class="at">data =</span> data)</span>
+<span id="cb17-2"><a></a><span class="fu">summary</span>(lm_simple)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = test_score ~ treatment, data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-43.762  -8.393   0.225   8.468  36.771 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  90.2853     0.1876  481.21   &lt;2e-16 ***
+treatment     3.9481     0.2737   14.43   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 11.83 on 7498 degrees of freedom
+Multiple R-squared:  0.02701,   Adjusted R-squared:  0.02688 
+F-statistic: 208.1 on 1 and 7498 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Run a difference-in-differences estimation to estimate the causal effect of the tutoring on the test scores, with only months 6 and 7, using <code>feols</code>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>did_simple <span class="ot">&lt;-</span> <span class="fu">feols</span>(test_score <span class="sc">~</span> treatment<span class="sc">*</span>post, <span class="at">data =</span> data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">7</span>)))</span>
+<span id="cb19-2"><a></a><span class="fu">summary</span>(did_simple)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OLS estimation, Dep. Var.: test_score
+Observations: 1,000
+Standard-errors: IID 
+               Estimate Std. Error   t value   Pr(&gt;|t|)    
+(Intercept)    86.78924   0.492991 176.04623  &lt; 2.2e-16 ***
+treatment       1.04930   0.719102   1.45918 1.4483e-01    
+post            2.05556   0.697195   2.94833 3.2695e-03 ** 
+treatment:post  5.22202   1.016963   5.13491 3.3942e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+RMSE: 8.00925   Adj. R2: 0.133667</code></pre>
+</div>
+</div>
+<ol start="5" type="1">
+<li>Run a difference-in-differences estimation with all years, using <code>feols</code>. Cluster the standard errors, and add individual and time fixed effects to run a TWFE estimation. What is the effect ? How does it evolve along time ?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>twfe_model <span class="ot">&lt;-</span> <span class="fu">feols</span>(test_score <span class="sc">~</span> treatment<span class="sc">*</span>post <span class="sc">|</span> id <span class="sc">+</span> month,</span>
+<span id="cb21-2"><a></a>                    <span class="at">cluster =</span> <span class="sc">~</span>id,</span>
+<span id="cb21-3"><a></a>                    <span class="at">data =</span> data)</span>
+<span id="cb21-4"><a></a><span class="fu">summary</span>(twfe_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OLS estimation, Dep. Var.: test_score
+Observations: 7,500
+Fixed-effects: id: 500,  month: 15
+Standard-errors: Clustered (id) 
+               Estimate Std. Error t value  Pr(&gt;|t|)    
+treatment:post  4.68905   0.267709 17.5154 &lt; 2.2e-16 ***
+... 2 variables were removed because of collinearity (treatment and
+post)
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+RMSE: 5.19844     Adj. R2: 0.798204
+                Within R2: 0.046385</code></pre>
+</div>
+</div>
+<ol start="6" type="1">
+<li><p>Is the treatment staggered ? If yes, what estimators do you have to consider instead ?</p></li>
+<li><p>Check the parallel trend assumption graphically. Does it seem plausible ?</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a></a>  <span class="fu">group_by</span>(month, treatment) <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a></a>  <span class="fu">summarise</span>(<span class="at">mean_score =</span> <span class="fu">mean</span>(test_score), <span class="at">.groups=</span><span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(month, mean_score, <span class="at">color =</span> <span class="fu">as.factor</span>(treatment))) <span class="sc">+</span></span>
+<span id="cb23-5"><a></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb23-6"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">7</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb23-7"><a></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Treatment"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="correction_files/figure-revealjs/unnamed-chunk-15-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="8" type="1">
+<li>Conduct an event-study, using <code>i</code> and <code>iplot()</code> to estimate interaction effects along time. Compare your results with the TWFE. How dynamic is the effect ?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>event_model <span class="ot">&lt;-</span> <span class="fu">feols</span>(test_score <span class="sc">~</span> <span class="fu">i</span>(month, treatment, <span class="at">ref =</span> <span class="dv">6</span>) <span class="sc">|</span> id <span class="sc">+</span> month,</span>
+<span id="cb24-2"><a></a>                     <span class="at">cluster =</span> <span class="sc">~</span>id,</span>
+<span id="cb24-3"><a></a>                     <span class="at">data =</span> data)</span>
+<span id="cb24-4"><a></a><span class="fu">iplot</span>(event_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="correction_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="9" type="1">
+<li>Use all your covariates to match your treatment group with a control group with similar covariates in the pre-treatment year, based on the method of the nearest neighbor. Re-run your TWFE and your event-study with that restricted data set, and compare the results.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>pre_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">6</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(test_score))</span>
+<span id="cb25-2"><a></a></span>
+<span id="cb25-3"><a></a><span class="fu">library</span>(MatchIt)</span>
+<span id="cb25-4"><a></a></span>
+<span id="cb25-5"><a></a>ps_model <span class="ot">&lt;-</span> <span class="fu">matchit</span>(treatment <span class="sc">~</span> .,  <span class="co"># replace 'other_covariates'</span></span>
+<span id="cb25-6"><a></a>                    <span class="at">data =</span> pre_data,</span>
+<span id="cb25-7"><a></a>                    <span class="at">method =</span> <span class="st">"nearest"</span>)</span>
+<span id="cb25-8"><a></a>matched_ids <span class="ot">&lt;-</span> <span class="fu">match.data</span>(ps_model) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(id) <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span>
+<span id="cb25-9"><a></a>matched_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(id <span class="sc">%in%</span> matched_ids)</span>
+<span id="cb25-10"><a></a></span>
+<span id="cb25-11"><a></a>twfe_matched <span class="ot">&lt;-</span> <span class="fu">feols</span>(test_score <span class="sc">~</span> treatment<span class="sc">*</span>post <span class="sc">|</span> id <span class="sc">+</span> month,</span>
+<span id="cb25-12"><a></a>                       <span class="at">cluster =</span> <span class="sc">~</span>id,</span>
+<span id="cb25-13"><a></a>                       <span class="at">data =</span> matched_data)</span>
+<span id="cb25-14"><a></a><span class="fu">summary</span>(twfe_matched)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OLS estimation, Dep. Var.: test_score
+Observations: 7,050
+Fixed-effects: id: 470,  month: 15
+Standard-errors: Clustered (id) 
+               Estimate Std. Error t value  Pr(&gt;|t|)    
+treatment:post  4.66057   0.277388 16.8016 &lt; 2.2e-16 ***
+... 2 variables were removed because of collinearity (treatment and
+post)
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+RMSE: 5.19782     Adj. R2: 0.797848
+                Within R2: 0.046018</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>event_matched <span class="ot">&lt;-</span> <span class="fu">feols</span>(test_score <span class="sc">~</span> <span class="fu">i</span>(month,treatment, <span class="at">ref =</span> <span class="dv">6</span>) <span class="sc">|</span> id <span class="sc">+</span> month,</span>
+<span id="cb27-2"><a></a>                        <span class="at">cluster =</span> <span class="sc">~</span>id,</span>
+<span id="cb27-3"><a></a>                        <span class="at">data =</span> matched_data)</span>
+<span id="cb27-4"><a></a><span class="fu">iplot</span>(event_matched)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="correction_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section></section>

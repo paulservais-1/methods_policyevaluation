@@ -2684,8 +2684,8 @@
     "objectID": "slides/session4/session4.html#difference-in-differences-1",
     "href": "slides/session4/session4.html#difference-in-differences-1",
     "title": "Methods for Research and Policy Evaluation",
-    "section": "Difference-in-differences",
-    "text": "Difference-in-differences\n\n\\(Y-X\\) : evolution of revenue in cities with Taylor Swift\n\\(B-A\\) : evolution of revenue in similar cities, but without Taylor Swift\nDID estimate : \\[\\begin{equation}\nDiD = (Y-X) - (B-A)\n\\end{equation}\\]\nIt removes the changes that have affected all cities, to isolate the specific effect of Taylor Swift.\nIdeally, you’d like your cities to be roughly similar before, to make sure you are isolating this effect…"
+    "section": "Difference-in-Differences",
+    "text": "Difference-in-Differences"
   },
   {
     "objectID": "slides/session4/session4.html#in-applied-research",
@@ -2713,7 +2713,7 @@
     "href": "slides/session4/session4.html#difference-in-differences-2",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Difference-in-Differences",
-    "text": "Difference-in-Differences"
+    "text": "Difference-in-Differences\n\\[\\begin{equation}\nY_{it} = \\alpha_i + \\beta_t + \\text{Group}_i + \\text{Period}_t + \\delta \\text{Group}_i \\times \\text{Period}_t + \\epsilon_{it}\n\\end{equation}\\]\n\nThe causal effect is the interaction effect \\(\\delta\\)\nThis model is called two-way fixed effects: TWFE\nGood for one homogeneous treatment (eg. a policy switch affecting all states in a certain year)\nMore robust and recent estimators exist in the literature (de Chaisemartin & D’Haultfœuille, 2020; Callaway & Sant’Anna, 2021), for heterogeneous or staggered treatment"
   },
   {
     "objectID": "slides/session4/session4.html#in-r",
@@ -2734,7 +2734,7 @@
     "href": "slides/session4/session4.html#difference-in-differences-3",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Difference-in-Differences",
-    "text": "Difference-in-Differences\n\\[\\begin{equation}\nY_{it} = \\alpha_i + \\beta_t + \\text{Group}_i + \\text{Period}_t + \\delta \\text{Group}_i \\times \\text{Period}_t + \\epsilon_{it}\n\\end{equation}\\]\n\nThe causal effect is the interaction effect \\(\\delta\\)\nThis model is called two-way fixed effects: TWFE\nGood for one homogeneous treatment (eg. a policy switch affecting all states in a certain year)\nMore robust and recent estimators exist in the literature (de Chaisemartin & D’Haultfœuille, 2020; Callaway & Sant’Anna, 2021), for heterogeneous or staggered treatment"
+    "text": "Difference-in-Differences\n\\[\\begin{equation}\nY_{it} = \\alpha_i + \\beta_t + \\text{Group_i} + \\text{Period}_t + \\delta \\text{Group_i} \\times \\text{Period}_t + \\espilon_{it}\n\\end{equation}\\]\n\nThe causal effect is the interaction effect \\(\\delta\\)\nThis model is called two-way fixed effects: TWFE\nMore robust and recent estimators exist in the literature (de Chaisemartin & D’Haultfœuille, 2020; Callaway & Sant’Anna, 2021), for heterogeneous or staggered treatment"
   },
   {
     "objectID": "slides/session4/session4.html#the-cholera-case",
@@ -2959,257 +2959,5 @@
     "title": "Session 4 — Difference-in-differences",
     "section": "",
     "text": "In this example (based on Luis Sattelmayer), we will use the replication data from the article “Newspapers in Times of Low Advertising Revenues” Angelucci and Cagé, 2019). You can find the data here. You need to sign in (you can do it with your institution) to download the data.\nIn France 1967, the government introduced advertisements on TV programs. Angelucci & Cagé wonder if this will impact newspaper revenues. They believe that this introduction of advertisements impacted more national newspapers than local newspapers. Their treatment variable is the introduction of advertisements and the grouping variable is based on the level of newspapers (national versus local).\nCodebook:\n\nyear: The year of the observation\nid_news: A unique identifier for each newspaper\nlocal: A binary indicator (0 or 1) representing whether a newspaper is local or national (1 = local, 0 = national)\nnational: A binary indicator (0 or 1) representing whether a newspaper is national or local (1 = national, 0 = local)\nra_cst: The advertising revenue of the newspaper (in constant (2014) euros)\nps_cst: The price of subscriptions for the newspaper. This variable measures how much the newspaper charges for its subscriptions, reflecting its pricing strategy and revenue from readers\nqtotal: The circulation of the newspaper. This variable measures the number of copies sold, reflecting the newspaper’s readership and revenue from readers\nafter_national: A binary indicator (0 or 1) representing the interaction between a newspaper’s national status and the post-television advertising era. Specifically, it marks the period after a newspaper has started national circulation and also corresponds to times after the introduction or significant increase of television advertising. This variable is designed to capture the combined effects of a newspaper reaching a national audience and the competitive or complementary impacts of television advertising on newspaper revenues or strategies\nra_cst_div_qtotal: A derived variable representing the advertising revenue per unit of circulation (ra_cst / qtotal). This variable is calculated to assess the efficiency or effectiveness of advertising revenue in relation to the newspaper’s circulation size\n\nYou should start by importing the data and clean the data. In this case, the dataset is already quite clean. We just need to create a few variables and transform some variables in factors.\n\nlibrary(haven)\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.6\n✔ forcats   1.0.1     ✔ stringr   1.6.0\n✔ lubridate 1.9.4     ✔ tibble    3.3.0\n✔ purrr     1.2.0     ✔ tidyr     1.3.2\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nnewspapers &lt;- read_dta(\"data/Angelucci_Cage_AEJMicro_dataset.dta\")\n\n\nnewspapers &lt;-\n  newspapers |&gt;\n  select(\n    year, id_news, after_national, local, national, ra_cst, ps_cst, qtotal\n    ) |&gt; \n  mutate(ra_cst_div_qtotal = ra_cst / qtotal, \n         after_national =  if_else(year &gt; 1967, 1, 0),\n         after_national_placebo = if_else(year &gt;= 1966, 1, 0),\n         across(c(id_news, local, national, after_national), as.factor),\n         year = as.factor(year)) \n\nglimpse(newspapers)\n\nRows: 1,196\nColumns: 10\n$ year                   &lt;fct&gt; 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1967,…\n$ id_news                &lt;fct&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,…\n$ after_national         &lt;fct&gt; 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0,…\n$ local                  &lt;fct&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…\n$ national               &lt;fct&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…\n$ ra_cst                 &lt;dbl&gt; 52890272, 56601060, 64840752, 70582944, 7497788…\n$ ps_cst                 &lt;dbl&gt; 2.287003, 2.204863, 2.131709, 2.427344, 2.34767…\n$ qtotal                 &lt;dbl&gt; 94478.09, 96288.54, 97313.22, 101068.50, 102103…\n$ ra_cst_div_qtotal      &lt;dbl&gt; 559.8152, 587.8276, 666.3098, 698.3674, 734.334…\n$ after_national_placebo &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,…\n\n\nNow, we can build the model. We use the logarithm of the advertising revenue (to help normalise the distribution of our variable). Next, we need to include the time and treatment variables so, national and after_national variable. Do not forget that you need the interaction effect. Furthermore, as we are using the whole dataset (observations from every year), we should introduce a fixed effect for year to control for linear time trends that would affect all newspapers. Finally, as we are comparing different newspapers over more than two years, we should also include a fixed effect for the newspaper. This would control for all unobserved and time-invariant differences between newspapers.\n\nlibrary(fixest)\ndid&lt;-feols(log(ra_cst) ~ national*after_national|year+id_news,\n            cluster=~id_news,\n     data = newspapers)\n\nNOTE: 144 observations removed because of NA values (LHS: 144, RHS: 1).\n\n\nThe variables 'national1' and 'after_national1' have been removed because of\ncollinearity (see $collin.var).\n\netable(did)\n\n                                          did\nDependent Var.:                   log(ra_cst)\n                                             \nnational1 x after_national1 -0.2175. (0.1164)\nFixed-Effects:              -----------------\nyear                                      Yes\nid_news                                   Yes\n___________________________ _________________\nS.E.: Clustered                   by: id_news\nObservations                            1,052\nR2                                    0.98576\nWithin R2                             0.04730\n---\nSignif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nNow, we can interpret our results. As you can see, the national and after_national variables were dropped, this is because of collinearity. In this case, we have collinearity because we add time and newspaper fixed effects which capture both national and after_national information. So, the model only keeps the interaction. When you use feols() the function automatically drops variables that are collinear. This is not the case with lm(). Furthermore, we see that the coefficient is negative, meaning that the introduction of ads did decrease revenues among national newspapers. However, this coefficient is not statistically significant, meaning that we cannot infer our results to the whole French newspaper population.\nWe can do a placebo test. Here, the interaction coefficient is not significant, meaning that we cannot reject the parallel trend assumption. As we have more than one year before the treatment, you should do more than one placebo test.\n\ndid_placebo &lt;-\n  feols(log(ra_cst) ~ national * after_national_placebo | year + id_news,\n        cluster=~id_news,\n     data = newspapers)\n\nNOTE: 144 observations removed because of NA values (LHS: 144, RHS: 1).\n\n\nThe variables 'national1' and 'after_national_placebo' have been removed because\nof collinearity (see $collin.var).\n\netable(did_placebo)\n\n                                         did_placebo\nDependent Var.:                          log(ra_cst)\n                                                    \nnational1 x after_national_placebo -0.2289. (0.1187)\nFixed-Effects:                     -----------------\nyear                                             Yes\nid_news                                          Yes\n__________________________________ _________________\nS.E.: Clustered                          by: id_news\nObservations                                   1,052\nR2                                           0.98580\nWithin R2                                    0.05004\n---\nSignif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
-  },
-  {
-    "objectID": "slides/session4/correction.html#we-saw-in-previous-sessions",
-    "href": "slides/session4/correction.html#we-saw-in-previous-sessions",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "We saw in previous sessions",
-    "text": "We saw in previous sessions\n\nHow to describe variables : descriptive statistics\nHow to infer from sample to larger population : statistical inference\nHow to analyse relations between variables :\n\nWhen DV is continuous:\n\nIndep. variable = categorical : t-test e.g. Urban/rural on median income\nIndep. variable = continuous : linear regressions e.g. Far-right vote share in communes and income"
-  },
-  {
-    "objectID": "slides/session4/correction.html#can-you-derive-causal-claims",
-    "href": "slides/session4/correction.html#can-you-derive-causal-claims",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Can you derive causal claims ?",
-    "text": "Can you derive causal claims ?\n\nYou can control for variables but…\nEndogeneity\nOmitted variable bias\nReverse causality"
-  },
-  {
-    "objectID": "slides/session4/correction.html#todays-objectives",
-    "href": "slides/session4/correction.html#todays-objectives",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Today’s objectives",
-    "text": "Today’s objectives\n\nIntroduce you to one of the main causal inference methods\nKnow what is event-study\nParallel trend assumption\nTwo-way fixed effects\nOther estimators\nMatching"
-  },
-  {
-    "objectID": "slides/session4/correction.html#causal-inference",
-    "href": "slides/session4/correction.html#causal-inference",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Causal inference",
-    "text": "Causal inference\n\n\\(X \\rightarrow Y\\)\nNeed for so-called identification strategy\nMany different strategies :\n\nDifference-in-differences (today)\nRegression discontinuity\nInstrumental variables"
-  },
-  {
-    "objectID": "slides/session4/correction.html#difference-in-differences",
-    "href": "slides/session4/correction.html#difference-in-differences",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Difference-in-Differences",
-    "text": "Difference-in-Differences\n\nCausal inference of observational data\nBased on event study\nRegression technique\nCompare two groups (control vs treatment)\nCompare Pre and Post treatment\nNeed for panel data \\(Y_{it}\\)"
-  },
-  {
-    "objectID": "slides/session4/correction.html#event-study",
-    "href": "slides/session4/correction.html#event-study",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Event-study",
-    "text": "Event-study\n\nHow does an event impact an outcome ? Compared with a reference"
-  },
-  {
-    "objectID": "slides/session4/correction.html#the-logic-behind-did",
-    "href": "slides/session4/correction.html#the-logic-behind-did",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "The logic behind DiD",
-    "text": "The logic behind DiD\n\nThe control and treatment only need to evolve in parallel in pre-treatment"
-  },
-  {
-    "objectID": "slides/session4/correction.html#difference-in-differences-1",
-    "href": "slides/session4/correction.html#difference-in-differences-1",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Difference-in-Differences",
-    "text": "Difference-in-Differences"
-  },
-  {
-    "objectID": "slides/session4/correction.html#the-att",
-    "href": "slides/session4/correction.html#the-att",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "The ATT",
-    "text": "The ATT\n\nATT = average treatment effect on the treated\nWhat is generally measured by a DiD\nthe difference between the counterfactual \\(Y_T(1)\\) and the actual outcome \\(Y_T(0)\\)"
-  },
-  {
-    "objectID": "slides/session4/correction.html#in-applied-research",
-    "href": "slides/session4/correction.html#in-applied-research",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "In applied research",
-    "text": "In applied research\n\nAssessing the impact of Medicare expansion on mortality rates (Miller et al, 2021)"
-  },
-  {
-    "objectID": "slides/session4/correction.html#why-would-running-a-simple-regression-not-work",
-    "href": "slides/session4/correction.html#why-would-running-a-simple-regression-not-work",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Why would running a simple regression not work ?",
-    "text": "Why would running a simple regression not work ?\n\\[\\begin{equation}\n\\text{Mortality}_{it} = \\text{Medicare}_{it} + \\epsilon_{it}\n\\end{equation}\\]\n\nwhat would you probably observe?"
-  },
-  {
-    "objectID": "slides/session4/correction.html#why-would-running-a-simple-regression-not-work-1",
-    "href": "slides/session4/correction.html#why-would-running-a-simple-regression-not-work-1",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Why would running a simple regression not work ?",
-    "text": "Why would running a simple regression not work ?\n\nSelection bias and endogeneity : being eligible to medicare = being older, perhaps in poor health condition\nOmitted variable bias : depending on your data, you might forget variables to control for, that might impact mortality rate and medicare coverage\nReverse causality"
-  },
-  {
-    "objectID": "slides/session4/correction.html#other-examples",
-    "href": "slides/session4/correction.html#other-examples",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Other examples",
-    "text": "Other examples\n\nAssessing the impact of wind turbine installations on the vote for the far-right"
-  },
-  {
-    "objectID": "slides/session4/correction.html#event-study-1",
-    "href": "slides/session4/correction.html#event-study-1",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Event-study",
-    "text": "Event-study"
-  },
-  {
-    "objectID": "slides/session4/correction.html#difference-in-differences-2",
-    "href": "slides/session4/correction.html#difference-in-differences-2",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Difference-in-Differences",
-    "text": "Difference-in-Differences\n\\[\\begin{equation}\nY_{it} = \\alpha_i + \\beta_t + \\text{Group}_i + \\text{Period}_t + \\delta \\text{Group}_i \\times \\text{Period}_t + \\epsilon_{it}\n\\end{equation}\\]\n\nThe causal effect is the interaction effect \\(\\delta\\)\nThis model is called two-way fixed effects: TWFE\nGood for one homogeneous treatment (eg. a policy switch affecting all states in a certain year)\nMore robust and recent estimators exist in the literature (de Chaisemartin & D’Haultfœuille, 2020; Callaway & Sant’Anna, 2021), for heterogeneous or staggered treatment"
-  },
-  {
-    "objectID": "slides/session4/correction.html#in-r",
-    "href": "slides/session4/correction.html#in-r",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "In R",
-    "text": "In R\n\nPanel data always require clustering of the standard errors\nIn general, at the level at which treatment is applied ::: r-fit-text\n\nfeols(formula|FE,cluster=~group,data):\n\nformula: Y ~ Time*Treatment (+controls)\nFE: fixed effects, in general at the individual and yearly level\ncluster=~group: specify that you want clustered SE (if you do not add this argument, you will have IID SE like in lm)\ndata: name of the dataset\n\nWith feols function, the stargazer function does not work. You need to use etable(). :::"
-  },
-  {
-    "objectID": "slides/session4/correction.html#common-pitfalls",
-    "href": "slides/session4/correction.html#common-pitfalls",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Common pitfalls",
-    "text": "Common pitfalls\n\nViolation of the parallel trends assumption\nComposition changes in the groups composition\nSpillover effects\nTime-varying confounders: events happening at the same time\nNot clustered standard errors"
-  },
-  {
-    "objectID": "slides/session4/correction.html#heterogeneous-treatment-effects",
-    "href": "slides/session4/correction.html#heterogeneous-treatment-effects",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Heterogeneous treatment effects",
-    "text": "Heterogeneous treatment effects\n\nA TWFE computes an average over years\nYet treatment effects are perhaps heterogeneous and dynamic\nYou can try running TWFE with interactions, event-study\nOr use more sophisticated estimators : De Chaisemartin & D’Hautefeuille, Callaway & Sant’Anna."
-  },
-  {
-    "objectID": "slides/session4/correction.html#an-example",
-    "href": "slides/session4/correction.html#an-example",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "An example",
-    "text": "An example\nBased on the data from Angelucci and Cagé, 2019.\nWe are interested in understanding how the introduction of advertisements in TV programs in France has impacted the revenues of newspapers throughout France. The hypothesis being that it impacted only national newspapers and not local ones."
-  },
-  {
-    "objectID": "slides/session4/correction.html#an-example-1",
-    "href": "slides/session4/correction.html#an-example-1",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "An example",
-    "text": "An example\n\nData set on newspapers revenues, can be downloaded here.\n\n\nlibrary(haven)\nlibrary(tidyverse)\nnewspapers &lt;- read_dta(\"data/Angelucci_Cage_AEJMicro_dataset.dta\")\n\nnewspapers &lt;-\n  newspapers |&gt;\n  select(\n    year, id_news, after_national, local, national, ra_cst, ps_cst, qtotal\n    ) |&gt; \n  mutate(ra_cst_div_qtotal = ra_cst / qtotal, \n         post_treatment =  if_else(year &gt;= 1967, 1, 0),\n         across(c(id_news, local, national, after_national), as.factor),\n         year = as.factor(year)) %&gt;% rename(treat_group = national)\nnewspapers\n\n# A tibble: 1,196 × 10\n   year  id_news after_national local treat_group    ra_cst ps_cst  qtotal\n   &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;          &lt;fct&gt; &lt;fct&gt;           &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;\n 1 1960  1       0              1     0            52890272   2.29  94478.\n 2 1961  1       0              1     0            56601060   2.20  96289.\n 3 1962  1       0              1     0            64840752   2.13  97313.\n 4 1963  1       0              1     0            70582944   2.43 101068.\n 5 1964  1       0              1     0            74977888   2.35 102103.\n 6 1965  1       0              1     0            74438248   2.29 105169.\n 7 1966  1       0              1     0            81383000   2.31 126235.\n 8 1967  1       0              1     0            80263152   2.88 128667.\n 9 1968  1       0              1     0            87165704   3.45 131824.\n10 1969  1       0              1     0           102596384   3.28 132417.\n# ℹ 1,186 more rows\n# ℹ 2 more variables: ra_cst_div_qtotal &lt;dbl&gt;, post_treatment &lt;dbl&gt;"
-  },
-  {
-    "objectID": "slides/session4/correction.html#two-way-fixed-effects",
-    "href": "slides/session4/correction.html#two-way-fixed-effects",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Two-way fixed effects",
-    "text": "Two-way fixed effects\n\nlibrary(fixest)\n\nnewspapers &lt;- newspapers |&gt;\n  mutate(year = as.numeric(as.character(year)),\n         treat_group = as.numeric(as.character(treat_group)))\n\ntwfe &lt;- feols(\n  log(ra_cst) ~ post_treatment*treat_group | id_news + year,\n  cluster = ~id_news,\n  data = newspapers %&gt;% filter(year == 1966|year == 1967)\n)\nsummary(twfe)\n\nOLS estimation, Dep. Var.: log(ra_cst)\nObservations: 156\nFixed-effects: id_news: 78,  year: 2\nStandard-errors: Clustered (id_news) \n                            Estimate Std. Error t value Pr(&gt;|t|)    \npost_treatment:treat_group -0.086116   0.042682 -2.0176 0.047118 *  \n... 2 variables were removed because of collinearity (post_treatment and\ntreat_group)\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\nRMSE: 0.057996     Adj. R2: 0.997027\n                 Within R2: 0.06695"
-  },
-  {
-    "objectID": "slides/session4/correction.html#checking-the-parallel-trends",
-    "href": "slides/session4/correction.html#checking-the-parallel-trends",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Checking the parallel trends",
-    "text": "Checking the parallel trends\n\nnewspapers %&gt;%\n  group_by(year, treat_group) %&gt;%\n  summarise(mean_score = mean(log(ra_cst), na.rm = TRUE), .groups = \"drop\") %&gt;%\n  ggplot(aes(year, mean_score, color = as.factor(treat_group))) +\n  geom_line()"
-  },
-  {
-    "objectID": "slides/session4/correction.html#checking-the-parallel-trends-1",
-    "href": "slides/session4/correction.html#checking-the-parallel-trends-1",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Checking the parallel trends",
-    "text": "Checking the parallel trends"
-  },
-  {
-    "objectID": "slides/session4/correction.html#event-study-2",
-    "href": "slides/session4/correction.html#event-study-2",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Event-study",
-    "text": "Event-study\n\nlibrary(fixest)\n\nnewspapers &lt;- newspapers |&gt;\n  mutate(year = as.numeric(as.character(year)),\n         treat_group = as.numeric(as.character(treat_group)))\n\nevent_study &lt;- feols(\n  log(ra_cst) ~ i(year, treat_group, ref = \"1966\") | id_news + year,\n  cluster = ~id_news,\n  data = newspapers\n)\n\niplot(event_study,\n      xlab = \"Year\",\n      ylab = \"Effect on log(ra_cst)\",\n      main = \"Event Study: Effect of National Newspapers\",\n      ref.line = 0)"
-  },
-  {
-    "objectID": "slides/session4/correction.html#event-study-3",
-    "href": "slides/session4/correction.html#event-study-3",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Event study",
-    "text": "Event study"
-  },
-  {
-    "objectID": "slides/session4/correction.html#event-study-4",
-    "href": "slides/session4/correction.html#event-study-4",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Event-study",
-    "text": "Event-study\n\nThis is for only one treatment timing\n\n\\[\\begin{equation}\nY_{it} = \\alpha_i + \\beta_t + \\text{Group_i} + \\text{Period}_t + \\delta \\text{Group_i} \\times \\text{Period}_t + \\epsilon_{it}\n\\end{equation}\\]\n\nFor staggered treatment : more complex estimators (e.g. Callaway and Sant’Anna, from package did)\nEstimates (group,time) effects\nFor each treatment period and cohort, an effect is computed."
-  },
-  {
-    "objectID": "slides/session4/correction.html#matching-1",
-    "href": "slides/session4/correction.html#matching-1",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Matching",
-    "text": "Matching\n\nIdeally you want identical treatment and control groups on all other covariates\nVariables predicting your treatment should also predict your control group\nMatching is useful to\n\nreduce bias due to differences between control vs. treatment\nmore credible and transparent comparaison between groups\n\nBut does not remove bias from unobserved variables !"
-  },
-  {
-    "objectID": "slides/session4/correction.html#propensity-score-matching",
-    "href": "slides/session4/correction.html#propensity-score-matching",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Propensity score matching",
-    "text": "Propensity score matching\n\nPropensity score = probability to receive treatment depending on covariates\n\nDecide of important covariates\nEstimate propensity scores per individual (logistic regression glm (Y ~ X, family = \"binomial\"))\nAssociate treatment group with control groups with similar scores\nCheck covariate balance\nEstimate treatment effect"
-  },
-  {
-    "objectID": "slides/session4/correction.html#types-of-matching",
-    "href": "slides/session4/correction.html#types-of-matching",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Types of matching",
-    "text": "Types of matching\n\nNearest : each treated individual is associated with the closest in the non-treated individuals \\(min(|PSM_t - PSM_c|)\\)\nRadius : controls lie within a certain radius \\(|PSM_t - PSM_c| \\leq R\\)\nKernel : closer controls are associated with higher weights"
-  },
-  {
-    "objectID": "slides/session4/correction.html#in-r-1",
-    "href": "slides/session4/correction.html#in-r-1",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "In R",
-    "text": "In R\n\ninstall.packages(\"MatchIt\")\nlibrary(MatchIt)\n\nmatch_model &lt;- matchit(treatment ~ .,\n                       data = data %&gt;% filter(time == pre-treatment_period) %&gt;% select(-c(outcome_var)),\n                       method = \"nearest\",   # nearest neighbor matching\n                       distance = \"logit\")   # use logistic propensity score\n\nmatched_ids &lt;- match.data(match_model) %&gt;% pull(id) %&gt;% unique()"
-  },
-  {
-    "objectID": "slides/session4/correction.html#propensity-score-matching-1",
-    "href": "slides/session4/correction.html#propensity-score-matching-1",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Propensity score matching",
-    "text": "Propensity score matching\n\nCan be used as a standalone method\nOr as pre-processing before DiD"
-  },
-  {
-    "objectID": "slides/session4/correction.html#exercice-1",
-    "href": "slides/session4/correction.html#exercice-1",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Exercice 1",
-    "text": "Exercice 1\n\nImport the data, located at https://github.com/paulservais-1/methods_policyevaluation/raw/main/homeworks/data/schoolpanel.csv. Have a look at the data set using glimpse. What will be your dependent variable ? Your independent variable ? How many individuals do you have in total ? How many individuals are treated ?\n\n\nlibrary(rio)\nlibrary(fixest)\nlibrary(tidyverse)\nlibrary(MatchIt)\ndata &lt;- import(\"https://github.com/paulservais-1/methods_policyevaluation/raw/main/homeworks/data/schoolpanel.csv\")\nglimpse(data)\n\nRows: 7,500\nColumns: 9\n$ id                 &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, …\n$ month              &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, …\n$ test_score         &lt;dbl&gt; 82.33900, 80.74787, 83.22705, 75.29832, 83.59322, 1…\n$ treatment          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, …\n$ income             &lt;dbl&gt; 26849.53, 29099.22, 28905.42, 29442.97, 33317.20, 3…\n$ parent_edu         &lt;dbl&gt; 15.15510, 15.15510, 15.15510, 15.15510, 15.15510, 1…\n$ school_funding     &lt;dbl&gt; 5035.761, 4599.654, 5324.554, 6279.920, 5623.768, 6…\n$ class_size         &lt;int&gt; 28, 20, 29, 27, 30, 21, 21, 24, 24, 26, 24, 24, 21,…\n$ teacher_experience &lt;int&gt; 0, 5, 3, 1, 7, 8, 6, 6, 7, 9, 11, 13, 13, 12, 14, 0…\n\nsummary(data)\n\n       id            month      test_score       treatment        income     \n Min.   :  1.0   Min.   : 1   Min.   : 50.47   Min.   :0.00   Min.   : 8114  \n 1st Qu.:125.8   1st Qu.: 4   1st Qu.: 83.59   1st Qu.:0.00   1st Qu.:30859  \n Median :250.5   Median : 8   Median : 92.25   Median :0.00   Median :36880  \n Mean   :250.5   Mean   : 8   Mean   : 92.14   Mean   :0.47   Mean   :36605  \n 3rd Qu.:375.2   3rd Qu.:12   3rd Qu.:100.79   3rd Qu.:1.00   3rd Qu.:42451  \n Max.   :500.0   Max.   :15   Max.   :131.00   Max.   :1.00   Max.   :67658  \n   parent_edu     school_funding   class_size    teacher_experience\n Min.   : 2.856   Min.   :3499   Min.   :14.00   Min.   : 0.00     \n 1st Qu.:10.236   1st Qu.:5830   1st Qu.:22.00   1st Qu.: 4.00     \n Median :12.171   Median :6604   Median :24.00   Median : 8.00     \n Mean   :12.126   Mean   :6597   Mean   :24.47   Mean   : 7.55     \n 3rd Qu.:14.267   3rd Qu.:7363   3rd Qu.:27.00   3rd Qu.:11.00     \n Max.   :22.171   Max.   :9637   Max.   :37.00   Max.   :21.00     \n\ndata %&gt;% distinct(id) %&gt;% nrow()\n\n[1] 500\n\ndata %&gt;% filter(treatment == 1) %&gt;% distinct(id) %&gt;% nrow()\n\n[1] 235\n\n\n\nCreate variable post worth 1 after month 7, and 0 before.\n\n\ndata &lt;- data %&gt;% mutate(post = ifelse(month&gt;=7, 1,0))\n\n\nRun a multiple regression with test_score as dependent variable and treatment as independent variable. What could go wrong with such specification ? Can you derive causal claims from it ?\n\n\nlm_simple &lt;- lm(test_score ~ treatment, data = data)\nsummary(lm_simple)\n\n\nCall:\nlm(formula = test_score ~ treatment, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-43.762  -8.393   0.225   8.468  36.771 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  90.2853     0.1876  481.21   &lt;2e-16 ***\ntreatment     3.9481     0.2737   14.43   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 11.83 on 7498 degrees of freedom\nMultiple R-squared:  0.02701,   Adjusted R-squared:  0.02688 \nF-statistic: 208.1 on 1 and 7498 DF,  p-value: &lt; 2.2e-16\n\n\n\nRun a difference-in-differences estimation to estimate the causal effect of the tutoring on the test scores, with only months 6 and 7, using feols.\n\n\ndid_simple &lt;- feols(test_score ~ treatment*post, data = data %&gt;% filter(month %in% c(6,7)))\nsummary(did_simple)\n\nOLS estimation, Dep. Var.: test_score\nObservations: 1,000\nStandard-errors: IID \n               Estimate Std. Error   t value   Pr(&gt;|t|)    \n(Intercept)    86.78924   0.492991 176.04623  &lt; 2.2e-16 ***\ntreatment       1.04930   0.719102   1.45918 1.4483e-01    \npost            2.05556   0.697195   2.94833 3.2695e-03 ** \ntreatment:post  5.22202   1.016963   5.13491 3.3942e-07 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\nRMSE: 8.00925   Adj. R2: 0.133667\n\n\n\nRun a difference-in-differences estimation with all years, using feols. Cluster the standard errors, and add individual and time fixed effects to run a TWFE estimation. What is the effect ? How does it evolve along time ?\n\n\ntwfe_model &lt;- feols(test_score ~ treatment*post | id + month,\n                    cluster = ~id,\n                    data = data)\nsummary(twfe_model)\n\nOLS estimation, Dep. Var.: test_score\nObservations: 7,500\nFixed-effects: id: 500,  month: 15\nStandard-errors: Clustered (id) \n               Estimate Std. Error t value  Pr(&gt;|t|)    \ntreatment:post  4.68905   0.267709 17.5154 &lt; 2.2e-16 ***\n... 2 variables were removed because of collinearity (treatment and\npost)\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\nRMSE: 5.19844     Adj. R2: 0.798204\n                Within R2: 0.046385\n\n\n\nIs the treatment staggered ? If yes, what estimators do you have to consider instead ?\nCheck the parallel trend assumption graphically. Does it seem plausible ?\n\n\ndata %&gt;%\n  group_by(month, treatment) %&gt;%\n  summarise(mean_score = mean(test_score), .groups=\"drop\") %&gt;%\n  ggplot(aes(month, mean_score, color = as.factor(treatment))) +\n  geom_line() +\n  geom_vline(xintercept = 7, linetype = \"dashed\") +\n  labs(color = \"Treatment\")\n\n\n\n\n\n\n\n\n\nConduct an event-study, using i and iplot() to estimate interaction effects along time. Compare your results with the TWFE. How dynamic is the effect ?\n\n\nevent_model &lt;- feols(test_score ~ i(month, treatment, ref = 6) | id + month,\n                     cluster = ~id,\n                     data = data)\niplot(event_model)\n\n\n\n\n\n\n\n\n\nUse all your covariates to match your treatment group with a control group with similar covariates in the pre-treatment year, based on the method of the nearest neighbor. Re-run your TWFE and your event-study with that restricted data set, and compare the results.\n\n\npre_data &lt;- data %&gt;% filter(month == 6) %&gt;% select(-c(test_score))\n\nlibrary(MatchIt)\n\nps_model &lt;- matchit(treatment ~ .,  # replace 'other_covariates'\n                    data = pre_data,\n                    method = \"nearest\")\nmatched_ids &lt;- match.data(ps_model) %&gt;% pull(id) %&gt;% unique()\nmatched_data &lt;- data %&gt;% filter(id %in% matched_ids)\n\ntwfe_matched &lt;- feols(test_score ~ treatment*post | id + month,\n                       cluster = ~id,\n                       data = matched_data)\nsummary(twfe_matched)\n\nOLS estimation, Dep. Var.: test_score\nObservations: 7,050\nFixed-effects: id: 470,  month: 15\nStandard-errors: Clustered (id) \n               Estimate Std. Error t value  Pr(&gt;|t|)    \ntreatment:post  4.66057   0.277388 16.8016 &lt; 2.2e-16 ***\n... 2 variables were removed because of collinearity (treatment and\npost)\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\nRMSE: 5.19782     Adj. R2: 0.797848\n                Within R2: 0.046018\n\nevent_matched &lt;- feols(test_score ~ i(month,treatment, ref = 6) | id + month,\n                        cluster = ~id,\n                        data = matched_data)\niplot(event_matched)"
-  },
-  {
-    "objectID": "slides/session4/session4.html#identification",
-    "href": "slides/session4/session4.html#identification",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Identification",
-    "text": "Identification\n\nThe whole identification lies in the parallel trends assumption\n= The key assumption to verify in DiD\n\ngraphically\nevent-study plots and placebos"
-  },
-  {
-    "objectID": "slides/session4/session4.html#an-intuitive-example",
-    "href": "slides/session4/session4.html#an-intuitive-example",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "An intuitive example",
-    "text": "An intuitive example\n\nTaylor Swift concerts : economic boom in the places where she went, surge in hotel bookings, restaurants etc.\nYet other factors : post-pandemic increase in traveling, summer tourism, etc.\nHow can we isolate the Taylor effect?"
-  },
-  {
-    "objectID": "slides/session4/session4.html#outcomes",
-    "href": "slides/session4/session4.html#outcomes",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "Outcomes",
-    "text": "Outcomes\n\n\n\n\nBefore\nAfter\n\n\n\n\nwith Taylor\nX\nY\n\n\nwithout Taylor\nA\nB\n\n\n\n\nAll variables describe hotel and restaurants revenues"
-  },
-  {
-    "objectID": "slides/session4/session4.html#on-the-finals",
-    "href": "slides/session4/session4.html#on-the-finals",
-    "title": "Methods for Research and Policy Evaluation",
-    "section": "On the finals",
-    "text": "On the finals\n\nHave you started looking at data sets ? papers ?\nDon’t hesitate to reach out with proposition, questions !\nSubmission date"
   }
 ]
