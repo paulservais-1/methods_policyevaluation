@@ -61,6 +61,27 @@ format: revealjs
 
 :::
 
+## The logic behind DiD
+- The control and treatment only need to evolve in parallel in pre-treatment
+```{r}
+#| echo: false
+library(ggplot2)
+library(tidyverse)
+cholera <-data.frame(
+    town = rep(c("A", "B"), each = 3),
+    year = rep(c(1852, 1853, 1855), times = 2),  # two pre-treatment years + one post
+    cholera_cases = c(120, 110, 20, 95, 85, 65)  # hypothetical numbers
+)
+
+ggplot(cholera, aes(x = year, y = cholera_cases, color = town, group = town)) +
+    geom_line(size = 1.2) +
+    geom_point(size = 3) +
+    labs(title = "DiD Example: Cholera Cases in two towns",
+         y = "Cholera Cases", x = "Year") +
+    theme_minimal()
+
+```
+
 ## An intuitive example
 - Taylor Swift concerts : economic boom in the places where she went, surge in hotel bookings, restaurants etc.
 - Yet other factors : post-pandemic increase in traveling, summer tourism, etc.
@@ -145,26 +166,6 @@ ggplot(df, aes(x = Time, y = Outcome, color = Group, linetype = Group)) +
 - What is generally measured by a DiD
 - the difference between the counterfactual $Y_T(1)$ and the actual outcome $Y_T(0)$
 
-## Historically
-- The control and treatment only need to evolve in parallel in pre-treatment
-```{r}
-#| echo: false
-library(ggplot2)
-library(tidyverse)
-cholera <-data.frame(
-    town = rep(c("A", "B"), each = 3),
-    year = rep(c(1852, 1853, 1855), times = 2),  # two pre-treatment years + one post
-    cholera_cases = c(120, 110, 20, 95, 85, 65)  # hypothetical numbers
-)
-
-ggplot(cholera, aes(x = year, y = cholera_cases, color = town, group = town)) +
-    geom_line(size = 1.2) +
-    geom_point(size = 3) +
-    labs(title = "DiD Example: Cholera Cases in two towns",
-         y = "Cholera Cases", x = "Year") +
-    theme_minimal()
-
-```
 
 ## In applied research
 - Assessing the impact of Medicare expansion on mortality rates (Miller et al, 2021)
