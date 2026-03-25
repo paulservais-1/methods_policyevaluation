@@ -180,6 +180,10 @@ window.Quarto = {
     <a class="dropdown-item" href="../../sessions/session3/session3.html">
  <span class="dropdown-text">Session 3: OLS regressions and non-linear regressions</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../sessions/session4/session4.html">
+ <span class="dropdown-text">Session 4: Difference-in-differences</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -204,6 +208,10 @@ window.Quarto = {
     <a class="dropdown-item" href="../../homeworks/homework3.html">
  <span class="dropdown-text">Session 3: OLS regressions and non-linear regressions</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../homeworks/homework4.html">
+ <span class="dropdown-text">Session 4: Difference-in-differences</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -227,6 +235,10 @@ window.Quarto = {
         <li>
     <a class="dropdown-item" href="../../slides/session3/slides3.html">
  <span class="dropdown-text">Session 3: OLS regressions and non-linear regressions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../slides/session4/session4.html">
+ <span class="dropdown-text">Session 4: Difference-in-differences</span></a>
   </li>  
     </ul>
   </li>
@@ -255,12 +267,9 @@ window.Quarto = {
   <li><a href="#identification-strategy" id="toc-identification-strategy" class="nav-link" data-scroll-target="#identification-strategy">Identification strategy</a></li>
   <li><a href="#difference-in-differences-theory" id="toc-difference-in-differences-theory" class="nav-link" data-scroll-target="#difference-in-differences-theory">Difference-in-differences : theory</a></li>
   <li><a href="#two-way-fixed-effects" id="toc-two-way-fixed-effects" class="nav-link" data-scroll-target="#two-way-fixed-effects">Two-way fixed effects</a></li>
-  <li><a href="#other-estimators" id="toc-other-estimators" class="nav-link" data-scroll-target="#other-estimators">Other estimators</a>
-  <ul class="collapse">
-  <li><a href="#callaway-and-santanna" id="toc-callaway-and-santanna" class="nav-link" data-scroll-target="#callaway-and-santanna">Callaway and Sant’Anna</a></li>
-  <li><a href="#de-chaisemartin" id="toc-de-chaisemartin" class="nav-link" data-scroll-target="#de-chaisemartin">De Chaisemartin</a></li>
-  </ul></li>
-  <li><a href="#an-example-mortality-rates-and-medicare" id="toc-an-example-mortality-rates-and-medicare" class="nav-link" data-scroll-target="#an-example-mortality-rates-and-medicare">An example : mortality rates and medicare</a></li>
+  <li><a href="#other-estimators" id="toc-other-estimators" class="nav-link" data-scroll-target="#other-estimators">Other estimators</a></li>
+  <li><a href="#callaway-and-santanna-estimator" id="toc-callaway-and-santanna-estimator" class="nav-link" data-scroll-target="#callaway-and-santanna-estimator">Callaway and Sant’Anna estimator</a></li>
+  <li><a href="#application" id="toc-application" class="nav-link" data-scroll-target="#application">Application</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -328,252 +337,198 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="two-way-fixed-effects">Two-way fixed effects</h2>
 <p>Historically, the main estimator used for difference-in-differences estimations was the two-way fixed effects estimator (TWFE). It consists in computing :</p>
 <p><span class="math display">\[\begin{equation}
-Y_{it} = \alpha_i + \beta_t + \text{Group_i} + \text{Period}_t + \delta \text{Group_i} \times \text{Period}_t + \espilon_{it}
-\end{equation}\]</span> where <span class="math inline">\(\text{Group_i}\)</span> and <span class="math inline">\(\text{Period}_t\)</span> respectively equal to one for units <span class="math inline">\(i\)</span> in the treatment group, and one for time periods <span class="math inline">\(t\)</span> in post-treatment. <span class="math inline">\(\delta\)</span> is the causal effect, also called ATT : average treatment effect on the treated (compared with the counterfactual of the treated). It is also possible to add covariates in that model <span class="math inline">\(X_{it}\)</span>, which generally do not modify the results.</p>
+Y_{it} = \alpha_i + \beta_t + \text{Group}_i + \text{Period}_t + \delta \text{Group}_i \times \text{Period}_t + \epsilon_{it}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\text{Group}_i\)</span> and <span class="math inline">\(\text{Period}_t\)</span> respectively equal to one for units <span class="math inline">\(i\)</span> in the treatment group, and one for time periods <span class="math inline">\(t\)</span> in post-treatment. <span class="math inline">\(\delta\)</span> is the causal effect, also called ATT : average treatment effect on the treated (compared with the counterfactual of the treated). It is also possible to add covariates in that model <span class="math inline">\(X_{it}\)</span>, which generally do not modify the results.</p>
 </section>
 <section id="other-estimators" class="level2">
 <h2 class="anchored" data-anchor-id="other-estimators">Other estimators</h2>
 <p>Yet authors have recently shown that this method can lead to bias, especially when the treatment is staggered - that is, affecting multiple time periods -, or when it is heterogeneous (the effect is different depending on the characteristics of the treated units). Authors, such as De Chaisemartin or Callaway and Sant’Anna have therefore proposed alternative estimators, which are used in a very similar way as the TWFE.</p>
-<section id="callaway-and-santanna" class="level3">
-<h3 class="anchored" data-anchor-id="callaway-and-santanna">Callaway and Sant’Anna</h3>
-<p>THe</p>
 </section>
-<section id="de-chaisemartin" class="level3">
-<h3 class="anchored" data-anchor-id="de-chaisemartin">De Chaisemartin</h3>
-</section>
-</section>
-<section id="an-example-mortality-rates-and-medicare" class="level2">
-<h2 class="anchored" data-anchor-id="an-example-mortality-rates-and-medicare">An example : mortality rates and medicare</h2>
-<p>To introduce the idea behind causal estimation, consider the following example. Suppose we want to estimate the effect of Medicare on mortality rates : did the introduction of Medicare change the mortality rates or not ? This example is inspired from Miller et al., 2021. To do so, you can use made up data, downloaded here. For each individual <span class="math inline">\(i\)</span>, in state <span class="math inline">\(s\)</span>, time <span class="math inline">\(t\)</span> you observe:</p>
-<ul>
-<li>Mortality (binary: 0 = alive, 1 = dead)</li>
-<li>Medicare (0/1)</li>
-<li>Age</li>
-<li>Health status (e.g., index from 1 to 10)</li>
-<li>Income</li>
-<li>State</li>
-<li>Year</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/medicare_did_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>From what we have seen so far, a natural approach might be to run a simple OLS regression of the form:</p>
+<section id="callaway-and-santanna-estimator" class="level2">
+<h2 class="anchored" data-anchor-id="callaway-and-santanna-estimator">Callaway and Sant’Anna estimator</h2>
+<p>The estimator proposed by Brantly Callaway and Pedro H. C. Sant’Anna provides an alternative to the traditional Two-Way Fixed Effects (TWFE) approach in difference-in-differences settings with staggered treatment adoption and heterogeneous treatment effects. The main idea is to move away from a single global regression and instead focus on a collection of more credible comparisons.</p>
+<p>Concretely, the method estimates <strong>group-time average treatment effects</strong>, defined as:</p>
 <p><span class="math display">\[\begin{equation}
-\text{Mortality}_i = \alpha + \beta \text{Medicare}_i + \epsilon_i,
+ATT(g, t)
 \end{equation}\]</span></p>
-<p>Where you basically estimate the relationship between medicare and mortality through so-called Linear Probability Model : a type of OLS regression applied to binary dependent variables, that gives you an approximation of the predicted probabilities (a better version would be to consider the logistic regression instead). Here, your dependent variable would be the mortality variable, worth 0 in case the person is not dead, and 1 in case the person is dead. Your potential outcomes would therefore be 0 or 1, and your groups would be either treated or not treated.</p>
+<p>where (g) denotes the period in which a group is first treated and (t) is the time period of interest. For each group (g), the treatment effect at time (t) is computed by comparing the outcomes of units first treated in period (g) with those of units that are <strong>not yet treated at time (t)</strong>. This is crucial, as it avoids using already-treated units as controls, which is one of the main sources of bias in TWFE when treatment effects are heterogeneous or when treatment timing varies across units.</p>
+<p>To see this more intuitively, consider a policy that is implemented at different dates across regions. Suppose Region A is treated in 2018, Region B in 2020, and Region C is never treated. When estimating the effect for Region A in 2019, both Regions B and C can serve as valid controls since neither has been treated yet. However, by 2020, Region B becomes treated, so only Region C remains a valid control group. Similarly, when estimating the effect for Region B after 2020, Region C is used as the comparison group. By structuring the analysis in this way, each estimated effect relies only on appropriate comparisons, avoiding contamination from already-treated units.</p>
+<p>The estimator therefore produces a set of treatment effects for different groups and periods, such as:</p>
+<p><span class="math display">\[\begin{equation}
+ATT(2018, 2019), \quad ATT(2018, 2020), \quad ATT(2020, 2021), \dots
+\end{equation}\]</span></p>
+<p>These effects can then be aggregated to obtain an overall average treatment effect or used to construct event-study type analyses that describe how the treatment effect evolves over time. In this sense, the approach can be understood as estimating many simple and valid difference-in-differences comparisons and then combining them, rather than relying on a single regression that may implicitly use invalid comparisons.</p>
+<p>In practice, this estimator can be implemented in R using the <code>did</code> package:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ols1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mortality <span class="sc">~</span> medicare, <span class="at">data =</span> data)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ols1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"did"</span>, <span class="at">repos =</span> <span class="st">"https://cloud.r-project.org"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = mortality ~ medicare, data = data)
+<pre><code>The following package(s) will be installed:
+- did [2.3.0]
+These packages will be installed into "~/Library/CloudStorage/ProtonDrive-paservai@protonmail.com-folder/Website/methods_policyevaluation/renv/library/macos/R-4.5/aarch64-apple-darwin20".
 
-Residuals:
-    Min      1Q  Median      3Q     Max 
--0.5166 -0.5166  0.4834  0.4834  0.4911 
-
-Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  0.516615   0.006200   83.33   &lt;2e-16 ***
-medicare    -0.007758   0.010480   -0.74    0.459    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.4998 on 9998 degrees of freedom
-Multiple R-squared:  5.482e-05, Adjusted R-squared:  -4.52e-05 
-F-statistic: 0.5481 on 1 and 9998 DF,  p-value: 0.4591</code></pre>
+# Installing packages --------------------------------------------------------
+- Installing did ...                            OK [linked from cache]
+Successfully installed 1 package in 4 milliseconds.</code></pre>
 </div>
-</div>
-<p>Yet this regression would only give you the association between the two, and you might get that, without controlling for other factors, the effect of Medicare is positive on mortality ! Indeed, not adding any other control, you might have omitted variable bias, leading to a positive correlation between the two, because people receiving medicare are already those more prone to suffering from diseases.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ols2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mortality <span class="sc">~</span> medicare <span class="sc">+</span> age <span class="sc">+</span> health <span class="sc">+</span> income, <span class="at">data =</span> data)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ols2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(did)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># set seed so everything is reproducible</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1814</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># generate dataset with 4 time periods</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">reset.sim</span>()</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>sp<span class="sc">$</span>te <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>time.periods <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># add dynamic effects</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>sp<span class="sc">$</span>te.e <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>time.periods</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># generate data set with these parameters</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># here, we dropped all units who are treated in time period 1 as they do not help us recover ATT(g,t)'s.</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>dta <span class="ot">&lt;-</span> <span class="fu">build_sim_dataset</span>(sp)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># How many observations remained after dropping the ``always-treated'' units</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(dta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = mortality ~ medicare + age + health + income, data = data)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--0.5526 -0.5130  0.4589  0.4858  0.5262 
-
-Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  6.870e-01  6.694e-02  10.264  &lt; 2e-16 ***
-medicare    -1.769e-03  1.082e-02  -0.164  0.87011    
-age         -2.696e-03  9.767e-04  -2.760  0.00579 ** 
-health      -5.200e-04  2.459e-03  -0.211  0.83253    
-income       3.038e-07  5.041e-07   0.603  0.54673    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.4997 on 9995 degrees of freedom
-Multiple R-squared:  0.000853,  Adjusted R-squared:  0.0004531 
-F-statistic: 2.133 on 4 and 9995 DF,  p-value: 0.07399</code></pre>
+<pre><code>[1] 15916</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This is what the data looks like</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 7
+      G      X    id cluster period     Y treat
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     3 -0.876     1       5      1  5.56     1
+2     3 -0.876     1       5      2  4.35     1
+3     3 -0.876     1       5      3  7.13     1
+4     3 -0.876     1       5      4  6.24     1
+5     2 -0.874     2      36      1 -3.66     1
+6     2 -0.874     2      36      2 -1.27     1</code></pre>
 </div>
 </div>
-<p>That is why you might then add control variables, like age, health, income etc, and run your regression again.</p>
+</section>
+<section id="application" class="level2">
+<h2 class="anchored" data-anchor-id="application">Application</h2>
+<p>In this example (based on Luis Sattelmayer), we will use the replication data from the article “Newspapers in Times of Low Advertising Revenues” Angelucci and Cagé, 2019). You can find the data here. You need to sign in (you can do it with your institution) to download the data.</p>
+<p>In France 1967, the government introduced advertisements on TV programs. Angelucci &amp; Cagé wonder if this will impact newspaper revenues. They believe that this introduction of advertisements impacted more national newspapers than local newspapers. Their treatment variable is the introduction of advertisements and the grouping variable is based on the level of newspapers (national versus local).</p>
+<p>Codebook:</p>
+<ul>
+<li><p>year: The year of the observation</p></li>
+<li><p>id_news: A unique identifier for each newspaper</p></li>
+<li><p>local: A binary indicator (0 or 1) representing whether a newspaper is local or national (1 = local, 0 = national)</p></li>
+<li><p>national: A binary indicator (0 or 1) representing whether a newspaper is national or local (1 = national, 0 = local)</p></li>
+<li><p>ra_cst: The advertising revenue of the newspaper (in constant (2014) euros)</p></li>
+<li><p>ps_cst: The price of subscriptions for the newspaper. This variable measures how much the newspaper charges for its subscriptions, reflecting its pricing strategy and revenue from readers</p></li>
+<li><p>qtotal: The circulation of the newspaper. This variable measures the number of copies sold, reflecting the newspaper’s readership and revenue from readers</p></li>
+<li><p>after_national: A binary indicator (0 or 1) representing the interaction between a newspaper’s national status and the post-television advertising era. Specifically, it marks the period after a newspaper has started national circulation and also corresponds to times after the introduction or significant increase of television advertising. This variable is designed to capture the combined effects of a newspaper reaching a national audience and the competitive or complementary impacts of television advertising on newspaper revenues or strategies</p></li>
+<li><p>ra_cst_div_qtotal: A derived variable representing the advertising revenue per unit of circulation (ra_cst / qtotal). This variable is calculated to assess the efficiency or effectiveness of advertising revenue in relation to the newspaper’s circulation size</p></li>
+</ul>
+<p>You should start by importing the data and clean the data. In this case, the dataset is already quite clean. We just need to create a few variables and transform some variables in factors.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'dplyr'</code></pre>
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.6
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ lubridate 1.9.4     ✔ tibble    3.3.0
+✔ purrr     1.2.0     ✔ tidyr     1.3.2
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>newspapers <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"data/Angelucci_Cage_AEJMicro_dataset.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>newspapers <span class="ot">&lt;-</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  newspapers <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    year, id_news, after_national, local, national, ra_cst, ps_cst, qtotal</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ra_cst_div_qtotal =</span> ra_cst <span class="sc">/</span> qtotal, </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">after_national =</span>  <span class="fu">if_else</span>(year <span class="sc">&gt;</span> <span class="dv">1967</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">after_national_placebo =</span> <span class="fu">if_else</span>(year <span class="sc">&gt;=</span> <span class="dv">1966</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>         <span class="fu">across</span>(<span class="fu">c</span>(id_news, local, national, after_national), as.factor),</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">year =</span> <span class="fu">as.factor</span>(year)) </span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(newspapers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,196
+Columns: 10
+$ year                   &lt;fct&gt; 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1967,…
+$ id_news                &lt;fct&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,…
+$ after_national         &lt;fct&gt; 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0,…
+$ local                  &lt;fct&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+$ national               &lt;fct&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ ra_cst                 &lt;dbl&gt; 52890272, 56601060, 64840752, 70582944, 7497788…
+$ ps_cst                 &lt;dbl&gt; 2.287003, 2.204863, 2.131709, 2.427344, 2.34767…
+$ qtotal                 &lt;dbl&gt; 94478.09, 96288.54, 97313.22, 101068.50, 102103…
+$ ra_cst_div_qtotal      &lt;dbl&gt; 559.8152, 587.8276, 666.3098, 698.3674, 734.334…
+$ after_national_placebo &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,…</code></pre>
+</div>
+</div>
+<p>Now, we can build the model. We use the logarithm of the advertising revenue (to help normalise the distribution of our variable). Next, we need to include the time and treatment variables so, national and after_national variable. Do not forget that you need the interaction effect. Furthermore, as we are using the whole dataset (observations from every year), we should introduce a fixed effect for year to control for linear time trends that would affect all newspapers. Finally, as we are comparing different newspapers over more than two years, we should also include a fixed effect for the newspaper. This would control for all unobserved and time-invariant differences between newspapers.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fixest)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>did<span class="ot">&lt;-</span><span class="fu">feols</span>(<span class="fu">log</span>(ra_cst) <span class="sc">~</span> national<span class="sc">*</span>after_national<span class="sc">|</span>year<span class="sc">+</span>id_news,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">cluster=</span><span class="sc">~</span>id_news,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> newspapers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>NOTE: 144 observations removed because of NA values (LHS: 144, RHS: 1).</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:stats':
-
-    filter, lag</code></pre>
+<pre><code>The variables 'national1' and 'after_national1' have been removed because of
+collinearity (see $collin.var).</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">etable</span>(did)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                          did
+Dependent Var.:                   log(ra_cst)
+                                             
+national1 x after_national1 -0.2175. (0.1164)
+Fixed-Effects:              -----------------
+year                                      Yes
+id_news                                   Yes
+___________________________ _________________
+S.E.: Clustered                   by: id_news
+Observations                            1,052
+R2                                    0.98576
+Within R2                             0.04730
+---
+Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Now, we can interpret our results. As you can see, the national and after_national variables were dropped, this is because of collinearity. In this case, we have collinearity because we add time and newspaper fixed effects which capture both national and after_national information. So, the model only keeps the interaction. When you use feols() the function automatically drops variables that are collinear. This is not the case with lm(). Furthermore, we see that the coefficient is negative, meaning that the introduction of ads did decrease revenues among national newspapers. However, this coefficient is not statistically significant, meaning that we cannot infer our results to the whole French newspaper population.</p>
+<p>We can do a placebo test. Here, the interaction coefficient is not significant, meaning that we cannot reject the parallel trend assumption. As we have more than one year before the treatment, you should do more than one placebo test.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>did_placebo <span class="ot">&lt;-</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">feols</span>(<span class="fu">log</span>(ra_cst) <span class="sc">~</span> national <span class="sc">*</span> after_national_placebo <span class="sc">|</span> year <span class="sc">+</span> id_news,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster=</span><span class="sc">~</span>id_news,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> newspapers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>NOTE: 144 observations removed because of NA values (LHS: 144, RHS: 1).</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:base':
-
-    intersect, setdiff, setequal, union</code></pre>
+<pre><code>The variables 'national1' and 'after_national_placebo' have been removed because
+of collinearity (see $collin.var).</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(treated_state, post) <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_mortality =</span> <span class="fu">mean</span>(mortality), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">etable</span>(did_placebo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 3
-  treated_state  post mean_mortality
-          &lt;int&gt; &lt;int&gt;          &lt;dbl&gt;
-1             0     0          0.513
-2             0     1          0.515
-3             1     0          0.524
-4             1     1          0.509</code></pre>
-</div>
-</div>
-<p>This method of causal estimation would lead to different potential critiques.</p>
-<p>First, there is a fundamental problem of selection bias. Medicare coverage is not randomly assigned. In the United States, eligibility is largely determined by age (65 and above) and, in some cases, by disability status. As a result, individuals on Medicare are, on average, older and in worse health than those who are not covered. Since both age and health status are strongly correlated with mortality, the regression will confound the effect of Medicare with these underlying differences. This could lead to the misleading conclusion that Medicare increases mortality, simply because its beneficiaries are more likely to die.</p>
-<p>Second, omitted variable bias is a major concern. Even if the researcher includes several control variables, it is unlikely that all relevant determinants of both Medicare enrollment and mortality are observed. Factors such as underlying health conditions, lifetime income, access to healthcare prior to eligibility, or health-related behaviors (e.g., smoking, diet) may be imperfectly measured or entirely unobserved. If these factors influence both treatment and outcome, the estimated coefficient on Medicare will be biased.</p>
-<p>Third, there may be issues of reverse causality. In some cases, individuals qualify for Medicare through disability pathways. This means that poor health can increase the likelihood of receiving Medicare, rather than Medicare affecting health. In such situations, the direction of causality is blurred, and a simple regression cannot disentangle the relationship.</p>
-<p>Fourth, the OLS framework imposes a homogeneous treatment effect: it assumes that Medicare has the same impact on mortality for all individuals. In reality, the effect is likely heterogeneous. For instance, Medicare may have a larger impact on low-income or high-risk individuals than on healthier populations. A single coefficient averages over these potentially very different effects.</p>
-<p>Fifth, researchers may inadvertently include bad controls—variables that are themselves affected by Medicare, such as the number of doctor visits or hospitalizations. Controlling for such variables blocks part of the causal mechanism through which Medicare operates, leading to biased (typically underestimated) effects.</p>
-<p>Sixth, there are timing issues to consider. Mortality is a dynamic outcome, and the effects of Medicare may take time to materialize. Moreover, individuals may enroll in Medicare shortly before death, which can create misleading correlations between coverage and mortality.</p>
-<p>Finally, measurement issues may arise. A simple binary indicator for Medicare coverage does not capture differences in duration of enrollment, quality of coverage, or actual healthcare utilization. Such measurement error can further bias the estimated relationship.</p>
-<p>More fundamentally, the regression estimates a conditional association—how mortality differs between those with and without Medicare. However, the causal question of interest is counterfactual: what would happen to mortality if individuals were given Medicare coverage? These are not the same object.</p>
-<p>For all these reasons, a simple OLS regression with a treatment dummy does not provide a credible estimate of the causal effect of Medicare on mortality. To answer this question properly, one needs a valid identification strategy, such as regression discontinuity (exploiting the age 65 eligibility threshold), difference-in-differences, or instrumental variables. These approaches aim to approximate a randomized experiment and isolate exogenous variation in treatment, allowing for a more credible causal interpretation.</p>
-<p>Hence, your treated units might still have characteristics that are not controlled for, and that also condition the outcome. In order to control for these characteristics, the difference-in-differences estimator controls for these fixed characteristics, by using the temporal variation in the introduction of the treatment. The canonical two-way fixed effects is written as :</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>did1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mortality <span class="sc">~</span> treated_state <span class="sc">*</span> post, <span class="at">data =</span> data)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(did1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = mortality ~ treated_state * post, data = data)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--0.5240 -0.5133  0.4760  0.4867  0.4911 
-
-Coefficients:
-                    Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)         0.513333   0.012907  39.772   &lt;2e-16 ***
-treated_state       0.010667   0.018253   0.584    0.559    
-post                0.001524   0.015427   0.099    0.921    
-treated_state:post -0.016667   0.021817  -0.764    0.445    
+<pre><code>                                         did_placebo
+Dependent Var.:                          log(ra_cst)
+                                                    
+national1 x after_national_placebo -0.2289. (0.1187)
+Fixed-Effects:                     -----------------
+year                                             Yes
+id_news                                          Yes
+__________________________________ _________________
+S.E.: Clustered                          by: id_news
+Observations                                   1,052
+R2                                           0.98580
+Within R2                                    0.05004
 ---
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.4999 on 9996 degrees of freedom
-Multiple R-squared:  9.836e-05, Adjusted R-squared:  -0.0002017 
-F-statistic: 0.3278 on 3 and 9996 DF,  p-value: 0.8053</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>did2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mortality <span class="sc">~</span> treated_state <span class="sc">*</span> post <span class="sc">+</span> age <span class="sc">+</span> health <span class="sc">+</span> income, <span class="at">data =</span> data)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(did2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = mortality ~ treated_state * post + age + health + 
-    income, data = data)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--0.5555 -0.5129  0.4582  0.4854  0.5297 
-
-Coefficients:
-                     Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)         6.980e-01  7.033e-02   9.925  &lt; 2e-16 ***
-treated_state       1.053e-02  1.830e-02   0.576  0.56493    
-post                1.665e-02  1.632e-02   1.020  0.30758    
-age                -3.047e-03  1.060e-03  -2.874  0.00406 ** 
-health             -4.171e-04  2.466e-03  -0.169  0.86568    
-income              3.090e-07  5.044e-07   0.613  0.54009    
-treated_state:post -1.667e-02  2.181e-02  -0.764  0.44479    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.4997 on 9993 degrees of freedom
-Multiple R-squared:  0.000957,  Adjusted R-squared:  0.0003572 
-F-statistic: 1.595 on 6 and 9993 DF,  p-value: 0.144</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>did_fe <span class="ot">&lt;-</span> <span class="fu">lm</span>(mortality <span class="sc">~</span> treated_state <span class="sc">*</span> post <span class="sc">+</span> <span class="fu">factor</span>(state) <span class="sc">+</span> <span class="fu">factor</span>(year), <span class="at">data =</span> data)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(did_fe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = mortality ~ treated_state * post + factor(state) + 
-    factor(year), data = data)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--0.5686 -0.5136  0.4484  0.4861  0.5414 
-
-Coefficients: (2 not defined because of singularities)
-                    Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)         0.517267   0.023090  22.402   &lt;2e-16 ***
-treated_state       0.025667   0.027075   0.948    0.343    
-post               -0.009667   0.024876  -0.389    0.698    
-factor(state)1     -0.007000   0.022357  -0.313    0.754    
-factor(state)2     -0.008000   0.022357  -0.358    0.720    
-factor(state)3     -0.020000   0.022357  -0.895    0.371    
-factor(state)4      0.010000   0.022357   0.447    0.655    
-factor(state)5     -0.013000   0.022357  -0.581    0.561    
-factor(state)6      0.006000   0.022357   0.268    0.788    
-factor(state)7      0.026000   0.022357   1.163    0.245    
-factor(state)8     -0.015000   0.022357  -0.671    0.502    
-factor(state)9            NA         NA      NA       NA    
-factor(year)2      -0.012000   0.022357  -0.537    0.591    
-factor(year)3      -0.016000   0.022357  -0.716    0.474    
-factor(year)4       0.035000   0.022357   1.566    0.117    
-factor(year)5      -0.004000   0.022357  -0.179    0.858    
-factor(year)6       0.010000   0.022357   0.447    0.655    
-factor(year)7       0.005000   0.022357   0.224    0.823    
-factor(year)8      -0.034000   0.022357  -1.521    0.128    
-factor(year)9       0.001000   0.022357   0.045    0.964    
-factor(year)10            NA         NA      NA       NA    
-treated_state:post -0.016667   0.021818  -0.764    0.445    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.4999 on 9980 degrees of freedom
-Multiple R-squared:  0.001599,  Adjusted R-squared:  -0.0003013 
-F-statistic: 0.8415 on 19 and 9980 DF,  p-value: 0.658</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, treated_state) <span class="sc">%&gt;%</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mortality =</span> <span class="fu">mean</span>(mortality), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> mortality, <span class="at">color =</span> <span class="fu">factor</span>(treated_state))) <span class="sc">+</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Treated State"</span>,</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Mortality Trends: Treated vs Control"</span>,</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Mortality rate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="session4_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 

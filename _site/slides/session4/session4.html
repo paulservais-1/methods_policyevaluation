@@ -272,8 +272,8 @@ Paul Servais
 <div class="column" style="width:70%;">
 <p><img data-src="images/ev_study.png"></p>
 </div></section>
-<section id="the-cholera-case" class="slide level2">
-<h2>The Cholera case</h2>
+<section id="the-logic-behind-did" class="slide level2">
+<h2>The logic behind DiD</h2>
 <ul>
 <li>The control and treatment only need to evolve in parallel in pre-treatment</li>
 </ul>
@@ -335,7 +335,7 @@ Paul Servais
 <section id="difference-in-differences-2" class="slide level2">
 <h2>Difference-in-Differences</h2>
 <p><span class="math display">\[\begin{equation}
-Y_{it} = \alpha_i + \beta_t + \text{Group_i} + \text{Period}_t + \delta \text{Group_i} \times \text{Period}_t + \epsilon_{it}
+Y_{it} = \alpha_i + \beta_t + \text{Group}_i + \text{Period}_t + \delta \text{Group}_i \times \text{Period}_t + \epsilon_{it}
 \end{equation}\]</span></p>
 <ul>
 <li>The causal effect is the interaction effect <span class="math inline">\(\delta\)</span></li>
@@ -545,6 +545,20 @@ Y_{it} = \alpha_i + \beta_t + \text{Group_i} + \text{Period}_t + \delta \text{Gr
 <li>Radius : controls lie within a certain radius <span class="math inline">\(|PSM_t - PSM_c| \leq R\)</span></li>
 <li>Kernel : closer controls are associated with higher weights</li>
 </ul>
+</section>
+<section id="in-r-1" class="slide level2 scrollable">
+<h2>In R</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">install.packages</span>(<span class="st">"MatchIt"</span>)</span>
+<span id="cb7-2"><a></a><span class="fu">library</span>(MatchIt)</span>
+<span id="cb7-3"><a></a></span>
+<span id="cb7-4"><a></a>match_model <span class="ot">&lt;-</span> <span class="fu">matchit</span>(treatment <span class="sc">~</span> .,</span>
+<span id="cb7-5"><a></a>                       <span class="at">data =</span> data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(time <span class="sc">==</span> pre<span class="sc">-</span>treatment_period) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(outcome_var)),</span>
+<span id="cb7-6"><a></a>                       <span class="at">method =</span> <span class="st">"nearest"</span>,   <span class="co"># nearest neighbor matching</span></span>
+<span id="cb7-7"><a></a>                       <span class="at">distance =</span> <span class="st">"logit"</span>)   <span class="co"># use logistic propensity score</span></span>
+<span id="cb7-8"><a></a></span>
+<span id="cb7-9"><a></a>matched_ids <span class="ot">&lt;-</span> <span class="fu">match.data</span>(match_model) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(id) <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="propensity-score-matching-1" class="slide level2">
 <h2>Propensity score matching</h2>

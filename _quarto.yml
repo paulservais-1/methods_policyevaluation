@@ -15,6 +15,8 @@ website:
             href: sessions/session2/session2.qmd
           - text: "Session 3: OLS regressions and non-linear regressions"
             href: sessions/session3/session3.qmd
+          - text: "Session 4: Difference-in-differences"
+            href: sessions/session4/session4.qmd
       - text: Exercices
       - menu:
           - text: "Session 1: Dataset Building and Descriptive Statistics"
@@ -23,6 +25,8 @@ website:
             href: homeworks/homework2.qmd
           - text: "Session 3: OLS regressions and non-linear regressions"
             href: homeworks/homework3.qmd
+          - text: "Session 4: Difference-in-differences"
+            href: homeworks/homework4.qmd
       - text: Slides
       - menu:
           - text: "Session 1: Dataset Building and Descriptive Statistics"
@@ -31,6 +35,8 @@ website:
             href: slides/session2/slides2.qmd
           - text: "Session 3: OLS regressions and non-linear regressions"
             href: slides/session3/slides3.qmd
+          - text: "Session 4: Difference-in-differences"
+            href: slides/session4/session4.qmd
       - href: about.qmd
         text: About
 

@@ -1,0 +1,118 @@
+---
+title: Session 4 - Difference-in-differences
+toc-depth: 3
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+## Exercice 1 : school tutoring program 
+You are asked to evaluate the effect of a **tutoring program** on students’ academic performance. The program is introduced in year 7 and affects only a subset of students, while others remain untreated. You observe a panel dataset that follows the same students over a period of 15 months.
+
+Your objective is to estimate the causal impact of the tutoring program on students’ test scores. To do so, you will use a **Difference-in-Differences (DiD)** approach, comparing the evolution of outcomes between treated and untreated students before and after the implementation of the program.
+
+1. Import the data, located at <https://github.com/paulservais-1/methods_policyevaluation/raw/main/homeworks/data/schoolpanel.csv>. Have a look at the data set using `glimpse`. What will be your dependent variable ? Your independent variable ? How many individuals do you have in total ? How many individuals are treated ? 
+
+```{r}
+#| echo: false
+#| eval: false
+library(rio)
+library(fixest)
+library(tidyverse)
+library(MatchIt)
+data <- import("https://github.com/paulservais-1/methods_policyevaluation/raw/main/homeworks/data/schoolpanel.csv")
+glimpse(data)
+summary(data)
+data %>% distinct(id) %>% nrow()
+data %>% filter(treatment == 1) %>% distinct(id) %>% nrow()
+```
+2. Create variable `post` worth 1 after month 7, and 0 before. 
+```{r}
+#| echo: false
+#| eval: false
+data <- data %>% mutate(post = ifelse(month>=7, 1,0))
+```
+3. Run a multiple regression with `test_score` as dependent variable and `treatment` as independent variable. What could go wrong with such specification ? Can you derive causal claims from it ?
+```{r}
+#| echo: false
+#| eval: false
+lm_simple <- lm(test_score ~ treatment, data = data)
+summary(lm_simple)
+```
+4. Run a difference-in-differences estimation to estimate the causal effect of the tutoring on the test scores, with only months 6 and 7, using `feols`.
+```{r}
+#| echo: false
+#| eval: false
+did_simple <- feols(test_score ~ treatment*post, data = data %>% filter(month %in% c(6,7)))
+summary(did_simple)
+```
+5. Run a difference-in-differences estimation with all years, using `feols`. Cluster the standard errors, and add individual and time fixed effects to run a TWFE estimation. What is the effect ? How does it evolve along time ?
+```{r}
+#| echo: false
+#| eval: false
+twfe_model <- feols(test_score ~ treatment*post | id + month,
+                    cluster = ~id,
+                    data = data)
+summary(twfe_model)
+```
+
+6. Is the treatment staggered ? If yes, what estimators do you have to consider instead ?
+
+7. Check the parallel trend assumption graphically. Does it seem plausible ?
+```{r}
+#| echo: false
+#| eval: false
+data %>%
+  group_by(month, treatment) %>%
+  summarise(mean_score = mean(test_score), .groups="drop") %>%
+  ggplot(aes(month, mean_score, color = as.factor(treatment))) +
+  geom_line() +
+  geom_vline(xintercept = 7, linetype = "dashed") +
+  labs(color = "Treatment")
+```
+8. Conduct an event-study, using `i` and `iplot()` to estimate interaction effects along time. Compare your results with the TWFE. How dynamic is the effect ?
+
+```{r}
+#| echo: false
+#| eval: false
+event_model <- feols(test_score ~ i(month, treatment, ref = 6) | id + month,
+                     cluster = ~id,
+                     data = data)
+iplot(event_model)
+```
+9. Use all your covariates to match your treatment group with a control group with similar covariates in the pre-treatment year, based on the method of the nearest neighbor. Re-run your TWFE and your event-study with that restricted data set, and compare the results.
+```{r}
+#| echo: false
+#| eval: false
+pre_data <- data %>% filter(month == 6) %>% select(-c(test_score))
+
+library(MatchIt)
+
+ps_model <- matchit(treatment ~ .,  # replace 'other_covariates'
+                    data = pre_data,
+                    method = "nearest")
+matched_ids <- match.data(ps_model) %>% pull(id) %>% unique()
+matched_data <- data %>% filter(id %in% matched_ids)
+
+twfe_matched <- feols(test_score ~ treatment*post | id + month,
+                       cluster = ~id,
+                       data = matched_data)
+summary(twfe_matched)
+
+event_matched <- feols(test_score ~ i(month,treatment, ref = 6) | id + month,
+                        cluster = ~id,
+                        data = matched_data)
+iplot(event_matched)
+```
+
+## Exercice 2 
+
+In 2019, some cities decided to introduce a smoking ban on the terraces of bars and restaurants (simulated example). We want to analyse the effect of the smoking ban on the number of hospitalisations linked to respiratory disease. Use the smoking dataset https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices4/data/smoking.RData.
+
+
+1. Compare the means of the outcome variable (called hospital_admissions) between treated and non-treated cities (variable treated) for the years 2018 and 2020 (before and after treatment, variable years or post).
+
+2. Produce the difference-in-differences analysis, using `feols`.
+
+
+

@@ -86,115 +86,131 @@ Hence, the parallel trends assumption is the key requirement behind this causal 
 Historically, the main estimator used for difference-in-differences estimations was the two-way fixed effects estimator (TWFE). It consists in computing :
 
 \begin{equation}
-Y_{it} = \alpha_i + \beta_t + \text{Group_i} + \text{Period}_t + \delta \text{Group_i} \times \text{Period}_t + \espilon_{it}
+Y_{it} = \alpha_i + \beta_t + \text{Group}_i + \text{Period}_t + \delta \text{Group}_i \times \text{Period}_t + \epsilon_{it}
 \end{equation}
-where $\text{Group_i}$ and $\text{Period}_t$ respectively equal to one for units $i$ in the treatment group, and one for time periods $t$ in post-treatment. $\delta$ is the causal effect, also called ATT : average treatment effect on the treated (compared with the counterfactual of the treated). It is also possible to add covariates in that model $X_{it}$, which generally do not modify the results.
+
+where $\text{Group}_i$ and $\text{Period}_t$ respectively equal to one for units $i$ in the treatment group, and one for time periods $t$ in post-treatment. $\delta$ is the causal effect, also called ATT : average treatment effect on the treated (compared with the counterfactual of the treated). It is also possible to add covariates in that model $X_{it}$, which generally do not modify the results.
 
 
 ## Other estimators
 
 Yet authors have recently shown that this method can lead to bias, especially when the treatment is staggered - that is, affecting multiple time periods -, or when it is heterogeneous (the effect is different depending on the characteristics of the treated units). Authors, such as De Chaisemartin or Callaway and Sant'Anna have therefore proposed alternative estimators, which are used in a very similar way as the TWFE.
 
-### Callaway and Sant'Anna
-THe 
+## Callaway and Sant’Anna estimator
 
-### De Chaisemartin 
+The estimator proposed by Brantly Callaway and Pedro H. C. Sant’Anna provides an alternative to the traditional Two-Way Fixed Effects (TWFE) approach in difference-in-differences settings with staggered treatment adoption and heterogeneous treatment effects. The main idea is to move away from a single global regression and instead focus on a collection of more credible comparisons.
 
-## An example : mortality rates and medicare 
-
-To introduce the idea behind causal estimation, consider the following example. Suppose we want to estimate the effect of Medicare on mortality rates : did the introduction of Medicare change the mortality rates or not ? This example is inspired from Miller et al., 2021. To do so, you can use made up data, downloaded here. For each individual $i$, in state $s$, time $t$ you observe:
-
-  - Mortality (binary: 0 = alive, 1 = dead)
-  - Medicare (0/1)
-  - Age
-  - Health status (e.g., index from 1 to 10)
-  - Income
-  - State
-  - Year
-
-
-```{r}
-library(rio)
-data <- import("data/medicare_did_data.csv")
-```
-
-From what we have seen so far, a natural approach might be to run a simple OLS regression of the form:
+Concretely, the method estimates **group-time average treatment effects**, defined as:
 
 \begin{equation}
-\text{Mortality}_i = \alpha + \beta \text{Medicare}_i + \epsilon_i,
+ATT(g, t)
 \end{equation}
 
-Where you basically estimate the relationship between medicare and mortality through so-called Linear Probability Model : a type of OLS regression applied to binary dependent variables, that gives you an approximation of the predicted probabilities (a better version would be to consider the logistic regression instead). Here, your dependent variable would be the mortality variable, worth 0 in case the person is not dead, and 1 in case the person is dead. Your potential outcomes would therefore be 0 or 1, and your groups would be either treated or not treated. 
+where \(g\) denotes the period in which a group is first treated and \(t\) is the time period of interest. For each group \(g\), the treatment effect at time \(t\) is computed by comparing the outcomes of units first treated in period \(g\) with those of units that are **not yet treated at time \(t\)**. This is crucial, as it avoids using already-treated units as controls, which is one of the main sources of bias in TWFE when treatment effects are heterogeneous or when treatment timing varies across units.
+
+To see this more intuitively, consider a policy that is implemented at different dates across regions. Suppose Region A is treated in 2018, Region B in 2020, and Region C is never treated. When estimating the effect for Region A in 2019, both Regions B and C can serve as valid controls since neither has been treated yet. However, by 2020, Region B becomes treated, so only Region C remains a valid control group. Similarly, when estimating the effect for Region B after 2020, Region C is used as the comparison group. By structuring the analysis in this way, each estimated effect relies only on appropriate comparisons, avoiding contamination from already-treated units.
+
+The estimator therefore produces a set of treatment effects for different groups and periods, such as:
+
+\begin{equation}
+ATT(2018, 2019), \quad ATT(2018, 2020), \quad ATT(2020, 2021), \dots
+\end{equation}
+
+These effects can then be aggregated to obtain an overall average treatment effect or used to construct event-study type analyses that describe how the treatment effect evolves over time. In this sense, the approach can be understood as estimating many simple and valid difference-in-differences comparisons and then combining them, rather than relying on a single regression that may implicitly use invalid comparisons.
+
+In practice, this estimator can be implemented in R using the `did` package:
 
 ```{r}
-ols1 <- lm(mortality ~ medicare, data = data)
-summary(ols1)
+install.packages("did", repos = "https://cloud.r-project.org")
+library(did)
+# set seed so everything is reproducible
+set.seed(1814)
+
+# generate dataset with 4 time periods
+sp <- reset.sim()
+sp$te <- 0
+time.periods <- 4
+
+# add dynamic effects
+sp$te.e <- 1:time.periods
+
+# generate data set with these parameters
+# here, we dropped all units who are treated in time period 1 as they do not help us recover ATT(g,t)'s.
+dta <- build_sim_dataset(sp)
+
+# How many observations remained after dropping the ``always-treated'' units
+nrow(dta)
+#This is what the data looks like
+head(dta)
 ```
-Yet this regression would only give you the association between the two, and you might get that, without controlling for other factors, the effect of Medicare is positive on mortality ! Indeed, not adding any other control, you might have omitted variable bias, leading to a positive correlation between the two, because people receiving medicare are already those more prone to suffering from diseases.
+
+## Application
+
+In this example (based on Luis Sattelmayer), we will use the replication data from the article "Newspapers in Times of Low Advertising Revenues " Angelucci and Cagé, 2019). You can find the data here. You need to sign in (you can do it with your institution) to download the data.
+
+In France 1967, the government introduced advertisements on TV programs. Angelucci & Cagé wonder if this will impact newspaper revenues. They believe that this introduction of advertisements impacted more national newspapers than local newspapers. Their treatment variable is the introduction of advertisements and the grouping variable is based on the level of newspapers (national versus local).
+
+Codebook:
+
+- year: The year of the observation
+
+- id_news: A unique identifier for each newspaper
+
+- local: A binary indicator (0 or 1) representing whether a newspaper is local or national (1 = local, 0 = national)
+
+- national: A binary indicator (0 or 1) representing whether a newspaper is national or local (1 = national, 0 = local)
+
+- ra_cst: The advertising revenue of the newspaper (in constant (2014) euros)
+
+- ps_cst: The price of subscriptions for the newspaper. This variable measures how much the newspaper charges for its subscriptions, reflecting its pricing strategy and revenue from readers
+
+- qtotal: The circulation of the newspaper. This variable measures the number of copies sold, reflecting the newspaper’s readership and revenue from readers
+
+- after_national: A binary indicator (0 or 1) representing the interaction between a newspaper’s national status and the post-television advertising era. Specifically, it marks the period after a newspaper has started national circulation and also corresponds to times after the introduction or significant increase of television advertising. This variable is designed to capture the combined effects of a newspaper reaching a national audience and the competitive or complementary impacts of television advertising on newspaper revenues or strategies
+
+- ra_cst_div_qtotal: A derived variable representing the advertising revenue per unit of circulation (ra_cst / qtotal). This variable is calculated to assess the efficiency or effectiveness of advertising revenue in relation to the newspaper’s circulation size
+
+You should start by importing the data and clean the data. In this case, the dataset is already quite clean. We just need to create a few variables and transform some variables in factors.
+
 ```{r}
-ols2 <- lm(mortality ~ medicare + age + health + income, data = data)
-summary(ols2)
-```
-That is why you might then add control variables, like age, health, income etc, and run your regression again. 
-```{r}
-library(dplyr)
-
-data %>%
-  group_by(treated_state, post) %>%
-  summarise(mean_mortality = mean(mortality), .groups = "drop")
-
-```
-This method of causal estimation would lead to different potential critiques. 
-
-First, there is a fundamental problem of selection bias. Medicare coverage is not randomly assigned. In the United States, eligibility is largely determined by age (65 and above) and, in some cases, by disability status. As a result, individuals on Medicare are, on average, older and in worse health than those who are not covered. Since both age and health status are strongly correlated with mortality, the regression will confound the effect of Medicare with these underlying differences. This could lead to the misleading conclusion that Medicare increases mortality, simply because its beneficiaries are more likely to die.
-
-Second, omitted variable bias is a major concern. Even if the researcher includes several control variables, it is unlikely that all relevant determinants of both Medicare enrollment and mortality are observed. Factors such as underlying health conditions, lifetime income, access to healthcare prior to eligibility, or health-related behaviors (e.g., smoking, diet) may be imperfectly measured or entirely unobserved. If these factors influence both treatment and outcome, the estimated coefficient on Medicare will be biased.
-
-Third, there may be issues of reverse causality. In some cases, individuals qualify for Medicare through disability pathways. This means that poor health can increase the likelihood of receiving Medicare, rather than Medicare affecting health. In such situations, the direction of causality is blurred, and a simple regression cannot disentangle the relationship.
-
-Fourth, the OLS framework imposes a homogeneous treatment effect: it assumes that Medicare has the same impact on mortality for all individuals. In reality, the effect is likely heterogeneous. For instance, Medicare may have a larger impact on low-income or high-risk individuals than on healthier populations. A single coefficient averages over these potentially very different effects.
-
-Fifth, researchers may inadvertently include bad controls—variables that are themselves affected by Medicare, such as the number of doctor visits or hospitalizations. Controlling for such variables blocks part of the causal mechanism through which Medicare operates, leading to biased (typically underestimated) effects.
-
-Sixth, there are timing issues to consider. Mortality is a dynamic outcome, and the effects of Medicare may take time to materialize. Moreover, individuals may enroll in Medicare shortly before death, which can create misleading correlations between coverage and mortality.
-
-Finally, measurement issues may arise. A simple binary indicator for Medicare coverage does not capture differences in duration of enrollment, quality of coverage, or actual healthcare utilization. Such measurement error can further bias the estimated relationship.
-
-More fundamentally, the regression estimates a conditional association—how mortality differs between those with and without Medicare. However, the causal question of interest is counterfactual: what would happen to mortality if individuals were given Medicare coverage? These are not the same object.
-
-For all these reasons, a simple OLS regression with a treatment dummy does not provide a credible estimate of the causal effect of Medicare on mortality. To answer this question properly, one needs a valid identification strategy, such as regression discontinuity (exploiting the age 65 eligibility threshold), difference-in-differences, or instrumental variables. These approaches aim to approximate a randomized experiment and isolate exogenous variation in treatment, allowing for a more credible causal interpretation.
-
-Hence, your treated units might still have characteristics that are not controlled for, and that also condition the outcome. In order to control for these characteristics, the difference-in-differences estimator controls for these fixed characteristics, by using the temporal variation in the introduction of the treatment. The canonical two-way fixed effects is written as :
-
-```{r}
-did1 <- lm(mortality ~ treated_state * post, data = data)
-summary(did1)
-```
-
-```{r}
-did2 <- lm(mortality ~ treated_state * post + age + health + income, data = data)
-summary(did2)
-```
-
-```{r}
-did_fe <- lm(mortality ~ treated_state * post + factor(state) + factor(year), data = data)
-summary(did_fe)
+library(haven)
+library(tidyverse)
+newspapers <- read_dta("data/Angelucci_Cage_AEJMicro_dataset.dta")
 ```
 ```{r}
-library(ggplot2)
+newspapers <-
+  newspapers |>
+  select(
+    year, id_news, after_national, local, national, ra_cst, ps_cst, qtotal
+    ) |> 
+  mutate(ra_cst_div_qtotal = ra_cst / qtotal, 
+         after_national =  if_else(year > 1967, 1, 0),
+         after_national_placebo = if_else(year >= 1966, 1, 0),
+         across(c(id_news, local, national, after_national), as.factor),
+         year = as.factor(year)) 
 
-data %>%
-  group_by(year, treated_state) %>%
-  summarise(mortality = mean(mortality), .groups = "drop") %>%
-  ggplot(aes(x = year, y = mortality, color = factor(treated_state))) +
-  geom_line(size = 1.2) +
-  labs(color = "Treated State",
-       title = "Mortality Trends: Treated vs Control",
-       y = "Mortality rate")
+glimpse(newspapers)
 ```
+Now, we can build the model. We use the logarithm of the advertising revenue (to help normalise the distribution of our variable). Next, we need to include the time and treatment variables so, national and after_national variable. Do not forget that you need the interaction effect. Furthermore, as we are using the whole dataset (observations from every year), we should introduce a fixed effect for year to control for linear time trends that would affect all newspapers. Finally, as we are comparing different newspapers over more than two years, we should also include a fixed effect for the newspaper. This would control for all unobserved and time-invariant differences between newspapers.
 
+```{r}
+library(fixest)
+did<-feols(log(ra_cst) ~ national*after_national|year+id_news,
+            cluster=~id_news,
+     data = newspapers)
+etable(did)
+```
+Now, we can interpret our results. As you can see, the national and after_national variables were dropped, this is because of collinearity. In this case, we have collinearity because we add time and newspaper fixed effects which capture both national and after_national information. So, the model only keeps the interaction. When you use feols() the function automatically drops variables that are collinear. This is not the case with lm(). Furthermore, we see that the coefficient is negative, meaning that the introduction of ads did decrease revenues among national newspapers. However, this coefficient is not statistically significant, meaning that we cannot infer our results to the whole French newspaper population.
 
+We can do a placebo test. Here, the interaction coefficient is not significant, meaning that we cannot reject the parallel trend assumption. As we have more than one year before the treatment, you should do more than one placebo test.
 
+```{r}
+did_placebo <-
+  feols(log(ra_cst) ~ national * after_national_placebo | year + id_news,
+        cluster=~id_news,
+     data = newspapers)
+etable(did_placebo)
+```
 
 
 

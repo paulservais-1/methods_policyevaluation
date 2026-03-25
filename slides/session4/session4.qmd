@@ -56,7 +56,7 @@ format: revealjs
 
 :::
 
-## The Cholera case
+## The logic behind DiD
 - The control and treatment only need to evolve in parallel in pre-treatment
 ```{r}
 #| echo: false
@@ -183,8 +183,9 @@ ggplot(df, aes(x = Time, y = Outcome, color = Group, linetype = Group)) +
 
 ## Difference-in-Differences
 
+
 \begin{equation}
-Y_{it} = \alpha_i + \beta_t + \text{Group_i} + \text{Period}_t + \delta \text{Group_i} \times \text{Period}_t + \epsilon_{it}
+Y_{it} = \alpha_i + \beta_t + \text{Group}_i + \text{Period}_t + \delta \text{Group}_i \times \text{Period}_t + \epsilon_{it}
 \end{equation}
 
 - The causal effect is the interaction effect $\delta$
@@ -373,6 +374,22 @@ $min(|PSM_t - PSM_c|)$
 - Radius : controls lie within a certain radius $|PSM_t - PSM_c| \leq R$
 - Kernel : closer controls are associated with higher weights
 
+## In R {.scrollable}
+
+```{r}
+#| eval: false
+#| echo: true
+
+install.packages("MatchIt")
+library(MatchIt)
+
+match_model <- matchit(treatment ~ .,
+                       data = data %>% filter(time == pre-treatment_period) %>% select(-c(outcome_var)),
+                       method = "nearest",   # nearest neighbor matching
+                       distance = "logit")   # use logistic propensity score
+
+matched_ids <- match.data(match_model) %>% pull(id) %>% unique()
+```
 ## Propensity score matching
 - Can be used as a standalone method
 - Or as pre-processing before DiD
