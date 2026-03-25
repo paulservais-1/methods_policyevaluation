@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Session 4 — Difference-in-differences – Methods for Research and Policy Evaluation</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-dea667461a5c81afc9ba75ce94cd63f3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Methods for Research and Policy Evaluation</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <span class="nav-link">
+<span class="menu-text">Sessions</span>
+    </span>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text"></span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
+        <li>
+    <a class="dropdown-item" href="../../sessions/session1/session1.html">
+ <span class="dropdown-text">Session 1: Dataset Building and Descriptive Statistics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../sessions/session2/session2.html">
+ <span class="dropdown-text">Session 2: OLS: Simple and Multiple Linear Regressions and Analysis</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../sessions/session3/session3.html">
+ <span class="dropdown-text">Session 3: OLS regressions and non-linear regressions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../sessions/session4/session4.html">
+ <span class="dropdown-text">Session 4: Difference-in-differences</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <span class="nav-link">
+<span class="menu-text">Exercices</span>
+    </span>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu--1" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text"></span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu--1">    
+        <li>
+    <a class="dropdown-item" href="../../homeworks/homework1.html">
+ <span class="dropdown-text">Session 1: Dataset Building and Descriptive Statistics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../homeworks/homework2.html">
+ <span class="dropdown-text">Session 2: Statistical inference and linear regressions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../homeworks/homework3.html">
+ <span class="dropdown-text">Session 3: OLS regressions and non-linear regressions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../homeworks/homework4.html">
+ <span class="dropdown-text">Session 4: Difference-in-differences</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <span class="nav-link">
+<span class="menu-text">Slides</span>
+    </span>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu--2" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text"></span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu--2">    
+        <li>
+    <a class="dropdown-item" href="../../slides/session1/slides1.html">
+ <span class="dropdown-text">Session 1: Dataset Building and Descriptive Statistics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../slides/session2/slides2.html">
+ <span class="dropdown-text">Session 2: Statistical inference and linear regressions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../slides/session3/slides3.html">
+ <span class="dropdown-text">Session 3: OLS regressions and non-linear regressions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../slides/session4/session4.html">
+ <span class="dropdown-text">Session 4: Difference-in-differences</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link active" data-scroll-target="#motivation">Motivation</a>
+  <ul class="collapse">
+  <li><a href="#identification-strategy" id="toc-identification-strategy" class="nav-link" data-scroll-target="#identification-strategy">Identification strategy</a></li>
+  <li><a href="#difference-in-differences-theory" id="toc-difference-in-differences-theory" class="nav-link" data-scroll-target="#difference-in-differences-theory">Difference-in-differences : theory</a></li>
+  <li><a href="#two-way-fixed-effects" id="toc-two-way-fixed-effects" class="nav-link" data-scroll-target="#two-way-fixed-effects">Two-way fixed effects</a></li>
+  <li><a href="#other-estimators" id="toc-other-estimators" class="nav-link" data-scroll-target="#other-estimators">Other estimators</a></li>
+  <li><a href="#callaway-and-santanna-estimator" id="toc-callaway-and-santanna-estimator" class="nav-link" data-scroll-target="#callaway-and-santanna-estimator">Callaway and Sant’Anna estimator</a></li>
+  <li><a href="#application" id="toc-application" class="nav-link" data-scroll-target="#application">Application</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Session 4 — Difference-in-differences</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="motivation" class="level1">
+<h1>Motivation</h1>
+<p>So far, we have seen how to describe variables using descriptive statistics, as well as different statistical techniques to study relationships between variables, depending on their type (categorical or continuous). We have seen that linear regressions are useful for describing the relationship between a continuous dependent variable and either categorical or continuous independent variables, and that logistic regressions are useful for characterising binary outcomes.</p>
+<section id="identification-strategy" class="level2">
+<h2 class="anchored" data-anchor-id="identification-strategy">Identification strategy</h2>
+<p>In the exercises from the last class, regressions allowed us to describe correlations between variables—that is, associations. However, these regressions do not, in general, allow us to identify causal relationships. Important variables that drive the observed effect may be omitted, leading to biased estimates or spurious correlations.</p>
+<p>Moreover, regression-based approaches often rely heavily on the researcher’s choices regarding which variables to include. This introduces a degree of arbitrariness. Consider the following example: if 99% of heroin users previously consumed cannabis, can we conclude that cannabis use causes heroin use? Clearly not—after all, 100% of heroin users have also consumed milk. This illustrates that simple associations are not sufficient to establish causality.</p>
+<p>That explains why in fields such as policy analysis, medicine, and political science, there is a growing interest in statistical methods that aim to identify causal relationships between variables. A causal question is inherently counterfactual: it asks what would have happened in a different scenario. For instance, what would have happened to an individual if they had not received a treatment?</p>
+<p>Causal analysis is therefore much more demanding than simple regressions. It requires stronger assumptions and careful research design. Causal inference addresses a specific type of research question. Some sociological approaches, especially more constructivist ones, question the very idea that variables can be cleanly isolated or that causal relationships exist independently “out there” in the world. In such perspectives, the goal may instead be to understand how variables are interconnected and how they jointly produce meaning through a chain of associative relationships.</p>
+<p>There are several key approaches to causal inference designed to reduce bias. One of the most intuitive (and, arguably, convincing) is the difference-in-differences design. The empirical approach used to uncover a causal effect is referred to as an identification strategy.</p>
+<p>In the next sessions, we will study two additional identification strategies: instrumental variables and regression discontinuity. These methods all rely on regression techniques, which is why the previous classes focused on building a solid understanding of regression analysis.</p>
+</section>
+<section id="difference-in-differences-theory" class="level2">
+<h2 class="anchored" data-anchor-id="difference-in-differences-theory">Difference-in-differences : theory</h2>
+<p>The intuition behind difference-in-differences (DiD) is quite simple: it involves tracking two groups over time—one that receives a treatment (e.g., a policy intervention) and one that does not.</p>
+<ul>
+<li><p>The group that receives the treatment is called the treatment group.</p></li>
+<li><p>The group that does not receive the treatment is called the control group.</p></li>
+</ul>
+<p>By comparing the changes in outcomes over time between these two groups, we can estimate the effect of the treatment. The key idea is to compare the observed change in the treatment group with the counterfactual scenario—what would have happened to the treatment group if it had not received the treatment.</p>
+<p>In practice, the counterfactual is often derived from the parallel trends assumption, which posits that, in the absence of treatment, the treatment and control groups would have followed similar trends before the intervention. If this assumption holds, any divergence in trends after the treatment can be attributed to the treatment itself.</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session4_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This is summarised on this figure, which shows the evolution of the outcome in two different groups, affected by the treatment in year 0. Before being affected by the treatment, the two groups evolve in parallel : yet, once the treatment is introduced, a new gap emerges between the groups. The dotted line shows the counterfactual, that is, under the parallel trends assumption, the evolution we would have expected for the treatment group, in the absence of treatment. The difference between that parallel counterfactual and the actual trend observed (in red), is the treatment effect.</p>
+<p>Hence, the parallel trends assumption is the key requirement behind this causal method: it is only because we assume the counterfactual would have followed the control group’s trend that we can estimate the causal effect. As such, an estimation based on difference-in-differences is generally conducted in two phases : first, the estimation of the causal effect, then - as important as the first step -, the verification of the parallel trends.</p>
+</section>
+<section id="two-way-fixed-effects" class="level2">
+<h2 class="anchored" data-anchor-id="two-way-fixed-effects">Two-way fixed effects</h2>
+<p>Historically, the main estimator used for difference-in-differences estimations was the two-way fixed effects estimator (TWFE). It consists in computing :</p>
+<p><span class="math display">\[\begin{equation}
+Y_{it} = \alpha_i + \beta_t + \text{Group}_i + \text{Period}_t + \delta \text{Group}_i \times \text{Period}_t + \epsilon_{it}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\text{Group}_i\)</span> and <span class="math inline">\(\text{Period}_t\)</span> respectively equal to one for units <span class="math inline">\(i\)</span> in the treatment group, and one for time periods <span class="math inline">\(t\)</span> in post-treatment. <span class="math inline">\(\delta\)</span> is the causal effect, also called ATT : average treatment effect on the treated (compared with the counterfactual of the treated). It is also possible to add covariates in that model <span class="math inline">\(X_{it}\)</span>, which generally do not modify the results.</p>
+</section>
+<section id="other-estimators" class="level2">
+<h2 class="anchored" data-anchor-id="other-estimators">Other estimators</h2>
+<p>Yet authors have recently shown that this method can lead to bias, especially when the treatment is staggered - that is, affecting multiple time periods -, or when it is heterogeneous (the effect is different depending on the characteristics of the treated units). Authors, such as De Chaisemartin or Callaway and Sant’Anna have therefore proposed alternative estimators, which are used in a very similar way as the TWFE.</p>
+</section>
+<section id="callaway-and-santanna-estimator" class="level2">
+<h2 class="anchored" data-anchor-id="callaway-and-santanna-estimator">Callaway and Sant’Anna estimator</h2>
+<p>The estimator proposed by Brantly Callaway and Pedro H. C. Sant’Anna provides an alternative to the traditional Two-Way Fixed Effects (TWFE) approach in difference-in-differences settings with staggered treatment adoption and heterogeneous treatment effects. The main idea is to move away from a single global regression and instead focus on a collection of more credible comparisons.</p>
+<p>Concretely, the method estimates <strong>group-time average treatment effects</strong>, defined as:</p>
+<p><span class="math display">\[\begin{equation}
+ATT(g, t)
+\end{equation}\]</span></p>
+<p>where (g) denotes the period in which a group is first treated and (t) is the time period of interest. For each group (g), the treatment effect at time (t) is computed by comparing the outcomes of units first treated in period (g) with those of units that are <strong>not yet treated at time (t)</strong>. This is crucial, as it avoids using already-treated units as controls, which is one of the main sources of bias in TWFE when treatment effects are heterogeneous or when treatment timing varies across units.</p>
+<p>To see this more intuitively, consider a policy that is implemented at different dates across regions. Suppose Region A is treated in 2018, Region B in 2020, and Region C is never treated. When estimating the effect for Region A in 2019, both Regions B and C can serve as valid controls since neither has been treated yet. However, by 2020, Region B becomes treated, so only Region C remains a valid control group. Similarly, when estimating the effect for Region B after 2020, Region C is used as the comparison group. By structuring the analysis in this way, each estimated effect relies only on appropriate comparisons, avoiding contamination from already-treated units.</p>
+<p>The estimator therefore produces a set of treatment effects for different groups and periods, such as:</p>
+<p><span class="math display">\[\begin{equation}
+ATT(2018, 2019), \quad ATT(2018, 2020), \quad ATT(2020, 2021), \dots
+\end{equation}\]</span></p>
+<p>These effects can then be aggregated to obtain an overall average treatment effect or used to construct event-study type analyses that describe how the treatment effect evolves over time. In this sense, the approach can be understood as estimating many simple and valid difference-in-differences comparisons and then combining them, rather than relying on a single regression that may implicitly use invalid comparisons.</p>
+<p>In practice, this estimator can be implemented in R using the <code>did</code> package:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"did"</span>, <span class="at">repos =</span> <span class="st">"https://cloud.r-project.org"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Downloading packages -------------------------------------------------------
+- Downloading did from CRAN ...                 OK [4.4 Mb in 0.25s]
+- Downloading BMisc from CRAN ...               OK [79.8 Kb in 0.15s]
+- Downloading caret from CRAN ...               OK [2.2 Mb in 0.21s]
+- Downloading e1071 from CRAN ...               OK [310.6 Kb in 0.16s]
+- Downloading proxy from CRAN ...               OK [69.8 Kb in 0.12s]
+- Downloading foreach from CRAN ...             OK [87.7 Kb in 0.12s]
+- Downloading iterators from CRAN ...           OK [293.2 Kb in 0.15s]
+- Downloading ModelMetrics from CRAN ...        OK [16.7 Kb in 0.1s]
+- Downloading plyr from CRAN ...                OK [392.1 Kb in 0.14s]
+- Downloading pROC from CRAN ...                OK [439 Kb in 0.16s]
+- Downloading recipes from CRAN ...             OK [868.7 Kb in 0.16s]
+- Downloading clock from CRAN ...               OK [547.4 Kb in 0.17s]
+- Downloading gower from CRAN ...               OK [183.6 Kb in 0.12s]
+- Downloading hardhat from CRAN ...             OK [605 Kb in 0.17s]
+- Downloading sparsevctrs from CRAN ...         OK [91.8 Kb]
+- Downloading ipred from CRAN ...               OK [170 Kb in 0.14s]
+- Downloading prodlim from CRAN ...             OK [144 Kb in 0.14s]
+- Downloading diagram from CRAN ...             OK [524.3 Kb in 0.2s]
+- Downloading shape from CRAN ...               OK [631.3 Kb in 0.15s]
+- Downloading lava from CRAN ...                OK [1.1 Mb in 0.25s]
+- Downloading future.apply from CRAN ...        OK [74.2 Kb]
+- Downloading future from CRAN ...              OK [440.1 Kb in 0.14s]
+- Downloading globals from CRAN ...             OK [55.2 Kb]
+- Downloading listenv from CRAN ...             OK [46.8 Kb in 0.12s]
+- Downloading parallelly from CRAN ...          OK [331.4 Kb in 0.15s]
+- Downloading progressr from CRAN ...           OK [223.1 Kb in 0.14s]
+- Downloading SQUAREM from CRAN ...             OK [234.8 Kb in 0.15s]
+- Downloading timeDate from CRAN ...            OK [358.7 Kb in 0.16s]
+- Downloading reshape2 from CRAN ...            OK [37.2 Kb]
+- Downloading RcppArmadillo from CRAN ...       OK [2 Mb in 0.18s]
+- Downloading pbapply from CRAN ...             OK [23.2 Kb in 0.12s]
+- Downloading DRDID from CRAN ...               OK [481.5 Kb in 0.19s]
+- Downloading trust from CRAN ...               OK [295.5 Kb in 0.18s]
+- Downloading fastglm from CRAN ...             OK [100.4 Kb in 0.15s]
+- Downloading bigmemory from CRAN ...           OK [70.6 Kb in 0.14s]
+- Downloading bigmemory.sri from CRAN ...       OK [1.9 Kb in 0.13s]
+- Downloading BH from CRAN ...                  OK [13.6 Mb in 0.31s]
+- Downloading RcppEigen from CRAN ...           OK [1.7 Mb in 0.17s]
+Successfully downloaded 38 packages in 14 seconds.
+
+The following package(s) will be installed:
+- BH            [1.90.0-1]
+- bigmemory     [4.6.4]
+- bigmemory.sri [0.1.8]
+- BMisc         [1.4.8]
+- caret         [7.0-1]
+- clock         [0.7.4]
+- diagram       [1.6.5]
+- did           [2.3.0]
+- DRDID         [1.2.3]
+- e1071         [1.7-17]
+- fastglm       [0.0.4]
+- foreach       [1.5.2]
+- future        [1.70.0]
+- future.apply  [1.20.2]
+- globals       [0.19.1]
+- gower         [1.0.2]
+- hardhat       [1.4.2]
+- ipred         [0.9-15]
+- iterators     [1.0.14]
+- lava          [1.8.2]
+- listenv       [0.10.1]
+- ModelMetrics  [1.2.2.2]
+- parallelly    [1.46.1]
+- pbapply       [1.7-4]
+- plyr          [1.8.9]
+- pROC          [1.19.0.1]
+- prodlim       [2026.03.11]
+- progressr     [0.18.0]
+- proxy         [0.4-29]
+- RcppArmadillo [15.2.4-1]
+- RcppEigen     [0.3.4.0.2]
+- recipes       [1.3.1]
+- reshape2      [1.4.5]
+- shape         [1.4.6.1]
+- sparsevctrs   [0.3.6]
+- SQUAREM       [2026.1]
+- timeDate      [4052.112]
+- trust         [0.1-9]
+These packages will be installed into "~/work/methods_policyevaluation/methods_policyevaluation/renv/library/linux-ubuntu-noble/R-4.5/x86_64-pc-linux-gnu".
+
+# Installing packages --------------------------------------------------------
+- Installing proxy ...                          OK [built from source and cached in 2.6s]
+- Installing e1071 ...                          OK [built from source and cached in 6.1s]
+- Installing iterators ...                      OK [built from source and cached in 1.4s]
+- Installing foreach ...                        OK [built from source and cached in 1.4s]
+- Installing ModelMetrics ...                   OK [built from source and cached in 14s]
+- Installing plyr ...                           OK [built from source and cached in 6.1s]
+- Installing pROC ...                           OK [built from source and cached in 10s]
+- Installing clock ...                          OK [built from source and cached in 1.2m]
+- Installing gower ...                          OK [built from source and cached in 1.5s]
+- Installing sparsevctrs ...                    OK [built from source and cached in 2.8s]
+- Installing hardhat ...                        OK [built from source and cached in 3.1s]
+- Installing shape ...                          OK [built from source and cached in 1.5s]
+- Installing diagram ...                        OK [built from source and cached in 1.8s]
+- Installing globals ...                        OK [built from source and cached in 2.0s]
+- Installing listenv ...                        OK [built from source and cached in 1.6s]
+- Installing parallelly ...                     OK [built from source and cached in 3.6s]
+- Installing future ...                         OK [built from source and cached in 6.3s]
+- Installing future.apply ...                   OK [built from source and cached in 2.0s]
+- Installing progressr ...                      OK [built from source and cached in 2.6s]
+- Installing SQUAREM ...                        OK [built from source and cached in 1.4s]
+- Installing lava ...                           OK [built from source and cached in 17s]
+- Installing prodlim ...                        OK [built from source and cached in 9.3s]
+- Installing ipred ...                          OK [built from source and cached in 5.2s]
+- Installing timeDate ...                       OK [built from source and cached in 7.3s]
+- Installing recipes ...                        OK [built from source and cached in 12s]
+- Installing reshape2 ...                       OK [built from source and cached in 6.3s]
+- Installing caret ...                          OK [built from source and cached in 17s]
+- Installing RcppArmadillo ...                  OK [built from source and cached in 15s]
+- Installing BMisc ...                          OK [built from source and cached in 15s]
+- Installing pbapply ...                        OK [built from source and cached in 1.6s]
+- Installing trust ...                          OK [built from source and cached in 1.2s]
+- Installing bigmemory.sri ...                  OK [built from source and cached in 1.1s]
+- Installing BH ...                             OK [built from source and cached in 4.2s]
+- Installing bigmemory ...                      OK [built from source and cached in 30s]
+- Installing RcppEigen ...                      OK [built from source and cached in 28s]
+- Installing fastglm ...                        OK [built from source and cached in 55s]
+- Installing DRDID ...                          OK [built from source and cached in 7.1s]
+- Installing did ...                            OK [built from source and cached in 8.5s]
+Successfully installed 38 packages in 6.4 minutes.</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(did)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># set seed so everything is reproducible</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1814</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># generate dataset with 4 time periods</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">reset.sim</span>()</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>sp<span class="sc">$</span>te <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>time.periods <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># add dynamic effects</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>sp<span class="sc">$</span>te.e <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>time.periods</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># generate data set with these parameters</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># here, we dropped all units who are treated in time period 1 as they do not help us recover ATT(g,t)'s.</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>dta <span class="ot">&lt;-</span> <span class="fu">build_sim_dataset</span>(sp)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># How many observations remained after dropping the ``always-treated'' units</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(dta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15916</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This is what the data looks like</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 7
+      G      X    id cluster period     Y treat
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     3 -0.876     1       5      1  5.56     1
+2     3 -0.876     1       5      2  4.35     1
+3     3 -0.876     1       5      3  7.13     1
+4     3 -0.876     1       5      4  6.24     1
+5     2 -0.874     2      36      1 -3.66     1
+6     2 -0.874     2      36      2 -1.27     1</code></pre>
+</div>
+</div>
+</section>
+<section id="application" class="level2">
+<h2 class="anchored" data-anchor-id="application">Application</h2>
+<p>In this example (based on Luis Sattelmayer), we will use the replication data from the article “Newspapers in Times of Low Advertising Revenues” Angelucci and Cagé, 2019). You can find the data here. You need to sign in (you can do it with your institution) to download the data.</p>
+<p>In France 1967, the government introduced advertisements on TV programs. Angelucci &amp; Cagé wonder if this will impact newspaper revenues. They believe that this introduction of advertisements impacted more national newspapers than local newspapers. Their treatment variable is the introduction of advertisements and the grouping variable is based on the level of newspapers (national versus local).</p>
+<p>Codebook:</p>
+<ul>
+<li><p>year: The year of the observation</p></li>
+<li><p>id_news: A unique identifier for each newspaper</p></li>
+<li><p>local: A binary indicator (0 or 1) representing whether a newspaper is local or national (1 = local, 0 = national)</p></li>
+<li><p>national: A binary indicator (0 or 1) representing whether a newspaper is national or local (1 = national, 0 = local)</p></li>
+<li><p>ra_cst: The advertising revenue of the newspaper (in constant (2014) euros)</p></li>
+<li><p>ps_cst: The price of subscriptions for the newspaper. This variable measures how much the newspaper charges for its subscriptions, reflecting its pricing strategy and revenue from readers</p></li>
+<li><p>qtotal: The circulation of the newspaper. This variable measures the number of copies sold, reflecting the newspaper’s readership and revenue from readers</p></li>
+<li><p>after_national: A binary indicator (0 or 1) representing the interaction between a newspaper’s national status and the post-television advertising era. Specifically, it marks the period after a newspaper has started national circulation and also corresponds to times after the introduction or significant increase of television advertising. This variable is designed to capture the combined effects of a newspaper reaching a national audience and the competitive or complementary impacts of television advertising on newspaper revenues or strategies</p></li>
+<li><p>ra_cst_div_qtotal: A derived variable representing the advertising revenue per unit of circulation (ra_cst / qtotal). This variable is calculated to assess the efficiency or effectiveness of advertising revenue in relation to the newspaper’s circulation size</p></li>
+</ul>
+<p>You should start by importing the data and clean the data. In this case, the dataset is already quite clean. We just need to create a few variables and transform some variables in factors.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.6
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ lubridate 1.9.4     ✔ tibble    3.3.0
+✔ purrr     1.2.0     ✔ tidyr     1.3.2
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>newspapers <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"data/Angelucci_Cage_AEJMicro_dataset.dta"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>newspapers <span class="ot">&lt;-</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  newspapers <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    year, id_news, after_national, local, national, ra_cst, ps_cst, qtotal</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ra_cst_div_qtotal =</span> ra_cst <span class="sc">/</span> qtotal, </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">after_national =</span>  <span class="fu">if_else</span>(year <span class="sc">&gt;</span> <span class="dv">1967</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">after_national_placebo =</span> <span class="fu">if_else</span>(year <span class="sc">&gt;=</span> <span class="dv">1966</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>         <span class="fu">across</span>(<span class="fu">c</span>(id_news, local, national, after_national), as.factor),</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">year =</span> <span class="fu">as.factor</span>(year)) </span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(newspapers)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,196
+Columns: 10
+$ year                   &lt;fct&gt; 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1967,…
+$ id_news                &lt;fct&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,…
+$ after_national         &lt;fct&gt; 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0,…
+$ local                  &lt;fct&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+$ national               &lt;fct&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ ra_cst                 &lt;dbl&gt; 52890272, 56601060, 64840752, 70582944, 7497788…
+$ ps_cst                 &lt;dbl&gt; 2.287003, 2.204863, 2.131709, 2.427344, 2.34767…
+$ qtotal                 &lt;dbl&gt; 94478.09, 96288.54, 97313.22, 101068.50, 102103…
+$ ra_cst_div_qtotal      &lt;dbl&gt; 559.8152, 587.8276, 666.3098, 698.3674, 734.334…
+$ after_national_placebo &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,…</code></pre>
+</div>
+</div>
+<p>Now, we can build the model. We use the logarithm of the advertising revenue (to help normalise the distribution of our variable). Next, we need to include the time and treatment variables so, national and after_national variable. Do not forget that you need the interaction effect. Furthermore, as we are using the whole dataset (observations from every year), we should introduce a fixed effect for year to control for linear time trends that would affect all newspapers. Finally, as we are comparing different newspapers over more than two years, we should also include a fixed effect for the newspaper. This would control for all unobserved and time-invariant differences between newspapers.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fixest)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>did<span class="ot">&lt;-</span><span class="fu">feols</span>(<span class="fu">log</span>(ra_cst) <span class="sc">~</span> national<span class="sc">*</span>after_national<span class="sc">|</span>year<span class="sc">+</span>id_news,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">cluster=</span><span class="sc">~</span>id_news,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> newspapers)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>NOTE: 144 observations removed because of NA values (LHS: 144, RHS: 1).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The variables 'national1' and 'after_national1' have been removed because of
+collinearity (see $collin.var).</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">etable</span>(did)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                          did
+Dependent Var.:                   log(ra_cst)
+                                             
+national1 x after_national1 -0.2175. (0.1164)
+Fixed-Effects:              -----------------
+year                                      Yes
+id_news                                   Yes
+___________________________ _________________
+S.E.: Clustered                   by: id_news
+Observations                            1,052
+R2                                    0.98576
+Within R2                             0.04730
+---
+Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Now, we can interpret our results. As you can see, the national and after_national variables were dropped, this is because of collinearity. In this case, we have collinearity because we add time and newspaper fixed effects which capture both national and after_national information. So, the model only keeps the interaction. When you use feols() the function automatically drops variables that are collinear. This is not the case with lm(). Furthermore, we see that the coefficient is negative, meaning that the introduction of ads did decrease revenues among national newspapers. However, this coefficient is not statistically significant, meaning that we cannot infer our results to the whole French newspaper population.</p>
+<p>We can do a placebo test. Here, the interaction coefficient is not significant, meaning that we cannot reject the parallel trend assumption. As we have more than one year before the treatment, you should do more than one placebo test.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>did_placebo <span class="ot">&lt;-</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">feols</span>(<span class="fu">log</span>(ra_cst) <span class="sc">~</span> national <span class="sc">*</span> after_national_placebo <span class="sc">|</span> year <span class="sc">+</span> id_news,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster=</span><span class="sc">~</span>id_news,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> newspapers)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>NOTE: 144 observations removed because of NA values (LHS: 144, RHS: 1).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The variables 'national1' and 'after_national_placebo' have been removed because
+of collinearity (see $collin.var).</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">etable</span>(did_placebo)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                         did_placebo
+Dependent Var.:                          log(ra_cst)
+                                                    
+national1 x after_national_placebo -0.2289. (0.1187)
+Fixed-Effects:                     -----------------
+year                                             Yes
+id_news                                          Yes
+__________________________________ _________________
+S.E.: Clustered                          by: id_news
+Observations                                   1,052
+R2                                           0.98580
+Within R2                                    0.05004
+---
+Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+    tabsets.forEach(function(tabset) {
+      const tabby = new Tabby('#' + tabset.id);
+    });
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/paulservais-1\.github\.io\/methods_policyevaluation\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
