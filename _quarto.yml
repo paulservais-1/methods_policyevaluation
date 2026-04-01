@@ -17,6 +17,9 @@ website:
             href: sessions/session3/session3.qmd
           - text: "Session 4: Difference-in-differences"
             href: sessions/session4/session4.qmd
+          - text: "Session 5 : Regression discontinuity design"
+            href: sessions/session5/session5.qmd
+
       - text: Exercices
       - menu:
           - text: "Session 1: Dataset Building and Descriptive Statistics"
@@ -27,6 +30,8 @@ website:
             href: homeworks/homework3.qmd
           - text: "Session 4: Difference-in-differences"
             href: homeworks/homework4.qmd
+          - text: "Session 5: Regression Discontinuity"
+            href: homeworks/homework5.qmd
       - text: Slides
       - menu:
           - text: "Session 1: Dataset Building and Descriptive Statistics"
@@ -37,6 +42,8 @@ website:
             href: slides/session3/slides3.qmd
           - text: "Session 4: Difference-in-differences"
             href: slides/session4/session4.qmd
+          - text: "Session 5: Regression discontinuity"
+            href: slides/session5/session5.qmd
       - href: about.qmd
         text: About
 

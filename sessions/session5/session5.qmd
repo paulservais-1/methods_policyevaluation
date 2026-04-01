@@ -1,5 +1,5 @@
 ---
-title: "Session 5 - Regression discontinuity and instrumental variables"
+title: "Session 5 - Regression discontinuity"
 format: html
 toc: true
 editor: visual
