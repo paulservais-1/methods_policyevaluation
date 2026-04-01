@@ -208,6 +208,14 @@ Paul Servais
 </div>
 
 </section>
+<section id="on-the-finals" class="slide level2">
+<h2>On the finals</h2>
+<ul>
+<li>Have you started looking at data sets ? papers ?</li>
+<li>Don’t hesitate to reach out with proposition, questions !</li>
+<li>Submission date</li>
+</ul>
+</section>
 <section id="we-saw-in-previous-sessions" class="slide level2">
 <h2>We saw in previous sessions</h2>
 <ul>
@@ -275,17 +283,57 @@ Paul Servais
 <div class="column" style="width:70%;">
 <p><img data-src="images/ev_study.png"></p>
 </div></section>
-<section id="the-logic-behind-did" class="slide level2">
-<h2>The logic behind DiD</h2>
+<section id="an-intuitive-example" class="slide level2">
+<h2>An intuitive example</h2>
 <ul>
-<li>The control and treatment only need to evolve in parallel in pre-treatment</li>
+<li><p>Taylor Swift concerts : economic boom in the places where she went, surge in hotel bookings, restaurants etc.</p></li>
+<li><p>Yet other factors : post-pandemic increase in traveling, summer tourism, etc.</p></li>
+<li><p><strong>How can we isolate the Taylor effect</strong>?</p></li>
 </ul>
-
-<img data-src="session4_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
+</section>
+<section id="outcomes" class="slide level2">
+<h2>Outcomes</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th>Before</th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>with Taylor</td>
+<td>X</td>
+<td>Y</td>
+</tr>
+<tr class="even">
+<td>without Taylor</td>
+<td>A</td>
+<td>B</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>All variables describe hotel and restaurants revenues</li>
+</ul>
+</section>
 <section id="difference-in-differences-1" class="slide level2">
+<h2>Difference-in-differences</h2>
+<ul>
+<li><p><span class="math inline">\(Y-X\)</span> : evolution of revenue in cities with Taylor Swift</p></li>
+<li><p><span class="math inline">\(B-A\)</span> : evolution of revenue in similar cities, but without Taylor Swift</p></li>
+<li><p>DID estimate : <span class="math display">\[\begin{equation}
+DiD = (Y-X) - (B-A)
+\end{equation}\]</span></p></li>
+<li><p>It removes the changes that have affected all cities, to isolate the specific effect of Taylor Swift.</p></li>
+<li><p>Ideally, you’d like your cities to be roughly similar before, to make sure you are isolating this effect…</p></li>
+</ul>
+</section>
+<section id="difference-in-differences-2" class="slide level2">
 <h2>Difference-in-Differences</h2>
 
-<img data-src="session4_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+<img data-src="session4_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
 <section id="the-att" class="slide level2">
 <h2>The ATT</h2>
 <ul>
@@ -294,6 +342,13 @@ Paul Servais
 <li>the difference between the counterfactual <span class="math inline">\(Y_T(1)\)</span> and the actual outcome <span class="math inline">\(Y_T(0)\)</span></li>
 </ul>
 </section>
+<section id="historically" class="slide level2">
+<h2>Historically</h2>
+<ul>
+<li>The control and treatment only need to evolve in parallel in pre-treatment</li>
+</ul>
+
+<img data-src="session4_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
 <section id="in-applied-research" class="slide level2">
 <h2>In applied research</h2>
 <ul>
@@ -335,7 +390,7 @@ Paul Servais
 <h2>Event-study</h2>
 
 <img data-src="images/event_study.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="difference-in-differences-2" class="slide level2">
+<section id="difference-in-differences-3" class="slide level2">
 <h2>Difference-in-Differences</h2>
 <p><span class="math display">\[\begin{equation}
 Y_{it} = \alpha_i + \beta_t + \text{Group}_i + \text{Period}_t + \delta \text{Group}_i \times \text{Period}_t + \epsilon_{it}
@@ -345,6 +400,17 @@ Y_{it} = \alpha_i + \beta_t + \text{Group}_i + \text{Period}_t + \delta \text{Gr
 <li>This model is called two-way fixed effects: TWFE</li>
 <li>Good for one homogeneous treatment (eg. a policy switch affecting all states in a certain year)</li>
 <li>More robust and recent estimators exist in the literature (de Chaisemartin &amp; D’Haultfœuille, 2020; Callaway &amp; Sant’Anna, 2021), for heterogeneous or <strong>staggered treatment</strong></li>
+</ul>
+</section>
+<section id="identification" class="slide level2">
+<h2>Identification</h2>
+<ul>
+<li>The whole identification lies in the parallel trends assumption</li>
+<li>= <strong>The key assumption to verify in DiD</strong>
+<ul>
+<li>graphically</li>
+<li>event-study plots and placebos</li>
+</ul></li>
 </ul>
 </section>
 <section id="in-r" class="slide level2">

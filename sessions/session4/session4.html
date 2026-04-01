@@ -78,7 +78,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-dea667461a5c81afc9ba75ce94cd63f3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-be3771519f21acc1c5b6733774c6dcd8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -187,6 +187,10 @@ window.Quarto = {
     <a class="dropdown-item" href="../../sessions/session4/session4.html">
  <span class="dropdown-text">Session 4: Difference-in-differences</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../sessions/session5/session5.html">
+ <span class="dropdown-text">Session 5 : Regression discontinuity design</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -215,6 +219,10 @@ window.Quarto = {
     <a class="dropdown-item" href="../../homeworks/homework4.html">
  <span class="dropdown-text">Session 4: Difference-in-differences</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../homeworks/homework5.html">
+ <span class="dropdown-text">Session 5: Regression Discontinuity</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -242,6 +250,10 @@ window.Quarto = {
         <li>
     <a class="dropdown-item" href="../../slides/session4/session4.html">
  <span class="dropdown-text">Session 4: Difference-in-differences</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../slides/session5/session5.html">
+ <span class="dropdown-text">Session 5: Regression discontinuity</span></a>
   </li>  
     </ul>
   </li>
@@ -366,128 +378,13 @@ ATT(2018, 2019), \quad ATT(2018, 2020), \quad ATT(2020, 2021), \dots
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"did"</span>, <span class="at">repos =</span> <span class="st">"https://cloud.r-project.org"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># Downloading packages -------------------------------------------------------
-- Downloading did from CRAN ...                 OK [4.4 Mb in 0.25s]
-- Downloading BMisc from CRAN ...               OK [79.8 Kb in 0.15s]
-- Downloading caret from CRAN ...               OK [2.2 Mb in 0.21s]
-- Downloading e1071 from CRAN ...               OK [310.6 Kb in 0.16s]
-- Downloading proxy from CRAN ...               OK [69.8 Kb in 0.12s]
-- Downloading foreach from CRAN ...             OK [87.7 Kb in 0.12s]
-- Downloading iterators from CRAN ...           OK [293.2 Kb in 0.15s]
-- Downloading ModelMetrics from CRAN ...        OK [16.7 Kb in 0.1s]
-- Downloading plyr from CRAN ...                OK [392.1 Kb in 0.14s]
-- Downloading pROC from CRAN ...                OK [439 Kb in 0.16s]
-- Downloading recipes from CRAN ...             OK [868.7 Kb in 0.16s]
-- Downloading clock from CRAN ...               OK [547.4 Kb in 0.17s]
-- Downloading gower from CRAN ...               OK [183.6 Kb in 0.12s]
-- Downloading hardhat from CRAN ...             OK [605 Kb in 0.17s]
-- Downloading sparsevctrs from CRAN ...         OK [91.8 Kb]
-- Downloading ipred from CRAN ...               OK [170 Kb in 0.14s]
-- Downloading prodlim from CRAN ...             OK [144 Kb in 0.14s]
-- Downloading diagram from CRAN ...             OK [524.3 Kb in 0.2s]
-- Downloading shape from CRAN ...               OK [631.3 Kb in 0.15s]
-- Downloading lava from CRAN ...                OK [1.1 Mb in 0.25s]
-- Downloading future.apply from CRAN ...        OK [74.2 Kb]
-- Downloading future from CRAN ...              OK [440.1 Kb in 0.14s]
-- Downloading globals from CRAN ...             OK [55.2 Kb]
-- Downloading listenv from CRAN ...             OK [46.8 Kb in 0.12s]
-- Downloading parallelly from CRAN ...          OK [331.4 Kb in 0.15s]
-- Downloading progressr from CRAN ...           OK [223.1 Kb in 0.14s]
-- Downloading SQUAREM from CRAN ...             OK [234.8 Kb in 0.15s]
-- Downloading timeDate from CRAN ...            OK [358.7 Kb in 0.16s]
-- Downloading reshape2 from CRAN ...            OK [37.2 Kb]
-- Downloading RcppArmadillo from CRAN ...       OK [2 Mb in 0.18s]
-- Downloading pbapply from CRAN ...             OK [23.2 Kb in 0.12s]
-- Downloading DRDID from CRAN ...               OK [481.5 Kb in 0.19s]
-- Downloading trust from CRAN ...               OK [295.5 Kb in 0.18s]
-- Downloading fastglm from CRAN ...             OK [100.4 Kb in 0.15s]
-- Downloading bigmemory from CRAN ...           OK [70.6 Kb in 0.14s]
-- Downloading bigmemory.sri from CRAN ...       OK [1.9 Kb in 0.13s]
-- Downloading BH from CRAN ...                  OK [13.6 Mb in 0.31s]
-- Downloading RcppEigen from CRAN ...           OK [1.7 Mb in 0.17s]
-Successfully downloaded 38 packages in 14 seconds.
-
-The following package(s) will be installed:
-- BH            [1.90.0-1]
-- bigmemory     [4.6.4]
-- bigmemory.sri [0.1.8]
-- BMisc         [1.4.8]
-- caret         [7.0-1]
-- clock         [0.7.4]
-- diagram       [1.6.5]
-- did           [2.3.0]
-- DRDID         [1.2.3]
-- e1071         [1.7-17]
-- fastglm       [0.0.4]
-- foreach       [1.5.2]
-- future        [1.70.0]
-- future.apply  [1.20.2]
-- globals       [0.19.1]
-- gower         [1.0.2]
-- hardhat       [1.4.2]
-- ipred         [0.9-15]
-- iterators     [1.0.14]
-- lava          [1.8.2]
-- listenv       [0.10.1]
-- ModelMetrics  [1.2.2.2]
-- parallelly    [1.46.1]
-- pbapply       [1.7-4]
-- plyr          [1.8.9]
-- pROC          [1.19.0.1]
-- prodlim       [2026.03.11]
-- progressr     [0.18.0]
-- proxy         [0.4-29]
-- RcppArmadillo [15.2.4-1]
-- RcppEigen     [0.3.4.0.2]
-- recipes       [1.3.1]
-- reshape2      [1.4.5]
-- shape         [1.4.6.1]
-- sparsevctrs   [0.3.6]
-- SQUAREM       [2026.1]
-- timeDate      [4052.112]
-- trust         [0.1-9]
+<pre><code>The following package(s) will be installed:
+- did [2.3.0]
 These packages will be installed into "~/work/methods_policyevaluation/methods_policyevaluation/renv/library/linux-ubuntu-noble/R-4.5/x86_64-pc-linux-gnu".
 
 # Installing packages --------------------------------------------------------
-- Installing proxy ...                          OK [built from source and cached in 2.6s]
-- Installing e1071 ...                          OK [built from source and cached in 6.1s]
-- Installing iterators ...                      OK [built from source and cached in 1.4s]
-- Installing foreach ...                        OK [built from source and cached in 1.4s]
-- Installing ModelMetrics ...                   OK [built from source and cached in 14s]
-- Installing plyr ...                           OK [built from source and cached in 6.1s]
-- Installing pROC ...                           OK [built from source and cached in 10s]
-- Installing clock ...                          OK [built from source and cached in 1.2m]
-- Installing gower ...                          OK [built from source and cached in 1.5s]
-- Installing sparsevctrs ...                    OK [built from source and cached in 2.8s]
-- Installing hardhat ...                        OK [built from source and cached in 3.1s]
-- Installing shape ...                          OK [built from source and cached in 1.5s]
-- Installing diagram ...                        OK [built from source and cached in 1.8s]
-- Installing globals ...                        OK [built from source and cached in 2.0s]
-- Installing listenv ...                        OK [built from source and cached in 1.6s]
-- Installing parallelly ...                     OK [built from source and cached in 3.6s]
-- Installing future ...                         OK [built from source and cached in 6.3s]
-- Installing future.apply ...                   OK [built from source and cached in 2.0s]
-- Installing progressr ...                      OK [built from source and cached in 2.6s]
-- Installing SQUAREM ...                        OK [built from source and cached in 1.4s]
-- Installing lava ...                           OK [built from source and cached in 17s]
-- Installing prodlim ...                        OK [built from source and cached in 9.3s]
-- Installing ipred ...                          OK [built from source and cached in 5.2s]
-- Installing timeDate ...                       OK [built from source and cached in 7.3s]
-- Installing recipes ...                        OK [built from source and cached in 12s]
-- Installing reshape2 ...                       OK [built from source and cached in 6.3s]
-- Installing caret ...                          OK [built from source and cached in 17s]
-- Installing RcppArmadillo ...                  OK [built from source and cached in 15s]
-- Installing BMisc ...                          OK [built from source and cached in 15s]
-- Installing pbapply ...                        OK [built from source and cached in 1.6s]
-- Installing trust ...                          OK [built from source and cached in 1.2s]
-- Installing bigmemory.sri ...                  OK [built from source and cached in 1.1s]
-- Installing BH ...                             OK [built from source and cached in 4.2s]
-- Installing bigmemory ...                      OK [built from source and cached in 30s]
-- Installing RcppEigen ...                      OK [built from source and cached in 28s]
-- Installing fastglm ...                        OK [built from source and cached in 55s]
-- Installing DRDID ...                          OK [built from source and cached in 7.1s]
-- Installing did ...                            OK [built from source and cached in 8.5s]
-Successfully installed 38 packages in 6.4 minutes.</code></pre>
+- Installing did ...                            OK [linked from cache]
+Successfully installed 1 package in 6.7 milliseconds.</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(did)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># set seed so everything is reproducible</span></span>
