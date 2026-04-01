@@ -194,7 +194,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Methods for Research and Policy Evaluation</h1>
-  <p class="subtitle">Session 4 : Difference-in-differences</p>
+  <p class="subtitle">Session 5 : Regression discontinuity design</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -205,447 +205,428 @@ Paul Servais
 </div>
 
 </section>
-<section id="on-the-finals" class="slide level2">
-<h2>On the finals</h2>
+<section id="last-sessions" class="slide level2">
+<h2>Last sessions</h2>
 <ul>
-<li>Have you started looking at data sets ? papers ?</li>
-<li>Don’t hesitate to reach out with proposition, questions !</li>
-<li>Submission date</li>
-</ul>
-</section>
-<section id="we-saw-in-previous-sessions" class="slide level2">
-<h2>We saw in previous sessions</h2>
+<li>Regressions
 <ul>
-<li>How to describe variables : descriptive statistics</li>
-<li>How to infer from sample to larger population : statistical inference</li>
-<li>How to analyse relations between variables :
-<ul>
-<li>When DV is continuous:
-<ul>
-<li>Indep. variable = categorical : t-test e.g.&nbsp;Urban/rural on median income</li>
-<li>Indep. variable = continuous : linear regressions e.g.&nbsp;Far-right vote share in communes and income</li>
+<li>OLS</li>
+<li>logistic</li>
 </ul></li>
+<li>Difference-in-differences</li>
+</ul>
+</section>
+<section id="identification-and-exogeneity" class="slide level2">
+<h2>Identification and exogeneity</h2>
+<ul>
+<li>An OLS is a correlational analysis <span class="math display">\[\begin{equation}
+Y_i = \alpha + \beta X_i + \delta D_i + \epsilon_i
+\end{equation}\]</span></li>
+<li>Identifying a causal effect (directional) requires exogeneity and directionality</li>
+<li><span class="math inline">\(D \rightarrow Y\)</span></li>
+<li>otherwise bias can arise</li>
+</ul>
+</section>
+<section id="identification-strategies" class="slide level2">
+<h2>Identification strategies</h2>
+<ul>
+<li>RDD uses arbitrary decision rule as source of exogeneity
+<ul>
+<li>applies in settings where treatment is determined by whether an observed running variable <span class="math inline">\(X\)</span> crosses a known cutoff <span class="math inline">\(c\)</span>.</li>
 </ul></li>
-</ul>
-</section>
-<section id="can-you-derive-causal-claims" class="slide level2">
-<h2>Can you derive causal claims ?</h2>
+<li>IV uses so-called instrument
 <ul>
-<li>You can control for variables but…</li>
-<li>Endogeneity</li>
-<li>Omitted variable bias</li>
-<li>Reverse causality</li>
-</ul>
-</section>
-<section id="todays-objectives" class="slide level2">
-<h2>Today’s objectives</h2>
-<ul>
-<li>Introduce you to one of the main causal inference methods</li>
-<li>Know what is event-study</li>
-<li>Parallel trend assumption</li>
-<li>Two-way fixed effects</li>
-<li>Other estimators</li>
-<li>Matching</li>
-</ul>
-</section>
-<section id="causal-inference" class="slide level2">
-<h2>Causal inference</h2>
-<ul>
-<li><p><span class="math inline">\(X \rightarrow Y\)</span></p></li>
-<li><p>Need for so-called <strong>identification strategy</strong></p></li>
-<li><p>Many different strategies :</p>
-<ul>
-<li>Difference-in-differences (today)</li>
-<li>Regression discontinuity</li>
-<li>Instrumental variables</li>
+<li>applies when treatment assignment is influenced by an exogeneous variable</li>
 </ul></li>
 </ul>
 </section>
-<section id="difference-in-differences" class="slide level2">
-<h2>Difference-in-Differences</h2>
-<ul>
-<li>Causal inference of observational data</li>
-<li>Based on event study</li>
-<li>Regression technique</li>
-<li>Compare two groups (control vs treatment)</li>
-<li>Compare Pre and Post treatment</li>
-<li><em>Need for panel data</em> <span class="math inline">\(Y_{it}\)</span></li>
-</ul>
-</section>
-<section id="event-study" class="slide level2">
-<h2>Event-study</h2>
-<ul>
-<li>How does an event impact an outcome ? Compared with a reference</li>
-</ul>
-<div class="column" style="width:70%;">
-<p><img data-src="images/ev_study.png"></p>
-</div></section>
-<section id="an-intuitive-example" class="slide level2">
-<h2>An intuitive example</h2>
-<ul>
-<li><p>Taylor Swift concerts : economic boom in the places where she went, surge in hotel bookings, restaurants etc.</p></li>
-<li><p>Yet other factors : post-pandemic increase in traveling, summer tourism, etc.</p></li>
-<li><p><strong>How can we isolate the Taylor effect</strong>?</p></li>
-</ul>
-</section>
-<section id="outcomes" class="slide level2">
-<h2>Outcomes</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th></th>
-<th>Before</th>
-<th>After</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>with Taylor</td>
-<td>X</td>
-<td>Y</td>
-</tr>
-<tr class="even">
-<td>without Taylor</td>
-<td>A</td>
-<td>B</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>All variables describe hotel and restaurants revenues</li>
-</ul>
-</section>
-<section id="difference-in-differences-1" class="slide level2">
-<h2>Difference-in-differences</h2>
-<ul>
-<li><p><span class="math inline">\(Y-X\)</span> : evolution of revenue in cities with Taylor Swift</p></li>
-<li><p><span class="math inline">\(B-A\)</span> : evolution of revenue in similar cities, but without Taylor Swift</p></li>
-<li><p>DID estimate : <span class="math display">\[\begin{equation}
-DiD = (Y-X) - (B-A)
-\end{equation}\]</span></p></li>
-<li><p>It removes the changes that have affected all cities, to isolate the specific effect of Taylor Swift.</p></li>
-<li><p>Ideally, you’d like your cities to be roughly similar before, to make sure you are isolating this effect…</p></li>
-</ul>
-</section>
-<section id="difference-in-differences-2" class="slide level2">
-<h2>Difference-in-Differences</h2>
+<section>
+<section id="regression-discontinuity" class="title-slide slide level1 center">
+<h1>Regression discontinuity</h1>
 
-<img data-src="session4_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
-<section id="the-att" class="slide level2">
-<h2>The ATT</h2>
+</section>
+<section id="sharp-and-fuzzy-rdd" class="slide level2">
+<h2>Sharp and fuzzy RDD</h2>
 <ul>
-<li>ATT = average treatment effect on the treated</li>
-<li>What is generally measured by a DiD</li>
-<li>the difference between the counterfactual <span class="math inline">\(Y_T(1)\)</span> and the actual outcome <span class="math inline">\(Y_T(0)\)</span></li>
+<li>Based on a running variable <span class="math inline">\(X\)</span></li>
+<li>Which influences probability <span class="math inline">\(P_T(X\geq c)\)</span> discontinuously</li>
+<li>Many exist out there because of legal thresholds</li>
+<li>Can be fuzzy or sharp</li>
+<li>Very close to the cutoff, individuals are treated/untreated</li>
+<li>But they also <strong>look very similar</strong></li>
 </ul>
 </section>
-<section id="historically" class="slide level2">
-<h2>Historically</h2>
+<section id="intuition-sharp-rdd" class="slide level2">
+<h2>Intuition sharp RDD</h2>
 <ul>
-<li>The control and treatment only need to evolve in parallel in pre-treatment</li>
+<li>Age and drinking : deterministic</li>
 </ul>
 
-<img data-src="session4_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
-<section id="in-applied-research" class="slide level2">
-<h2>In applied research</h2>
+<img data-src="session5_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
+<section id="intuition-fuzzy-rdd" class="slide level2">
+<h2>Intuition fuzzy RDD</h2>
 <ul>
-<li>Assessing the impact of Medicare expansion on mortality rates (Miller et al, 2021)</li>
+<li>Result at an entrance exam and admission rule (informal - yet not decisive threshold at 16/20).</li>
 </ul>
-<div class="column" style="width:100%;">
-<p><img data-src="images/medicare.png"></p>
-</div></section>
-<section id="why-would-running-a-simple-regression-not-work" class="slide level2">
-<h2>Why would running a simple regression not work ?</h2>
+
+<img data-src="session5_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+<section id="measuring-the-jump-at-discontinuity" class="slide level2">
+<h2>Measuring the jump at discontinuity</h2>
+
+<img data-src="session5_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<section id="example" class="slide level2">
+<h2>Example</h2>
+<ul>
+<li>Scholarship and GPA</li>
+</ul>
+
+<img data-src="session5_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
+<section id="impact-on-the-outcome" class="slide level2">
+<h2>Impact on the outcome</h2>
+<ul>
+<li>This jump helps assess the impacts of the treatment on the outcome <span class="math display">\[\begin{equation}
+\tau = \lim_{x \to c^+} \mathbb{E}[Y_i \mid X_i = x] - \lim_{x \to c^-} \mathbb{E}[Y_i \mid X_i = x]
+\end{equation}\]</span></li>
+<li><span class="math inline">\(c^+ = c+h\)</span> and <span class="math inline">\(c^- = c-h\)</span> with <span class="math inline">\(h \rightarrow 0\)</span></li>
+<li>Trade-off between
+<ul>
+<li>bias (<span class="math inline">\(h \text{ big} \rightarrow \text{bias}\)</span>)</li>
+<li>statistical power (<span class="math inline">\(h \text{ small} \rightarrow n \text{ small}\)</span>)</li>
+</ul></li>
+</ul>
+</section>
+<section id="trade-off-bias---variance" class="slide level2">
+<h2>Trade-off bias - variance</h2>
+<ul>
+<li>Two bandwidths : 1 or 10</li>
+</ul>
+
+<img data-src="session5_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<section id="late" class="slide level2">
+<h2>LATE</h2>
+<ul>
+<li>The data set will be restricted around the cutoff</li>
+<li>A local coefficient will be estimated</li>
+<li>Local Average Treatment Effect</li>
+<li>Can be parametric (you specify the relationship) or non parametric</li>
+</ul>
+</section>
+<section id="example-1" class="slide level2 scrollable">
+<h2>Example</h2>
 <p><span class="math display">\[\begin{equation}
-\text{Mortality}_{it} = \text{Medicare}_{it} + \epsilon_{it}
+Y_{i\{h\}} = \alpha + \beta X_{i\{h\}} + \delta D_{i\{h\}} + \epsilon_i
 \end{equation}\]</span></p>
-<ul>
-<li>what would you probably observe?</li>
-</ul>
-</section>
-<section id="why-would-running-a-simple-regression-not-work-1" class="slide level2">
-<h2>Why would running a simple regression not work ?</h2>
-<ul>
-<li>Selection bias and endogeneity : being eligible to medicare = being older, perhaps in poor health condition</li>
-<li>Omitted variable bias : depending on your data, you might forget variables to control for, that might impact mortality rate and medicare coverage</li>
-<li>Reverse causality</li>
-</ul>
-</section>
-<section id="other-examples" class="slide level2">
-<h2>Other examples</h2>
-<ul>
-<li>Assessing the impact of wind turbine installations on the vote for the far-right</li>
-</ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="images/controls.png"></p>
-</div><div class="column" style="width:50%;">
-<p><img data-src="images/parallel_trend.png"></p>
-</div></div>
-</section>
-<section id="event-study-1" class="slide level2">
-<h2>Event-study</h2>
-
-<img data-src="images/event_study.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="difference-in-differences-3" class="slide level2">
-<h2>Difference-in-Differences</h2>
-<p><span class="math display">\[\begin{equation}
-Y_{it} = \alpha_i + \beta_t + \text{Group}_i + \text{Period}_t + \delta \text{Group}_i \times \text{Period}_t + \epsilon_{it}
-\end{equation}\]</span></p>
-<ul>
-<li>The causal effect is the interaction effect <span class="math inline">\(\delta\)</span></li>
-<li>This model is called two-way fixed effects: TWFE</li>
-<li>Good for one homogeneous treatment (eg. a policy switch affecting all states in a certain year)</li>
-<li>More robust and recent estimators exist in the literature (de Chaisemartin &amp; D’Haultfœuille, 2020; Callaway &amp; Sant’Anna, 2021), for heterogeneous or <strong>staggered treatment</strong></li>
-</ul>
-</section>
-<section id="identification" class="slide level2">
-<h2>Identification</h2>
-<ul>
-<li>The whole identification lies in the parallel trends assumption</li>
-<li>= <strong>The key assumption to verify in DiD</strong>
-<ul>
-<li>graphically</li>
-<li>event-study plots and placebos</li>
-</ul></li>
-</ul>
-</section>
-<section id="in-r" class="slide level2">
-<h2>In R</h2>
-<ul>
-<li>Panel data <em>always require clustering of the standard errors</em></li>
-<li>In general, at the level at which treatment is applied ::: r-fit-text</li>
-</ul>
-<p><code>feols(formula|FE,cluster=~group,data)</code>:</p>
-<ul>
-<li><p>formula: Y ~ Time*Treatment (+controls)</p></li>
-<li><p>FE: fixed effects, in general at the individual and yearly level</p></li>
-<li><p>cluster=~group: specify that you want clustered SE (if you do not add this argument, you will have IID SE like in lm)</p></li>
-<li><p>data: name of the dataset</p></li>
-</ul>
-<p>With feols function, the stargazer function does not work. You need to use etable(). :::</p>
-</section>
-<section id="common-pitfalls" class="slide level2">
-<h2>Common pitfalls</h2>
-<ul>
-<li>Violation of the parallel trends assumption</li>
-<li>Composition changes in the groups composition</li>
-<li>Spillover effects</li>
-<li>Time-varying confounders: events happening at the same time</li>
-<li>Not clustered standard errors</li>
-</ul>
-</section>
-<section id="heterogeneous-treatment-effects" class="slide level2">
-<h2>Heterogeneous treatment effects</h2>
-<ul>
-<li>A TWFE computes an average over years</li>
-<li>Yet treatment effects are perhaps heterogeneous and dynamic</li>
-<li>You can try running TWFE with interactions, event-study</li>
-<li>Or use more sophisticated estimators : De Chaisemartin &amp; D’Hautefeuille, Callaway &amp; Sant’Anna.</li>
-</ul>
-</section>
-<section id="an-example" class="slide level2">
-<h2>An example</h2>
-<p>Based on the data from Angelucci and Cagé, 2019.</p>
-<p>We are interested in understanding how the introduction of advertisements in TV programs in France has impacted the revenues of newspapers throughout France. The hypothesis being that it impacted only national newspapers and not local ones.</p>
-</section>
-<section id="an-example-1" class="slide level2 scrollable">
-<h2>An example</h2>
-<ul>
-<li>Data set on newspapers revenues, can be downloaded <a href="https://www.openicpsr.org/openicpsr/project/116438/version/V1/view?path=/openicpsr/116438/fcr:versions/V1/data/dta/Angelucci_Cage_AEJMicro_dataset.dta&amp;type=file">here</a>.</li>
-</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(haven)</span>
-<span id="cb1-2"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a></a>newspapers <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"data/Angelucci_Cage_AEJMicro_dataset.dta"</span>)</span>
-<span id="cb1-4"><a></a></span>
-<span id="cb1-5"><a></a>newspapers <span class="ot">&lt;-</span></span>
-<span id="cb1-6"><a></a>  newspapers <span class="sc">|&gt;</span></span>
-<span id="cb1-7"><a></a>  <span class="fu">select</span>(</span>
-<span id="cb1-8"><a></a>    year, id_news, after_national, local, national, ra_cst, ps_cst, qtotal</span>
-<span id="cb1-9"><a></a>    ) <span class="sc">|&gt;</span> </span>
-<span id="cb1-10"><a></a>  <span class="fu">mutate</span>(<span class="at">ra_cst_div_qtotal =</span> ra_cst <span class="sc">/</span> qtotal, </span>
-<span id="cb1-11"><a></a>         <span class="at">post_treatment =</span>  <span class="fu">if_else</span>(year <span class="sc">&gt;=</span> <span class="dv">1967</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb1-12"><a></a>         <span class="fu">across</span>(<span class="fu">c</span>(id_news, local, national, after_national), as.factor),</span>
-<span id="cb1-13"><a></a>         <span class="at">year =</span> <span class="fu">as.factor</span>(year)) <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">treat_group =</span> national)</span>
-<span id="cb1-14"><a></a>newspapers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a></a><span class="fu">library</span>(MASS)</span>
+<span id="cb1-3"><a></a><span class="fu">library</span>(stargazer)</span>
+<span id="cb1-4"><a></a><span class="co"># Define the bandwidth</span></span>
+<span id="cb1-5"><a></a>h <span class="ot">&lt;-</span> <span class="dv">10</span>  </span>
+<span id="cb1-6"><a></a></span>
+<span id="cb1-7"><a></a><span class="co"># Subset data within ± the threshold</span></span>
+<span id="cb1-8"><a></a>rd_data1<span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
+<span id="cb1-9"><a></a>  <span class="fu">filter</span>(<span class="fu">abs</span>(X <span class="sc">-</span> <span class="dv">80</span>) <span class="sc">&lt;=</span> h)</span>
+<span id="cb1-10"><a></a></span>
+<span id="cb1-11"><a></a>rd_data2<span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
+<span id="cb1-12"><a></a>  <span class="fu">filter</span>(<span class="fu">abs</span>(X <span class="sc">-</span> <span class="dv">80</span>) <span class="sc">&lt;=</span> <span class="fl">0.1</span><span class="sc">*</span>h)</span>
+<span id="cb1-13"><a></a></span>
+<span id="cb1-14"><a></a></span>
+<span id="cb1-15"><a></a><span class="co"># Create running variable centered at the threshold</span></span>
+<span id="cb1-16"><a></a>rd_data1 <span class="ot">&lt;-</span> rd_data1 <span class="sc">|&gt;</span> </span>
+<span id="cb1-17"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-18"><a></a>    <span class="at">centered_X =</span> X <span class="sc">-</span> <span class="dv">80</span>,  <span class="co"># Centering at the threshold</span></span>
+<span id="cb1-19"><a></a>    <span class="at">treatment =</span> <span class="fu">if_else</span>(X <span class="sc">&gt;=</span> <span class="dv">80</span>, <span class="dv">1</span>, <span class="dv">0</span>) <span class="co"># Treatment indicator</span></span>
+<span id="cb1-20"><a></a>  )</span>
+<span id="cb1-21"><a></a></span>
+<span id="cb1-22"><a></a>rd_data2 <span class="ot">&lt;-</span> rd_data2 <span class="sc">|&gt;</span> </span>
+<span id="cb1-23"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-24"><a></a>    <span class="at">centered_X =</span> X <span class="sc">-</span> <span class="dv">80</span>,  <span class="co"># Centering at the threshold</span></span>
+<span id="cb1-25"><a></a>    <span class="at">treatment =</span> <span class="fu">if_else</span>(X <span class="sc">&gt;=</span> <span class="dv">80</span>, <span class="dv">1</span>, <span class="dv">0</span>) <span class="co"># Treatment indicator</span></span>
+<span id="cb1-26"><a></a>  )</span>
+<span id="cb1-27"><a></a></span>
+<span id="cb1-28"><a></a><span class="co"># Estimate local linear regression with interaction</span></span>
+<span id="cb1-29"><a></a>rd_model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y<span class="sc">~</span> treatment <span class="sc">+</span> centered_X, <span class="at">data =</span> rd_data1)</span>
+<span id="cb1-30"><a></a>rd_model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y<span class="sc">~</span> treatment <span class="sc">+</span> centered_X, <span class="at">data =</span> rd_data2)</span>
+<span id="cb1-31"><a></a></span>
+<span id="cb1-32"><a></a><span class="co">#Compare the models</span></span>
+<span id="cb1-33"><a></a></span>
+<span id="cb1-34"><a></a><span class="fu">stargazer</span>(rd_model1, rd_model2, <span class="at">type =</span> <span class="st">"text"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,196 × 10
-   year  id_news after_national local treat_group    ra_cst ps_cst  qtotal
-   &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;          &lt;fct&gt; &lt;fct&gt;           &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
- 1 1960  1       0              1     0            52890272   2.29  94478.
- 2 1961  1       0              1     0            56601060   2.20  96289.
- 3 1962  1       0              1     0            64840752   2.13  97313.
- 4 1963  1       0              1     0            70582944   2.43 101068.
- 5 1964  1       0              1     0            74977888   2.35 102103.
- 6 1965  1       0              1     0            74438248   2.29 105169.
- 7 1966  1       0              1     0            81383000   2.31 126235.
- 8 1967  1       0              1     0            80263152   2.88 128667.
- 9 1968  1       0              1     0            87165704   3.45 131824.
-10 1969  1       0              1     0           102596384   3.28 132417.
-# ℹ 1,186 more rows
-# ℹ 2 more variables: ra_cst_div_qtotal &lt;dbl&gt;, post_treatment &lt;dbl&gt;</code></pre>
+<pre><code>
+===================================================================
+                                  Dependent variable:              
+                    -----------------------------------------------
+                                           Y                       
+                              (1)                     (2)          
+-------------------------------------------------------------------
+treatment                   0.573***                0.691**        
+                            (0.061)                 (0.231)        
+                                                                   
+centered_X                  0.041***                 -0.014        
+                            (0.005)                 (0.182)        
+                                                                   
+Constant                    5.965***                5.873***       
+                            (0.033)                 (0.140)        
+                                                                   
+-------------------------------------------------------------------
+Observations                  156                      14          
+R2                           0.885                   0.806         
+Adjusted R2                  0.884                   0.770         
+Residual Std. Error     0.184 (df = 153)        0.185 (df = 11)    
+F Statistic         591.223*** (df = 2; 153) 22.789*** (df = 2; 11)
+===================================================================
+Note:                                   *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 </div>
 </div>
 </section>
-<section id="two-way-fixed-effects" class="slide level2 scrollable">
-<h2>Two-way fixed effects</h2>
+<section id="using-built-in-functions" class="slide level2">
+<h2>Using built-in functions</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(fixest)</span>
-<span id="cb3-2"><a></a></span>
-<span id="cb3-3"><a></a>newspapers <span class="ot">&lt;-</span> newspapers <span class="sc">|&gt;</span></span>
-<span id="cb3-4"><a></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(year)),</span>
-<span id="cb3-5"><a></a>         <span class="at">treat_group =</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(treat_group)))</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(rdrobust)</span>
+<span id="cb3-2"><a></a><span class="co"># Parameters</span></span>
+<span id="cb3-3"><a></a></span>
+<span id="cb3-4"><a></a><span class="co"># Run robust RDD</span></span>
+<span id="cb3-5"><a></a>rdd_result <span class="ot">&lt;-</span> <span class="fu">rdrobust</span>(<span class="at">y =</span> df<span class="sc">$</span>Y, <span class="at">x =</span> df<span class="sc">$</span>X, <span class="at">c =</span> cutoff, <span class="at">h =</span> <span class="dv">10</span>) <span class="co"># h = points allows to specify the number of points</span></span>
 <span id="cb3-6"><a></a></span>
-<span id="cb3-7"><a></a>twfe <span class="ot">&lt;-</span> <span class="fu">feols</span>(</span>
-<span id="cb3-8"><a></a>  <span class="fu">log</span>(ra_cst) <span class="sc">~</span> post_treatment<span class="sc">*</span>treat_group <span class="sc">|</span> id_news <span class="sc">+</span> year,</span>
-<span id="cb3-9"><a></a>  <span class="at">cluster =</span> <span class="sc">~</span>id_news,</span>
-<span id="cb3-10"><a></a>  <span class="at">data =</span> newspapers <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">1966</span><span class="sc">|</span>year <span class="sc">==</span> <span class="dv">1967</span>)</span>
-<span id="cb3-11"><a></a>)</span>
-<span id="cb3-12"><a></a><span class="fu">summary</span>(twfe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-7"><a></a><span class="co"># Print summary</span></span>
+<span id="cb3-8"><a></a><span class="fu">summary</span>(rdd_result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>OLS estimation, Dep. Var.: log(ra_cst)
-Observations: 156
-Fixed-effects: id_news: 78,  year: 2
-Standard-errors: Clustered (id_news) 
-                            Estimate Std. Error t value Pr(&gt;|t|)    
-post_treatment:treat_group -0.086116   0.042682 -2.0176 0.047118 *  
-... 2 variables were removed because of collinearity (post_treatment and
-treat_group)
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-RMSE: 0.057996     Adj. R2: 0.997027
-                 Within R2: 0.06695 </code></pre>
-</div>
-</div>
-</section>
-<section id="checking-the-parallel-trends" class="slide level2">
-<h2>Checking the parallel trends</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>newspapers <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a></a>  <span class="fu">group_by</span>(year, treat_group) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a></a>  <span class="fu">summarise</span>(<span class="at">mean_score =</span> <span class="fu">mean</span>(<span class="fu">log</span>(ra_cst), <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-4"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(year, mean_score, <span class="at">color =</span> <span class="fu">as.factor</span>(treat_group))) <span class="sc">+</span></span>
-<span id="cb5-5"><a></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="checking-the-parallel-trends-1" class="slide level2">
-<h2>Checking the parallel trends</h2>
+<pre><code>Sharp RD estimates using local polynomial regression.
 
-<img data-src="session4_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
-<section id="event-study-2" class="slide level2">
-<h2>Event-study</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">library</span>(fixest)</span>
-<span id="cb6-2"><a></a></span>
-<span id="cb6-3"><a></a>newspapers <span class="ot">&lt;-</span> newspapers <span class="sc">|&gt;</span></span>
-<span id="cb6-4"><a></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(year)),</span>
-<span id="cb6-5"><a></a>         <span class="at">treat_group =</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(treat_group)))</span>
-<span id="cb6-6"><a></a></span>
-<span id="cb6-7"><a></a>event_study <span class="ot">&lt;-</span> <span class="fu">feols</span>(</span>
-<span id="cb6-8"><a></a>  <span class="fu">log</span>(ra_cst) <span class="sc">~</span> <span class="fu">i</span>(year, treat_group, <span class="at">ref =</span> <span class="st">"1966"</span>) <span class="sc">|</span> id_news <span class="sc">+</span> year,</span>
-<span id="cb6-9"><a></a>  <span class="at">cluster =</span> <span class="sc">~</span>id_news,</span>
-<span id="cb6-10"><a></a>  <span class="at">data =</span> newspapers</span>
-<span id="cb6-11"><a></a>)</span>
-<span id="cb6-12"><a></a></span>
-<span id="cb6-13"><a></a><span class="fu">iplot</span>(event_study,</span>
-<span id="cb6-14"><a></a>      <span class="at">xlab =</span> <span class="st">"Year"</span>,</span>
-<span id="cb6-15"><a></a>      <span class="at">ylab =</span> <span class="st">"Effect on log(ra_cst)"</span>,</span>
-<span id="cb6-16"><a></a>      <span class="at">main =</span> <span class="st">"Event Study: Effect of National Newspapers"</span>,</span>
-<span id="cb6-17"><a></a>      <span class="at">ref.line =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+Number of Obs.                  300
+BW type                      Manual
+Kernel                   Triangular
+VCE method                       NN
+
+Number of Obs.                  155          145
+Eff. Number of Obs.              82           74
+Order est. (p)                    1            1
+Order bias  (q)                   2            2
+BW est. (h)                  10.000       10.000
+BW bias (b)                  10.000       10.000
+rho (h/b)                     1.000        1.000
+Unique Obs.                     155          145
+
+=====================================================================
+                   Point    Robust Inference
+                Estimate         z     P&gt;|z|      [ 95% C.I. ]       
+---------------------------------------------------------------------
+     RD Effect     0.631     7.375     0.000     [0.540 , 0.931]     
+=====================================================================</code></pre>
+</div>
 </div>
 </section>
-<section id="event-study-3" class="slide level2">
-<h2>Event study</h2>
-
-<img data-src="session4_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
-<section id="event-study-4" class="slide level2">
-<h2>Event-study</h2>
+<section id="continuity-at-the-cutoff" class="slide level2 scrollable">
+<h2>Continuity at the cutoff</h2>
 <ul>
-<li>This is for only one treatment timing</li>
-</ul>
-<p><span class="math display">\[\begin{equation}
-Y_{it} = \alpha_i + \beta_t + \text{Group_i} + \text{Period}_t + \delta \text{Group_i} \times \text{Period}_t + \epsilon_{it}
-\end{equation}\]</span></p>
+<li>Absent of treatment, <span class="math inline">\(Y\)</span> would have followed a continuous trend at the cutoff.</li>
+<li>Typical tests
 <ul>
-<li>For staggered treatment : more complex estimators (e.g.&nbsp;Callaway and Sant’Anna, from package <code>did</code>)</li>
-<li>Estimates (group,time) effects</li>
-<li>For each treatment period and cohort, an effect is computed.</li>
-</ul>
-</section>
-<section>
-<section id="matching" class="title-slide slide level1 center">
-<h1>Matching</h1>
-
-</section>
-<section id="matching-1" class="slide level2">
-<h2>Matching</h2>
-<ul>
-<li>Ideally you want identical treatment and control groups on all other covariates</li>
-<li>Variables predicting your treatment should also predict your control group</li>
-<li>Matching is useful to
-<ul>
-<li>reduce bias due to differences between control vs.&nbsp;treatment</li>
-<li>more credible and transparent comparaison between groups</li>
+<li><strong>Covariate continuity tests</strong> : placebos with other covariates</li>
+<li><strong>McCrary density test</strong>: test whether the density of the running variable is continuous at the cutoff, which helps detect manipulation or sorting around the threshold.</li>
+<li><strong>Placebos</strong> with other cutoffs</li>
+<li><strong>Varying bandwidths</strong>: verify that results are robust to different choices of bandwidth.</li>
+<li><strong>Varying polynomial orders</strong>: check that results are not driven by a specific functional form, by changing the order of the estimation in the argument of the function <code>p =</code>.</li>
 </ul></li>
-<li>But does not remove bias from unobserved variables !</li>
 </ul>
 </section>
-<section id="propensity-score-matching" class="slide level2">
-<h2>Propensity score matching</h2>
+<section id="covariate-continuity-test" class="slide level2">
+<h2>Covariate continuity test</h2>
 <ul>
-<li>Propensity score = probability to receive treatment depending on covariates
-<ol type="1">
-<li>Decide of important covariates</li>
-<li>Estimate propensity scores per individual (logistic regression <code>glm (Y ~ X, family = "binomial")</code>)</li>
-<li>Associate treatment group with control groups with similar scores</li>
-<li>Check covariate balance</li>
-<li>Estimate treatment effect</li>
-</ol></li>
-</ul>
-</section>
-<section id="types-of-matching" class="slide level2">
-<h2>Types of matching</h2>
+<li><p>In a valid <strong>RDD</strong>, units just below and above the cutoff should be <strong>similar</strong></p></li>
+<li><p>This means <strong>pre-treatment covariates</strong> must be <strong>continuous at the threshold</strong></p>
 <ul>
-<li>Nearest : each treated individual is associated with the closest in the non-treated individuals <span class="math inline">\(min(|PSM_t - PSM_c|)\)</span></li>
-<li>Radius : controls lie within a certain radius <span class="math inline">\(|PSM_t - PSM_c| \leq R\)</span></li>
-<li>Kernel : closer controls are associated with higher weights</li>
+<li>The design may be <strong>invalid</strong></li>
+<li>There could be <strong>manipulation or sorting</strong></li>
+</ul></li>
 </ul>
 </section>
-<section id="in-r-1" class="slide level2 scrollable">
-<h2>In R</h2>
+<section id="what-do-we-test" class="slide level2">
+<h2>What do we test?</h2>
+<ul>
+<li>We check whether:</li>
+<li>Age, income, education, etc.</li>
+<li>change <strong>smoothly</strong> at the cutoff</li>
+</ul>
+</section>
+<section id="example-2" class="slide level2">
+<h2>Example</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">install.packages</span>(<span class="st">"MatchIt"</span>)</span>
-<span id="cb7-2"><a></a><span class="fu">library</span>(MatchIt)</span>
-<span id="cb7-3"><a></a></span>
-<span id="cb7-4"><a></a>match_model <span class="ot">&lt;-</span> <span class="fu">matchit</span>(treatment <span class="sc">~</span> .,</span>
-<span id="cb7-5"><a></a>                       <span class="at">data =</span> data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(time <span class="sc">==</span> pre<span class="sc">-</span>treatment_period) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(outcome_var)),</span>
-<span id="cb7-6"><a></a>                       <span class="at">method =</span> <span class="st">"nearest"</span>,   <span class="co"># nearest neighbor matching</span></span>
-<span id="cb7-7"><a></a>                       <span class="at">distance =</span> <span class="st">"logit"</span>)   <span class="co"># use logistic propensity score</span></span>
-<span id="cb7-8"><a></a></span>
-<span id="cb7-9"><a></a>matched_ids <span class="ot">&lt;-</span> <span class="fu">match.data</span>(match_model) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(id) <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb5-2"><a></a></span>
+<span id="cb5-3"><a></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb5-4"><a></a></span>
+<span id="cb5-5"><a></a>dat_good <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb5-6"><a></a>  <span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">1000</span>, <span class="dv">0</span>, <span class="dv">100</span>),</span>
+<span id="cb5-7"><a></a>  <span class="at">D =</span> <span class="fu">ifelse</span>(x <span class="sc">&gt;=</span> <span class="dv">50</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb5-8"><a></a>  <span class="at">age =</span> <span class="dv">30</span> <span class="sc">+</span> <span class="fl">0.1</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="dv">0</span>, <span class="dv">2</span>)  <span class="co"># smooth</span></span>
+<span id="cb5-9"><a></a>)</span>
+<span id="cb5-10"><a></a></span>
+<span id="cb5-11"><a></a><span class="fu">ggplot</span>(dat_good, <span class="fu">aes</span>(x, age, <span class="at">color =</span> <span class="fu">factor</span>(D))) <span class="sc">+</span></span>
+<span id="cb5-12"><a></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb5-13"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">50</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb5-14"><a></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb5-15"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"No jump at cutoff"</span>,</span>
+<span id="cb5-16"><a></a>       <span class="at">x =</span> <span class="st">"Running variable"</span>,</span>
+<span id="cb5-17"><a></a>       <span class="at">y =</span> <span class="st">"Covariate (Age)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="propensity-score-matching-1" class="slide level2">
-<h2>Propensity score matching</h2>
+<section id="example-3" class="slide level2">
+<h2>Example</h2>
+
+<img data-src="session5_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
+<section id="mccrary-density-test" class="slide level2 scrollable">
+<h2>McCrary density test</h2>
 <ul>
-<li>Can be used as a standalone method</li>
-<li>Or as pre-processing before DiD</li>
+<li>You expect similar density on both sides of cutoff</li>
+<li>Imagine some students manage to convince or corrupt their profs</li>
+<li>Just call <code>dens_test &lt;- rddensity(X = df$X, c = cutoff)</code> from <code>rddensity</code> package</li>
+<li>NULL = continuity at the cutoff</li>
+<li>reject if p-value &lt; 0.05</li>
 </ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Manipulation testing using local polynomial density estimation.
+
+Number of obs =       500
+Model =               unrestricted
+Kernel =              triangular
+BW method =           estimated
+VCE method =          jackknife
+
+c = 80                Left of c           Right of c          
+Number of obs         212                 288                 
+Eff. Number of obs    203                 286                 
+Order est. (p)        2                   2                   
+Order bias (q)        3                   3                   
+BW est. (h)           12.117              10.839              
+
+Method                T                   P &gt; |T|             
+Robust                -2.3671             0.0179              </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+P-values of binomial tests (H0: p=0.5).
+
+Window Length              &lt;c     &gt;=c    P&gt;|T|
+3.328     + 3.328          20     214    0.0000
+4.305     + 4.163          60     230    0.0000
+5.281     + 4.997         101     245    0.0000
+6.258     + 5.832         124     255    0.0000
+7.234     + 6.666         143     266    0.0000
+8.211     + 7.501         163     270    0.0000
+9.187     + 8.335         180     278    0.0000
+10.164    + 9.170         190     283    0.0000
+11.140    + 10.004        200     285    0.0001
+12.117    + 10.839        203     286    0.0002</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="session5_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$Estl
+Call: lpdensity
+
+Sample size                                      212
+Polynomial order for point estimation    (p=)    2
+Order of derivative estimated            (v=)    1
+Polynomial order for confidence interval (q=)    3
+Kernel function                                  triangular
+Scaling factor                                   0.424849699398798
+Bandwidth method                                 user provided
+
+Use summary(...) to show estimates.
+
+$Estr
+Call: lpdensity
+
+Sample size                                      288
+Polynomial order for point estimation    (p=)    2
+Order of derivative estimated            (v=)    1
+Polynomial order for confidence interval (q=)    3
+Kernel function                                  triangular
+Scaling factor                                   0.577154308617234
+Bandwidth method                                 user provided
+
+Use summary(...) to show estimates.
+
+$Estplot</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="session5_files/figure-revealjs/unnamed-chunk-11-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="biased" class="slide level2">
+<h2>Biased</h2>
+<ul>
+<li>Sorting around the threshold</li>
+</ul>
+
+<img data-src="session5_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<section id="polynomial-orders" class="slide level2 scrollable">
+<h2>Polynomial orders</h2>
+<ul>
+<li>Why increase the degrees of your polynoms?</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="session5_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="session5_files/figure-revealjs/unnamed-chunk-13-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="visualising" class="slide level2">
+<h2>Visualising</h2>
+
+<img data-src="session5_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
+<section id="using-rdrobust" class="slide level2">
+<h2>Using rdrobust</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># Different polynomial orders</span></span>
+<span id="cb9-2"><a></a>rdd_p1 <span class="ot">&lt;-</span> <span class="fu">rdrobust</span>(y, x, <span class="at">c =</span> cutoff, <span class="at">p =</span> <span class="dv">1</span>)</span>
+<span id="cb9-3"><a></a>rdd_p2 <span class="ot">&lt;-</span> <span class="fu">rdrobust</span>(y, x, <span class="at">c =</span> cutoff, <span class="at">p =</span> <span class="dv">2</span>)</span>
+<span id="cb9-4"><a></a>rdd_p3 <span class="ot">&lt;-</span> <span class="fu">rdrobust</span>(y, x, <span class="at">c =</span> cutoff, <span class="at">p =</span> <span class="dv">3</span>)</span>
+<span id="cb9-5"><a></a></span>
+<span id="cb9-6"><a></a>results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb9-7"><a></a>  <span class="at">p =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb9-8"><a></a>  <span class="at">tau =</span> <span class="fu">c</span>(rdd_p1<span class="sc">$</span>Estimate[<span class="dv">1</span>], rdd_p2<span class="sc">$</span>Estimate[<span class="dv">1</span>], rdd_p3<span class="sc">$</span>Estimate[<span class="dv">1</span>]),</span>
+<span id="cb9-9"><a></a>  <span class="at">se  =</span> <span class="fu">c</span>(rdd_p1<span class="sc">$</span>se[<span class="dv">1</span>], rdd_p2<span class="sc">$</span>se[<span class="dv">1</span>], rdd_p3<span class="sc">$</span>se[<span class="dv">1</span>]),</span>
+<span id="cb9-10"><a></a>  <span class="at">pval =</span> <span class="fu">c</span>(rdd_p1<span class="sc">$</span>pv[<span class="dv">1</span>], rdd_p2<span class="sc">$</span>pv[<span class="dv">1</span>], rdd_p3<span class="sc">$</span>pv[<span class="dv">1</span>])</span>
+<span id="cb9-11"><a></a>)</span>
+<span id="cb9-12"><a></a>results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  p       tau        se         pval
+1 1 0.7484098 0.0852428 1.638508e-18
+2 2 0.8123347 0.1144619 1.275033e-12
+3 3 0.8138165 0.1226531 3.242616e-11</code></pre>
+</div>
+</div>
 </section></section>
-<section>
 <section id="exercices" class="title-slide slide level1 center">
 <h1>Exercices</h1>
 
+
 </section>
-<section id="exercice-1" class="slide level2">
-<h2>Exercice 1</h2>
-<ul>
-<li>You are asked to evaluate the effect of a <strong>tutoring program</strong> on students’ academic performance. The program is introduced in year 7 and affects only a subset of students, while others remain untreated. You observe a panel dataset that follows the same students over a period of 15 months.</li>
-</ul>
-
-
-</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

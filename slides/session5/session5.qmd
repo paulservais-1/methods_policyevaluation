@@ -1,0 +1,617 @@
+---
+title: "Methods for Research and Policy Evaluation"
+subtitle: "Session 5 : Regression discontinuity design"
+author: "Paul Servais"
+format: revealjs
+---
+
+
+
+## Last sessions
+
+- Regressions
+  - OLS
+  - logistic
+- Difference-in-differences
+
+## Identification and exogeneity
+- An OLS is a correlational analysis
+\begin{equation}
+Y_i = \alpha + \beta X_i + \delta D_i + \epsilon_i
+\end{equation}
+- Identifying a causal effect (directional) requires exogeneity and directionality
+- $D \rightarrow Y$
+- otherwise bias can arise
+
+## Identification strategies
+- RDD uses arbitrary decision rule as source of exogeneity
+  - applies in settings where treatment is determined by whether an observed running variable $X$ crosses a known cutoff $c$.
+- IV uses so-called instrument 
+  - applies when treatment assignment is influenced by an exogeneous variable
+
+# Regression discontinuity
+
+## Sharp and fuzzy RDD
+- Based on a running variable $X$
+- Which influences probability $P_T(X\geq c)$ discontinuously
+- Many exist out there because of legal thresholds
+- Can be fuzzy or sharp
+- Very close to the cutoff, individuals are treated/untreated
+- But they also **look very similar**
+
+## Intuition sharp RDD
+- Age and drinking : deterministic
+```{r}
+#| echo: false
+
+# Load library
+library(ggplot2)
+
+# Set seed
+set.seed(123)
+
+# Parameters
+n <- 500
+c <- 0  # cutoff
+
+# Simulate running variable
+X <- runif(n, -2, 2)
+
+# Sharp treatment assignment (Heaviside)
+D <- ifelse(X >= c, 1, 0)
+
+# Add slight vertical jitter for visualization (so points don't overlap perfectly)
+D_jitter <- D + rnorm(n, mean = 0, sd = 0.03)
+
+# Dataframe
+df <- data.frame(X, D, D_jitter)
+
+# Create smooth grid for step function
+X_grid <- seq(-2, 2, length.out = 1000)
+P <- ifelse(X_grid >= c, 1, 0)
+df_step <- data.frame(X_grid, P)
+
+# Plot
+ggplot() +
+  # Cloud of points
+  geom_point(data = df, aes(x = X, y = D_jitter), alpha = 0.4) +
+  
+  # Heaviside step function
+  geom_step(data = df_step, aes(x = X_grid, y = P), size = 1) +
+  
+  # Cutoff line
+  geom_vline(xintercept = c, linetype = "dashed") +
+  
+  labs(
+    title = "Sharp RDD: Treatment Probability with Discontinuity",
+    x = "Running Variable (X)",
+    y = "Treatment (D)"
+  ) +
+  
+  theme_minimal()
+```
+
+## Intuition fuzzy RDD
+- Result at an entrance exam and admission rule (informal - yet not decisive threshold at 16/20). 
+```{r}
+#| echo: false
+
+# Load library
+library(ggplot2)
+
+# Set seed
+set.seed(123)
+
+# Parameters
+n <- 500
+c <- 0  # cutoff
+slope <- 5  # steepness of logistic curve
+jump <- 0.3 # size of discontinuity at cutoff
+
+# Simulate running variable
+X <- runif(n, -2, 2)
+
+# Logistic probability function
+P <- 1 / (1 + exp(-slope * X))
+
+# Add a discontinuity at cutoff
+P[X >= c] <- P[X >= c] + jump
+P <- pmin(P, 1)  # cap at 1
+
+# Simulate treatment assignment
+D <- rbinom(n, 1, P)
+
+# Add vertical jitter for visualization
+D_jitter <- D + rnorm(n, mean = 0, sd = 0.03)
+
+# Dataframe for points
+df <- data.frame(X, D_jitter)
+
+# Smooth curve for theoretical probability
+X_grid <- seq(-2, 2, length.out = 1000)
+P_grid <- 1 / (1 + exp(-slope * X_grid))
+P_grid[X_grid >= c] <- P_grid[X_grid >= c] + jump
+P_grid <- pmin(P_grid, 1)
+df_curve <- data.frame(X_grid, P_grid)
+
+# Plot
+ggplot() +
+  # Cloud of points
+  geom_point(data = df, aes(x = X, y = D_jitter), alpha = 0.4) +
+  
+  # Smooth fuzzy probability curve
+  geom_line(data = df_curve, aes(x = X_grid, y = P_grid), color = "blue", size = 1.2) +
+  
+  # Cutoff line
+  geom_vline(xintercept = c, linetype = "dashed") +
+  
+  labs(
+    title = "Fuzzy RDD: Probability of Treatment with Discontinuity",
+    x = "Running Variable (X)",
+    y = "Pr(D = 1 | X)"
+  ) +
+  
+  theme_minimal()
+```
+
+## Measuring the jump at discontinuity
+```{r}
+#| echo: false
+
+library(tidyverse)
+simulated_rdd_data_before_treatment <- 
+  tibble(
+    outcome = rnorm(200, mean = 1, sd = 1),
+    running_variable = c(1:200),
+    treatment = "before treatment"
+  ) 
+
+simulated_rdd_data_after_treatment <- 
+  tibble(outcome = rnorm(200, mean = 3, sd = 1),
+        running_variable = c(201:400),
+        treatment = "after treatment"
+  )
+
+rbind(simulated_rdd_data_before_treatment, 
+      simulated_rdd_data_after_treatment) |> 
+  ggplot(aes(x = running_variable, y = outcome, color = treatment)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(formula = y ~ x, method = "loess") +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  scale_color_brewer(palette = "Set1")
+```
+
+## Example
+- Scholarship and GPA
+```{r}
+#| echo: false
+# Set seed for reproducibility
+set.seed(123)
+
+# Parameters
+n <- 300           # number of students
+cutoff <- 80       # scholarship cutoff
+slope <- 0.05      # linear trend of GPA with score
+jump <- 0.5        # effect of scholarship on GPA
+
+# Simulate exam scores
+X <- runif(n, 60, 100)
+
+# Simulate GPA: linear trend + jump at cutoff + noise
+Y <- 2 + slope * X + ifelse(X >= cutoff, jump, 0) + rnorm(n, 0, 0.2)
+
+# Create dataframe
+df <- data.frame(X, Y)
+```
+
+```{r}
+#| echo: false
+
+ggplot(df, aes(x = X, y = Y)) +
+  geom_point(alpha = 0.6) +
+  # Separate regression lines on each side of cutoff
+  geom_smooth(data = subset(df, X < cutoff), aes(x = X, y = Y), method = "lm", color = "blue", se = FALSE) +
+  geom_smooth(data = subset(df, X >= cutoff), aes(x = X, y = Y), method = "lm", color = "red", se = FALSE) +
+  # Vertical line at cutoff
+  geom_vline(xintercept = cutoff, linetype = "dashed") +
+  labs(
+    title = "RDD: Effect of Scholarship on GPA",
+    x = "Entrance Exam Score",
+    y = "GPA after 1 Year"
+  ) +
+  theme_minimal()
+```
+
+## Impact on the outcome
+- This jump helps assess the impacts of the treatment on the outcome
+\begin{equation}
+\tau = \lim_{x \to c^+} \mathbb{E}[Y_i \mid X_i = x] - \lim_{x \to c^-} \mathbb{E}[Y_i \mid X_i = x]
+\end{equation}
+- $c^+ = c+h$ and $c^- = c-h$ with $h \rightarrow 0$
+- Trade-off between
+  - bias ($h \text{ big} \rightarrow \text{bias}$) 
+  - statistical power ($h \text{ small} \rightarrow n \text{ small}$)
+
+## Trade-off bias - variance
+- Two bandwidths : 1 or 10
+```{r}
+ggplot(df, aes(x = X, y = Y)) +
+  # Shaded bandwidth = 10 (lighter grey, wider)
+  geom_rect(aes(xmin = cutoff - 10, xmax = cutoff + 10,
+                ymin = -Inf, ymax = Inf),
+            fill = "grey80", alpha = 0.4, inherit.aes = FALSE) +
+  
+  # Shaded bandwidth = 1 (darker grey, narrower)
+  geom_rect(aes(xmin = cutoff - 1, xmax = cutoff + 1,
+                ymin = -Inf, ymax = Inf),
+            fill = "grey50", alpha = 0.5, inherit.aes = FALSE) +
+  
+  geom_point(alpha = 0.6) +
+  
+  # Separate regression lines
+  geom_smooth(data = subset(df, X < cutoff),
+              method = "lm", color = "blue", se = FALSE) +
+  geom_smooth(data = subset(df, X >= cutoff),
+              method = "lm", color = "red", se = FALSE) +
+  
+  geom_vline(xintercept = cutoff, linetype = "dashed") +
+  
+  labs(
+    title = "RDD: Effect of Scholarship on GPA",
+    x = "Entrance Exam Score",
+    y = "GPA after 1 Year"
+  ) +
+  theme_minimal()
+```
+## LATE
+- The data set will be restricted around the cutoff
+- A local coefficient will be estimated
+- Local Average Treatment Effect
+- Can be parametric (you specify the relationship) or non parametric
+
+## Example {.scrollable}
+
+\begin{equation}
+Y_{i\{h\}} = \alpha + \beta X_{i\{h\}} + \delta D_{i\{h\}} + \epsilon_i
+\end{equation}
+
+```{r}
+#| echo: true
+
+library(tidyverse)
+library(MASS)
+library(stargazer)
+# Define the bandwidth
+h <- 10  
+
+# Subset data within ± the threshold
+rd_data1<- df |> 
+  filter(abs(X - 80) <= h)
+
+rd_data2<- df |> 
+  filter(abs(X - 80) <= 0.1*h)
+
+
+# Create running variable centered at the threshold
+rd_data1 <- rd_data1 |> 
+  mutate(
+    centered_X = X - 80,  # Centering at the threshold
+    treatment = if_else(X >= 80, 1, 0) # Treatment indicator
+  )
+
+rd_data2 <- rd_data2 |> 
+  mutate(
+    centered_X = X - 80,  # Centering at the threshold
+    treatment = if_else(X >= 80, 1, 0) # Treatment indicator
+  )
+
+# Estimate local linear regression with interaction
+rd_model1 <- lm(Y~ treatment + centered_X, data = rd_data1)
+rd_model2 <- lm(Y~ treatment + centered_X, data = rd_data2)
+
+#Compare the models
+
+stargazer(rd_model1, rd_model2, type = "text")
+```
+
+## Using built-in functions
+```{r}
+#| echo: true
+
+library(rdrobust)
+# Parameters
+
+# Run robust RDD
+rdd_result <- rdrobust(y = df$Y, x = df$X, c = cutoff, h = 10) # h = points allows to specify the number of points
+
+# Print summary
+summary(rdd_result)
+```
+
+## Continuity at the cutoff {.scrollable}
+- Absent of treatment, $Y$ would have followed a continuous trend at the cutoff. 
+- Typical tests
+  - **Covariate continuity tests** : placebos with other covariates
+  - **McCrary density test**: test whether the density of the running variable is continuous at the cutoff, which helps detect manipulation or sorting around the threshold. 
+  - **Placebos** with other cutoffs
+  - **Varying bandwidths**: verify that results are robust to different choices of bandwidth.
+  - **Varying polynomial orders**: check that results are not driven by a specific functional form, by changing the order of the estimation in the argument of the function `p = `.
+
+
+## Covariate continuity test
+
+- In a valid **RDD**, units just below and above the cutoff should be **similar**
+- This means **pre-treatment covariates** must be **continuous at the threshold**
+  
+  - The design may be **invalid**
+  - There could be **manipulation or sorting**
+
+
+## What do we test?
+- We check whether:
+- Age, income, education, etc.
+- change **smoothly** at the cutoff
+
+## Example
+
+```{r}
+#| echo: true
+#| eval: false
+library(tidyverse)
+
+set.seed(123)
+
+dat_good <- tibble(
+  x = runif(1000, 0, 100),
+  D = ifelse(x >= 50, 1, 0),
+  age = 30 + 0.1*x + rnorm(1000, 0, 2)  # smooth
+)
+
+ggplot(dat_good, aes(x, age, color = factor(D))) +
+  geom_point(alpha = 0.3) +
+  geom_vline(xintercept = 50, linetype = 2) +
+  stat_smooth(method = "loess", se = FALSE) +
+  labs(title = "No jump at cutoff",
+       x = "Running variable",
+       y = "Covariate (Age)")
+```
+
+## Example
+
+```{r}
+#| echo: false
+library(tidyverse)
+
+set.seed(123)
+
+dat_good <- tibble(
+  x = runif(1000, 0, 100),
+  D = ifelse(x >= 50, 1, 0),
+  age = 30 + 0.1*x + rnorm(1000, 0, 2)  # smooth
+)
+
+ggplot(dat_good, aes(x, age, color = factor(D))) +
+  geom_point(alpha = 0.3) +
+  geom_vline(xintercept = 50, linetype = 2) +
+  stat_smooth(method = "loess", se = FALSE) +
+  labs(title = "No jump at cutoff",
+       x = "Running variable",
+       y = "Covariate (Age)")
+```
+
+
+## McCrary density test {.scrollable}
+- You expect similar density on both sides of cutoff
+- Imagine some students manage to convince or corrupt their profs
+- Just call `dens_test <- rddensity(X = df$X, c = cutoff)` from `rddensity` package
+- NULL = continuity at the cutoff
+- reject if p-value < 0.05
+```{r}
+#install.packages("rddensity")
+# Load packages
+
+library(rddensity)
+library(ggplot2)
+
+set.seed(123)
+
+# Parameters
+n <- 500
+cutoff <- 80
+
+# Simulate running variable X (exam score)
+# Normal distribution around 75–85
+X <- rnorm(n, mean = 78, sd = 5)
+
+# Introduce manipulation: add "bunching" just above the cutoff
+# Students who scored 78–79 get bumped to 80
+manipulated <- X > 77 & X < cutoff
+X[manipulated] <- cutoff
+
+# Simulate outcome variable Y (GPA), continuous around 3.0
+Y <- 2.5 + 0.03 * X + rnorm(n, 0, 0.2)
+
+df <- data.frame(X, Y)
+
+# Run McCrary density test
+dens_test <- rddensity(X = df$X, c = cutoff)
+
+# Summary
+summary(dens_test)
+
+# Plot the density
+rdplotdensity(dens_test, X = df$X)
+
+```
+## Biased 
+- Sorting around the threshold
+```{r}
+ggplot(df, aes(x = X, y = Y)) +
+  # Shaded bandwidth = 10 (lighter grey, wider)
+  geom_rect(aes(xmin = cutoff - 10, xmax = cutoff + 10,
+                ymin = -Inf, ymax = Inf),
+            fill = "grey80", alpha = 0.4, inherit.aes = FALSE) +
+  
+  # Shaded bandwidth = 1 (darker grey, narrower)
+  geom_rect(aes(xmin = cutoff - 1, xmax = cutoff + 1,
+                ymin = -Inf, ymax = Inf),
+            fill = "grey50", alpha = 0.5, inherit.aes = FALSE) +
+  
+  geom_point(alpha = 0.6) +
+  
+  # Separate regression lines
+  geom_smooth(data = subset(df, X < cutoff),
+              method = "lm", color = "blue", se = FALSE) +
+  geom_smooth(data = subset(df, X >= cutoff),
+              method = "lm", color = "red", se = FALSE) +
+  
+  geom_vline(xintercept = cutoff, linetype = "dashed") +
+  
+  labs(
+    title = "RDD: Effect of Scholarship on GPA",
+    x = "Entrance Exam Score",
+    y = "GPA after 1 Year"
+  ) +
+  theme_minimal()
+```
+
+## Polynomial orders {.scrollable}
+- Why increase the degrees of your polynoms?
+```{r}
+# simultate nonlinearity
+dat <- tibble(
+    x = rnorm(1000, 100, 50)
+  ) %>% 
+  mutate(
+    x = case_when(x < 0 ~ 0, TRUE ~ x),
+    D = case_when(x > 140 ~ 1, TRUE ~ 0),
+    x2 = x*x,
+    x3 = x*x*x,
+    y3 = 10000 + 0 * D - 100 * x + x2 + rnorm(1000, 0, 1000)
+  ) %>% 
+  filter(x < 280)
+
+
+p1 <- ggplot(aes(x, y3, colour = factor(D)), data = dat) +
+  geom_point(alpha = 0.2) +
+  geom_vline(xintercept = 140, colour = "grey", linetype = 2) +
+  stat_smooth(method = "lm", se = F) +
+  labs(x = "Test score (X)", y = "Potential Outcome (Y)")
+
+p2 <- ggplot(aes(x, y3, colour = factor(D)), data = dat) +
+  geom_point(alpha = 0.2) +
+  geom_vline(xintercept = 140, colour = "grey", linetype = 2) +
+  stat_smooth(method = "loess", se = F) +
+  labs(x = "Test score (X)", y = "Potential Outcome (Y)")
+
+p1
+p2
+```
+
+## Visualising
+
+```{r}
+library(rdrobust)
+set.seed(123)
+
+# Parameters
+n <- 500
+cutoff <- 80
+
+# Running variable
+X <- runif(n, 60, 100)
+
+# Nonlinear baseline + treatment effect + noise
+Y <- 1 + 0.04 * X - 0.0003 * X^2 +   # nonlinear trend
+     0.8 * (X >= cutoff) +           # treatment effect
+     rnorm(n, 0, 0.3)
+
+df <- data.frame(X, Y)
+
+library(dplyr)
+library(ggplot2)
+
+# Create dataset with polynomial labels
+df_list <- list(
+  df %>% mutate(p = "p = 1"),
+  df %>% mutate(p = "p = 2"),
+  df %>% mutate(p = "p = 3")
+)
+
+df_all <- bind_rows(df_list)
+
+ggplot(df_all, aes(x = X, y = Y)) +
+  geom_point(alpha = 0.3) +
+  
+  # p = 1
+  geom_smooth(
+    data = subset(df_all, p == "p = 1" & X < cutoff),
+    method = "lm", formula = y ~ x,
+    se = FALSE, color = "blue"
+  ) +
+  geom_smooth(
+    data = subset(df_all, p == "p = 1" & X >= cutoff),
+    method = "lm", formula = y ~ x,
+    se = FALSE, color = "blue", linetype = "dashed"
+  ) +
+  
+  # p = 2
+  geom_smooth(
+    data = subset(df_all, p == "p = 2" & X < cutoff),
+    method = "lm", formula = y ~ poly(x, 2),
+    se = FALSE, color = "red"
+  ) +
+  geom_smooth(
+    data = subset(df_all, p == "p = 2" & X >= cutoff),
+    method = "lm", formula = y ~ poly(x, 2),
+    se = FALSE, color = "red", linetype = "dashed"
+  ) +
+  
+  # p = 3
+  geom_smooth(
+    data = subset(df_all, p == "p = 3" & X < cutoff),
+    method = "lm", formula = y ~ poly(x, 3),
+    se = FALSE, color = "green"
+  ) +
+  geom_smooth(
+    data = subset(df_all, p == "p = 3" & X >= cutoff),
+    method = "lm", formula = y ~ poly(x, 3),
+    se = FALSE, color = "green", linetype = "dashed"
+  ) +
+  
+  geom_vline(xintercept = cutoff, linetype = "dashed") +
+  
+  facet_wrap(~p) +
+  
+  labs(
+    title = "RDD Fits by Polynomial Order",
+    subtitle = "Solid = Left of cutoff, Dashed = Right",
+    x = "Running Variable",
+    y = "Outcome"
+  ) +
+  theme_minimal()
+
+y <- df$Y
+x <- df$X
+
+```
+## Using rdrobust
+```{r}
+#| echo: true
+# Different polynomial orders
+rdd_p1 <- rdrobust(y, x, c = cutoff, p = 1)
+rdd_p2 <- rdrobust(y, x, c = cutoff, p = 2)
+rdd_p3 <- rdrobust(y, x, c = cutoff, p = 3)
+
+results <- data.frame(
+  p = c(1, 2, 3),
+  tau = c(rdd_p1$Estimate[1], rdd_p2$Estimate[1], rdd_p3$Estimate[1]),
+  se  = c(rdd_p1$se[1], rdd_p2$se[1], rdd_p3$se[1]),
+  pval = c(rdd_p1$pv[1], rdd_p2$pv[1], rdd_p3$pv[1])
+)
+results
+
+```
+
+# Exercices

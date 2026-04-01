@@ -1,0 +1,194 @@
+---
+title: Session 5 - Regression discontinuity design
+toc-depth: 3
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+## Load the relevant packages
+Start by loading the following packages:
+```{r}
+#| eval: false
+#| echo: true
+
+library(rio)
+library(tidyverse)
+library(rdrobust)
+library(rddensity)
+```
+
+## Exercice 1: regression discontinuity design (RDD)
+
+This exercise is inspired by Carpenter and Dobkin (2015). You are provided with a data set about crime rates in the US, which you can find at <https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices5/data/carpenter_dobkin_data.dta>. You want to analyse the effect of alcohol on crime rates.
+
+1. Import the data. The codebook is the following :
+- `age` stands for the age
+- `arrested_for` qualifies the reasons for which people have been arrested. `DUI` stands for driving under the influence.
+- `number` is the number of people of that age arrested for that reason.
+
+2. Run the following code : 
+
+```{r}
+#| eval: false
+p <- data_set %>%  ggplot(aes(x = age, y = number)) +
+  geom_point(alpha = 0.05) +
+  facet_wrap(facets = vars(arrested_for), scales = "free_y") +
+  theme_minimal()
+
+p
+```
+
+3. Do you observe any “jump” or discontinuity in your graphs? If so, where?
+
+4. Restrict your dataset to DUIs (driving under the influence).
+
+5. Run your regression discontinuity using rdrobust, with age as the independent variable and number as the dependent variable, using a cutoff at 21 and a bandwidth of 2.
+
+6. Is this a sharp or fuzzy RDD?
+
+7. Does being allowed to drink alcohol affect the number of DUIs?
+
+8. Repeat the analysis using the number of assaults and the legal majority at 18 to examine whether turning 18 has an impact on the number of assaults.
+
+9. Run a McCrary density test to verify that there is no sorting at the cutoff. Verify that your results are robust for different polynomial degrees.
+```{r}
+#| eval: false
+#| echo: false
+
+library(rio)
+library(tidyverse)
+library(rdrobust)
+library(estimatr)
+library(AER)
+
+carpenter_dobkin_prepared <- import("data/carpenter_dobkin_data.dta")
+glimpse(carpenter_dobkin_prepared)
+p <- carpenter_dobkin_prepared %>%  ggplot(aes(x = age, y = number)) +
+  geom_point(alpha = 0.05) +
+  facet_wrap(facets = vars(arrested_for), scales = "free_y") +
+  theme_minimal()
+
+p
+
+carpenter_dobkin_dui_only <-
+  carpenter_dobkin_prepared |>
+  filter(
+    arrested_for == "DUI",
+    abs(age - 21) < 2
+  )
+
+carpenter_dobkin_assault_only <-
+  carpenter_dobkin_prepared |>
+  filter(
+    arrested_for == "Assault",
+    abs(age - 18) < 2
+  )
+
+rdd_dui <- rdrobust(
+  # specifies the DV
+  y = carpenter_dobkin_dui_only$number,
+  # specifies the running variable of the RDD
+  x = carpenter_dobkin_dui_only$age,
+  # specifies the cutoff
+  c = 21,
+  # specifies the bandwidth, here the unit of analysis is years
+  h = 2,
+  all = TRUE
+) 
+
+rdd_assault <- rdrobust(
+  # specifies the DV
+  y = carpenter_dobkin_assault_only$number,
+  # specifies the running variable of the RDD
+  x = carpenter_dobkin_assault_only$age,
+  # specifies the cutoff
+  c = 18,
+  # specifies the bandwidth, here the unit of analysis is years
+  h = 2,
+  all = TRUE
+) 
+
+rdd_dui |> summary()
+rdd_assault %>% summary()
+```
+
+
+## Exercice 2
+
+This exercise explores the causal effect of narrowly winning an election on the candidate’s performance in the next election. The idea is that winning by just over 50% allows the candidate to run as an incumbent in the following election, yet candidates having very close to the 50% (below or above) are in practice very comparable in terms of ressources. We can therefore compare candidates just above 50%, to candidates who lost by just under 50% to identify the incumbency advantage.
+
+You are provided with a dataset data_set (simulated for this exercise), which you can find here <https://github.com/paulservais-1/methods_policyevaluation/raw/main/data/incumbency.dta>. Each row corresponds to a candidate, and each column to its electoral results in election t, and in the next election t+1. The codebook is :
+
+- `vote_share_t` : vote share (%) for the candidate in the first election
+- `vote_share_t1` : vote share (%) for the same candidate in the following election
+
+1. Import the data set
+
+2. Create a variable `incumbent` worth 1 when the candidate is an incumbent in the second election
+
+3. Plot the relationship between vote_share_t and vote_share_t1, and change the color at the cutoff.
+
+4. Do you observe a jump anywhere ? If yes, where is it located?
+
+5. Estimate a regression discontinuity to estimate the incumbency effect on electoral outcomes.
+
+- Using function `lm` and restricting your data to different bandwidths.
+- Using rdrobust().
+How large is the effect ? How significant is the effect ?
+
+6. Is it a sharp or fuzzy RDD? 
+
+7. Repeat the RDD estimation with different polynomial orders (p = 1, 2, 3). Are the results sensitive to the polynomial order?
+
+8. Run a McCrary density test to check for potential sorting around the cutoff. Can we assume that candidates do not manipulate their vote share to just cross 50%?
+
+
+## Exercice 3
+
+We want to study whether entering a PhD program in Grandes Ecoles increases individuals’ future earnings. Admission is largely determined by the grade on the master’s thesis:
+
+- Candidates with a thesis grade above 16/20 are more likely to be admitted.
+- Some candidates below 16 are admitted occasionally, and some above 16 are rejected.
+
+You are provided with a data set following individuals over 10 years, containing :
+1. `thesis_grade`: their score at the master's thesis
+2. Their `future_income`, ten years later.
+3. Their admission status in the PhD program, admitted.
+
+It can be found here <https://github.com/paulservais-1/methods_policyevaluation/raw/main/data/grades_ge.dta>.
+
+1. Import the data set.
+2. Run the following code :
+
+```{r}
+#| eval: false
+library(ggplot2)
+library(dplyr)
+data_set <- data_set %>% mutate(admit_jitter = admitted + runif(n, -0.05, 0.05))
+ggplot() +
+  geom_point(data = data_set, aes(x = thesis_grade, y = admit_jitter), alpha = 0.4) +
+  labs(
+    title = "Fuzzy RDD: Probability of PhD Admission vs. Thesis Grade",
+    x = "Thesis Grade",
+    y = "Admission status"
+  ) +
+  theme_minimal()
+```
+Do you notice any effect of the grade on the admissions ? At which cutoff ?
+
+3. Plot the relationship between income and the running variable, and change the color at the cutoff.
+
+4. Do you observe a jump anywhere ? If yes, where is it located?
+
+5. Estimate a regression discontinuity to estimate the effect of being admitted in a Grande Ecole on future earnings.
+
+- Using function `lm` and restricting your data to different bandwidths.
+- Using rdrobust().
+How large is the effect ? How significant is the effect ?
+
+6. Is it a sharp or fuzzy RDD? 
+
+7. Repeat the RDD estimation with different polynomial orders (p = 1, 2, 3). Are the results sensitive to the polynomial order?
+
+8. Run a McCrary density test to check for potential sorting around the cutoff. Can we assume that candidates do not manipulate their master's thesis grade just above the cutoff?

@@ -3211,5 +3211,271 @@
     "title": "Methods for Research and Policy Evaluation",
     "section": "On the finals",
     "text": "On the finals\n\nHave you started looking at data sets ? papers ?\nDon’t hesitate to reach out with proposition, questions !\nSubmission date"
+  },
+  {
+    "objectID": "slides/session4/session4.html#historically",
+    "href": "slides/session4/session4.html#historically",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Historically",
+    "text": "Historically\n\nThe control and treatment only need to evolve in parallel in pre-treatment"
+  },
+  {
+    "objectID": "slides/session5/session5.html#last-sessions",
+    "href": "slides/session5/session5.html#last-sessions",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Last sessions",
+    "text": "Last sessions\n\nRegressions\n\nOLS\nlogistic\n\nDifference-in-differences"
+  },
+  {
+    "objectID": "slides/session5/session5.html#identification-and-exogeneity",
+    "href": "slides/session5/session5.html#identification-and-exogeneity",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Identification and exogeneity",
+    "text": "Identification and exogeneity\n\nAn OLS is a correlational analysis \\[\\begin{equation}\nY_i = \\alpha + \\beta X_i + \\delta D_i + \\epsilon_i\n\\end{equation}\\]\nIdentifying a causal effect (directional) requires exogeneity and directionality\n\\(D \\rightarrow Y\\)\notherwise bias can arise"
+  },
+  {
+    "objectID": "slides/session5/session5.html#identification-strategies",
+    "href": "slides/session5/session5.html#identification-strategies",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Identification strategies",
+    "text": "Identification strategies\n\nRDD uses arbitrary decision rule as source of exogeneity\n\napplies in settings where treatment is determined by whether an observed running variable \\(X\\) crosses a known cutoff \\(c\\).\n\nIV uses so-called instrument\n\napplies when treatment assignment is influenced by an exogeneous variable"
+  },
+  {
+    "objectID": "slides/session5/session5.html#sharp-and-fuzzy-rdd",
+    "href": "slides/session5/session5.html#sharp-and-fuzzy-rdd",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Sharp and fuzzy RDD",
+    "text": "Sharp and fuzzy RDD\n\nBased on a running variable \\(X\\)\nWhich influences probability \\(P_T(X\\geq c)\\) discontinuously\nMany exist out there because of legal thresholds\nCan be fuzzy or sharp\nVery close to the cutoff, individuals are treated/untreated\nBut they also look very similar"
+  },
+  {
+    "objectID": "slides/session5/session5.html#intuition-sharp-rdd",
+    "href": "slides/session5/session5.html#intuition-sharp-rdd",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Intuition sharp RDD",
+    "text": "Intuition sharp RDD\n\nAge and drinking : deterministic"
+  },
+  {
+    "objectID": "slides/session5/session5.html#intuition-fuzzy-rdd",
+    "href": "slides/session5/session5.html#intuition-fuzzy-rdd",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Intuition fuzzy RDD",
+    "text": "Intuition fuzzy RDD\n\nResult at an entrance exam and admission rule (informal - yet not decisive threshold at 16/20)."
+  },
+  {
+    "objectID": "slides/session5/session5.html#measuring-the-jump-at-discontinuity",
+    "href": "slides/session5/session5.html#measuring-the-jump-at-discontinuity",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Measuring the jump at discontinuity",
+    "text": "Measuring the jump at discontinuity"
+  },
+  {
+    "objectID": "slides/session5/session5.html#impact-on-the-outcome",
+    "href": "slides/session5/session5.html#impact-on-the-outcome",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Impact on the outcome",
+    "text": "Impact on the outcome\n\nThis jump helps assess the impacts of the treatment on the outcome \\[\\begin{equation}\n\\tau = \\lim_{x \\to c^+} \\mathbb{E}[Y_i \\mid X_i = x] - \\lim_{x \\to c^-} \\mathbb{E}[Y_i \\mid X_i = x]\n\\end{equation}\\]\n\\(c^+ = c+h\\) and \\(c^- = c-h\\) with \\(h \\rightarrow 0\\)\nTrade-off between\n\nbias (\\(h \\text{ big} \\rightarrow \\text{bias}\\))\nstatistical power (\\(h \\text{ small} \\rightarrow n \\text{ small}\\))"
+  },
+  {
+    "objectID": "slides/session5/session5.html#example",
+    "href": "slides/session5/session5.html#example",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Example",
+    "text": "Example\n\nScholarship and GPA"
+  },
+  {
+    "objectID": "slides/session5/session5.html#example-1",
+    "href": "slides/session5/session5.html#example-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Example",
+    "text": "Example\n\\[\\begin{equation}\nY_{i\\{h\\}} = \\alpha + \\beta X_{i\\{h\\}} + \\delta D_{i\\{h\\}} + \\epsilon_i\n\\end{equation}\\]\n\nlibrary(tidyverse)\nlibrary(MASS)\nlibrary(stargazer)\n# Define the bandwidth\nh &lt;- 10  \n\n# Subset data within ± the threshold\nrd_data1&lt;- df |&gt; \n  filter(abs(X - 80) &lt;= h)\n\nrd_data2&lt;- df |&gt; \n  filter(abs(X - 80) &lt;= 0.1*h)\n\n\n# Create running variable centered at the threshold\nrd_data1 &lt;- rd_data1 |&gt; \n  mutate(\n    centered_X = X - 80,  # Centering at the threshold\n    treatment = if_else(X &gt;= 80, 1, 0) # Treatment indicator\n  )\n\nrd_data2 &lt;- rd_data2 |&gt; \n  mutate(\n    centered_X = X - 80,  # Centering at the threshold\n    treatment = if_else(X &gt;= 80, 1, 0) # Treatment indicator\n  )\n\n# Estimate local linear regression with interaction\nrd_model1 &lt;- lm(Y~ treatment + centered_X, data = rd_data1)\nrd_model2 &lt;- lm(Y~ treatment + centered_X, data = rd_data2)\n\n#Compare the models\n\nstargazer(rd_model1, rd_model2, type = \"text\")\n\n\n===================================================================\n                                  Dependent variable:              \n                    -----------------------------------------------\n                                           Y                       \n                              (1)                     (2)          \n-------------------------------------------------------------------\ntreatment                   0.573***                0.691**        \n                            (0.061)                 (0.231)        \n                                                                   \ncentered_X                  0.041***                 -0.014        \n                            (0.005)                 (0.182)        \n                                                                   \nConstant                    5.965***                5.873***       \n                            (0.033)                 (0.140)        \n                                                                   \n-------------------------------------------------------------------\nObservations                  156                      14          \nR2                           0.885                   0.806         \nAdjusted R2                  0.884                   0.770         \nResidual Std. Error     0.184 (df = 153)        0.185 (df = 11)    \nF Statistic         591.223*** (df = 2; 153) 22.789*** (df = 2; 11)\n===================================================================\nNote:                                   *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01"
+  },
+  {
+    "objectID": "slides/session5/session5.html#using-built-in-functions",
+    "href": "slides/session5/session5.html#using-built-in-functions",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Using built-in functions",
+    "text": "Using built-in functions\n\nlibrary(rdrobust)\n# Parameters\n\n# Run robust RDD\nrdd_result &lt;- rdrobust(y = df$Y, x = df$X, c = cutoff, h = 10) # h = points allows to specify the number of points\n\n# Print summary\nsummary(rdd_result)\n\nSharp RD estimates using local polynomial regression.\n\nNumber of Obs.                  300\nBW type                      Manual\nKernel                   Triangular\nVCE method                       NN\n\nNumber of Obs.                  155          145\nEff. Number of Obs.              82           74\nOrder est. (p)                    1            1\nOrder bias  (q)                   2            2\nBW est. (h)                  10.000       10.000\nBW bias (b)                  10.000       10.000\nrho (h/b)                     1.000        1.000\nUnique Obs.                     155          145\n\n=====================================================================\n                   Point    Robust Inference\n                Estimate         z     P&gt;|z|      [ 95% C.I. ]       \n---------------------------------------------------------------------\n     RD Effect     0.631     7.375     0.000     [0.540 , 0.931]     \n====================================================================="
+  },
+  {
+    "objectID": "slides/session5/session5.html#continuity-at-the-cutoff",
+    "href": "slides/session5/session5.html#continuity-at-the-cutoff",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Continuity at the cutoff",
+    "text": "Continuity at the cutoff\n\nAbsent of treatment, \\(Y\\) would have followed a continuous trend at the cutoff.\nTypical tests\n\nCovariate continuity tests : placebos with other covariates\nMcCrary density test: test whether the density of the running variable is continuous at the cutoff, which helps detect manipulation or sorting around the threshold.\nPlacebos with other cutoffs\nVarying bandwidths: verify that results are robust to different choices of bandwidth.\nVarying polynomial orders: check that results are not driven by a specific functional form, by changing the order of the estimation in the argument of the function p =."
+  },
+  {
+    "objectID": "slides/session5/session5.html#covariate-continuity-test",
+    "href": "slides/session5/session5.html#covariate-continuity-test",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Covariate continuity test",
+    "text": "Covariate continuity test\n\nIn a valid RDD, units just below and above the cutoff should be similar\nThis means pre-treatment covariates must be continuous at the threshold\n\nThe design may be invalid\nThere could be manipulation or sorting"
+  },
+  {
+    "objectID": "slides/session5/session5.html#mccrary-density-test",
+    "href": "slides/session5/session5.html#mccrary-density-test",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "McCrary density test",
+    "text": "McCrary density test\n\nYou expect similar density on both sides of cutoff\nImagine some students manage to convince or corrupt their profs\nJust call dens_test &lt;- rddensity(X = df$X, c = cutoff) from rddensity package\nNULL = continuity at the cutoff\nreject if p-value &lt; 0.05\n\n\n\n\nManipulation testing using local polynomial density estimation.\n\nNumber of obs =       500\nModel =               unrestricted\nKernel =              triangular\nBW method =           estimated\nVCE method =          jackknife\n\nc = 80                Left of c           Right of c          \nNumber of obs         212                 288                 \nEff. Number of obs    203                 286                 \nOrder est. (p)        2                   2                   \nOrder bias (q)        3                   3                   \nBW est. (h)           12.117              10.839              \n\nMethod                T                   P &gt; |T|             \nRobust                -2.3671             0.0179              \n\n\n\nP-values of binomial tests (H0: p=0.5).\n\nWindow Length              &lt;c     &gt;=c    P&gt;|T|\n3.328     + 3.328          20     214    0.0000\n4.305     + 4.163          60     230    0.0000\n5.281     + 4.997         101     245    0.0000\n6.258     + 5.832         124     255    0.0000\n7.234     + 6.666         143     266    0.0000\n8.211     + 7.501         163     270    0.0000\n9.187     + 8.335         180     278    0.0000\n10.164    + 9.170         190     283    0.0000\n11.140    + 10.004        200     285    0.0001\n12.117    + 10.839        203     286    0.0002\n\n\n\n\n\n\n\n\n\n$Estl\nCall: lpdensity\n\nSample size                                      212\nPolynomial order for point estimation    (p=)    2\nOrder of derivative estimated            (v=)    1\nPolynomial order for confidence interval (q=)    3\nKernel function                                  triangular\nScaling factor                                   0.424849699398798\nBandwidth method                                 user provided\n\nUse summary(...) to show estimates.\n\n$Estr\nCall: lpdensity\n\nSample size                                      288\nPolynomial order for point estimation    (p=)    2\nOrder of derivative estimated            (v=)    1\nPolynomial order for confidence interval (q=)    3\nKernel function                                  triangular\nScaling factor                                   0.577154308617234\nBandwidth method                                 user provided\n\nUse summary(...) to show estimates.\n\n$Estplot"
+  },
+  {
+    "objectID": "slides/session5/session5.html#polynomial-orders",
+    "href": "slides/session5/session5.html#polynomial-orders",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Polynomial orders",
+    "text": "Polynomial orders\n\nWhy increase the degrees of your polynoms?"
+  },
+  {
+    "objectID": "slides/session5/session5.html#what-do-we-test",
+    "href": "slides/session5/session5.html#what-do-we-test",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "What do we test?",
+    "text": "What do we test?\n\nWe check whether:\nAge, income, education, etc.\nchange smoothly at the cutoff"
+  },
+  {
+    "objectID": "slides/session5/session5.html#example-2",
+    "href": "slides/session5/session5.html#example-2",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Example",
+    "text": "Example\n\nlibrary(tidyverse)\n\nset.seed(123)\n\ndat_good &lt;- tibble(\n  x = runif(1000, 0, 100),\n  D = ifelse(x &gt;= 50, 1, 0),\n  age = 30 + 0.1*x + rnorm(1000, 0, 2)  # smooth\n)\n\nggplot(dat_good, aes(x, age, color = factor(D))) +\n  geom_point(alpha = 0.3) +\n  geom_vline(xintercept = 50, linetype = 2) +\n  stat_smooth(method = \"loess\", se = FALSE) +\n  labs(title = \"No jump at cutoff\",\n       x = \"Running variable\",\n       y = \"Covariate (Age)\")"
+  },
+  {
+    "objectID": "slides/session5/session5.html#covariate-continuity-test-example",
+    "href": "slides/session5/session5.html#covariate-continuity-test-example",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Covariate continuity test: Example",
+    "text": "Covariate continuity test: Example"
+  },
+  {
+    "objectID": "slides/session5/session5.html#trade-off-bias---variance",
+    "href": "slides/session5/session5.html#trade-off-bias---variance",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Trade-off bias - variance",
+    "text": "Trade-off bias - variance\n\nTwo bandwidths : 1 or 10"
+  },
+  {
+    "objectID": "slides/session5/session5.html#late",
+    "href": "slides/session5/session5.html#late",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "LATE",
+    "text": "LATE\n\nThe data set will be restricted around the cutoff\nA local coefficient will be estimated\nLocal Average Treatment Effect\nCan be parametric (you specify the relationship) or non parametric"
+  },
+  {
+    "objectID": "slides/session5/session5.html#biased",
+    "href": "slides/session5/session5.html#biased",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Biased",
+    "text": "Biased\n\nSorting around the threshold"
+  },
+  {
+    "objectID": "slides/session5/session5.html#example-3",
+    "href": "slides/session5/session5.html#example-3",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Example",
+    "text": "Example"
+  },
+  {
+    "objectID": "slides/session5/session5.html#mccrary-density-test-1",
+    "href": "slides/session5/session5.html#mccrary-density-test-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "McCrary density test",
+    "text": "McCrary density test\n\nNULL = continuity at the cutoff\nreject if p-value &lt; 0.05\n\n\n\n\nManipulation testing using local polynomial density estimation.\n\nNumber of obs =       500\nModel =               unrestricted\nKernel =              triangular\nBW method =           estimated\nVCE method =          jackknife\n\nc = 80                Left of c           Right of c          \nNumber of obs         212                 288                 \nEff. Number of obs    203                 286                 \nOrder est. (p)        2                   2                   \nOrder bias (q)        3                   3                   \nBW est. (h)           12.117              10.839              \n\nMethod                T                   P &gt; |T|             \nRobust                -2.3671             0.0179              \n\n\n\nP-values of binomial tests (H0: p=0.5).\n\nWindow Length              &lt;c     &gt;=c    P&gt;|T|\n3.328     + 3.328          20     214    0.0000\n4.305     + 4.163          60     230    0.0000\n5.281     + 4.997         101     245    0.0000\n6.258     + 5.832         124     255    0.0000\n7.234     + 6.666         143     266    0.0000\n8.211     + 7.501         163     270    0.0000\n9.187     + 8.335         180     278    0.0000\n10.164    + 9.170         190     283    0.0000\n11.140    + 10.004        200     285    0.0001\n12.117    + 10.839        203     286    0.0002\n\n\n\n\n\n\n\n\n\n$Estl\nCall: lpdensity\n\nSample size                                      212\nPolynomial order for point estimation    (p=)    2\nOrder of derivative estimated            (v=)    1\nPolynomial order for confidence interval (q=)    3\nKernel function                                  triangular\nScaling factor                                   0.424849699398798\nBandwidth method                                 user provided\n\nUse summary(...) to show estimates.\n\n$Estr\nCall: lpdensity\n\nSample size                                      288\nPolynomial order for point estimation    (p=)    2\nOrder of derivative estimated            (v=)    1\nPolynomial order for confidence interval (q=)    3\nKernel function                                  triangular\nScaling factor                                   0.577154308617234\nBandwidth method                                 user provided\n\nUse summary(...) to show estimates.\n\n$Estplot"
+  },
+  {
+    "objectID": "slides/session5/session5.html#using-rdrobust",
+    "href": "slides/session5/session5.html#using-rdrobust",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Using rdrobust",
+    "text": "Using rdrobust\n\n# Different polynomial orders\nrdd_p1 &lt;- rdrobust(y, x, c = cutoff, p = 1)\nrdd_p2 &lt;- rdrobust(y, x, c = cutoff, p = 2)\nrdd_p3 &lt;- rdrobust(y, x, c = cutoff, p = 3)\n\nresults &lt;- data.frame(\n  p = c(1, 2, 3),\n  tau = c(rdd_p1$Estimate[1], rdd_p2$Estimate[1], rdd_p3$Estimate[1]),\n  se  = c(rdd_p1$se[1], rdd_p2$se[1], rdd_p3$se[1]),\n  pval = c(rdd_p1$pv[1], rdd_p2$pv[1], rdd_p3$pv[1])\n)\nresults\n\n  p       tau        se         pval\n1 1 0.7484098 0.0852428 1.638508e-18\n2 2 0.8123347 0.1144619 1.275033e-12\n3 3 0.8138165 0.1226531 3.242616e-11"
+  },
+  {
+    "objectID": "slides/session5/session5.html#visualising",
+    "href": "slides/session5/session5.html#visualising",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Visualising",
+    "text": "Visualising"
+  },
+  {
+    "objectID": "homeworks/homework5.html",
+    "href": "homeworks/homework5.html",
+    "title": "Session 5 - Regression discontinuity design",
+    "section": "",
+    "text": "Start by loading the following packages:\n\nlibrary(rio)\nlibrary(tidyverse)\nlibrary(rdrobust)\nlibrary(rddensity)"
+  },
+  {
+    "objectID": "homeworks/homework5.html#load-the-relevant-packages",
+    "href": "homeworks/homework5.html#load-the-relevant-packages",
+    "title": "Session 5 - Regression discontinuity design",
+    "section": "",
+    "text": "Start by loading the following packages:\n\nlibrary(rio)\nlibrary(tidyverse)\nlibrary(rdrobust)\nlibrary(rddensity)"
+  },
+  {
+    "objectID": "homeworks/homework5.html#exercice-1-regression-discontinuity-design-rdd",
+    "href": "homeworks/homework5.html#exercice-1-regression-discontinuity-design-rdd",
+    "title": "Session 5 - Regression discontinuity design",
+    "section": "Exercice 1: regression discontinuity design (RDD)",
+    "text": "Exercice 1: regression discontinuity design (RDD)\nThis exercise is inspired by Carpenter and Dobkin (2015). You are provided with a data set about crime rates in the US, which you can find at https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices5/data/carpenter_dobkin_data.dta. You want to analyse the effect of alcohol on crime rates.\n\nImport the data. The codebook is the following :\n\n\nage stands for the age\narrested_for qualifies the reasons for which people have been arrested. DUI stands for driving under the influence.\nnumber is the number of people of that age arrested for that reason.\n\n\nRun the following code :\n\n\np &lt;- data_set %&gt;%  ggplot(aes(x = age, y = number)) +\n  geom_point(alpha = 0.05) +\n  facet_wrap(facets = vars(arrested_for), scales = \"free_y\") +\n  theme_minimal()\n\np\n\n\nDo you observe any “jump” or discontinuity in your graphs? If so, where?\nRestrict your dataset to DUIs (driving under the influence).\nRun your regression discontinuity using rdrobust, with age as the independent variable and number as the dependent variable, using a cutoff at 21 and a bandwidth of 2.\nIs this a sharp or fuzzy RDD?\nDoes being allowed to drink alcohol affect the number of DUIs?\nRepeat the analysis using the number of assaults and the legal majority at 18 to examine whether turning 18 has an impact on the number of assaults.\nRun a McCrary density test to verify that there is no sorting at the cutoff. Verify that your results are robust for different polynomial degrees."
+  },
+  {
+    "objectID": "homeworks/homework5.html#exercice-2",
+    "href": "homeworks/homework5.html#exercice-2",
+    "title": "Session 5 - Regression discontinuity design",
+    "section": "Exercice 2",
+    "text": "Exercice 2\nThis exercise explores the causal effect of narrowly winning an election on the candidate’s performance in the next election. The idea is that winning by just over 50% allows the candidate to run as an incumbent in the following election, yet candidates having very close to the 50% (below or above) are in practice very comparable in terms of ressources. We can therefore compare candidates just above 50%, to candidates who lost by just under 50% to identify the incumbency advantage.\nYou are provided with a dataset data_set (simulated for this exercise), which you can find here https://github.com/paulservais-1/methods_policyevaluation/raw/main/data/incumbency.dta. Each row corresponds to a candidate, and each column to its electoral results in election t, and in the next election t+1. The codebook is :\n\nvote_share_t : vote share (%) for the candidate in the first election\nvote_share_t1 : vote share (%) for the same candidate in the following election\n\n\nImport the data set\nCreate a variable incumbent worth 1 when the candidate is an incumbent in the second election\nPlot the relationship between vote_share_t and vote_share_t1, and change the color at the cutoff.\nDo you observe a jump anywhere ? If yes, where is it located?\nEstimate a regression discontinuity to estimate the incumbency effect on electoral outcomes.\n\n\nUsing function lm and restricting your data to different bandwidths.\nUsing rdrobust(). How large is the effect ? How significant is the effect ?\n\n\nIs it a sharp or fuzzy RDD?\nRepeat the RDD estimation with different polynomial orders (p = 1, 2, 3). Are the results sensitive to the polynomial order?\nRun a McCrary density test to check for potential sorting around the cutoff. Can we assume that candidates do not manipulate their vote share to just cross 50%?"
+  },
+  {
+    "objectID": "homeworks/homework5.html#exercice-3",
+    "href": "homeworks/homework5.html#exercice-3",
+    "title": "Session 5 - Regression discontinuity design",
+    "section": "Exercice 3",
+    "text": "Exercice 3\nWe want to study whether entering a PhD program in Grandes Ecoles increases individuals’ future earnings. Admission is largely determined by the grade on the master’s thesis:\n\nCandidates with a thesis grade above 16/20 are more likely to be admitted.\nSome candidates below 16 are admitted occasionally, and some above 16 are rejected.\n\nYou are provided with a data set following individuals over 10 years, containing : 1. thesis_grade: their score at the master’s thesis 2. Their future_income, ten years later. 3. Their admission status in the PhD program, admitted.\nIt can be found here https://github.com/paulservais-1/methods_policyevaluation/raw/main/data/grades_ge.dta.\n\nImport the data set.\nRun the following code :\n\n\nlibrary(ggplot2)\nlibrary(dplyr)\ndata_set &lt;- data_set %&gt;% mutate(admit_jitter = admitted + runif(n, -0.05, 0.05))\nggplot() +\n  geom_point(data = data_set, aes(x = thesis_grade, y = admit_jitter), alpha = 0.4) +\n  labs(\n    title = \"Fuzzy RDD: Probability of PhD Admission vs. Thesis Grade\",\n    x = \"Thesis Grade\",\n    y = \"Admission status\"\n  ) +\n  theme_minimal()\n\nDo you notice any effect of the grade on the admissions ? At which cutoff ?\n\nPlot the relationship between income and the running variable, and change the color at the cutoff.\nDo you observe a jump anywhere ? If yes, where is it located?\nEstimate a regression discontinuity to estimate the effect of being admitted in a Grande Ecole on future earnings.\n\n\nUsing function lm and restricting your data to different bandwidths.\nUsing rdrobust(). How large is the effect ? How significant is the effect ?\n\n\nIs it a sharp or fuzzy RDD?\nRepeat the RDD estimation with different polynomial orders (p = 1, 2, 3). Are the results sensitive to the polynomial order?\nRun a McCrary density test to check for potential sorting around the cutoff. Can we assume that candidates do not manipulate their master’s thesis grade just above the cutoff?"
+  },
+  {
+    "objectID": "sessions/session5/session5.html",
+    "href": "sessions/session5/session5.html",
+    "title": "Session 5 - Regression discontinuity and instrumental variables",
+    "section": "",
+    "text": "The first identification strategy we have considered so far is the difference-in-differences approach. This method of causal inference uses panel data and, by comparing treated and untreated units over time, estimates the causal effects of a treatment on a given dependent variable. However, there are many situations in which tracking such groups over time is not feasible—for example, due to data limitations or because the treatment affects all individuals within a group.\nFor this reason, alternative strategies have been developed to analyze causal effects, such as regression discontinuity designs (RDD) and instrumental variables (IV).\nThese approaches rely on identifying variables that predict treatment assignment but are exogenous to other determinants of the outcome. In the case of RDD, exogeneity arises from the discrete nature of treatment assignment: in many contexts, treatment is determined by a cutoff rule, as is often the case in public policy. This discontinuity creates a sharp jump that allows us to compare very similar individuals on either side of the threshold—some receiving the treatment, others not—in order to estimate its causal impact. For example, legal drinking age or driving eligibility is determined by age thresholds: once an individual turns eighteen, they become eligible, regardless of other characteristics such as parental behavior, income, or education.\nThis session will present regression discontinuity. The next one will be devoted to instrumental variables."
+  },
+  {
+    "objectID": "sessions/session5/session5.html#motivation",
+    "href": "sessions/session5/session5.html#motivation",
+    "title": "Session 5 - Regression discontinuity and instrumental variables",
+    "section": "",
+    "text": "The first identification strategy we have considered so far is the difference-in-differences approach. This method of causal inference uses panel data and, by comparing treated and untreated units over time, estimates the causal effects of a treatment on a given dependent variable. However, there are many situations in which tracking such groups over time is not feasible—for example, due to data limitations or because the treatment affects all individuals within a group.\nFor this reason, alternative strategies have been developed to analyze causal effects, such as regression discontinuity designs (RDD) and instrumental variables (IV).\nThese approaches rely on identifying variables that predict treatment assignment but are exogenous to other determinants of the outcome. In the case of RDD, exogeneity arises from the discrete nature of treatment assignment: in many contexts, treatment is determined by a cutoff rule, as is often the case in public policy. This discontinuity creates a sharp jump that allows us to compare very similar individuals on either side of the threshold—some receiving the treatment, others not—in order to estimate its causal impact. For example, legal drinking age or driving eligibility is determined by age thresholds: once an individual turns eighteen, they become eligible, regardless of other characteristics such as parental behavior, income, or education.\nThis session will present regression discontinuity. The next one will be devoted to instrumental variables."
+  },
+  {
+    "objectID": "sessions/session5/session5.html#regression-discontinuity-design-rdd",
+    "href": "sessions/session5/session5.html#regression-discontinuity-design-rdd",
+    "title": "Session 5 - Regression discontinuity and instrumental variables",
+    "section": "Regression Discontinuity Design (RDD)",
+    "text": "Regression Discontinuity Design (RDD)\nRegression discontinuity design (RDD) is an identification strategy that exploits discontinuities in treatment assignment rules to estimate causal effects. It applies in settings where treatment is determined by whether an observed running variable \\(X\\) crosses a known cutoff \\(c\\). The key idea is that units located very close to the cutoff are comparable in all respects except for their treatment status.\nUnder appropriate assumptions, any discontinuity in the outcome variable at the cutoff can therefore be attributed to the causal effect of the treatment.\n\nSharp and fuzzy RDD\nThe difference between sharp and fuzzy RDD lies in how treatment is assigned at the cutoff. In a sharp RDD, the probability of receiving the treatment jumps deterministically at the cutoff: all units on one side of the threshold receive the treatment, and none on the other side do. In contrast, in a fuzzy RDD, the probability of treatment also jumps at the cutoff, but not all units comply perfectly. Some units above the cutoff may not receive the treatment, and some below the cutoff may receive it. In other words, the jump in treatment probability is partial, reflecting imperfect compliance or other factors, rather than a deterministic assignment.\nThis is illustrated in the following figure, which shows the probability of receiving the treatment as a function of the running variable, \\(P(D = 1 \\mid X)\\). The figure compares the two cases: in a sharp RDD, treatment assignment is perfectly deterministic at the cutoff, resulting in a full jump from 0 to 1; in a fuzzy RDD, the probability of treatment also jumps at the cutoff, but not all units comply, so the jump is partial rather than complete.\n\nSharp RDDFuzzy RDD\n\n\n\n\nWarning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.\nℹ Please use `linewidth` instead."
+  },
+  {
+    "objectID": "sessions/session5/session5.html#examples-of-sharp-and-fuzzy-rdd",
+    "href": "sessions/session5/session5.html#examples-of-sharp-and-fuzzy-rdd",
+    "title": "Session 5 - Regression discontinuity and instrumental variables",
+    "section": "Examples of sharp and fuzzy RDD",
+    "text": "Examples of sharp and fuzzy RDD\nThe difference between sharp and fuzzy RDD lies in how treatment is assigned at the cutoff. In a sharp RDD, treatment assignment is perfectly deterministic: all units above the threshold receive the treatment, and all units below it do not. Examples include the legal drinking age—once a person turns 18, they are legally allowed to drink—and driving eligibility, where turning 16 or 18 (depending on the country) makes someone automatically eligible for a license. Other examples include scholarship programs with strict score thresholds, where all students above a cutoff receive the award.\nIn contrast, a fuzzy RDD occurs when the probability of receiving treatment jumps at the cutoff but is not deterministic. Some units do not comply, or other factors affect actual treatment. For instance, in college admissions, a student above a test score threshold may choose not to enroll or be prevented by financial constraints, while some students below the cutoff may still enroll via exceptions. Similarly, in subsidy programs, eligibility is determined by income or age thresholds, but not all eligible individuals take up the subsidy. Draft lotteries also illustrate a fuzzy design: a randomly assigned lottery number increases the probability of being drafted, but not everyone with a “drafted” number serves, and some with an “undrafted” number may still serve.\n\nGraphical Intuition\nOnce we understand the difference between sharp and fuzzy RDD, the intuition behind RDD is most clearly illustrated using a graph. On the horizontal axis, we plot the running variable \\(X\\), and on the vertical axis, the outcome variable \\(Y\\). The cutoff \\(c\\) is represented by a vertical line.\nA sharp RDD arises when treatment assignment is a deterministic function of the running variable. Formally, treatment is defined as:\n\\[\\begin{equation}\nD_i = 1\\{X_i \\geq c\\}\n\\end{equation}\\]\nso that all units with \\(X_i \\geq c\\) receive the treatment, and none of those with \\(X_i &lt; c\\) do.\nThe causal effect is identified by comparing the conditional expectation of the outcome variable on either side of the cutoff:\n\\[\\begin{equation}\n\\tau = \\lim_{x \\to c^+} \\mathbb{E}[Y_i \\mid X_i = x] - \\lim_{x \\to c^-} \\mathbb{E}[Y_i \\mid X_i = x]\n\\end{equation}\\]\nThis parameter captures the average treatment effect at the cutoff. Identification relies on the assumption that, in the absence of treatment, the conditional expectation of the outcome would be continuous at \\(c\\). In other words, units just above and just below the threshold would have had similar outcomes if neither group had been treated.\nIn practice, estimation is typically performed using local linear regressions on either side of the cutoff, restricting attention to observations within a bandwidth around \\(c\\). That is, estimating :\n\\[\\begin{equation}\nY_i = \\alpha + \\beta X_i + \\delta D_i + \\epsilon_i,\n\\end{equation}\\] where \\(X_i\\) is the running variable, and \\(D_i\\) is the treatment dummy.\nThe choice of bandwidth involves a bias-variance trade-off: narrower bandwidths improve comparability but reduce precision, while wider bandwidths increase precision at the cost of potentially introducing bias.\nEach point on the graph corresponds to an observation. We then fit separate regression lines (or smooth curves) on either side of the cutoff. If the treatment has a causal effect on the running variable, we expect to observe a discontinuity—a jump—in the outcome at \\(X = c\\).\n\nTo the left of the cutoff (\\(X &lt; c\\)), units are untreated.\nTo the right of the cutoff (\\(X \\geq c\\)), units are treated.\nThe size of the vertical jump at the cutoff corresponds to the estimated treatment effect \\(\\tau\\).\n\n\n\n`geom_smooth()` using formula = 'y ~ x'\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\n\nCrucially, the identification assumption implies that, absent treatment, the outcome would evolve smoothly through the cutoff.This assumption is called continuity at the cutoff assumption. Therefore, any observed jump at \\(c\\) can be attributed to the treatment rather than to underlying differences between units.\nIn practice, researchers often visualize this by plotting binned averages of \\(Y\\) against \\(X\\), along with fitted lines on each side of the cutoff. A clear discontinuity at the threshold provides visual evidence supporting the validity of the RDD design."
+  },
+  {
+    "objectID": "sessions/session5/session5.html#example-scholarship-effect-on-gpa",
+    "href": "sessions/session5/session5.html#example-scholarship-effect-on-gpa",
+    "title": "Session 5 - Regression discontinuity and instrumental variables",
+    "section": "Example: Scholarship Effect on GPA",
+    "text": "Example: Scholarship Effect on GPA\nWe want to study whether receiving a scholarship (hence, being funded for your studies) influences your results. We consider a scenario where a scholarship is awarded to students who score 80 or more on an entrance exam. The running variable is the exam score X, and the outcome is the GPA after one year. The scholarship is expected to increase GPA (because students work in better conditions), creating a discontinuity at the cutoff. We generate the data to obtain a smooth cutoff.\n\nggplot(df, aes(x = X, y = Y)) +\n  geom_point(alpha = 0.6) +\n  # Separate regression lines on each side of cutoff\n  geom_smooth(data = subset(df, X &lt; cutoff), aes(x = X, y = Y), method = \"lm\", color = \"blue\", se = FALSE) +\n  geom_smooth(data = subset(df, X &gt;= cutoff), aes(x = X, y = Y), method = \"lm\", color = \"red\", se = FALSE) +\n  # Vertical line at cutoff\n  geom_vline(xintercept = cutoff, linetype = \"dashed\") +\n  labs(\n    title = \"RDD: Effect of Scholarship on GPA\",\n    x = \"Entrance Exam Score\",\n    y = \"GPA after 1 Year\"\n  ) +\n  theme_minimal()\n\n`geom_smooth()` using formula = 'y ~ x'\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\n\n\nInterpretation\nStudents just above and just below the cutoff (a score of 80 on the entrance exam) are comparable, except for scholarship receipt. The jump in GPA at the cutoff can therefore be interpreted as the causal effect of the scholarship, assuming that no other factors change discontinuously at that score.\nA first way to estimate the LATE (local average treatment effect) is to define a bandwidth, \\(bd\\), around the cutoff of the running variable within which the estimation is performed. For instance, one might consider only observations within 10 points of the cutoff. A larger bandwidth increases the sample size and thus the statistical precision of the estimates, but it also raises the risk of bias, as students farther from the cutoff may no longer be truly comparable.\nTwo examples of LATE estimation are provided below: one using a very small bandwidthand the other a much larger one, illustrating the trade-off between bias and precision.\n\\[\\begin{equation}\nY_i (h) = \\alpha + \\beta X_i (h) + \\delta D_i + \\epsilon_i\n\\end{equation}\\]\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.6\n✔ forcats   1.0.1     ✔ stringr   1.6.0\n✔ lubridate 1.9.4     ✔ tibble    3.3.0\n✔ purrr     1.2.0     ✔ tidyr     1.3.2\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(MASS)\n\n\nAttaching package: 'MASS'\n\nThe following object is masked from 'package:dplyr':\n\n    select\n\nlibrary(stargazer)\n\n\nPlease cite as: \n\n Hlavac, Marek (2022). stargazer: Well-Formatted Regression and Summary Statistics Tables.\n R package version 5.2.3. https://CRAN.R-project.org/package=stargazer \n\n# Define the bandwidth\nh &lt;- 10  \n\n# Subset data within ±0.2 of the threshold\nrd_data1&lt;- df |&gt; \n  filter(abs(X - 80) &lt;= h)\n\nrd_data2&lt;- df |&gt; \n  filter(abs(X - 80) &lt;= 0.1*h)\n\n\n# Create running variable centered at the threshold\nrd_data1 &lt;- rd_data1 |&gt; \n  mutate(\n    centered_X = X - 80,  # Centering at the threshold\n    treatment = if_else(X &gt;= 80, 1, 0) # Treatment indicator\n  )\n\nrd_data2 &lt;- rd_data2 |&gt; \n  mutate(\n    centered_X = X - 80,  # Centering at the threshold\n    treatment = if_else(X &gt;= 80, 1, 0) # Treatment indicator\n  )\n\n# Estimate local linear regression with interaction\nrd_model1 &lt;- lm(Y~ treatment + centered_X, data = rd_data1)\nrd_model2 &lt;- lm(Y~ treatment + centered_X, data = rd_data2)\nrd_model3 &lt;- rlm(Y~ treatment + centered_X, data = rd_data2)\n\n#Compare the models\n\nstargazer(rd_model1, rd_model2, rd_model3, type = \"text\")\n\n\n===================================================================================\n                                          Dependent variable:                      \n                    ---------------------------------------------------------------\n                                                   Y                               \n                                          OLS                           robust     \n                                                                        linear     \n                              (1)                     (2)                 (3)      \n-----------------------------------------------------------------------------------\ntreatment                   0.573***                0.691**            0.682***    \n                            (0.061)                 (0.231)             (0.178)    \n                                                                                   \ncentered_X                  0.041***                 -0.014             -0.004     \n                            (0.005)                 (0.182)             (0.140)    \n                                                                                   \nConstant                    5.965***                5.873***           5.868***    \n                            (0.033)                 (0.140)             (0.108)    \n                                                                                   \n-----------------------------------------------------------------------------------\nObservations                  156                      14                 14       \nR2                           0.885                   0.806                         \nAdjusted R2                  0.884                   0.770                         \nResidual Std. Error     0.184 (df = 153)        0.185 (df = 11)     0.092 (df = 11)\nF Statistic         591.223*** (df = 2; 153) 22.789*** (df = 2; 11)                \n===================================================================================\nNote:                                                   *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01\n\n\nThe results indeed give you values around 0.5, as expected : the causal estimate through RDD is therefore of 0.5 (the increase in GPA after one year, for those who received the scholarship)."
+  },
+  {
+    "objectID": "sessions/session5/session5.html#using-built-in-functions",
+    "href": "sessions/session5/session5.html#using-built-in-functions",
+    "title": "Session 5 - Regression discontinuity and instrumental variables",
+    "section": "Using built-in functions",
+    "text": "Using built-in functions\nIf you don’t wath to bother with the data preparation, you can compute the RDD estimate of the causal effect of the scholarship by calling rdrobust() from the library rdrobust, which only requires you to specify the following variables :\n\nYour dependent variable \\(Y\\)\nYour running variable \\(X\\)\nYour cutoff\nYour bandwidth \\(h\\)\n\nIt will then compute robust estimates of your causal effect.\n\nlibrary(rdrobust)\nlibrary(rddtools)\n\nLoading required package: AER\n\n\nLoading required package: car\n\n\nLoading required package: carData\n\n\n\nAttaching package: 'car'\n\n\nThe following object is masked from 'package:dplyr':\n\n    recode\n\n\nThe following object is masked from 'package:purrr':\n\n    some\n\n\nLoading required package: lmtest\n\n\nLoading required package: zoo\n\n\n\nAttaching package: 'zoo'\n\n\nThe following objects are masked from 'package:base':\n\n    as.Date, as.Date.numeric\n\n\nLoading required package: sandwich\n\n\nLoading required package: survival\n\n\nLoading required package: np\n\n\nNonparametric Kernel Methods for Mixed Datatypes (version 0.60-20)\n[vignette(\"np_faq\",package=\"np\") provides answers to frequently asked questions]\n[vignette(\"np\",package=\"np\") an overview]\n[vignette(\"entropy_np\",package=\"np\") an overview of entropy-based methods]\n\n\n\nPlease consider citing R and rddtools,\ncitation()\ncitation('rddtools')\n\n# Parameters\n\n# Run robust RDD\nrdd_result &lt;- rdrobust(y = df$Y, x = df$X, c = cutoff, h = 10) # h = points allows to specify the number of points\n\n# Print summary\nsummary(rdd_result)\n\nSharp RD estimates using local polynomial regression.\n\nNumber of Obs.                  300\nBW type                      Manual\nKernel                   Triangular\nVCE method                       NN\n\nNumber of Obs.                  155          145\nEff. Number of Obs.              82           74\nOrder est. (p)                    1            1\nOrder bias  (q)                   2            2\nBW est. (h)                  10.000       10.000\nBW bias (b)                  10.000       10.000\nrho (h/b)                     1.000        1.000\nUnique Obs.                     155          145\n\n=====================================================================\n                   Point    Robust Inference\n                Estimate         z     P&gt;|z|      [ 95% C.I. ]       \n---------------------------------------------------------------------\n     RD Effect     0.631     7.375     0.000     [0.540 , 0.931]     \n=====================================================================\n\n\nIf you do not specify the value of\\(h\\), the function automatically selects an optimal bandwidth based on statistical criteria that optimally balance bias and variance.\n\nlibrary(rdrobust)\nlibrary(rddtools)\n# Parameters\n\n# Run robust RDD\nrdd_result &lt;- rdrobust(y = df$Y, x = df$X, c = cutoff) # h = points allows to specify the number of points\n\n# Print summary\nsummary(rdd_result)\n\nSharp RD estimates using local polynomial regression.\n\nNumber of Obs.                  300\nBW type                       mserd\nKernel                   Triangular\nVCE method                       NN\n\nNumber of Obs.                  155          145\nEff. Number of Obs.              49           38\nOrder est. (p)                    1            1\nOrder bias  (q)                   2            2\nBW est. (h)                   5.606        5.606\nBW bias (b)                  10.283       10.283\nrho (h/b)                     0.545        0.545\nUnique Obs.                     155          145\n\n=====================================================================\n                   Point    Robust Inference\n                Estimate         z     P&gt;|z|      [ 95% C.I. ]       \n---------------------------------------------------------------------\n     RD Effect     0.695     7.033     0.000     [0.525 , 0.931]     \n====================================================================="
+  },
+  {
+    "objectID": "sessions/session5/session5.html#continuity-at-the-cutoff",
+    "href": "sessions/session5/session5.html#continuity-at-the-cutoff",
+    "title": "Session 5 - Regression discontinuity and instrumental variables",
+    "section": "Continuity at the cutoff",
+    "text": "Continuity at the cutoff\nThe main identifying assumption of RDD is the continuity at the cutoff assumption - that is, in the absence of treatment, the dependent variable \\(Y\\) would have followed a continuous trend at the cutoff. Hence, the effect is only due to the treatment. To prove this, different robustness checks can be performed.\n\nCovariate continuity tests: check that observable characteristics (e.g., age, gender, prior grades) evolve smoothly at the cutoff. This can be done by using the same functions as before, with other dependent variables.\nMcCrary density test: test whether the density of the running variable is continuous at the cutoff, which helps detect manipulation or sorting around the threshold. It could be the case for instance if some students who scored just below 80 (say 78–79 points) bribed the teacher or found ways to retake part of the exam, or strategically delayed grading to barely cross 80. Then the density around 80 would be discontinuous.\n\n\n#install.packages(\"rddensity\")\n# Load packages\nlibrary(rddensity)\nlibrary(ggplot2)\n\nset.seed(123)\n\n# Parameters\nn &lt;- 500\ncutoff &lt;- 80\n\n# Simulate running variable X (exam score)\n# Normal distribution around 75–85\nX &lt;- rnorm(n, mean = 78, sd = 5)\n\n# Introduce manipulation: add \"bunching\" just above the cutoff\n# Students who scored 78–79 get bumped to 80\nmanipulated &lt;- X &gt; 77 & X &lt; cutoff\nX[manipulated] &lt;- cutoff\n\n# Simulate outcome variable Y (GPA), continuous around 3.0\nY &lt;- 2.5 + 0.03 * X + rnorm(n, 0, 0.2)\n\ndf &lt;- data.frame(X, Y)\n\n# Run McCrary density test\ndens_test &lt;- rddensity(X = df$X, c = cutoff)\n\n# Summary\nsummary(dens_test)\n\n\nManipulation testing using local polynomial density estimation.\n\nNumber of obs =       500\nModel =               unrestricted\nKernel =              triangular\nBW method =           estimated\nVCE method =          jackknife\n\nc = 80                Left of c           Right of c          \nNumber of obs         212                 288                 \nEff. Number of obs    203                 286                 \nOrder est. (p)        2                   2                   \nOrder bias (q)        3                   3                   \nBW est. (h)           12.117              10.839              \n\nMethod                T                   P &gt; |T|             \nRobust                -2.3671             0.0179              \n\n\nWarning in summary.CJMrddensity(dens_test): There are repeated observations.\nPoint estimates and standard errors have been adjusted. Use option\nmassPoints=FALSE to suppress this feature.\n\n\n\nP-values of binomial tests (H0: p=0.5).\n\nWindow Length              &lt;c     &gt;=c    P&gt;|T|\n3.328     + 3.328          20     214    0.0000\n4.305     + 4.163          60     230    0.0000\n5.281     + 4.997         101     245    0.0000\n6.258     + 5.832         124     255    0.0000\n7.234     + 6.666         143     266    0.0000\n8.211     + 7.501         163     270    0.0000\n9.187     + 8.335         180     278    0.0000\n10.164    + 9.170         190     283    0.0000\n11.140    + 10.004        200     285    0.0001\n12.117    + 10.839        203     286    0.0002\n\n# Plot the density\nrdplotdensity(dens_test, X = df$X)\n\n\n\n\n\n\n\n\n$Estl\nCall: lpdensity\n\nSample size                                      212\nPolynomial order for point estimation    (p=)    2\nOrder of derivative estimated            (v=)    1\nPolynomial order for confidence interval (q=)    3\nKernel function                                  triangular\nScaling factor                                   0.424849699398798\nBandwidth method                                 user provided\n\nUse summary(...) to show estimates.\n\n$Estr\nCall: lpdensity\n\nSample size                                      288\nPolynomial order for point estimation    (p=)    2\nOrder of derivative estimated            (v=)    1\nPolynomial order for confidence interval (q=)    3\nKernel function                                  triangular\nScaling factor                                   0.577154308617234\nBandwidth method                                 user provided\n\nUse summary(...) to show estimates.\n\n$Estplot\n\n\n\n\n\n\n\n\n\n\nPlacebo cutoffs: estimate the RDD at fake cutoffs where no treatment occurs; no discontinuity should be found.\nVarying bandwidths: verify that results are robust to different choices of bandwidth.\nVarying polynomial orders: check that results are not driven by a specific functional form, by changing the order of the estimation in the argument of the function p =."
   }
 ]

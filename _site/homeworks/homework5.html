@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>homework5 – Methods for Research and Policy Evaluation</title>
+<title>Session 5 - Regression discontinuity design – Methods for Research and Policy Evaluation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -32,16 +67,15 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="../">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-5b4ad623e5705c0698d39aec6f10cf02.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -106,34 +140,26 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
         <li>
-    <a class="dropdown-item" href="../sessions/session1.html">
- <span class="dropdown-text">Session 1: Introduction</span></a>
+    <a class="dropdown-item" href="../sessions/session1/session1.html">
+ <span class="dropdown-text">Session 1: Dataset Building and Descriptive Statistics</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../sessions/session2.html">
- <span class="dropdown-text">Session 2: Descriptive Statistics</span></a>
+    <a class="dropdown-item" href="../sessions/session2/session2.html">
+ <span class="dropdown-text">Session 2: OLS: Simple and Multiple Linear Regressions and Analysis</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../sessions/session3.html">
- <span class="dropdown-text">Session 3: Probability</span></a>
+    <a class="dropdown-item" href="../sessions/session3/session3.html">
+ <span class="dropdown-text">Session 3: OLS regressions and non-linear regressions</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../sessions/session4.html">
- <span class="dropdown-text">Session 4: Regression</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../sessions/session5.html">
- <span class="dropdown-text">Session 5: Probability</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../sessions/session6.html">
- <span class="dropdown-text">Session 6: Regression</span></a>
+    <a class="dropdown-item" href="../sessions/session4/session4.html">
+ <span class="dropdown-text">Session 4: Difference-in-differences</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
     <span class="nav-link">
-<span class="menu-text">Homeworks</span>
+<span class="menu-text">Exercices</span>
     </span>
   </li>  
   <li class="nav-item dropdown ">
@@ -143,27 +169,47 @@ ul.task-list li input[type="checkbox"] {
     <ul class="dropdown-menu" aria-labelledby="nav-menu--1">    
         <li>
     <a class="dropdown-item" href="../homeworks/homework1.html">
- <span class="dropdown-text">Session 1: Introduction</span></a>
+ <span class="dropdown-text">Session 1: Dataset Building and Descriptive Statistics</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../homeworks/homework2.html">
- <span class="dropdown-text">Session 2: Descriptive Statistics</span></a>
+ <span class="dropdown-text">Session 2: Statistical inference and linear regressions</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../homeworks/homework3.html">
- <span class="dropdown-text">Session 3: Probability</span></a>
+ <span class="dropdown-text">Session 3: OLS regressions and non-linear regressions</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../homeworks/homework4.html">
- <span class="dropdown-text">Session 4: Regression</span></a>
+ <span class="dropdown-text">Session 4: Difference-in-differences</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <span class="nav-link">
+<span class="menu-text">Slides</span>
+    </span>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu--2" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text"></span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu--2">    
+        <li>
+    <a class="dropdown-item" href="../slides/session1/slides1.html">
+ <span class="dropdown-text">Session 1: Dataset Building and Descriptive Statistics</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../homeworks/homework5.html">
- <span class="dropdown-text">Session 5: Probability</span></a>
+    <a class="dropdown-item" href="../slides/session2/slides2.html">
+ <span class="dropdown-text">Session 2: Statistical inference and linear regressions</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../homeworks/homework6.html">
- <span class="dropdown-text">Session 6: Regression</span></a>
+    <a class="dropdown-item" href="../slides/session3/slides3.html">
+ <span class="dropdown-text">Session 3: OLS regressions and non-linear regressions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../slides/session4/session4.html">
+ <span class="dropdown-text">Session 4: Difference-in-differences</span></a>
   </li>  
     </ul>
   </li>
@@ -182,17 +228,151 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#load-the-relevant-packages" id="toc-load-the-relevant-packages" class="nav-link active" data-scroll-target="#load-the-relevant-packages">Load the relevant packages</a></li>
+  <li><a href="#exercice-1-regression-discontinuity-design-rdd" id="toc-exercice-1-regression-discontinuity-design-rdd" class="nav-link" data-scroll-target="#exercice-1-regression-discontinuity-design-rdd">Exercice 1: regression discontinuity design (RDD)</a></li>
+  <li><a href="#exercice-2" id="toc-exercice-2" class="nav-link" data-scroll-target="#exercice-2">Exercice 2</a></li>
+  <li><a href="#exercice-3" id="toc-exercice-3" class="nav-link" data-scroll-target="#exercice-3">Exercice 3</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Session 5 - Regression discontinuity design</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
+</header>
 
+
+<section id="load-the-relevant-packages" class="level2">
+<h2 class="anchored" data-anchor-id="load-the-relevant-packages">Load the relevant packages</h2>
+<p>Start by loading the following packages:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rdrobust)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rddensity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-1-regression-discontinuity-design-rdd" class="level2">
+<h2 class="anchored" data-anchor-id="exercice-1-regression-discontinuity-design-rdd">Exercice 1: regression discontinuity design (RDD)</h2>
+<p>This exercise is inspired by Carpenter and Dobkin (2015). You are provided with a data set about crime rates in the US, which you can find at <a href="https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices5/data/carpenter_dobkin_data.dta" class="uri">https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices5/data/carpenter_dobkin_data.dta</a>. You want to analyse the effect of alcohol on crime rates.</p>
+<ol type="1">
+<li>Import the data. The codebook is the following :</li>
+</ol>
+<ul>
+<li><code>age</code> stands for the age</li>
+<li><code>arrested_for</code> qualifies the reasons for which people have been arrested. <code>DUI</code> stands for driving under the influence.</li>
+<li><code>number</code> is the number of people of that age arrested for that reason.</li>
+</ul>
+<ol start="2" type="1">
+<li>Run the following code :</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> data_set <span class="sc">%&gt;%</span>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> number)) <span class="sc">+</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.05</span>) <span class="sc">+</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="at">facets =</span> <span class="fu">vars</span>(arrested_for), <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="1">
+<li><p>Do you observe any “jump” or discontinuity in your graphs? If so, where?</p></li>
+<li><p>Restrict your dataset to DUIs (driving under the influence).</p></li>
+<li><p>Run your regression discontinuity using rdrobust, with age as the independent variable and number as the dependent variable, using a cutoff at 21 and a bandwidth of 2.</p></li>
+<li><p>Is this a sharp or fuzzy RDD?</p></li>
+<li><p>Does being allowed to drink alcohol affect the number of DUIs?</p></li>
+<li><p>Repeat the analysis using the number of assaults and the legal majority at 18 to examine whether turning 18 has an impact on the number of assaults.</p></li>
+<li><p>Run a McCrary density test to verify that there is no sorting at the cutoff. Verify that your results are robust for different polynomial degrees.</p></li>
+</ol>
+</section>
+<section id="exercice-2" class="level2">
+<h2 class="anchored" data-anchor-id="exercice-2">Exercice 2</h2>
+<p>This exercise explores the causal effect of narrowly winning an election on the candidate’s performance in the next election. The idea is that winning by just over 50% allows the candidate to run as an incumbent in the following election, yet candidates having very close to the 50% (below or above) are in practice very comparable in terms of ressources. We can therefore compare candidates just above 50%, to candidates who lost by just under 50% to identify the incumbency advantage.</p>
+<p>You are provided with a dataset data_set (simulated for this exercise), which you can find here <a href="https://github.com/paulservais-1/methods_policyevaluation/raw/main/data/incumbency.dta" class="uri">https://github.com/paulservais-1/methods_policyevaluation/raw/main/data/incumbency.dta</a>. Each row corresponds to a candidate, and each column to its electoral results in election t, and in the next election t+1. The codebook is :</p>
+<ul>
+<li><code>vote_share_t</code> : vote share (%) for the candidate in the first election</li>
+<li><code>vote_share_t1</code> : vote share (%) for the same candidate in the following election</li>
+</ul>
+<ol type="1">
+<li><p>Import the data set</p></li>
+<li><p>Create a variable <code>incumbent</code> worth 1 when the candidate is an incumbent in the second election</p></li>
+<li><p>Plot the relationship between vote_share_t and vote_share_t1, and change the color at the cutoff.</p></li>
+<li><p>Do you observe a jump anywhere ? If yes, where is it located?</p></li>
+<li><p>Estimate a regression discontinuity to estimate the incumbency effect on electoral outcomes.</p></li>
+</ol>
+<ul>
+<li>Using function <code>lm</code> and restricting your data to different bandwidths.</li>
+<li>Using rdrobust(). How large is the effect ? How significant is the effect ?</li>
+</ul>
+<ol start="6" type="1">
+<li><p>Is it a sharp or fuzzy RDD?</p></li>
+<li><p>Repeat the RDD estimation with different polynomial orders (p = 1, 2, 3). Are the results sensitive to the polynomial order?</p></li>
+<li><p>Run a McCrary density test to check for potential sorting around the cutoff. Can we assume that candidates do not manipulate their vote share to just cross 50%?</p></li>
+</ol>
+</section>
+<section id="exercice-3" class="level2">
+<h2 class="anchored" data-anchor-id="exercice-3">Exercice 3</h2>
+<p>We want to study whether entering a PhD program in Grandes Ecoles increases individuals’ future earnings. Admission is largely determined by the grade on the master’s thesis:</p>
+<ul>
+<li>Candidates with a thesis grade above 16/20 are more likely to be admitted.</li>
+<li>Some candidates below 16 are admitted occasionally, and some above 16 are rejected.</li>
+</ul>
+<p>You are provided with a data set following individuals over 10 years, containing : 1. <code>thesis_grade</code>: their score at the master’s thesis 2. Their <code>future_income</code>, ten years later. 3. Their admission status in the PhD program, admitted.</p>
+<p>It can be found here <a href="https://github.com/paulservais-1/methods_policyevaluation/raw/main/data/grades_ge.dta" class="uri">https://github.com/paulservais-1/methods_policyevaluation/raw/main/data/grades_ge.dta</a>.</p>
+<ol type="1">
+<li>Import the data set.</li>
+<li>Run the following code :</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>data_set <span class="ot">&lt;-</span> data_set <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">admit_jitter =</span> admitted <span class="sc">+</span> <span class="fu">runif</span>(n, <span class="sc">-</span><span class="fl">0.05</span>, <span class="fl">0.05</span>))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> data_set, <span class="fu">aes</span>(<span class="at">x =</span> thesis_grade, <span class="at">y =</span> admit_jitter), <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Fuzzy RDD: Probability of PhD Admission vs. Thesis Grade"</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Thesis Grade"</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Admission status"</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Do you notice any effect of the grade on the admissions ? At which cutoff ?</p>
+<ol start="3" type="1">
+<li><p>Plot the relationship between income and the running variable, and change the color at the cutoff.</p></li>
+<li><p>Do you observe a jump anywhere ? If yes, where is it located?</p></li>
+<li><p>Estimate a regression discontinuity to estimate the effect of being admitted in a Grande Ecole on future earnings.</p></li>
+</ol>
+<ul>
+<li>Using function <code>lm</code> and restricting your data to different bandwidths.</li>
+<li>Using rdrobust(). How large is the effect ? How significant is the effect ?</li>
+</ul>
+<ol start="6" type="1">
+<li><p>Is it a sharp or fuzzy RDD?</p></li>
+<li><p>Repeat the RDD estimation with different polynomial orders (p = 1, 2, 3). Are the results sensitive to the polynomial order?</p></li>
+<li><p>Run a McCrary density test to check for potential sorting around the cutoff. Can we assume that candidates do not manipulate their master’s thesis grade just above the cutoff?</p></li>
+</ol>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -250,14 +430,13 @@ ul.task-list li input[type="checkbox"] {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-      const outerScaffold = trigger.parentElement.cloneNode(true);
-      const codeEl = outerScaffold.querySelector('code');
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
         }
-      }
-      return codeEl.innerText;
+        return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
