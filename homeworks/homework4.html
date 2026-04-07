@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -247,28 +282,228 @@ ul.task-list li input[type="checkbox"] {
 <ol type="1">
 <li>Import the data, located at <a href="https://github.com/paulservais-1/methods_policyevaluation/raw/main/homeworks/data/schoolpanel.csv" class="uri">https://github.com/paulservais-1/methods_policyevaluation/raw/main/homeworks/data/schoolpanel.csv</a>. Have a look at the data set using <code>glimpse</code>. What will be your dependent variable ? Your independent variable ? How many individuals do you have in total ? How many individuals are treated ?</li>
 </ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fixest)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.6
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.1     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.2
+✔ purrr     1.2.0     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MatchIt)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"https://github.com/paulservais-1/methods_policyevaluation/raw/main/homeworks/data/schoolpanel.csv"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 7,500
+Columns: 9
+$ id                 &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, …
+$ month              &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, …
+$ test_score         &lt;dbl&gt; 82.33900, 80.74787, 83.22705, 75.29832, 83.59322, 1…
+$ treatment          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, …
+$ income             &lt;dbl&gt; 26849.53, 29099.22, 28905.42, 29442.97, 33317.20, 3…
+$ parent_edu         &lt;dbl&gt; 15.15510, 15.15510, 15.15510, 15.15510, 15.15510, 1…
+$ school_funding     &lt;dbl&gt; 5035.761, 4599.654, 5324.554, 6279.920, 5623.768, 6…
+$ class_size         &lt;int&gt; 28, 20, 29, 27, 30, 21, 21, 24, 24, 26, 24, 24, 21,…
+$ teacher_experience &lt;int&gt; 0, 5, 3, 1, 7, 8, 6, 6, 7, 9, 11, 13, 13, 12, 14, 0…</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       id            month      test_score       treatment        income     
+ Min.   :  1.0   Min.   : 1   Min.   : 50.47   Min.   :0.00   Min.   : 8114  
+ 1st Qu.:125.8   1st Qu.: 4   1st Qu.: 83.59   1st Qu.:0.00   1st Qu.:30859  
+ Median :250.5   Median : 8   Median : 92.25   Median :0.00   Median :36880  
+ Mean   :250.5   Mean   : 8   Mean   : 92.14   Mean   :0.47   Mean   :36605  
+ 3rd Qu.:375.2   3rd Qu.:12   3rd Qu.:100.79   3rd Qu.:1.00   3rd Qu.:42451  
+ Max.   :500.0   Max.   :15   Max.   :131.00   Max.   :1.00   Max.   :67658  
+   parent_edu     school_funding   class_size    teacher_experience
+ Min.   : 2.856   Min.   :3499   Min.   :14.00   Min.   : 0.00     
+ 1st Qu.:10.236   1st Qu.:5830   1st Qu.:22.00   1st Qu.: 4.00     
+ Median :12.171   Median :6604   Median :24.00   Median : 8.00     
+ Mean   :12.126   Mean   :6597   Mean   :24.47   Mean   : 7.55     
+ 3rd Qu.:14.267   3rd Qu.:7363   3rd Qu.:27.00   3rd Qu.:11.00     
+ Max.   :22.171   Max.   :9637   Max.   :37.00   Max.   :21.00     </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> <span class="fu">distinct</span>(id) <span class="sc">%&gt;%</span> <span class="fu">nrow</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 500</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(treatment <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>(id) <span class="sc">%&gt;%</span> <span class="fu">nrow</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 235</code></pre>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Create variable <code>post</code> worth 1 after month 7, and 0 before.</li>
 </ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">post =</span> <span class="fu">ifelse</span>(month<span class="sc">&gt;=</span><span class="dv">7</span>, <span class="dv">1</span>,<span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <ol start="3" type="1">
 <li>Run a multiple regression with <code>test_score</code> as dependent variable and <code>treatment</code> as independent variable. What could go wrong with such specification ? Can you derive causal claims from it ?</li>
 </ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>lm_simple <span class="ot">&lt;-</span> <span class="fu">lm</span>(test_score <span class="sc">~</span> treatment, <span class="at">data =</span> data)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_simple)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = test_score ~ treatment, data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-43.762  -8.393   0.225   8.468  36.771 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  90.2853     0.1876  481.21   &lt;2e-16 ***
+treatment     3.9481     0.2737   14.43   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 11.83 on 7498 degrees of freedom
+Multiple R-squared:  0.02701,   Adjusted R-squared:  0.02688 
+F-statistic: 208.1 on 1 and 7498 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
 <ol start="4" type="1">
 <li>Run a difference-in-differences estimation to estimate the causal effect of the tutoring on the test scores, with only months 6 and 7, using <code>feols</code>.</li>
 </ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>did_simple <span class="ot">&lt;-</span> <span class="fu">feols</span>(test_score <span class="sc">~</span> treatment<span class="sc">*</span>post, <span class="at">data =</span> data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">7</span>)))</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(did_simple)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OLS estimation, Dep. Var.: test_score
+Observations: 1,000
+Standard-errors: IID 
+               Estimate Std. Error   t value   Pr(&gt;|t|)    
+(Intercept)    86.78924   0.492991 176.04623  &lt; 2.2e-16 ***
+treatment       1.04930   0.719102   1.45918 1.4483e-01    
+post            2.05556   0.697195   2.94833 3.2695e-03 ** 
+treatment:post  5.22202   1.016963   5.13491 3.3942e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+RMSE: 8.00925   Adj. R2: 0.133667</code></pre>
+</div>
+</div>
 <ol start="5" type="1">
 <li>Run a difference-in-differences estimation with all years, using <code>feols</code>. Cluster the standard errors, and add individual and time fixed effects to run a TWFE estimation. What is the effect ? How does it evolve along time ?</li>
 </ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>twfe_model <span class="ot">&lt;-</span> <span class="fu">feols</span>(test_score <span class="sc">~</span> treatment<span class="sc">*</span>post <span class="sc">|</span> id <span class="sc">+</span> month,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cluster =</span> <span class="sc">~</span>id,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The variables 'treatment' and 'post' have been removed because of collinearity
+(see $collin.var).</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(twfe_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OLS estimation, Dep. Var.: test_score
+Observations: 7,500
+Fixed-effects: id: 500,  month: 15
+Standard-errors: Clustered (id) 
+               Estimate Std. Error t value  Pr(&gt;|t|)    
+treatment:post  4.68905   0.267709 17.5154 &lt; 2.2e-16 ***
+... 2 variables were removed because of collinearity (treatment and
+post)
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+RMSE: 5.19844     Adj. R2: 0.798204
+                Within R2: 0.046385</code></pre>
+</div>
+</div>
 <ol start="6" type="1">
 <li><p>Is the treatment staggered ? If yes, what estimators do you have to consider instead ?</p></li>
 <li><p>Check the parallel trend assumption graphically. Does it seem plausible ?</p></li>
 </ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month, treatment) <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_score =</span> <span class="fu">mean</span>(test_score), <span class="at">.groups=</span><span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(month, mean_score, <span class="at">color =</span> <span class="fu">as.factor</span>(treatment))) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">7</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Treatment"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="homework4_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <ol start="8" type="1">
 <li>Conduct an event-study, using <code>i</code> and <code>iplot()</code> to estimate interaction effects along time. Compare your results with the TWFE. How dynamic is the effect ?</li>
 </ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>event_model <span class="ot">&lt;-</span> <span class="fu">feols</span>(test_score <span class="sc">~</span> <span class="fu">i</span>(month, treatment, <span class="at">ref =</span> <span class="dv">6</span>) <span class="sc">|</span> id <span class="sc">+</span> month,</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">cluster =</span> <span class="sc">~</span>id,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> data)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">iplot</span>(event_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="homework4_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <ol start="9" type="1">
 <li>Use all your covariates to match your treatment group with a control group with similar covariates in the pre-treatment year, based on the method of the nearest neighbor. Re-run your TWFE and your event-study with that restricted data set, and compare the results.</li>
 </ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>pre_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">6</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(test_score))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MatchIt)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>ps_model <span class="ot">&lt;-</span> <span class="fu">matchit</span>(treatment <span class="sc">~</span> .,  <span class="co"># replace 'other_covariates'</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> pre_data,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">method =</span> <span class="st">"nearest"</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>matched_ids <span class="ot">&lt;-</span> <span class="fu">match.data</span>(ps_model) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(id) <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>matched_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(id <span class="sc">%in%</span> matched_ids)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>twfe_matched <span class="ot">&lt;-</span> <span class="fu">feols</span>(test_score <span class="sc">~</span> treatment<span class="sc">*</span>post <span class="sc">|</span> id <span class="sc">+</span> month,</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">cluster =</span> <span class="sc">~</span>id,</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> matched_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The variables 'treatment' and 'post' have been removed because of collinearity
+(see $collin.var).</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(twfe_matched)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OLS estimation, Dep. Var.: test_score
+Observations: 7,050
+Fixed-effects: id: 470,  month: 15
+Standard-errors: Clustered (id) 
+               Estimate Std. Error t value  Pr(&gt;|t|)    
+treatment:post  4.66057   0.277388 16.8016 &lt; 2.2e-16 ***
+... 2 variables were removed because of collinearity (treatment and
+post)
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+RMSE: 5.19782     Adj. R2: 0.797848
+                Within R2: 0.046018</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>event_matched <span class="ot">&lt;-</span> <span class="fu">feols</span>(test_score <span class="sc">~</span> <span class="fu">i</span>(month,treatment, <span class="at">ref =</span> <span class="dv">6</span>) <span class="sc">|</span> id <span class="sc">+</span> month,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">cluster =</span> <span class="sc">~</span>id,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">data =</span> matched_data)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">iplot</span>(event_matched)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="homework4_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="exercice-2" class="level2">
 <h2 class="anchored" data-anchor-id="exercice-2">Exercice 2</h2>
