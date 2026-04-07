@@ -14,8 +14,8 @@ Your objective is to estimate the causal impact of the tutoring program on stude
 1. Import the data, located at <https://github.com/paulservais-1/methods_policyevaluation/raw/main/homeworks/data/schoolpanel.csv>. Have a look at the data set using `glimpse`. What will be your dependent variable ? Your independent variable ? How many individuals do you have in total ? How many individuals are treated ? 
 
 ```{r}
-#| echo: false
-#| eval: false
+#| echo: true
+#| eval: true
 library(rio)
 library(fixest)
 library(tidyverse)
@@ -28,28 +28,28 @@ data %>% filter(treatment == 1) %>% distinct(id) %>% nrow()
 ```
 2. Create variable `post` worth 1 after month 7, and 0 before. 
 ```{r}
-#| echo: false
-#| eval: false
+#| echo: true
+#| eval: true
 data <- data %>% mutate(post = ifelse(month>=7, 1,0))
 ```
 3. Run a multiple regression with `test_score` as dependent variable and `treatment` as independent variable. What could go wrong with such specification ? Can you derive causal claims from it ?
 ```{r}
-#| echo: false
-#| eval: false
+#| echo: true
+#| eval: true
 lm_simple <- lm(test_score ~ treatment, data = data)
 summary(lm_simple)
 ```
 4. Run a difference-in-differences estimation to estimate the causal effect of the tutoring on the test scores, with only months 6 and 7, using `feols`.
 ```{r}
-#| echo: false
-#| eval: false
+#| echo: true
+#| eval: true
 did_simple <- feols(test_score ~ treatment*post, data = data %>% filter(month %in% c(6,7)))
 summary(did_simple)
 ```
 5. Run a difference-in-differences estimation with all years, using `feols`. Cluster the standard errors, and add individual and time fixed effects to run a TWFE estimation. What is the effect ? How does it evolve along time ?
 ```{r}
-#| echo: false
-#| eval: false
+#| echo: true
+#| eval: true
 twfe_model <- feols(test_score ~ treatment*post | id + month,
                     cluster = ~id,
                     data = data)
@@ -60,8 +60,8 @@ summary(twfe_model)
 
 7. Check the parallel trend assumption graphically. Does it seem plausible ?
 ```{r}
-#| echo: false
-#| eval: false
+#| echo: true
+#| eval: true
 data %>%
   group_by(month, treatment) %>%
   summarise(mean_score = mean(test_score), .groups="drop") %>%
@@ -73,8 +73,8 @@ data %>%
 8. Conduct an event-study, using `i` and `iplot()` to estimate interaction effects along time. Compare your results with the TWFE. How dynamic is the effect ?
 
 ```{r}
-#| echo: false
-#| eval: false
+#| echo: true
+#| eval: true
 event_model <- feols(test_score ~ i(month, treatment, ref = 6) | id + month,
                      cluster = ~id,
                      data = data)
@@ -82,8 +82,8 @@ iplot(event_model)
 ```
 9. Use all your covariates to match your treatment group with a control group with similar covariates in the pre-treatment year, based on the method of the nearest neighbor. Re-run your TWFE and your event-study with that restricted data set, and compare the results.
 ```{r}
-#| echo: false
-#| eval: false
+#| echo: true
+#| eval: true
 pre_data <- data %>% filter(month == 6) %>% select(-c(test_score))
 
 library(MatchIt)
