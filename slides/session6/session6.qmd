@@ -142,11 +142,11 @@ summary(iv_model2)
 
 ## Conditions of good instrument
 
-1.  Affects the treatment (relevance),
+1.  Affects the treatment (relevance)
 
-2.  Does not directly affect the outcome except through the treatment (exclusion restriction),
+2.  Does not directly affect the outcome except through the treatment (exclusion restriction)
 
-3.  Is independent of unobserved confounders (validity).
+3.  Is independent of unobserved confounders (exogeneity)
 
 ## Relevance condition
 - Only condition that can be directly tested
@@ -219,6 +219,7 @@ summary(lm(covariates ~ distance_to_college, data = df))
   - Instrument
 
 ## Overall
+- Correlation is not always meaningless
 - Causal inference only answers one very specific type of question 
 - $X \rightarrow Y$
 - Should be complemented by other methods
@@ -246,15 +247,38 @@ summary(lm(covariates ~ distance_to_college, data = df))
 # Exercices
 
 ## Exercice 1
-
 ```{r}
 #| echo: false
 #| eval: false
+
 library(rio)
 library(AER)
 library(estimatr)
 
-df <- import("https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/data/turnout_internet.dta")
+df <- import("https://github.com/paulservais-1/methods_policyevaluation/raw/main/data/turnout_internet.dta")
 
 ols1 <- lm(turnout ~ internet, data = df)
 summary(ols1)
+
+ols_controls <- lm(turnout ~ internet + income + graduates + unemployment + urban, data = df)
+summary(ols_controls)
+
+
+# replace "instrument" with actual variable name in dataset
+first_stage <- lm(internet ~ rain + income + graduates + unemployment + urban, data = df)
+summary(first_stage)
+
+df$internet_hat <- fitted(first_stage)
+
+second_stage_manual <- lm(turnout ~ internet_hat + income + graduates + unemployment + urban, data = df)
+summary(second_stage_manual)
+
+iv_model <- ivreg(
+  turnout ~ internet + income + graduates + unemployment + urban |
+    rain + income + graduates + unemployment + urban,
+  data = df
+)
+
+summary(iv_model)
+
+summary(iv_model, diagnostics = TRUE)
