@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>homework6 – Methods for Research and Policy Evaluation</title>
+<title>Session 6 - Instrumental variables – Methods for Research and Policy Evaluation</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -40,10 +40,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-be3771519f21acc1c5b6733774c6dcd8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-4897d45d2f75ed4f519693be625836c5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,6 +72,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -127,6 +156,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="../sessions/session5/session5.html">
  <span class="dropdown-text">Session 5 : Regression discontinuity design</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../sessions/session6/session6.html">
+ <span class="dropdown-text">Session 6 : Instrumental variables</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -158,6 +191,10 @@ ul.task-list li input[type="checkbox"] {
         <li>
     <a class="dropdown-item" href="../homeworks/homework5.html">
  <span class="dropdown-text">Session 5: Regression Discontinuity</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../homeworks/homework6.html">
+ <span class="dropdown-text">Session 6 : Instrumental variables</span></a>
   </li>  
     </ul>
   </li>
@@ -191,6 +228,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="../slides/session5/session5.html">
  <span class="dropdown-text">Session 5: Regression discontinuity</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../slides/session6/session6.html">
+ <span class="dropdown-text">Session 6: Instrumental variables</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -208,17 +249,105 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#exercice-1-internet-and-turnout" id="toc-exercice-1-internet-and-turnout" class="nav-link active" data-scroll-target="#exercice-1-internet-and-turnout">Exercice 1 : Internet and turnout</a></li>
+  <li><a href="#exercice-2-education-and-earnings" id="toc-exercice-2-education-and-earnings" class="nav-link" data-scroll-target="#exercice-2-education-and-earnings">Exercice 2: Education and earnings</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Session 6 - Instrumental variables</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
+</header>
 
+
+<section id="exercice-1-internet-and-turnout" class="level2">
+<h2 class="anchored" data-anchor-id="exercice-1-internet-and-turnout">Exercice 1 : Internet and turnout</h2>
+<p>This exercise is inspired from Gavazza, Nardotto, and Valletti (2017) : <strong>Internet and Politics: Evidence from U.K. Local Elections and Local Government Policies</strong>. You are interested in analysing the effect of internet diffusion on voter turnout. A key concern is that internet access is endogenous: areas with higher civic engagement or socioeconomic status may both adopt the internet faster and have higher turnout.</p>
+<p>To address this, you use an instrumental variable strategy based on rainfall. Bad weather affects the quality and diffusion of broadband infrastructure, but is plausibly unrelated to voter turnout except through internet access.</p>
+<p>You are provided with data (simulated) on wards in the UK, with the following codebook :</p>
+<ul>
+<li>turnout: voter turnout rate</li>
+<li>internet: broadband penetration in the ward (%)</li>
+<li>rain: rainfall (instrument)</li>
+<li>rain2: squared rainfall</li>
+<li>income : median income in the ward</li>
+<li>graduates : % of graduates in the ward</li>
+<li>unemployment : % of unemployed</li>
+<li>urban : whether</li>
+</ul>
+<p>You are asked to evaluate the causal effect of having access to the internet on political participation. A key concern is that internet access is endogenous: areas with higher socioeconomic status or civic engagement may both adopt broadband earlier and exhibit higher voter turnout. To address this issue, you use rainfall as an instrumental variable, exploiting the fact that during the broadband installation period, rainfall was a strong predictor of broadband penetration. This relationship is illustrated in the accompanying figure from Gavazza, Nardotto, and Valletti (2017).</p>
+<p><img src="images/UK_internet_rain.png" class="img-fluid"></p>
+<ol type="1">
+<li>Import the data set from <a href="https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/data/turnout_internet.dta" class="uri">https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/data/turnout_internet.dta</a>, and briefly summarise the variables. What will be your dependent variable ?</li>
+<li>Estimate the relationship between internet penetration and voter turnout using OLS. Does that regression allow you to derive causal claims ? Why might this estimate be biased? What sources of endogeneity could be present?</li>
+<li>Include income, graduates, unemployment, and urban status, as control variables. Do your estimates change ?</li>
+<li>Estimate the relationship: <span class="math display">\[\begin{equation}
+\text{internet}_i =\pi_0+ \pi_1+ \text{rain}_i + \text{rain}^2_i+\delta X_i+ u_i
+\end{equation}\]</span></li>
+</ol>
+<ul>
+<li>What stage is this ? How many instruments do you have ?</li>
+<li>Is your instrument binary or continuous ?</li>
+</ul>
+<ol start="5" type="1">
+<li>Manually store the relevant fitted values and run a second linear regression model to finalise your causal estimation, using <code>lm</code>. What do you observe ?</li>
+<li>Use <code>library(AER)</code> to run your full 2SLS, using <code>ivreg()</code>. Compare your results.</li>
+<li>Perform and interpret the following diagnostic tests on your regression :</li>
+</ol>
+<ul>
+<li>Weak instrument test</li>
+<li>Wu-Hausman test</li>
+<li>Sargan test</li>
+</ul>
+<ol start="8" type="1">
+<li>How could you run falsification tests ?</li>
+</ol>
+</section>
+<section id="exercice-2-education-and-earnings" class="level2">
+<h2 class="anchored" data-anchor-id="exercice-2-education-and-earnings">Exercice 2: Education and earnings</h2>
+<p>You are interested in analysing the effects of education on future earnings (do more educated people earn more money). To address the potential endogeneity, they need an instrument that affects years of education without being influenced by other factors like ability or family background. They use the <strong>compulsory schooling law</strong>, which creates differences in school timing based on birth date. Children born early in the year start school older than those born later, and because of the minimum school-leaving age, early-born children (in the year) can legally leave school sooner than late-born children. This generates variation in education that is largely independent of individual characteristics. You can import the data from <a href="https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices5/data/angrist_krueger.dta" class="uri">https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices5/data/angrist_krueger.dta</a>.</p>
+<ol type="1">
+<li><p>Import the data set.</p></li>
+<li><p>The code book is the following. The data set contains data about men’s earnings in 1980 (census extract):</p></li>
+</ol>
+<ul>
+<li><code>log_wage</code> : log weekly wage</li>
+<li><code>education</code> : years of schooling</li>
+<li><code>yob</code>: year of birth</li>
+<li><code>qob</code>: quarter of birth</li>
+<li><code>sob</code>: state of birth</li>
+</ul>
+<ol start="3" type="1">
+<li><p>Run the first-stage regression, regressing education on the quarter of birth. Is the instrument working ? Is it strong ? How much is the F-statistic ?</p></li>
+<li><p>Run the two-stage regression, regressing the wage using the fitted values of education. How can you interpet that result ?</p></li>
+<li><p>Run the 2SLS using the <code>ivreg</code> estimator. Have a look at the diagnostic using <code>summary(two_sls, diagnostics = TRUE)</code> and interpret those. Are the estimates different ?</p></li>
+<li><p>Run the 2SLS using the <code>ivrobust()</code> estimator. Do you notice something different in the estimates or their standard deviations ?</p></li>
+<li><p>Re-run the IVs using the year of birth as additional control. Is the result changed ?</p></li>
+</ol>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

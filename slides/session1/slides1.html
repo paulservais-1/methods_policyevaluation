@@ -6,8 +6,8 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.36">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.37">
 
   <meta name="author" content="Paul Servais">
   <title>Methods for Research and Policy Evaluation</title>
@@ -436,7 +436,7 @@ Paul Servais
 <span id="cb1-2"><a></a>x1 <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,N, <span class="at">replace=</span>T) <span class="co"># first dice (values are from 1 to 6)</span></span>
 <span id="cb1-3"><a></a><span class="fu">head</span>(x1,<span class="dv">20</span>) <span class="co"># head</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 4 1 6 3 5 1 6 1 3 5 3 5 4 2 6 6 3 3 2 6</code></pre>
+<pre><code> [1] 5 5 3 4 2 2 2 6 3 2 1 1 6 4 2 6 3 1 5 6</code></pre>
 </div>
 </div>
 </section>
@@ -518,20 +518,20 @@ P(Y_{ij}) = P(X_1 = i)\times P(X_2 = j)
 <span id="cb6-4"><a></a>y <span class="ot">=</span> x1 <span class="sc">+</span> x2</span>
 <span id="cb6-5"><a></a><span class="fu">head</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  7 12  8  4  9  5</code></pre>
+<pre><code>[1]  5  8  6  6 11 11</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">mean</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 7.0384</code></pre>
+<pre><code>[1] 6.9568</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">sd</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.408922</code></pre>
+<pre><code>[1] 2.427534</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">summary</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  2.000   5.000   7.000   7.038   9.000  12.000 </code></pre>
+  2.000   5.000   7.000   6.957   9.000  12.000 </code></pre>
 </div>
 </div>
 </section>
@@ -545,7 +545,7 @@ P(Y_{ij}) = P(X_1 = i)\times P(X_2 = j)
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">mean</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 7.0384</code></pre>
+<pre><code>[1] 6.9568</code></pre>
 </div>
 </div>
 </section>
@@ -560,7 +560,7 @@ P(Y_{ij}) = P(X_1 = i)\times P(X_2 = j)
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">var</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5.802906</code></pre>
+<pre><code>[1] 5.892923</code></pre>
 </div>
 </div>
 </section>
@@ -622,13 +622,13 @@ P(Y|X_1 = 4) = \frac{1}{6}
 <span id="cb19-2"><a></a>x <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>,<span class="dv">100</span>, <span class="at">replace=</span>T) <span class="co"># your hundred dices</span></span>
 <span id="cb19-3"><a></a><span class="fu">head</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 845 749 413 171 852 776</code></pre>
+<pre><code>[1] 297 697 977 150 345  68</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>y <span class="ot">=</span><span class="dv">0</span></span>
 <span id="cb21-2"><a></a><span class="cf">for</span>(i <span class="cf">in</span> x){y <span class="ot">=</span> y<span class="sc">+</span><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>i, N, <span class="at">replace =</span> T)<span class="sc">/</span>i}</span>
 <span id="cb21-3"><a></a><span class="fu">head</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 48.74625 52.68953 46.72207 50.56547 52.04625 53.09246</code></pre>
+<pre><code>[1] 50.10158 47.34672 46.10530 48.09120 50.99457 53.73963</code></pre>
 </div>
 </div>
 </section>
@@ -662,7 +662,7 @@ P(Y|X_1 = 4) = \frac{1}{6}
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">quantile</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      0%      25%      50%      75%     100% 
-38.51945 48.28366 50.25295 52.18355 61.93479 </code></pre>
+40.12010 48.25449 50.19590 52.08824 60.42843 </code></pre>
 </div>
 </div>
 </section>
@@ -759,9 +759,9 @@ P(Y|X_1 = 4) = \frac{1}{6}
 <pre><code># A tibble: 3 × 43
   codecommune  Year codedep  agri  indp  cadr  pint  empl  ouvr  chom  pact
   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 01001        2024 01          0    39    33    14    86   147    26   319
-2 01002        2024 01          0    39     9     0    66     0     9   114
-3 01016        2024 01          0    41    40    40    41    13     0   175
+1 01004        2024 01          4   142   678  1647  1211  1235   427  4917
+2 01006        2024 01          0     0     0    34    23    23     0    80
+3 01010        2024 01         29    36    58    98   197   154    47   572
 # ℹ 32 more variables: age &lt;dbl&gt;, popf &lt;dbl&gt;, francais &lt;dbl&gt;, etranger &lt;dbl&gt;,
 #   prixbien &lt;dbl&gt;, capitalratio &lt;dbl&gt;, npropri &lt;dbl&gt;, nlogement &lt;dbl&gt;,
 #   pop &lt;dbl&gt;, revmoyfoy &lt;dbl&gt;, revtot &lt;dbl&gt;, recetteimpotslocaux &lt;dbl&gt;,
@@ -786,13 +786,13 @@ P(Y|X_1 = 4) = \frac{1}{6}
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="co"># Nominal : the density typology of communes </span></span>
 <span id="cb30-2"><a></a><span class="fu">unique</span>(comm_r<span class="sc">$</span>dens)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Rural"                "Urbain intermédiaire" "Urbain dense"        </code></pre>
+<pre><code>[1] "Urbain intermédiaire" "Rural"                "Urbain dense"        </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="fu">table</span>(comm_r<span class="sc">$</span>dens)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
                Rural         Urbain dense Urbain intermédiaire 
-                8760                  213                 1027 </code></pre>
+                8760                  205                 1035 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a><span class="fu">summary</span>(comm_r<span class="sc">$</span>dens)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -814,23 +814,23 @@ P(Y|X_1 = 4) = \frac{1}{6}
 <span id="cb36-2"><a></a><span class="fu">summary</span>(comm_r<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-   9693   25863   29591   31172   34522  121370       6 </code></pre>
+   8151   25858   29647   31174   34652  133022      10 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="fu">range</span>(comm_r<span class="sc">$</span>revmoyfoy, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]   9693.044 121370.390</code></pre>
+<pre><code>[1]   8151.157 133021.660</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="fu">summary</span>((comm_r <span class="sc">%&gt;%</span> <span class="fu">drop_na</span>(revmoyfoy))<span class="sc">$</span>revmoyfoy) <span class="co">#dropping NA's</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   9693   25863   29591   31172   34522  121370 </code></pre>
+   8151   25858   29647   31174   34652  133022 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a><span class="co">#replacing the NA's</span></span>
 <span id="cb42-2"><a></a>comm_r <span class="ot">&lt;-</span> comm_r <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">revmoyfoy =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(revmoyfoy), <span class="fu">mean</span>(revmoyfoy, <span class="at">na.rm =</span><span class="cn">TRUE</span>), revmoyfoy))</span>
 <span id="cb42-3"><a></a><span class="fu">summary</span>(comm_r<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   9693   25863   29595   31172   34522  121370 </code></pre>
+   8151   25862   29650   31174   34650  133022 </code></pre>
 </div>
 </div>
 </section>
@@ -843,12 +843,12 @@ P(Y|X_1 = 4) = \frac{1}{6}
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a><span class="co"># Continuous : the median income in those communes</span></span>
 <span id="cb44-2"><a></a><span class="fu">IQR</span>(comm_r<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 8658.626</code></pre>
+<pre><code>[1] 8787.961</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a><span class="fu">quantile</span>(comm_r<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        0%        25%        50%        75%       100% 
-  9693.044  25863.056  29594.768  34521.682 121370.390 </code></pre>
+  8151.157  25862.426  29650.265  34650.387 133021.660 </code></pre>
 </div>
 </div>
 </section>
@@ -901,7 +901,7 @@ P(Y|X_1 = 4) = \frac{1}{6}
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a><span class="fu">mean</span>(comm_r<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 31171.7</code></pre>
+<pre><code>[1] 31174.21</code></pre>
 </div>
 </div>
 <ul>
@@ -910,11 +910,11 @@ P(Y|X_1 = 4) = \frac{1}{6}
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a><span class="fu">mean</span>((comm_r <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dens <span class="sc">==</span> <span class="st">"Rural"</span>))<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 30393.68</code></pre>
+<pre><code>[1] 30493.43</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a></a><span class="fu">mean</span>((comm_r <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dens <span class="sc">==</span> <span class="st">"Urbain dense"</span><span class="sc">|</span>dens <span class="sc">==</span> <span class="st">"Urbain intermédiaire"</span>))<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 36668.05</code></pre>
+<pre><code>[1] 35983.59</code></pre>
 </div>
 </div>
 </section>
@@ -978,13 +978,13 @@ t_test_result <- t.test(
     Welch Two Sample t-test
 
 data:  rural_income and urban_income
-t = -18.482, df = 1397.5, p-value < 2.2e-16
+t = -16.764, df = 1407.1, p-value < 2.2e-16
 alternative hypothesis: true difference in means is not equal to 0
 99 percent confidence interval:
- -7150.025 -5398.723
+ -6334.890 -4645.448
 sample estimates:
 mean of x mean of y 
- 30393.68  36668.05 
+ 30493.43  35983.59 
 ```
 
 

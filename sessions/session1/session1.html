@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -75,10 +75,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-be3771519f21acc1c5b6733774c6dcd8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-4897d45d2f75ed4f519693be625836c5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -191,6 +191,10 @@ window.Quarto = {
     <a class="dropdown-item" href="../../sessions/session5/session5.html">
  <span class="dropdown-text">Session 5 : Regression discontinuity design</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../sessions/session6/session6.html">
+ <span class="dropdown-text">Session 6 : Instrumental variables</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -223,6 +227,10 @@ window.Quarto = {
     <a class="dropdown-item" href="../../homeworks/homework5.html">
  <span class="dropdown-text">Session 5: Regression Discontinuity</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../homeworks/homework6.html">
+ <span class="dropdown-text">Session 6 : Instrumental variables</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -254,6 +262,10 @@ window.Quarto = {
         <li>
     <a class="dropdown-item" href="../../slides/session5/session5.html">
  <span class="dropdown-text">Session 5: Regression discontinuity</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../slides/session6/session6.html">
+ <span class="dropdown-text">Session 6: Instrumental variables</span></a>
   </li>  
     </ul>
   </li>
@@ -385,7 +397,7 @@ P(Y=7) = 6\times1/36 = 1/6
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,N, <span class="at">replace=</span>T) <span class="co"># second dice (values are from 1 to 6)</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(x1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5 5 1 2 6 5</code></pre>
+<pre><code>[1] 6 5 4 6 2 5</code></pre>
 </div>
 </div>
 <p>In fact your final result - the sum of the two dices -, is the union of two independent events <span class="math inline">\(X_1, X_2\)</span> being respectively the outcome of dice <span class="math inline">\(1\)</span> and <span class="math inline">\(2\)</span>, provided that they are indeed independent. Your final result <span class="math inline">\(Y\)</span> is therefore simply the sum of these two random variables. You can then sum :</p>
@@ -408,9 +420,9 @@ P(Y=7) = 6\times1/36 = 1/6
 <div class="cell-output cell-output-stdout">
 <pre><code>y
       2       3       4       5       6       7       8       9      10      11 
-0.02789 0.05470 0.08507 0.11378 0.14010 0.16696 0.13923 0.10667 0.08357 0.05444 
+0.02737 0.05522 0.08240 0.11282 0.13854 0.16542 0.13987 0.11222 0.08334 0.05415 
      12 
-0.02759 </code></pre>
+0.02865 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(prob)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -526,16 +538,16 @@ Y \ge 4 \text{, } Y\le 9 \text{ and } S_Y = \{4, 5, 6, 7, 8, 9\}
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat, <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           y
-1  1.7909286
-2  1.6598929
-3  0.8339286
-4  1.4028929
-5  2.3843214
-6  1.5666071
-7  0.9133214
-8  0.9579643
-9  1.0657857
-10 2.1038929</code></pre>
+1  1.0748571
+2  1.4256429
+3  2.3862143
+4  2.0196786
+5  1.2843929
+6  1.8015000
+7  1.1768929
+8  1.1449643
+9  0.6115357
+10 1.9362143</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="at">x =</span> y)) <span class="sc">+</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density))) <span class="sc">+</span></span>
@@ -607,9 +619,9 @@ P(Y \le Y_0) = \int_{R_{min}}^{Y_0} f_Y(y')\text{d}y'
 <pre><code># A tibble: 3 × 43
   codecommune  Year codedep  agri  indp  cadr  pint  empl  ouvr  chom  pact
   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 01001        2024 01          0    39    33    14    86   147    26   319
-2 01014        2024 01          0   119    19   173   199   392    22   902
-3 01017        2024 01         11     0     0     0    41    28    19    80
+1 01002        2024 01          0    39     9     0    66     0     9   114
+2 01006        2024 01          0     0     0    34    23    23     0    80
+3 01009        2024 01          0    41     0    95    21     4     2   161
 # ℹ 32 more variables: age &lt;dbl&gt;, popf &lt;dbl&gt;, francais &lt;dbl&gt;, etranger &lt;dbl&gt;,
 #   prixbien &lt;dbl&gt;, capitalratio &lt;dbl&gt;, npropri &lt;dbl&gt;, nlogement &lt;dbl&gt;,
 #   pop &lt;dbl&gt;, revmoyfoy &lt;dbl&gt;, revtot &lt;dbl&gt;, recetteimpotslocaux &lt;dbl&gt;,
@@ -623,9 +635,9 @@ P(Y \le Y_0) = \int_{R_{min}}^{Y_0} f_Y(y')\text{d}y'
 <pre><code># A tibble: 3 × 43
   codecommune  Year codedep  agri  indp  cadr  pint  empl  ouvr  chom  pact
   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 95651        2024 95          0    19    43   117    91    56    45   326
-2 95652        2024 95          6   218   439   489   579   186   101  1917
-3 95680        2024 95          0   540   452  1785  3121  2347  1036  8245
+1 95656        2024 95          0     2    69    94     0     0    15   165
+2 95660        2024 95          0     0    55    69   162    25    41   311
+3 95678        2024 95          0    31   197   112    55    40    23   435
 # ℹ 32 more variables: age &lt;dbl&gt;, popf &lt;dbl&gt;, francais &lt;dbl&gt;, etranger &lt;dbl&gt;,
 #   prixbien &lt;dbl&gt;, capitalratio &lt;dbl&gt;, npropri &lt;dbl&gt;, nlogement &lt;dbl&gt;,
 #   pop &lt;dbl&gt;, revmoyfoy &lt;dbl&gt;, revtot &lt;dbl&gt;, recetteimpotslocaux &lt;dbl&gt;,
@@ -654,7 +666,7 @@ P(Y \le Y_0) = \int_{R_{min}}^{Y_0} f_Y(y')\text{d}y'
 <div class="cell-output cell-output-stdout">
 <pre><code>
                Rural         Urbain dense Urbain intermédiaire 
-                8780                  201                 1019 </code></pre>
+                8776                  205                 1019 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(comm_r<span class="sc">$</span>dens)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -672,23 +684,23 @@ P(Y \le Y_0) = \int_{R_{min}}^{Y_0} f_Y(y')\text{d}y'
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(comm_r<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-   9812   25699   29495   30971   34326  128858      10 </code></pre>
+   8729   25756   29517   31206   34617  121370       6 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(comm_r<span class="sc">$</span>revmoyfoy, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]   9812.476 128858.060</code></pre>
+<pre><code>[1]   8729.167 121370.390</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>((comm_r <span class="sc">%&gt;%</span> <span class="fu">drop_na</span>(revmoyfoy))<span class="sc">$</span>revmoyfoy) <span class="co">#dropping NA's</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   9812   25699   29495   30971   34326  128858 </code></pre>
+   8729   25756   29517   31206   34617  121370 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#replacing the NA's</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>comm_r <span class="ot">&lt;-</span> comm_r <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">revmoyfoy =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(revmoyfoy), <span class="fu">mean</span>(revmoyfoy, <span class="at">na.rm =</span><span class="cn">TRUE</span>), revmoyfoy))</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(comm_r<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   9812   25702   29503   30971   34321  128858 </code></pre>
+   8729   25760   29527   31206   34615  121370 </code></pre>
 </div>
 </div>
 <p>Notice that your last summary no longer contains NA values, and has an unchanged mean value - which is the objective of filling with mean values instead of the NA’s.</p>
@@ -734,22 +746,22 @@ P(Y \le Y_0) = \int_{R_{min}}^{Y_0} f_Y(y')\text{d}y'
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(comm_r<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 30971.31</code></pre>
+<pre><code>[1] 31205.65</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(comm_r<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 8244.975</code></pre>
+<pre><code>[1] 8583.764</code></pre>
 </div>
 </div>
 <p>And the conditional expectations can also simply be computed by filtering out the values that are undesired.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((comm_r <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dens <span class="sc">==</span> <span class="st">"Rural"</span>))<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 30273.32</code></pre>
+<pre><code>[1] 30402.62</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((comm_r <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dens <span class="sc">==</span> <span class="st">"Urbain dense"</span><span class="sc">|</span>dens <span class="sc">==</span> <span class="st">"Urbain intermédiaire"</span>))<span class="sc">$</span>revmoyfoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 35994.54</code></pre>
+<pre><code>[1] 36963.37</code></pre>
 </div>
 </div>
 <p>Where you clearly see that :</p>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -75,10 +75,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-be3771519f21acc1c5b6733774c6dcd8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-4897d45d2f75ed4f519693be625836c5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -191,6 +191,10 @@ window.Quarto = {
     <a class="dropdown-item" href="../../sessions/session5/session5.html">
  <span class="dropdown-text">Session 5 : Regression discontinuity design</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../sessions/session6/session6.html">
+ <span class="dropdown-text">Session 6 : Instrumental variables</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -223,6 +227,10 @@ window.Quarto = {
     <a class="dropdown-item" href="../../homeworks/homework5.html">
  <span class="dropdown-text">Session 5: Regression Discontinuity</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../homeworks/homework6.html">
+ <span class="dropdown-text">Session 6 : Instrumental variables</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -254,6 +262,10 @@ window.Quarto = {
         <li>
     <a class="dropdown-item" href="../../slides/session5/session5.html">
  <span class="dropdown-text">Session 5: Regression discontinuity</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../slides/session6/session6.html">
+ <span class="dropdown-text">Session 6: Instrumental variables</span></a>
   </li>  
     </ul>
   </li>
@@ -443,18 +455,18 @@ lm(formula = W ~ m, data = dat)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--32.500 -11.694  -0.495  11.004  43.113 
+-33.215  -9.392   0.111   9.342  40.382 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  -0.4293     3.6001  -0.119    0.905    
-m            10.0225     0.6189  16.194   &lt;2e-16 ***
+(Intercept)  -2.5320     2.8933  -0.875    0.384    
+m            10.2510     0.4974  20.609   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 17.87 on 98 degrees of freedom
-Multiple R-squared:  0.728, Adjusted R-squared:  0.7252 
-F-statistic: 262.2 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 14.36 on 98 degrees of freedom
+Multiple R-squared:  0.8125,    Adjusted R-squared:  0.8106 
+F-statistic: 424.7 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> m, <span class="at">y =</span> W)) <span class="sc">+</span> </span>
@@ -508,18 +520,18 @@ lm(formula = W ~ m, data = dat)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--162.08 -102.02  -35.63   89.25  286.67 
+-144.51 -103.98  -23.89   92.57  297.47 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -202.838     23.024   -8.81 4.61e-14 ***
-m            100.790      3.958   25.46  &lt; 2e-16 ***
+(Intercept) -207.860     23.758  -8.749 6.25e-14 ***
+m            101.267      4.084  24.793  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 114.3 on 98 degrees of freedom
-Multiple R-squared:  0.8687,    Adjusted R-squared:  0.8674 
-F-statistic: 648.4 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 117.9 on 98 degrees of freedom
+Multiple R-squared:  0.8625,    Adjusted R-squared:  0.8611 
+F-statistic: 614.7 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> </span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> m, <span class="at">y =</span> W)) <span class="sc">+</span> </span>
@@ -610,18 +622,18 @@ lm(formula = W ~ m, data = dat)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--28.528  -5.486   0.692   3.727  48.881 
+-28.460  -5.060   0.156   4.653  33.896 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  -2.1577     2.1073  -1.024    0.308    
-m            10.3879     0.3623  28.674   &lt;2e-16 ***
+(Intercept)  -0.1689     2.1418  -0.079    0.937    
+m             9.8743     0.3682  26.817   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 10.46 on 98 degrees of freedom
-Multiple R-squared:  0.8935,    Adjusted R-squared:  0.8924 
-F-statistic: 822.2 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 10.63 on 98 degrees of freedom
+Multiple R-squared:  0.8801,    Adjusted R-squared:  0.8788 
+F-statistic: 719.1 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> m, <span class="at">y =</span> W)) <span class="sc">+</span> </span>
@@ -692,7 +704,7 @@ Please cite as: </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(model2<span class="sc">$</span>residuals)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.195566e-14</code></pre>
+<pre><code>[1] -3.862155e-14</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model2<span class="sc">$</span>fitted.values, model2<span class="sc">$</span>residuals)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -722,18 +734,18 @@ Please cite as: </code></pre>
                                                              linear  
                                       (1)           (2)        (3)   
 ---------------------------------------------------------------------
-x                                  10.001***     10.446***  10.274***
-                                    (0.001)       (0.618)    (0.519) 
+x                                  10.001***      9.742***  9.934*** 
+                                    (0.001)       (0.616)    (0.530) 
                                                                      
-Constant                            -0.713         32.921    123.743 
-                                    (0.638)      (356.586)  (299.485)
+Constant                            -0.518        275.958    222.402 
+                                    (0.643)      (358.468)  (308.260)
                                                                      
 ---------------------------------------------------------------------
 Observations                         1,000         1,000      1,000  
-R2                                   1.000         0.223             
-Adjusted R2                          1.000         0.222             
-Residual Std. Error (df = 998)       9.886       5,528.669  3,875.191
-F Statistic (df = 1; 998)      81,958,878.000*** 285.841***          
+R2                                   1.000         0.200             
+Adjusted R2                          1.000         0.200             
+Residual Std. Error (df = 998)       9.878       5,506.545  3,770.555
+F Statistic (df = 1; 998)      81,951,712.000*** 250.219***          
 =====================================================================
 Note:                                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 </div>

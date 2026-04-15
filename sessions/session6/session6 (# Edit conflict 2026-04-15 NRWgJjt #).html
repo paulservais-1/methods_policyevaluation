@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Session 6 - Instrumental variables – Methods for Research and Policy Evaluation</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-4897d45d2f75ed4f519693be625836c5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Methods for Research and Policy Evaluation</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <span class="nav-link">
+<span class="menu-text">Sessions</span>
+    </span>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text"></span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
+        <li>
+    <a class="dropdown-item" href="../../sessions/session1/session1.html">
+ <span class="dropdown-text">Session 1: Dataset Building and Descriptive Statistics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../sessions/session2/session2.html">
+ <span class="dropdown-text">Session 2: OLS: Simple and Multiple Linear Regressions and Analysis</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../sessions/session3/session3.html">
+ <span class="dropdown-text">Session 3: OLS regressions and non-linear regressions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../sessions/session4/session4.html">
+ <span class="dropdown-text">Session 4: Difference-in-differences</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../sessions/session5/session5.html">
+ <span class="dropdown-text">Session 5 : Regression discontinuity design</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../sessions/session6/session6.html">
+ <span class="dropdown-text">Session 6 : Instrumental variables</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <span class="nav-link">
+<span class="menu-text">Exercices</span>
+    </span>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu--1" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text"></span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu--1">    
+        <li>
+    <a class="dropdown-item" href="../../homeworks/homework1.html">
+ <span class="dropdown-text">Session 1: Dataset Building and Descriptive Statistics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../homeworks/homework2.html">
+ <span class="dropdown-text">Session 2: Statistical inference and linear regressions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../homeworks/homework3.html">
+ <span class="dropdown-text">Session 3: OLS regressions and non-linear regressions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../homeworks/homework4.html">
+ <span class="dropdown-text">Session 4: Difference-in-differences</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../homeworks/homework5.html">
+ <span class="dropdown-text">Session 5: Regression Discontinuity</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../homeworks/homework6.html">
+ <span class="dropdown-text">Session 6 : Instrumental variables</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <span class="nav-link">
+<span class="menu-text">Slides</span>
+    </span>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu--2" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text"></span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu--2">    
+        <li>
+    <a class="dropdown-item" href="../../slides/session1/slides1.html">
+ <span class="dropdown-text">Session 1: Dataset Building and Descriptive Statistics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../slides/session2/slides2.html">
+ <span class="dropdown-text">Session 2: Statistical inference and linear regressions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../slides/session3/slides3.html">
+ <span class="dropdown-text">Session 3: OLS regressions and non-linear regressions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../slides/session4/session4.html">
+ <span class="dropdown-text">Session 4: Difference-in-differences</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../slides/session5/session5.html">
+ <span class="dropdown-text">Session 5: Regression discontinuity</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../slides/session6/session6.html">
+ <span class="dropdown-text">Session 6: Instrumental variables</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link active" data-scroll-target="#motivation">Motivation</a></li>
+  <li><a href="#instrumental-variables" id="toc-instrumental-variables" class="nav-link" data-scroll-target="#instrumental-variables">Instrumental variables</a>
+  <ul class="collapse">
+  <li><a href="#intuition" id="toc-intuition" class="nav-link" data-scroll-target="#intuition">Intuition</a></li>
+  <li><a href="#two-stage-residual-inclusion-2sri" id="toc-two-stage-residual-inclusion-2sri" class="nav-link" data-scroll-target="#two-stage-residual-inclusion-2sri">Two-stage residual inclusion (2SRI)</a></li>
+  <li><a href="#an-example" id="toc-an-example" class="nav-link" data-scroll-target="#an-example">An example</a></li>
+  <li><a href="#robustness-checks" id="toc-robustness-checks" class="nav-link" data-scroll-target="#robustness-checks">Robustness checks</a>
+  <ul class="collapse">
+  <li><a href="#relevance-of-the-instrument" id="toc-relevance-of-the-instrument" class="nav-link" data-scroll-target="#relevance-of-the-instrument">Relevance of the instrument</a></li>
+  <li><a href="#exclusion-restriction" id="toc-exclusion-restriction" class="nav-link" data-scroll-target="#exclusion-restriction">Exclusion restriction</a></li>
+  <li><a href="#exogeneity" id="toc-exogeneity" class="nav-link" data-scroll-target="#exogeneity">Exogeneity</a></li>
+  </ul></li>
+  <li><a href="#robustness-checks-1" id="toc-robustness-checks-1" class="nav-link" data-scroll-target="#robustness-checks-1">Robustness checks</a>
+  <ul class="collapse">
+  <li><a href="#sanity-check" id="toc-sanity-check" class="nav-link" data-scroll-target="#sanity-check">Sanity check</a></li>
+  <li><a href="#placebofalsification-test---verify-the-exclusion-restriction" id="toc-placebofalsification-test---verify-the-exclusion-restriction" class="nav-link" data-scroll-target="#placebofalsification-test---verify-the-exclusion-restriction">Placebo/Falsification test - verify the exclusion restriction</a></li>
+  <li><a href="#balance-test-checking-the-exogeneity-condition" id="toc-balance-test-checking-the-exogeneity-condition" class="nav-link" data-scroll-target="#balance-test-checking-the-exogeneity-condition">Balance test / checking the exogeneity condition</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Session 6 - Instrumental variables</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="motivation" class="level1">
+<h1>Motivation</h1>
+<p>The two identification strategies we have considered so far are the difference-in-differences approach, and the regression discontinuity design. We saw that the first method allows to derive causal claims from the analysis of panel data, while the second one uses a cutoff predicting a treatment to analyse causal effects. We saw that regression discontinuities can be sharp or fuzzy, in which case the cutoff does not deterministically predict the treatment. Instrumental variables are in fact very close to the latter variables : they are variables that are unrelated to unobservable variables that may influence your independent variable of interest, yet that can still influence your treatment/independent variables. In other words, they are variables that are exogeneous,</p>
+<p>This session will present the last identification strategy that we will see in this class : instrumental variables.</p>
+</section>
+<section id="instrumental-variables" class="level1">
+<h1>Instrumental variables</h1>
+<section id="intuition" class="level2">
+<h2 class="anchored" data-anchor-id="intuition">Intuition</h2>
+<p>In instrumental variables (IV) estimation, the logic is slightly different. Imagine you want to measure the causal effect of a treatment or policy on an outcome. A typical problem is endogeneity: the treatment is correlated with unobserved factors that also affect the outcome.</p>
+<p>For example, suppose you want to estimate the effect of scholarship receipt on GPA. Students who apply or are selected for the scholarship may differ in unobserved ways (motivation, prior effort) from those who do not, creating bias in a simple regression.</p>
+<p>An instrumental variable is a variable that:</p>
+<ol type="1">
+<li><p>Affects the treatment (relevance),</p></li>
+<li><p>Does not directly affect the outcome except through the treatment (exclusion restriction), and</p></li>
+<li><p>Is independent of unobserved confounders (validity).</p></li>
+</ol>
+<p>By using an instrument, we can isolate the exogenous variation in the treatment and estimate its causal effect.</p>
+<p>In this context, the IV estimate corresponds to a local average treatment effect (LATE) — the effect for the subpopulation whose treatment status is influenced by the instrument. This is summarised on the figure below.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    U[Unobserved Confounders] --&gt; X[Endogenous Variable]
+    U --&gt; Y[Outcome]
+    Z[Instrument] --&gt; X
+    X --&gt; Y
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>To compute the local average treatment effect (LATE), we generally use two-stage least squares (2SLS) regressions.</p>
+<p>1.First stage: regress the treatment variable <span class="math inline">\(D_i\)</span> on the instrument <span class="math inline">\(Z_i\)</span>:</p>
+<p><span class="math display">\[\begin{equation}
+D_i = \alpha + \beta Z_i + \gamma' W_i + \epsilon_i
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(W_i\)</span> denotes additional control variables. This first stage captures how the instrument affects the treatment. The fitted values are:</p>
+<p><span class="math display">\[\begin{equation}
+\hat{D}_i = \hat{\alpha} + \hat{\beta} Z_i + \hat{\gamma'} W_i
+\end{equation}\]</span></p>
+<p>These predicted values represent the part of the treatment that is exogenous, i.e.&nbsp;driven only by the instrument.</p>
+<ol start="2" type="1">
+<li>Second stage:</li>
+</ol>
+<p>We then regress the outcome variable <span class="math inline">\(Y_i\)</span> on the <strong>fitted values</strong> from the first stage, <span class="math inline">\(\hat{D}_i\)</span>:</p>
+<p><span class="math display">\[\begin{equation}
+Y_i = \alpha + \beta X_i+ \delta \hat{D}_i + \theta' W_i + u_i
+\end{equation}\]</span></p>
+<p>By using <span class="math inline">\(\hat{D}_i\)</span> instead of <span class="math inline">\(D_i\)</span>, you isolate the variation in <span class="math inline">\(D\)</span> that is <strong>due only to the exogenous instrument</strong>, removing endogeneity bias. The coefficient <span class="math inline">\(\delta\)</span> then estimates the causal effect of the treatment on the outcome — the LATE, that is the causal effect due to the variation in the instrument.</p>
+</section>
+<section id="two-stage-residual-inclusion-2sri" class="level2">
+<h2 class="anchored" data-anchor-id="two-stage-residual-inclusion-2sri">Two-stage residual inclusion (2SRI)</h2>
+<p>An alternative approach, especially common in nonlinear models (logit, probit), is the two-stage residual inclusion (2SRI) method. We use it when the first stage is a probit/logit model, for instance when the treatment variable is binary.</p>
+<p>Instead of using fitted values, we proceed as follows for the first stage: <span class="math display">\[\begin{equation}
+D_i = \alpha + \pi Z_i + \gamma' W_i + \varepsilon_i
+\end{equation}\]</span> in which we recover the residuals :</p>
+<p><span class="math display">\[\begin{equation}
+\hat{\epsilon}_i =D_i - \hat{D}_i
+\end{equation}\]</span></p>
+<p>and then, for the second stage, we include both the treatment and the first-stage residuals in the outcome equation:</p>
+<p><span class="math display">\[\begin{equation}
+Y_i = \alpha + \delta D_i + \rho \hat{\varepsilon}_i + \theta' W_i + u_i
+\end{equation}\]</span></p>
+<p>In that case, <span class="math inline">\(D_i\)</span> corresponds to the total effect of the treatment, while <span class="math inline">\(\hat{\varepsilon}_i\)</span> controls for its endogeneous part. <span class="math inline">\(\delta\)</span> then corresponds to the researched causal effect.</p>
+</section>
+<section id="an-example" class="level2">
+<h2 class="anchored" data-anchor-id="an-example">An example</h2>
+<p>A typical example of an instrumental variable (IV) approach is analyzing the effect of education on earnings. Since more educated individuals tend to have higher earnings, there are many factors that could influence both education and earnings—these are omitted variables, such as individual ability, family background, and motivation, which are difficult or impossible to measure.</p>
+<p>Measuring the causal effect of education therefore often requires the use of instrumental variables to isolate exogenous variation in education. For example, some authors have argued that a good IV for educational attainment is the distance to the nearest college.</p>
+<p>The logic is the following. Students living closer to a college are more likely to obtain additional schooling, but the distance itself is unlikely to directly affect future earnings, satisfying the IV assumptions of relevance and exclusion. Of course, one could argue that distance to college is perhaps correlated with variables influencing both the outcome and the treatment : that is, education of parents, or income of the parents, etc. These variables can be controlled for, to keep only the instrument in the regression.</p>
+<p>The IV can be computed in three different ways : - Using two successive linear regressions; - Using the <code>ivreg</code> function from the <code>AER</code> package - Using the <code>iv_robust</code> function from the <code>estimatr</code> package</p>
+<p>I simulate data here to analyse the impact of education on earnings, using distance to college as my instrument.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required package</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AER)  <span class="co"># For ivreg (2SLS)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: car</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: carData</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: lmtest</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: zoo</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'zoo'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    as.Date, as.Date.numeric</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: sandwich</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: survival</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(estimatr)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample size</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Instrument: distance to nearest college (in km, exogenous)</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>distance_to_college <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="dv">0</span>, <span class="dv">50</span>)  <span class="co"># 0 = very close, 50 = far</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Unobserved confounder: ability or motivation</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>ability <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Treatment: years of education (depends on distance and ability)</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Students closer to college tend to get more education</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>education <span class="ot">&lt;-</span> <span class="dv">12</span> <span class="sc">+</span> <span class="fl">0.05</span> <span class="sc">*</span> (<span class="dv">50</span> <span class="sc">-</span> distance_to_college) <span class="sc">+</span> <span class="fl">0.8</span> <span class="sc">*</span> ability <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co"># education is continuous: years of schooling</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Outcome: earnings (depends on education and ability)</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>earnings <span class="ot">&lt;-</span> <span class="dv">20000</span> <span class="sc">+</span> <span class="dv">1500</span> <span class="sc">*</span> education <span class="sc">+</span> <span class="dv">5000</span> <span class="sc">*</span> ability <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">5000</span>)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine into a data frame</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(earnings, education, distance_to_college, ability)</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Quick look</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  earnings education distance_to_college     ability
+1 45909.00  15.01900           14.378876 -0.37560287
+2 38260.18  11.97003           39.415257 -0.56187636
+3 41019.36  13.71389           20.448846 -0.34391723
+4 41251.12  12.57881           44.150870  0.09049665
+5 54311.44  13.24152           47.023364  1.59850877
+6 35838.17  14.19486            2.277825 -0.08856511</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Naive OLS (biased because of ability confounding)</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>lm_first <span class="ot">&lt;-</span> <span class="fu">lm</span>(education <span class="sc">~</span> distance_to_college, <span class="at">data =</span> df)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>fitted_educ <span class="ot">&lt;-</span> lm_first<span class="sc">$</span>fitted.values</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>ivcom <span class="ot">&lt;-</span> <span class="fu">lm</span>(earnings <span class="sc">~</span> fitted_educ, <span class="at">data =</span> df)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ivcom)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = earnings ~ fitted_educ, data = df)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-25795.3  -5499.6    518.1   5419.4  22921.3 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  25102.2     7044.6   3.563 0.000401 ***
+fitted_educ   1140.4      528.9   2.156 0.031537 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 8360 on 498 degrees of freedom
+Multiple R-squared:  0.00925,   Adjusted R-squared:  0.007261 
+F-statistic:  4.65 on 1 and 498 DF,  p-value: 0.03154</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2SLS using distance as instrument</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>iv_model <span class="ot">&lt;-</span> <span class="fu">ivreg</span>(earnings <span class="sc">~</span> education <span class="sc">|</span> distance_to_college, <span class="at">data =</span> df)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>iv_model2 <span class="ot">&lt;-</span> <span class="fu">iv_robust</span>(earnings <span class="sc">~</span> education <span class="sc">|</span> distance_to_college, <span class="at">data =</span> df)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(iv_model, <span class="at">diagnostics =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+ivreg(formula = earnings ~ education | distance_to_college, data = df)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-25205.8  -5259.7    446.7   5096.0  20841.8 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  25102.2     6382.8   3.933 9.59e-05 ***
+education     1140.4      479.2   2.380   0.0177 *  
+
+Diagnostic tests:
+                 df1 df2 statistic  p-value    
+Weak instruments   1 498    150.08  &lt; 2e-16 ***
+Wu-Hausman         1 497     31.63 3.12e-08 ***
+Sargan             0  NA        NA       NA    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 7574 on 498 degrees of freedom
+Multiple R-Squared: 0.1867, Adjusted R-squared: 0.185 
+Wald test: 5.664 on 1 and 498 DF,  p-value: 0.01769 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(iv_model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+iv_robust(formula = earnings ~ education | distance_to_college, 
+    data = df)
+
+Standard error type:  HC2 
+
+Coefficients:
+            Estimate Std. Error t value  Pr(&gt;|t|) CI Lower CI Upper  DF
+(Intercept)    25102     6414.4   3.913 0.0001036  12499.6    37705 498
+education       1140      481.6   2.368 0.0182798    194.1     2087 498
+
+Multiple R-squared:  0.1867 ,   Adjusted R-squared:  0.185 
+F-statistic: 5.606 on 1 and 498 DF,  p-value: 0.01828</code></pre>
+</div>
+</div>
+</section>
+<section id="robustness-checks" class="level2">
+<h2 class="anchored" data-anchor-id="robustness-checks">Robustness checks</h2>
+<p>There a few statistical tests you can run to verify the design of your IV. It is mostly theoretically driven : hence a good instrument should be ‘weird’ and seem indeed unrelated to your dependent variable, from a theoretical point of view. There are three conditions an instrument should verify, that are described here.</p>
+<section id="relevance-of-the-instrument" class="level3">
+<h3 class="anchored" data-anchor-id="relevance-of-the-instrument">Relevance of the instrument</h3>
+<p>A key requirement for a valid instrument is relevance: the instrument must be strongly correlated with the treatment, in this case, educational attainment. In our example, distance to the nearest college directly influences the likelihood that an individual pursues additional schooling. Individuals who live closer to a college tend to have more years of education. This relationship can be formally assessed by regressing education on the instrument: if the coefficient on distance is significant and the first-stage F-statistic exceeds the commonly used threshold of 10, the instrument can be considered sufficiently relevant for a reliable IV estimate. Without a strong correlation, the exogenous variation in education induced by the instrument would be too weak, making the IV estimate unstable and uninformative.</p>
+<p>You can easily check the strength and relevance of your estimates using diagnostics.</p>
+</section>
+<section id="exclusion-restriction" class="level3">
+<h3 class="anchored" data-anchor-id="exclusion-restriction">Exclusion restriction</h3>
+<p>The second key condition is the exclusion restriction, which requires that the instrument affects the outcome only through its effect on the treatment. In this context, the distance to college should not directly influence future earnings except through its impact on educational attainment. Theoretically, this assumption is plausible: simply living closer to a college does not directly alter labor market opportunities or wages, except by affecting the number of years of schooling. However, it is important to note that the exclusion restriction cannot be directly tested statistically with a single instrument. Its plausibility must rely on a strong theoretical argument, and it can be indirectly supported by controlling for other variables that might correlate with distance to college, such as the parent’s level of education, earnings, local socioeconomic conditions or the quality of nearby schools.</p>
+</section>
+<section id="exogeneity" class="level3">
+<h3 class="anchored" data-anchor-id="exogeneity">Exogeneity</h3>
+<p>The third key condition is the independence (or exogeneity) condition, which requires that the instrument is uncorrelated with unobserved factors that affect the outcome. In this context, the distance to college should be as good as randomly assigned with respect to individuals’ unobserved characteristics, such as ability, motivation, or family background, that may also influence future earnings. This assumption may be more difficult to justify, since families might choose their place of residence based on preferences or constraints that are themselves related to education and income. As a result, individuals living closer to colleges could systematically differ from those living farther away in ways that directly affect earnings. While this condition cannot be tested directly, its plausibility can be strengthened by controlling for observable characteristics such as parental education, family income, and local economic conditions, and by arguing that, conditional on these controls, distance to college is unlikely to be correlated with unobserved determinants of earnings.</p>
+</section>
+</section>
+<section id="robustness-checks-1" class="level2">
+<h2 class="anchored" data-anchor-id="robustness-checks-1">Robustness checks</h2>
+<section id="sanity-check" class="level3">
+<h3 class="anchored" data-anchor-id="sanity-check">Sanity check</h3>
+<p>A useful sanity check in this context is to compare the instrumental variable (IV) estimates with those obtained from a naive OLS regression. Because the data-generating process includes an unobserved factor—ability—that positively affects both education and earnings, the OLS estimate is expected to be upward biased.</p>
+<p>In contrast, the IV strategy uses distance to college as an exogenous source of variation in education, isolating only the component of schooling that is unrelated to ability. Therefore, a key consistency check is that the IV estimate of the return to education should be lower than the OLS estimate. Observing this pattern provides reassurance that the instrument is correcting for the omitted variable bias in the expected direction and that the empirical strategy is behaving in line with the underlying economic intuition.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>lm_first <span class="ot">&lt;-</span> <span class="fu">lm</span>(education <span class="sc">~</span> distance_to_college, <span class="at">data =</span> df)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_first)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = education ~ distance_to_college, data = df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.8976 -0.8868 -0.0680  0.7981  3.8914 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)         14.533926   0.115960  125.34   &lt;2e-16 ***
+distance_to_college -0.049758   0.004062  -12.25   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.29 on 498 degrees of freedom
+Multiple R-squared:  0.2316,    Adjusted R-squared:   0.23 
+F-statistic: 150.1 on 1 and 498 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># to compare with </span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>iv_model <span class="ot">&lt;-</span> <span class="fu">ivreg</span>(earnings <span class="sc">~</span> education <span class="sc">|</span> distance_to_college, <span class="at">data =</span> df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="placebofalsification-test---verify-the-exclusion-restriction" class="level3">
+<h3 class="anchored" data-anchor-id="placebofalsification-test---verify-the-exclusion-restriction">Placebo/Falsification test - verify the exclusion restriction</h3>
+<p>A useful placebo check consists of testing whether the instrument affects an outcome that it should not plausibly influence. In this context, one can generate or select a variable that is unrelated to education and future earnings, and regress it on distance to college. When working with chronological data, an especially convincing approach is to use a pre-treatment version of the dependent variable—measured before education decisions are made—as the outcome. If the instrument affects an outcome measured prior to treatment or an outcome that it should not plausibly influence, this suggests the presence of additional channels linking the instrument to the dependent variable beyond the intended causal pathway through education. In that case, distance to college should not predict this earlier outcome. Finding no significant relationship strengthens the credibility of the exclusion restriction, while any detected effect would suggest that the instrument may be capturing other underlying factors, thereby undermining its validity.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+    Z[Distance to College] --&gt; E[Education]
+    E --&gt; Y[Earnings]
+    
+    %% Violation of exclusion restriction
+    Z --&gt; L[Labor Market Conditions]
+    L --&gt; Y
+    
+    %% Optional confounder
+    U[Unobserved Factors] --&gt; E
+    U --&gt; Y
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is purely random. In practice, it is good to take a pre-treatment version of your dependent variable.</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>placebo <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(placebo <span class="sc">~</span> distance_to_college, <span class="at">data =</span> df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = placebo ~ distance_to_college, data = df)
+
+Coefficients:
+        (Intercept)  distance_to_college  
+         -0.0209512            0.0002445  </code></pre>
+</div>
+</div>
+<p>Since the instrument is assumed to affect earnings only through its impact on education, it should have no effect on this placebo outcome. Finding no statistically significant relationship provides supportive evidence for the exclusion restriction, as it suggests that distance to college does not directly influence unrelated variables. Conversely, if a significant effect were detected, it would cast doubt on the validity of the instrument by indicating that it may be correlated with other unobserved factors affecting outcomes beyond education.</p>
+</section>
+<section id="balance-test-checking-the-exogeneity-condition" class="level3">
+<h3 class="anchored" data-anchor-id="balance-test-checking-the-exogeneity-condition">Balance test / checking the exogeneity condition</h3>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+    Z[Distance to College] --&gt; E[Education]
+    E --&gt; Y[Earnings]
+
+    %% Violation of exogeneity (instrument not independent)
+    U[Unobserved variable] --&gt; Z
+    U --&gt; E
+    U --&gt; Y
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>A useful balance test examines whether the instrument is correlated with observable characteristics that could also affect the outcome. This is a testable proxy for exogeneity, because exogeneity requires independence from all unobservables, which we cannot observe directly. In this context, one can regress predetermined variables—such as parental education, family background, or other individual characteristics—on distance to college. The intuition is that, if the instrument is as good as randomly assigned, it should not systematically predict these observable covariates.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Balance test 1</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(ability <span class="sc">~</span> distance_to_college, <span class="at">data =</span> df))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = ability ~ distance_to_college, data = df)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.82796 -0.61831  0.03553  0.69367  2.68062 
+
+Coefficients:
+                      Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)         -1.552e-05  9.044e-02   0.000    1.000
+distance_to_college  8.777e-04  3.168e-03   0.277    0.782
+
+Residual standard error: 1.006 on 498 degrees of freedom
+Multiple R-squared:  0.0001541, Adjusted R-squared:  -0.001854 
+F-statistic: 0.07677 on 1 and 498 DF,  p-value: 0.7818</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Balance test 2</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(lm(parents_earnings ~ distance_to_college, data = df))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Finding no significant relationships provides supportive evidence for the independence assumption, suggesting that individuals living closer to or farther from a college are comparable along observed dimensions. Conversely, if distance to college is strongly correlated with these characteristics, it raises concerns that the instrument may also be correlated with unobserved factors, thereby weakening the credibility of the identification strategy. While including these observable characteristics as controls in the 2SLS regression can help account for systematic differences along observed dimensions, this strategy relies on the strong assumption that selection into distance operates entirely through observables. If this assumption fails, controlling for observables may not fully address endogeneity arising from unobserved factors, leaving the validity of the instrument in question.</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+    tabsets.forEach(function(tabset) {
+      const tabby = new Tabby('#' + tabset.id);
+    });
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/paulservais-1\.github\.io\/methods_policyevaluation\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
