@@ -617,25 +617,11 @@ F-statistic: 0.00641 on 1 and 498 DF,  p-value: 0.9362</code></pre>
 <h1>Exercices</h1>
 
 </section>
-<section id="exercice-1" class="slide level2">
+<section id="exercice-1" class="slide level2 scrollable">
 <h2>Exercice 1</h2>
-<p>#| echo: false #| eval: false</p>
-<p>library(rio) library(AER) library(estimatr)</p>
-<p>df &lt;- import(“https://github.com/paulservais-1/methods_policyevaluation/raw/main/data/turnout_internet.dta”)</p>
-<p>ols1 &lt;- lm(turnout ~ internet, data = df) summary(ols1)</p>
-<p>ols_controls &lt;- lm(turnout ~ internet + income + graduates + unemployment + urban, data = df) summary(ols_controls)</p>
+
+
 </section></section>
-<section id="replace-instrument-with-actual-variable-name-in-dataset" class="title-slide slide level1 center">
-<h1>replace “instrument” with actual variable name in dataset</h1>
-<p>first_stage &lt;- lm(internet ~ rain + income + graduates + unemployment + urban, data = df) summary(first_stage)</p>
-<p>df$internet_hat &lt;- fitted(first_stage)</p>
-<p>second_stage_manual &lt;- lm(turnout ~ internet_hat + income + graduates + unemployment + urban, data = df) summary(second_stage_manual)</p>
-<p>iv_model &lt;- ivreg( turnout ~ internet + income + graduates + unemployment + urban | rain + income + graduates + unemployment + urban, data = df )</p>
-<p>summary(iv_model)</p>
-<p>summary(iv_model, diagnostics = TRUE)</p>
-
-
-</section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
