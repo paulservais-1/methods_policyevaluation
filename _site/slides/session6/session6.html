@@ -428,9 +428,9 @@ F-statistic: 5.606 on 1 and 498 DF,  p-value: 0.01828</code></pre>
 <section id="conditions-of-good-instrument" class="slide level2">
 <h2>Conditions of good instrument</h2>
 <ol type="1">
-<li><p>Affects the treatment (relevance),</p></li>
-<li><p>Does not directly affect the outcome except through the treatment (exclusion restriction),</p></li>
-<li><p>Is independent of unobserved confounders (validity).</p></li>
+<li><p>Affects the treatment (relevance)</p></li>
+<li><p>Does not directly affect the outcome except through the treatment (exclusion restriction)</p></li>
+<li><p>Is independent of unobserved confounders (exogeneity)</p></li>
 </ol>
 </section>
 <section id="relevance-condition" class="slide level2">
@@ -576,6 +576,7 @@ F-statistic: 0.00641 on 1 and 498 DF,  p-value: 0.9362</code></pre>
 <section id="overall-1" class="slide level2">
 <h2>Overall</h2>
 <ul>
+<li>Correlation is not always meaningless</li>
 <li>Causal inference only answers one very specific type of question</li>
 <li><span class="math inline">\(X \rightarrow Y\)</span></li>
 <li>Should be complemented by other methods</li>
@@ -615,9 +616,185 @@ F-statistic: 0.00641 on 1 and 498 DF,  p-value: 0.9362</code></pre>
 </section>
 <section id="exercice-1" class="slide level2">
 <h2>Exercice 1</h2>
-<p>#| echo: false #| eval: false library(rio) library(AER) library(estimatr)</p>
-<p>df &lt;- import(“https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/data/turnout_internet.dta”)</p>
-<p>ols1 &lt;- lm(turnout ~ internet, data = df) summary(ols1)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">library</span>(rio)</span>
+<span id="cb18-2"><a></a><span class="fu">library</span>(AER)</span>
+<span id="cb18-3"><a></a><span class="fu">library</span>(estimatr)</span>
+<span id="cb18-4"><a></a></span>
+<span id="cb18-5"><a></a>df <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"https://github.com/paulservais-1/methods_policyevaluation/raw/main/data/turnout_internet.dta"</span>)</span>
+<span id="cb18-6"><a></a></span>
+<span id="cb18-7"><a></a>ols1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(turnout <span class="sc">~</span> internet, <span class="at">data =</span> df)</span>
+<span id="cb18-8"><a></a><span class="fu">summary</span>(ols1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = turnout ~ internet, data = df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-63.355 -22.479  -3.244  21.145  58.961 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 37.95014    0.54785   69.27   &lt;2e-16 ***
+internet     0.91663    0.02614   35.07   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 26.16 on 2998 degrees of freedom
+Multiple R-squared:  0.2909,    Adjusted R-squared:  0.2907 
+F-statistic:  1230 on 1 and 2998 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>ols_controls <span class="ot">&lt;-</span> <span class="fu">lm</span>(turnout <span class="sc">~</span> internet <span class="sc">+</span> income <span class="sc">+</span> graduates <span class="sc">+</span> unemployment <span class="sc">+</span> urban, <span class="at">data =</span> df)</span>
+<span id="cb20-2"><a></a><span class="fu">summary</span>(ols_controls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = turnout ~ internet + income + graduates + unemployment + 
+    urban, data = df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-78.676 -13.686  -1.306  13.325  63.684 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   4.785e+01  1.893e+00  25.273  &lt; 2e-16 ***
+internet      3.762e-01  2.153e-02  17.473  &lt; 2e-16 ***
+income        5.145e-04  4.289e-05  11.994  &lt; 2e-16 ***
+graduates     4.992e-01  1.777e-02  28.088  &lt; 2e-16 ***
+unemployment -5.011e-01  1.793e-02 -27.943  &lt; 2e-16 ***
+urban         3.331e+00  7.054e-01   4.722 2.44e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 18.88 on 2994 degrees of freedom
+Multiple R-squared:  0.6311,    Adjusted R-squared:  0.6305 
+F-statistic:  1024 on 5 and 2994 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>first_stage <span class="ot">&lt;-</span> <span class="fu">lm</span>(internet <span class="sc">~</span> rain <span class="sc">+</span> income <span class="sc">+</span> graduates <span class="sc">+</span> unemployment <span class="sc">+</span> urban, <span class="at">data =</span> df)</span>
+<span id="cb22-2"><a></a><span class="fu">summary</span>(first_stage)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = internet ~ rain + income + graduates + unemployment + 
+    urban, data = df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-26.637  -8.330  -2.335   5.126  67.950 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   3.758e+01  1.511e+00  24.866  &lt; 2e-16 ***
+rain         -6.193e-01  1.568e-02 -39.495  &lt; 2e-16 ***
+income        3.197e-04  2.915e-05  10.967  &lt; 2e-16 ***
+graduates     2.167e-01  1.182e-02  18.340  &lt; 2e-16 ***
+unemployment -1.720e-01  1.206e-02 -14.263  &lt; 2e-16 ***
+urban         1.807e+00  4.847e-01   3.727 0.000197 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 13 on 2994 degrees of freedom
+Multiple R-squared:  0.4952,    Adjusted R-squared:  0.4943 
+F-statistic: 587.4 on 5 and 2994 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>df<span class="sc">$</span>internet_hat <span class="ot">&lt;-</span> <span class="fu">fitted</span>(first_stage)</span>
+<span id="cb24-2"><a></a></span>
+<span id="cb24-3"><a></a>second_stage_manual <span class="ot">&lt;-</span> <span class="fu">lm</span>(turnout <span class="sc">~</span> internet_hat <span class="sc">+</span> income <span class="sc">+</span> graduates <span class="sc">+</span> unemployment <span class="sc">+</span> urban, <span class="at">data =</span> df)</span>
+<span id="cb24-4"><a></a><span class="fu">summary</span>(second_stage_manual)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = turnout ~ internet_hat + income + graduates + unemployment + 
+    urban, data = df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-77.080 -13.991  -0.843  13.156  62.736 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   4.759e+01  1.961e+00  24.263  &lt; 2e-16 ***
+internet_hat  4.139e-01  3.786e-02  10.932  &lt; 2e-16 ***
+income        5.025e-04  4.522e-05  11.113  &lt; 2e-16 ***
+graduates     4.912e-01  1.944e-02  25.271  &lt; 2e-16 ***
+unemployment -4.944e-01  1.926e-02 -25.669  &lt; 2e-16 ***
+urban         3.257e+00  7.287e-01   4.469 8.15e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 19.44 on 2994 degrees of freedom
+Multiple R-squared:  0.6091,    Adjusted R-squared:  0.6084 
+F-statistic:   933 on 5 and 2994 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>iv_model <span class="ot">&lt;-</span> <span class="fu">ivreg</span>(</span>
+<span id="cb26-2"><a></a>  turnout <span class="sc">~</span> internet <span class="sc">+</span> income <span class="sc">+</span> graduates <span class="sc">+</span> unemployment <span class="sc">+</span> urban <span class="sc">|</span></span>
+<span id="cb26-3"><a></a>    rain <span class="sc">+</span> income <span class="sc">+</span> graduates <span class="sc">+</span> unemployment <span class="sc">+</span> urban,</span>
+<span id="cb26-4"><a></a>  <span class="at">data =</span> df</span>
+<span id="cb26-5"><a></a>)</span>
+<span id="cb26-6"><a></a></span>
+<span id="cb26-7"><a></a><span class="fu">summary</span>(iv_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+ivreg(formula = turnout ~ internet + income + graduates + unemployment + 
+    urban | rain + income + graduates + unemployment + urban, 
+    data = df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-80.223 -13.693  -1.377  13.530  63.756 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   4.759e+01  1.906e+00  24.963  &lt; 2e-16 ***
+internet      4.139e-01  3.680e-02  11.247  &lt; 2e-16 ***
+income        5.025e-04  4.395e-05  11.434  &lt; 2e-16 ***
+graduates     4.912e-01  1.889e-02  26.000  &lt; 2e-16 ***
+unemployment -4.944e-01  1.872e-02 -26.410  &lt; 2e-16 ***
+urban         3.257e+00  7.082e-01   4.598 4.44e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 18.89 on 2994 degrees of freedom
+Multiple R-Squared: 0.6307, Adjusted R-squared: 0.6301 
+Wald test: 987.6 on 5 and 2994 DF,  p-value: &lt; 2.2e-16 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="fu">summary</span>(iv_model, <span class="at">diagnostics =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+ivreg(formula = turnout ~ internet + income + graduates + unemployment + 
+    urban | rain + income + graduates + unemployment + urban, 
+    data = df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-80.223 -13.693  -1.377  13.530  63.756 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   4.759e+01  1.906e+00  24.963  &lt; 2e-16 ***
+internet      4.139e-01  3.680e-02  11.247  &lt; 2e-16 ***
+income        5.025e-04  4.395e-05  11.434  &lt; 2e-16 ***
+graduates     4.912e-01  1.889e-02  26.000  &lt; 2e-16 ***
+unemployment -4.944e-01  1.872e-02 -26.410  &lt; 2e-16 ***
+urban         3.257e+00  7.082e-01   4.598 4.44e-06 ***
+
+Diagnostic tests:
+                  df1  df2 statistic p-value    
+Weak instruments    1 2994  1559.886  &lt;2e-16 ***
+Wu-Hausman          1 2993     1.603   0.206    
+Sargan              0   NA        NA      NA    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 18.89 on 2994 degrees of freedom
+Multiple R-Squared: 0.6307, Adjusted R-squared: 0.6301 
+Wald test: 987.6 on 5 and 2994 DF,  p-value: &lt; 2.2e-16 </code></pre>
+</div>
+</div>
 
 
 </section></section>

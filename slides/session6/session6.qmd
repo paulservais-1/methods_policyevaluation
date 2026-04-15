@@ -246,7 +246,8 @@ summary(lm(covariates ~ distance_to_college, data = df))
 
 # Exercices
 
-## Exercice 1
+## Exercice 1 {.scrollable}
+
 ```{r}
 #| echo: false
 #| eval: false
@@ -263,8 +264,6 @@ summary(ols1)
 ols_controls <- lm(turnout ~ internet + income + graduates + unemployment + urban, data = df)
 summary(ols_controls)
 
-
-# replace "instrument" with actual variable name in dataset
 first_stage <- lm(internet ~ rain + income + graduates + unemployment + urban, data = df)
 summary(first_stage)
 
@@ -282,3 +281,4 @@ iv_model <- ivreg(
 summary(iv_model)
 
 summary(iv_model, diagnostics = TRUE)
+```
