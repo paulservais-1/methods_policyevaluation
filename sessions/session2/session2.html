@@ -456,16 +456,16 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat, <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           y
-1  1.5433214
-2  1.9791071
-3  1.7510714
-4  1.6784286
-5  1.5812143
-6  0.9547500
-7  1.9435000
-8  1.6735000
-9  0.9809643
-10 1.4745714</code></pre>
+1  1.4697500
+2  1.7783571
+3  1.5665357
+4  0.7840714
+5  1.1912143
+6  1.4682500
+7  1.2422500
+8  1.0092857
+9  1.3371071
+10 0.6860000</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="at">x =</span> y)) <span class="sc">+</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density)), <span class="at">bins =</span> <span class="dv">100</span>)<span class="sc">+</span></span>
@@ -488,7 +488,7 @@ Attaching package: 'dplyr'</code></pre>
 [1] 1.291
 
 $y
-[1] 0.6977025</code></pre>
+[1] 0.7040999</code></pre>
 </div>
 </div>
 <p>You might ask yourself : what is the probability of obtaining 1.291 ? Of course, this probability would be extremely low : <span class="math inline">\(P_X(x) \rightarrow 0\)</span>. Instead, you would rather consider the probability of having a value falling in a given interval <span class="math inline">\([a,b]\)</span>, for instance <span class="math inline">\([1, 1.5]\)</span>. This probability would be given by: <span class="math display">\[\begin{equation}
@@ -568,11 +568,11 @@ f_N(x) = \mathcal{N}(x; \mu, \sigma) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.504305</code></pre>
+<pre><code>[1] 1.500622</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5004983</code></pre>
+<pre><code>[1] 0.5002781</code></pre>
 </div>
 </div>
 <p>which means that the normal distribution is centered in 1.5, and its standard deviation is 0.5 : 68% of the data is located within the interval between 1 and 2.</p>
@@ -1477,7 +1477,7 @@ Z \leq  \frac{2-\mu_Y}{\sigma} = 0.997941
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(int) <span class="co"># </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9753467</code></pre>
+<pre><code>[1] 0.9757707</code></pre>
 </div>
 </div>
 <p>This gives about 0.97, which is very close to what you had computed from the tables. Note how I am computing this integral : I am just summing over all the values <span class="math inline">\(x \leq 2.5\)</span>, with the very small steps <span class="math inline">\(\delta x = 0.0000001\)</span> and therefore $ x = 0.000005$ , <span class="math inline">\(x = 0.000015\)</span>,<span class="math inline">\(x = 0.000025\)</span>, <span class="math inline">\(x = 0.000035\)</span>,…, <span class="math inline">\(x = 2.500000\)</span> and adding the very small quantities:</p>
@@ -1487,7 +1487,7 @@ Z \leq  \frac{2-\mu_Y}{\sigma} = 0.997941
 <p>As already said, an integral is just a fancy way of writing a sum for continuous variables ! Hence, numerically, a way of computing that integral is just to take a very small step, and simulate the sum ! If you repeat the exact same process for 2 instead of 2.5, you get :</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8376866</code></pre>
+<pre><code>[1] 0.8395576</code></pre>
 </div>
 </div>
 <p>which is also very close to what we had found from the tables.</p>
