@@ -1,9 +1,6 @@
 ---
 title: Session 5 - Regression discontinuity design
 toc-depth: 3
-editor: 
-  markdown: 
-    wrap: 72
 ---
 
 ## Load the relevant packages
@@ -53,8 +50,8 @@ p
 
 9. Run a McCrary density test to verify that there is no sorting at the cutoff. Verify that your results are robust for different polynomial degrees.
 ```{r}
-#| eval: false
-#| echo: false
+#| eval: true
+#| echo: true
 
 library(rio)
 library(tidyverse)
@@ -62,7 +59,7 @@ library(rdrobust)
 library(estimatr)
 library(AER)
 
-carpenter_dobkin_prepared <- import("data/carpenter_dobkin_data.dta")
+carpenter_dobkin_prepared <- import("https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/exercices/exercices5/data/carpenter_dobkin_data.dta")
 glimpse(carpenter_dobkin_prepared)
 p <- carpenter_dobkin_prepared %>%  ggplot(aes(x = age, y = number)) +
   geom_point(alpha = 0.05) +
@@ -74,15 +71,13 @@ p
 carpenter_dobkin_dui_only <-
   carpenter_dobkin_prepared |>
   filter(
-    arrested_for == "DUI",
-    abs(age - 21) < 2
+    arrested_for == "DUI"
   )
 
 carpenter_dobkin_assault_only <-
   carpenter_dobkin_prepared |>
   filter(
-    arrested_for == "Assault",
-    abs(age - 18) < 2
+    arrested_for == "Assault"
   )
 
 rdd_dui <- rdrobust(
@@ -105,9 +100,7 @@ rdd_assault <- rdrobust(
   # specifies the cutoff
   c = 18,
   # specifies the bandwidth, here the unit of analysis is years
-  h = 2,
-  all = TRUE
-) 
+  h = 2) 
 
 rdd_dui |> summary()
 rdd_assault %>% summary()

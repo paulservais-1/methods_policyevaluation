@@ -5,8 +5,8 @@ toc: true
 editor: visual
 ---
 
-
 ## Motivation
+
 The first identification strategy we have considered so far is the difference-in-differences approach. This method of causal inference uses panel data and, by comparing treated and untreated units over time, estimates the causal effects of a treatment on a given dependent variable. However, there are many situations in which tracking such groups over time is not feasible—for example, due to data limitations or because the treatment affects all individuals within a group.
 
 For this reason, alternative strategies have been developed to analyze causal effects, such as regression discontinuity designs (RDD) and instrumental variables (IV).
@@ -15,7 +15,7 @@ These approaches rely on identifying variables that predict treatment assignment
 
 This session will present regression discontinuity. The next one will be devoted to instrumental variables.
 
-# Regression discontinuity design 
+# Regression discontinuity design
 
 ## Regression Discontinuity Design (RDD)
 
@@ -30,8 +30,8 @@ The difference between sharp and fuzzy RDD lies in how treatment is assigned at 
 This is illustrated in the following figure, which shows the probability of receiving the treatment as a function of the running variable, $P(D = 1 \mid X)$. The figure compares the two cases: in a sharp RDD, treatment assignment is perfectly deterministic at the cutoff, resulting in a full jump from 0 to 1; in a fuzzy RDD, the probability of treatment also jumps at the cutoff, but not all units comply, so the jump is partial rather than complete.
 
 ::: panel-tabset
-
 ## Sharp RDD
+
 ```{r}
 #| echo: false
 
@@ -81,7 +81,9 @@ ggplot() +
   
   theme_minimal()
 ```
+
 ## Fuzzy RDD
+
 ```{r}
 #| echo: false
 
@@ -144,8 +146,6 @@ ggplot() +
 ```
 :::
 
-
-
 ## Examples of sharp and fuzzy RDD
 
 The difference between sharp and fuzzy RDD lies in how treatment is assigned at the cutoff. In a sharp RDD, treatment assignment is perfectly deterministic: all units above the threshold receive the treatment, and all units below it do not. Examples include the legal drinking age—once a person turns 18, they are legally allowed to drink—and driving eligibility, where turning 16 or 18 (depending on the country) makes someone automatically eligible for a license. Other examples include scholarship programs with strict score thresholds, where all students above a cutoff receive the award.
@@ -176,16 +176,15 @@ In practice, estimation is typically performed using local linear regressions on
 
 \begin{equation}
 Y_i = \alpha + \beta X_i + \delta D_i + \epsilon_i,
-\end{equation}
-where $X_i$ is the running variable, and $D_i$ is the treatment dummy.
+\end{equation} where $X_i$ is the running variable, and $D_i$ is the treatment dummy.
 
 The choice of bandwidth involves a bias-variance trade-off: narrower bandwidths improve comparability but reduce precision, while wider bandwidths increase precision at the cost of potentially introducing bias.
 
 Each point on the graph corresponds to an observation. We then fit separate regression lines (or smooth curves) on either side of the cutoff. If the **treatment has a causal effect** on the running variable, we expect to observe a discontinuity—a jump—in the outcome at $X = c$.
 
-- To the **left of the cutoff** ($X < c$), units are untreated.
-- To the **right of the cutoff** ($X \geq c$), units are treated.
-- The **size of the vertical jump at the cutoff** corresponds to the estimated treatment effect $\tau$.
+-   To the **left of the cutoff** ($X < c$), units are untreated.
+-   To the **right of the cutoff** ($X \geq c$), units are treated.
+-   The **size of the vertical jump at the cutoff** corresponds to the estimated treatment effect $\tau$.
 
 ```{r}
 #| echo: false
@@ -261,7 +260,6 @@ Y <- 2 + slope * X + ifelse(X >= cutoff, jump, 0) + rnorm(n, 0, 0.2)
 df <- data.frame(X, Y)
 ```
 
-
 ```{r}
 ggplot(df, aes(x = X, y = Y)) +
   geom_point(alpha = 0.6) +
@@ -278,9 +276,8 @@ ggplot(df, aes(x = X, y = Y)) +
   theme_minimal()
 ```
 
-
-
 ### Interpretation
+
 Students just above and just below the cutoff (a score of 80 on the entrance exam) are comparable, except for scholarship receipt. The jump in GPA at the cutoff can therefore be interpreted as the causal effect of the scholarship, assuming that no other factors change discontinuously at that score.
 
 A first way to estimate the LATE (local average treatment effect) is to define a bandwidth, $bd$, around the cutoff of the running variable within which the estimation is performed. For instance, one might consider only observations within 10 points of the cutoff. A larger bandwidth increases the sample size and thus the statistical precision of the estimates, but it also raises the risk of bias, as students farther from the cutoff may no longer be truly comparable.
@@ -329,17 +326,16 @@ rd_model3 <- rlm(Y~ treatment + centered_X, data = rd_data2)
 stargazer(rd_model1, rd_model2, rd_model3, type = "text")
 ```
 
-
-The results indeed give you values around 0.5, as expected : the causal estimate through RDD is therefore of 0.5 (the increase in GPA after one year, for those who received the scholarship). 
+The results indeed give you values around 0.5, as expected : the causal estimate through RDD is therefore of 0.5 (the increase in GPA after one year, for those who received the scholarship).
 
 ## Using built-in functions
 
 If you don't wath to bother with the data preparation, you can compute the RDD estimate of the causal effect of the scholarship by calling `rdrobust()` from the library `rdrobust`, which only requires you to specify the following variables :
 
-1. Your dependent variable $Y$
-2. Your running variable $X$
-3. Your cutoff
-4. Your bandwidth $h$
+1.  Your dependent variable $Y$
+2.  Your running variable $X$
+3.  Your cutoff
+4.  Your bandwidth $h$
 
 It will then compute robust estimates of your causal effect.
 
@@ -356,6 +352,7 @@ summary(rdd_result)
 ```
 
 If you do not specify the value of$h$, the function automatically selects an optimal bandwidth based on statistical criteria that optimally balance bias and variance.
+
 ```{r}
 library(rdrobust)
 library(rddtools)
@@ -368,13 +365,13 @@ rdd_result <- rdrobust(y = df$Y, x = df$X, c = cutoff) # h = points allows to sp
 summary(rdd_result)
 ```
 
-
 ## Continuity at the cutoff
-The main identifying assumption of RDD is the continuity at the cutoff assumption - that is, in the absence of treatment, the dependent variable $Y$ would have followed a continuous trend at the cutoff. Hence, the effect is only due to the treatment. To prove this, different robustness checks can be performed. 
 
-1. **Covariate continuity tests**: check that observable characteristics (e.g., age, gender, prior grades) evolve smoothly at the cutoff. This can be done by using the same functions as before, with other dependent variables.
+The main identifying assumption of RDD is the continuity at the cutoff assumption - that is, in the absence of treatment, the dependent variable $Y$ would have followed a continuous trend at the cutoff. Hence, the effect is only due to the treatment. To prove this, different robustness checks can be performed.
 
-2. **McCrary density test**: test whether the density of the running variable is continuous at the cutoff, which helps detect manipulation or sorting around the threshold. It could be the case for instance if some students who scored just below 80 (say 78–79 points) bribed the teacher or found ways to retake part of the exam, or strategically delayed grading to barely cross 80. Then the density around 80 would be discontinuous.
+1.  **Covariate continuity tests**: check that observable characteristics (e.g., age, gender, prior grades) evolve smoothly at the cutoff. This can be done by using the same functions as before, with other dependent variables.
+
+2.  **McCrary density test**: test whether the density of the running variable is continuous at the cutoff, which helps detect manipulation or sorting around the threshold. It could be the case for instance if some students who scored just below 80 (say 78–79 points) bribed the teacher or found ways to retake part of the exam, or strategically delayed grading to barely cross 80. Then the density around 80 would be discontinuous.
 
 ```{r}
 #install.packages("rddensity")
@@ -413,9 +410,8 @@ rdplotdensity(dens_test, X = df$X)
 
 ```
 
-3. **Placebo cutoffs**: estimate the RDD at fake cutoffs where no treatment occurs; no discontinuity should be found.
+3.  **Placebo cutoffs**: estimate the RDD at fake cutoffs where no treatment occurs; no discontinuity should be found.
 
-4. **Varying bandwidths**: verify that results are robust to different choices of bandwidth.
+4.  **Varying bandwidths**: verify that results are robust to different choices of bandwidth.
 
-5. **Varying polynomial orders**: check that results are not driven by a specific functional form, by changing the order of the estimation in the argument of the function `p = `.
-
+5.  **Varying polynomial orders**: check that results are not driven by a specific functional form, by changing the order of the estimation in the argument of the function `p =`.

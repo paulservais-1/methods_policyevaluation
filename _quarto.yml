@@ -19,6 +19,8 @@ website:
             href: sessions/session4/session4.qmd
           - text: "Session 5 : Regression discontinuity design"
             href: sessions/session5/session5.qmd
+          - text: "Session 6 : Instrumental variables"
+            href: sessions/session6/session6.qmd
 
       - text: Exercices
       - menu:
@@ -32,6 +34,8 @@ website:
             href: homeworks/homework4.qmd
           - text: "Session 5: Regression Discontinuity"
             href: homeworks/homework5.qmd
+          - text: "Session 6 : Instrumental variables"
+            href: homeworks/homework6.qmd
       - text: Slides
       - menu:
           - text: "Session 1: Dataset Building and Descriptive Statistics"
@@ -44,6 +48,8 @@ website:
             href: slides/session4/session4.qmd
           - text: "Session 5: Regression discontinuity"
             href: slides/session5/session5.qmd
+          - text: "Session 6: Instrumental variables"
+            href: slides/session6/session6.qmd
       - href: about.qmd
         text: About
 

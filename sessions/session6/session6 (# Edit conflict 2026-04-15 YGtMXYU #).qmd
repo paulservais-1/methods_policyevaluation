@@ -1,0 +1,237 @@
+---
+title: "Session 6 - Instrumental variables"
+format: html
+toc: true
+editor: visual
+---
+
+# Motivation
+
+The two identification strategies we have considered so far are the difference-in-differences approach, and the regression discontinuity design. We saw that the first method allows to derive causal claims from the analysis of panel data, while the second one uses a cutoff predicting a treatment to analyse causal effects. We saw that regression discontinuities can be sharp or fuzzy, in which case the cutoff does not deterministically predict the treatment. Instrumental variables are in fact very close to the latter variables : they are variables that are unrelated to unobservable variables that may influence your independent variable of interest, yet that can still influence your treatment/independent variables. In other words, they are variables that are exogeneous, 
+
+This session will present the last identification strategy that we will see in this class : instrumental variables. 
+
+# Instrumental variables
+
+## Intuition 
+In instrumental variables (IV) estimation, the logic is slightly different. Imagine you want to measure the causal effect of a treatment or policy on an outcome. A typical problem is endogeneity: the treatment is correlated with unobserved factors that also affect the outcome.
+
+For example, suppose you want to estimate the effect of scholarship receipt on GPA. Students who apply or are selected for the scholarship may differ in unobserved ways (motivation, prior effort) from those who do not, creating bias in a simple regression.
+
+An instrumental variable is a variable that:
+
+1. Affects the treatment (relevance),
+
+2. Does not directly affect the outcome except through the treatment (exclusion restriction), and 
+
+3. Is independent of unobserved confounders (validity).
+
+By using an instrument, we can isolate the exogenous variation in the treatment and estimate its causal effect.
+
+In this context, the IV estimate corresponds to a local average treatment effect (LATE) — the effect for the subpopulation whose treatment status is influenced by the instrument. This is summarised on the figure below.
+
+```{mermaid}
+flowchart LR
+    U[Unobserved Confounders] --> X[Endogenous Variable]
+    U --> Y[Outcome]
+    Z[Instrument] --> X
+    X --> Y
+```
+
+To compute the local average treatment effect (LATE), we generally use two-stage least squares (2SLS) regressions.
+
+1.First stage: regress the treatment variable $D_i$ on the instrument $Z_i$:
+
+\begin{equation}
+D_i = \alpha + \beta Z_i + \gamma' W_i + \epsilon_i
+\end{equation}
+
+ where $W_i$ denotes additional control variables.
+This first stage captures how the instrument affects the treatment. The fitted values are:
+
+\begin{equation}
+\hat{D}_i = \hat{\alpha} + \hat{\beta} Z_i + \hat{\gamma'} W_i
+\end{equation}
+
+These predicted values represent the part of the treatment that is exogenous, i.e. driven only by the instrument.
+
+2.  Second stage: 
+
+We then regress the outcome variable $Y_i$ on the **fitted values** from the first stage, $\hat{D}_i$:
+
+\begin{equation}
+Y_i = \alpha + \beta X_i+ \delta \hat{D}_i + \theta' W_i + u_i
+\end{equation}
+
+By using $\hat{D}_i$ instead of $D_i$, you isolate the variation in $D$ that is **due only to the exogenous instrument**, removing endogeneity bias. The coefficient $\delta$ then estimates the causal effect of the treatment on the outcome — the LATE, that is the causal effect due to the variation in the instrument.
+
+## Two-stage residual inclusion (2SRI)
+
+An alternative approach, especially common in nonlinear models (logit, probit), is the two-stage residual inclusion (2SRI) method. We use it when the first stage is a probit/logit model, for instance when the treatment variable is binary.
+
+Instead of using fitted values, we proceed as follows for the first stage:
+\begin{equation}
+D_i = \alpha + \pi Z_i + \gamma' W_i + \varepsilon_i
+\end{equation}
+in which we recover the residuals :
+
+
+\begin{equation}
+\hat{\epsilon}_i =D_i - \hat{D}_i
+\end{equation}
+
+and then, for the second stage, we include both the treatment and the first-stage residuals in the outcome equation:
+
+\begin{equation}
+Y_i = \alpha + \delta D_i + \rho \hat{\varepsilon}_i + \theta' W_i + u_i
+\end{equation}
+
+In that case, $D_i$ corresponds to the total effect of the treatment, while  $\hat{\varepsilon}_i$ controls for its endogeneous part. $\delta$ then corresponds to the researched causal effect.
+
+
+## An example
+
+A typical example of an instrumental variable (IV) approach is analyzing the effect of education on earnings. Since more educated individuals tend to have higher earnings, there are many factors that could influence both education and earnings—these are omitted variables, such as individual ability, family background, and motivation, which are difficult or impossible to measure.
+
+Measuring the causal effect of education therefore often requires the use of instrumental variables to isolate exogenous variation in education. For example, some authors have argued that a good IV for educational attainment is the distance to the nearest college.
+
+The logic is the following. Students living closer to a college are more likely to obtain additional schooling, but the distance itself is unlikely to directly affect future earnings, satisfying the IV assumptions of relevance and exclusion. Of course, one could argue that distance to college is perhaps correlated with variables influencing both the outcome and the treatment : that is, education of parents, or income of the parents, etc. These variables can be controlled for, to keep only the instrument in the regression.
+
+The IV can be computed in three different ways : - Using two successive linear regressions; - Using the `ivreg` function from the `AER` package - Using the `iv_robust` function from the `estimatr` package
+
+I simulate data here to analyse the impact of education on earnings, using distance to college as my instrument.
+
+```{r}
+# Load required package
+library(AER)  # For ivreg (2SLS)
+library(estimatr)
+set.seed(123)
+
+# Sample size
+n <- 500
+
+# Instrument: distance to nearest college (in km, exogenous)
+distance_to_college <- runif(n, 0, 50)  # 0 = very close, 50 = far
+
+# Unobserved confounder: ability or motivation
+ability <- rnorm(n, 0, 1)
+
+# Treatment: years of education (depends on distance and ability)
+# Students closer to college tend to get more education
+education <- 12 + 0.05 * (50 - distance_to_college) + 0.8 * ability + rnorm(n, 0, 1)
+# education is continuous: years of schooling
+
+# Outcome: earnings (depends on education and ability)
+earnings <- 20000 + 1500 * education + 5000 * ability + rnorm(n, 0, 5000)
+
+# Combine into a data frame
+df <- data.frame(earnings, education, distance_to_college, ability)
+
+# Quick look
+head(df)
+
+# Naive OLS (biased because of ability confounding)
+lm_first <- lm(education ~ distance_to_college, data = df)
+
+df$fitted_educ <- lm_first$fitted.values
+ivcom <- lm(earnings ~ fitted_educ, data = df)
+summary(ivcom)
+
+
+# 2SLS using distance as instrument
+iv_model <- ivreg(earnings ~ education | distance_to_college, data = df)
+iv_model2 <- iv_robust(earnings ~ education | distance_to_college, data = df)
+summary(iv_model, diagnostics = TRUE)
+summary(iv_model2)
+```
+
+## Robustness checks
+
+There a few statistical tests you can run to verify the design of your IV. It is mostly theoretically driven : hence a good instrument should be 'weird' and seem indeed unrelated to your dependent variable, from a theoretical point of view. There are three conditions an instrument should verify, that are described here.
+
+### Relevance of the instrument
+
+A key requirement for a valid instrument is relevance: the instrument must be strongly correlated with the treatment, in this case, educational attainment. In our example, distance to the nearest college directly influences the likelihood that an individual pursues additional schooling. Individuals who live closer to a college tend to have more years of education. This relationship can be formally assessed by regressing education on the instrument: if the coefficient on distance is significant and the first-stage F-statistic exceeds the commonly used threshold of 10, the instrument can be considered sufficiently relevant for a reliable IV estimate. Without a strong correlation, the exogenous variation in education induced by the instrument would be too weak, making the IV estimate unstable and uninformative.
+
+You can easily check the strength and relevance of your estimates using diagnostics.
+
+### Exclusion restriction
+
+The second key condition is the exclusion restriction, which requires that the instrument affects the outcome only through its effect on the treatment. In this context, the distance to college should not directly influence future earnings except through its impact on educational attainment. Theoretically, this assumption is plausible: simply living closer to a college does not directly alter labor market opportunities or wages, except by affecting the number of years of schooling. However, it is important to note that the exclusion restriction cannot be directly tested statistically with a single instrument. Its plausibility must rely on a strong theoretical argument, and it can be indirectly supported by controlling for other variables that might correlate with distance to college, such as the parent's level of education, earnings, local socioeconomic conditions or the quality of nearby schools.
+
+
+### Exogeneity
+
+The third key condition is the independence (or exogeneity) condition, which requires that the instrument is uncorrelated with unobserved factors that affect the outcome. In this context, the distance to college should be as good as randomly assigned with respect to individuals’ unobserved characteristics, such as ability, motivation, or family background, that may also influence future earnings. This assumption may be more difficult to justify, since families might choose their place of residence based on preferences or constraints that are themselves related to education and income. As a result, individuals living closer to colleges could systematically differ from those living farther away in ways that directly affect earnings. While this condition cannot be tested directly, its plausibility can be strengthened by controlling for observable characteristics such as parental education, family income, and local economic conditions, and by arguing that, conditional on these controls, distance to college is unlikely to be correlated with unobserved determinants of earnings.
+
+## Robustness checks
+
+### Sanity check
+A useful sanity check in this context is to compare the instrumental variable (IV) estimates with those obtained from a naive OLS regression. Because the data-generating process includes an unobserved factor—ability—that positively affects both education and earnings, the OLS estimate is expected to be upward biased. 
+
+In contrast, the IV strategy uses distance to college as an exogenous source of variation in education, isolating only the component of schooling that is unrelated to ability. Therefore, a key consistency check is that the IV estimate of the return to education should be lower than the OLS estimate. Observing this pattern provides reassurance that the instrument is correcting for the omitted variable bias in the expected direction and that the empirical strategy is behaving in line with the underlying economic intuition.
+
+```{r}
+lm_first <- lm(education ~ distance_to_college, data = df)
+summary(lm_first)
+# to compare with 
+iv_model <- ivreg(earnings ~ education | distance_to_college, data = df)
+
+```
+
+### Placebo/Falsification test - verify the exclusion restriction
+
+A useful placebo check consists of testing whether the instrument affects an outcome that it should not plausibly influence. In this context, one can generate or select a variable that is unrelated to education and future earnings, and regress it on distance to college. When working with chronological data, an especially convincing approach is to use a pre-treatment version of the dependent variable—measured before education decisions are made—as the outcome. If the instrument affects an outcome measured prior to treatment or an outcome that it should not plausibly influence, this suggests the presence of additional channels linking the instrument to the dependent variable beyond the intended causal pathway through education. In that case, distance to college should not predict this earlier outcome. Finding no significant relationship strengthens the credibility of the exclusion restriction, while any detected effect would suggest that the instrument may be capturing other underlying factors, thereby undermining its validity.
+
+```{mermaid}
+graph LR
+    Z[Distance to College] --> E[Education]
+    E --> Y[Earnings]
+    
+    %% Violation of exclusion restriction
+    Z --> L[Labor Market Conditions]
+    L --> Y
+    
+    %% Optional confounder
+    U[Unobserved Factors] --> E
+    U --> Y
+```
+
+```{r}
+# This is purely random. In practice, it is good to take a pre-treatment version of your dependent variable.
+placebo <- rnorm(n)
+
+lm(placebo ~ distance_to_college, data = df)
+```
+
+Since the instrument is assumed to affect earnings only through its impact on education, it should have no effect on this placebo outcome. Finding no statistically significant relationship provides supportive evidence for the exclusion restriction, as it suggests that distance to college does not directly influence unrelated variables. Conversely, if a significant effect were detected, it would cast doubt on the validity of the instrument by indicating that it may be correlated with other unobserved factors affecting outcomes beyond education.
+
+
+### Balance test / checking the exogeneity condition
+
+```{mermaid}
+graph LR
+    Z[Distance to College] --> E[Education]
+    E --> Y[Earnings]
+
+    %% Violation of exogeneity (instrument not independent)
+    U[Unobserved variables] --> Z
+    U --> E
+    U --> Y
+```
+
+A useful balance test examines whether the instrument is correlated with observable characteristics that could also affect the outcome. This is a testable proxy for exogeneity, because exogeneity requires independence from all unobservables, which we cannot observe directly. In this context, one can regress predetermined variables—such as parental education, family background, or other individual characteristics—on distance to college. The intuition is that, if the instrument is as good as randomly assigned, it should not systematically predict these observable covariates. 
+
+```{r}
+# Balance test 1
+summary(lm(ability ~ distance_to_college, data = df))
+
+# Balance test 2
+# summary(lm(parents_earnings ~ distance_to_college, data = df))
+
+
+```
+
+Finding no significant relationships provides supportive evidence for the independence assumption, suggesting that individuals living closer to or farther from a college are comparable along observed dimensions. Conversely, if distance to college is strongly correlated with these characteristics, it raises concerns that the instrument may also be correlated with unobserved factors, thereby weakening the credibility of the identification strategy. While including these observable characteristics as controls in the 2SLS regression can help account for systematic differences along observed dimensions, this strategy relies on the strong assumption that selection into distance operates entirely through observables. If this assumption fails, controlling for observables may not fully address endogeneity arising from unobserved factors, leaving the validity of the instrument in question.
+
+
