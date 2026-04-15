@@ -39,8 +39,13 @@ D_i = \alpha + \beta Z_i + \gamma' W_i + \epsilon_i
 -   2nd stage :
 
 \begin{equation}
-\hat{D}_i = \hat{\alpha} + \hat{\beta} Z_i + \hat{\gamma'} W_i
+Y_i = \alpha + \beta X_i+ \delta \hat{D}_i + \theta' W_i + u_i
 \end{equation}
+
+## Causal estimate
+- $\delta$ is your causal estimate
+- It is a LATE !
+- "The 1-unit variation in D caused by Z leads to a $\delta$ increase in Y"
 
 
 ## How to run your IV {.scrollable}
@@ -185,8 +190,13 @@ summary(lm(pre_treatment ~ distance_to_college, data = df))
 summary(lm(covariates ~ distance_to_college, data = df))
 ```
 
+## An example
+- Gavazza, Nardotto, and Valletti (2017) : [**Internet and Politics: Evidence from U.K. Local Elections and Local Government Policies**](https://www.qmul.ac.uk/sef/media/econ/images/documents/UKinternet.pdf)
+
+
 ## Instrumental variables
 - Require very good institutional knowledge
+- Weather (rainfall has often been used)
 - You will hardly find one easily
 - All hypotheses can not be tested
 
@@ -235,3 +245,16 @@ summary(lm(covariates ~ distance_to_college, data = df))
 
 # Exercices
 
+## Exercice 1
+
+```{r}
+#| echo: false
+#| eval: false
+library(rio)
+library(AER)
+library(estimatr)
+
+df <- import("https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/data/turnout_internet.dta")
+
+ols1 <- lm(turnout ~ internet, data = df)
+summary(ols1)

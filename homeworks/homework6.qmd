@@ -25,7 +25,7 @@ You are asked to evaluate the causal effect of having access to the internet on 
 ![](images/UK_internet_rain.png)
 
 
-1. Import the data set from <https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/data/turnout_internet.dta>, and briefly summarise the variables. What will be your dependent variable ?
+1. Import the data set from <https://github.com/paulservais-1/methods_policyevaluation/raw/main/data/turnout_internet.dta>, and briefly summarise the variables. What will be your dependent variable ?
 2. Estimate the relationship between internet penetration and voter turnout using OLS. Does that regression allow you to derive causal claims ? Why might this estimate be biased? What sources of endogeneity could be present?
 3. Include income, graduates, unemployment, and urban status, as control variables. Do your estimates change ?
 4. Estimate the relationship:

@@ -3658,7 +3658,7 @@
     "href": "slides/session6/session6.html#two-stage-least-squares",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Two-stage least squares",
-    "text": "Two-stage least squares\n\n1st stage : \\[\\begin{equation}\nD_i = \\alpha + \\beta Z_i + \\gamma' W_i + \\epsilon_i\n\\end{equation}\\]\n2nd stage :\n\n\\[\\begin{equation}\n\\hat{D}_i = \\hat{\\alpha} + \\hat{\\beta} Z_i + \\hat{\\gamma'} W_i\n\\end{equation}\\]"
+    "text": "Two-stage least squares\n\n1st stage : \\[\\begin{equation}\nD_i = \\alpha + \\beta Z_i + \\gamma' W_i + \\epsilon_i\n\\end{equation}\\]\n2nd stage :\n\n\\[\\begin{equation}\nY_i = \\alpha + \\beta X_i+ \\delta \\hat{D}_i + \\theta' W_i + u_i\n\\end{equation}\\]"
   },
   {
     "objectID": "slides/session6/session6.html#how-to-run-your-iv",
@@ -3721,7 +3721,7 @@
     "href": "slides/session6/session6.html#instrumental-variables-1",
     "title": "Methods for Research and Policy Evaluation",
     "section": "Instrumental variables",
-    "text": "Instrumental variables\n\nRequire very good institutional knowledge\nYou will hardly find one easily\nAll hypotheses can not be tested"
+    "text": "Instrumental variables\n\nRequire very good institutional knowledge\nWeather (rainfall has often been used)\nYou will hardly find one easily\nAll hypotheses can not be tested"
   },
   {
     "objectID": "slides/session6/session6.html#overall",
@@ -3771,5 +3771,26 @@
     "title": "Methods for Research and Policy Evaluation",
     "section": "Papers",
     "text": "Papers"
+  },
+  {
+    "objectID": "slides/session6/session6.html#causal-estimate",
+    "href": "slides/session6/session6.html#causal-estimate",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Causal estimate",
+    "text": "Causal estimate\n\n\\(\\delta\\) is your causal estimate\nIt is a LATE !\n“The 1-unit variation in D caused by Z leads to a \\(\\delta\\) increase in Y”"
+  },
+  {
+    "objectID": "slides/session6/session6.html#an-example",
+    "href": "slides/session6/session6.html#an-example",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "An example",
+    "text": "An example\n\nGavazza, Nardotto, and Valletti (2017) : Internet and Politics: Evidence from U.K. Local Elections and Local Government Policies"
+  },
+  {
+    "objectID": "slides/session6/session6.html#exercice-1",
+    "href": "slides/session6/session6.html#exercice-1",
+    "title": "Methods for Research and Policy Evaluation",
+    "section": "Exercice 1",
+    "text": "Exercice 1\n#| echo: false #| eval: false library(rio) library(AER) library(estimatr)\ndf &lt;- import(“https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/data/turnout_internet.dta”)\nols1 &lt;- lm(turnout ~ internet, data = df) summary(ols1)"
   }
 ]

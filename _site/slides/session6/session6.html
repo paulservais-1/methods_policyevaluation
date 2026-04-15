@@ -240,8 +240,16 @@ D_i = \alpha + \beta Z_i + \gamma' W_i + \epsilon_i
 <li><p>2nd stage :</p></li>
 </ul>
 <p><span class="math display">\[\begin{equation}
-\hat{D}_i = \hat{\alpha} + \hat{\beta} Z_i + \hat{\gamma'} W_i
+Y_i = \alpha + \beta X_i+ \delta \hat{D}_i + \theta' W_i + u_i
 \end{equation}\]</span></p>
+</section>
+<section id="causal-estimate" class="slide level2">
+<h2>Causal estimate</h2>
+<ul>
+<li><span class="math inline">\(\delta\)</span> is your causal estimate</li>
+<li>It is a LATE !</li>
+<li>“The 1-unit variation in D caused by Z leads to a <span class="math inline">\(\delta\)</span> increase in Y”</li>
+</ul>
 </section>
 <section id="how-to-run-your-iv" class="slide level2 scrollable">
 <h2>How to run your IV</h2>
@@ -518,10 +526,17 @@ F-statistic: 0.00641 on 1 and 498 DF,  p-value: 0.9362</code></pre>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">summary</span>(<span class="fu">lm</span>(covariates <span class="sc">~</span> distance_to_college, <span class="at">data =</span> df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
+<section id="an-example" class="slide level2">
+<h2>An example</h2>
+<ul>
+<li>Gavazza, Nardotto, and Valletti (2017) : <a href="https://www.qmul.ac.uk/sef/media/econ/images/documents/UKinternet.pdf"><strong>Internet and Politics: Evidence from U.K. Local Elections and Local Government Policies</strong></a></li>
+</ul>
+</section>
 <section id="instrumental-variables-1" class="slide level2">
 <h2>Instrumental variables</h2>
 <ul>
 <li>Require very good institutional knowledge</li>
+<li>Weather (rainfall has often been used)</li>
 <li>You will hardly find one easily</li>
 <li>All hypotheses can not be tested</li>
 </ul>
@@ -593,11 +608,19 @@ F-statistic: 0.00641 on 1 and 498 DF,  p-value: 0.9362</code></pre>
 
 </section>
 
+<section>
 <section id="exercices" class="title-slide slide level1 center">
 <h1>Exercices</h1>
 
-
 </section>
+<section id="exercice-1" class="slide level2">
+<h2>Exercice 1</h2>
+<p>#| echo: false #| eval: false library(rio) library(AER) library(estimatr)</p>
+<p>df &lt;- import(“https://github.com/scpo-quantimethods/quantitative_methods_two/raw/main/data/turnout_internet.dta”)</p>
+<p>ols1 &lt;- lm(turnout ~ internet, data = df) summary(ols1)</p>
+
+
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
