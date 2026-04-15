@@ -421,18 +421,18 @@ lm(formula = W ~ m, data = dat)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--40.147 -13.000   0.776  11.204  29.427 
+-42.265 -11.941   0.174  11.068  36.009 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  -1.0238     3.2649  -0.314    0.755    
-m             9.8422     0.5613  17.535   &lt;2e-16 ***
+(Intercept)  -2.9138     3.1428  -0.927    0.356    
+m            10.2889     0.5403  19.043   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 16.2 on 98 degrees of freedom
-Multiple R-squared:  0.7583,    Adjusted R-squared:  0.7558 
-F-statistic: 307.5 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 15.6 on 98 degrees of freedom
+Multiple R-squared:  0.7873,    Adjusted R-squared:  0.7851 
+F-statistic: 362.6 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
@@ -467,18 +467,18 @@ lm(formula = W ~ m, data = dat)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--153.47  -98.69  -33.06   80.51  275.73 
+-154.24  -99.76  -41.83   91.20  282.71 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -202.744     23.190  -8.743 6.44e-14 ***
-m            100.750      3.987  25.271  &lt; 2e-16 ***
+(Intercept) -207.325     23.394  -8.862 3.55e-14 ***
+m            101.163      4.022  25.154  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 115.1 on 98 degrees of freedom
-Multiple R-squared:  0.867, Adjusted R-squared:  0.8656 
-F-statistic: 638.6 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 116.1 on 98 degrees of freedom
+Multiple R-squared:  0.8659,    Adjusted R-squared:  0.8645 
+F-statistic: 632.7 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <ul>
@@ -515,18 +515,18 @@ lm(formula = W ~ m, data = dat)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--34.096  -3.733   0.326   3.842  31.184 
+-34.766  -6.517   0.254   7.826  33.795 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  -1.1693     1.9467  -0.601    0.549    
-m            10.1807     0.3347  30.420   &lt;2e-16 ***
+(Intercept)  -0.9335     2.3397  -0.399    0.691    
+m            10.1648     0.4022  25.271   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 9.661 on 98 degrees of freedom
-Multiple R-squared:  0.9042,    Adjusted R-squared:  0.9033 
-F-statistic: 925.4 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 11.61 on 98 degrees of freedom
+Multiple R-squared:  0.867, Adjusted R-squared:  0.8656 
+F-statistic: 638.6 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
@@ -575,7 +575,7 @@ F-statistic: 925.4 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">mean</span>(model2<span class="sc">$</span>residuals)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -4.142464e-14</code></pre>
+<pre><code>[1] 1.056921e-13</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">plot</span>(model2<span class="sc">$</span>fitted.values, model2<span class="sc">$</span>residuals)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -605,18 +605,18 @@ F-statistic: 925.4 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
                                                              linear  
                                       (1)           (2)        (3)   
 ---------------------------------------------------------------------
-x                                  10.001***      7.558***  7.983*** 
-                                    (0.001)       (0.647)    (0.510) 
+x                                  10.001***      9.763***  9.698*** 
+                                    (0.001)       (0.647)    (0.526) 
                                                                      
-Constant                            -0.604        696.960*  520.729* 
-                                    (0.652)      (381.125)  (300.537)
+Constant                            -0.679        -66.290    -0.471  
+                                    (0.628)      (382.390)  (310.737)
                                                                      
 ---------------------------------------------------------------------
 Observations                         1,000         1,000      1,000  
-R2                                   1.000         0.120             
-Adjusted R2                          1.000         0.119             
-Residual Std. Error (df = 998)      10.267       6,003.396  3,860.614
-F Statistic (df = 1; 998)      81,599,934.000*** 136.327***          
+R2                                   1.000         0.186             
+Adjusted R2                          1.000         0.185             
+Residual Std. Error (df = 998)       9.630       5,861.028  3,917.963
+F Statistic (df = 1; 998)      88,441,812.000*** 227.508***          
 =====================================================================
 Note:                                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 </div>
