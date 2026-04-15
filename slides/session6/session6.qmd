@@ -249,8 +249,8 @@ summary(lm(covariates ~ distance_to_college, data = df))
 ## Exercice 1 {.scrollable}
 
 ```{r}
-#| echo: false
-#| eval: false
+#| echo: true
+#| eval: true
 
 library(rio)
 library(AER)

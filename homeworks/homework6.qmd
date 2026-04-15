@@ -30,7 +30,7 @@ You are asked to evaluate the causal effect of having access to the internet on 
 3. Include income, graduates, unemployment, and urban status, as control variables. Do your estimates change ?
 4. Estimate the relationship:
 \begin{equation}
-\text{internet}_i =\pi_0+ \pi_1+ \text{rain}_i + \text{rain}^2_i+\delta X_i+ u_i
+\text{internet}_i =\pi_0\text{rain}_i+ \pi_1 \text{rain}^2_i+\delta X_i+ u_i
 \end{equation}
 
 - What stage is this ? How many instruments do you have ?
